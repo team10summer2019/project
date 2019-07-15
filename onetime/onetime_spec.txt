@@ -1,0 +1,37 @@
+///////////////////////////////////////////////
+//
+// File: onetime_spec.txt
+// Description: Specification for onetime pad program
+//
+// Author: (Ron) Zorondras Rodriguez
+// Course:  CPSC 233 Summer 2019
+// Creation Date: July 12, 2019
+// Version: 0.01
+// Revision Date: July 13, 2019
+//
+///////////////////////////////////////////////
+
+Classes
+
+CharMan  :   performs the character conversions to bit arrays, xor operations, and random array generation
+             manages character input and bitwise operations, will be called by keygen to generate a key of length message.length() 
+	     as a demonstration. 
+	     
+UserInput:   Takes in user input either from the console using Scanner.  Converts the Plain text message into a string to be passed to encrypt object.
+
+FileInput:   Takes in a file, a text file of a plain text message, and converts it into a string, stores the length of the string.  
+
+genKey:      Takes the length of the UserInput Object or from the FileInput Object say string.length()=n and generates n shorts or chars, 
+             and stores them into a file or an array of type short, or type char length n.  Also writes the key to file.
+	     
+Encrypt:     Encrypt object takes a key, and a message, and uses CharMan to encrypt the message bitwise against the key, 
+             displays the encrypted message interpreted as shorts or chars, saves the encrypted message to file as a string of chars or as a *.bin file
+	     sequence of 2 byte shorts.
+	     
+Decrypt:     Decrypt object takes a key (from file), and an encrypted bin file, and uses CharMan to decrypt the message bitwise against the key.
+             Displays the decrypted message to the terminal, and or saves the decrypted message to file.
+	     
+Menu:        Menu object, prints a menu and reads in user selections for various options such as input Message from Keyboard, read Mesage from text file, 
+             generate a key the same length as the message, encrypt a message, decrypt a message or quit.  While loop with a switch statement. 
+	     
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
