@@ -37,7 +37,22 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 	
 	int counter = 0 ;
 		for (int k = 0 ; k < mazeSize*mazeSize ; k++){
-			if (k % mazeSize == 0){ counter++ ;}
+			if ( k > 0 && k % mazeSize == 0){ counter++ ;}
+			roomList.add( new Room(k%mazeSize,counter,true,true,true,true) );
+		}
+	}
+
+	// input constructor 
+	public Maze(int size){
+	mazeSize=size;
+	hero = new Player();
+	mazeWraith = new Monster();
+	door = new Door();
+	roomList = new ArrayList<Room>(mazeSize*mazeSize);
+	
+	int counter = 0 ;
+		for (int k = 0 ; k < mazeSize*mazeSize ; k++){
+			if ( k > 0 && k % mazeSize == 0){ counter++ ;}
 			roomList.add( new Room(k%mazeSize,counter,true,true,true,true) );
 		}
 	}
