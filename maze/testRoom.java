@@ -11,39 +11,47 @@
 //
 ///////////////////////////////////////////////
 
-
 public class testRoom {
 
-public static void main(String[] args){
+	public static void main(String[] args){
 
+	Room test = new Room();
 
-Room test = new Room();
+	test.displayRoomStats();
+	test.drawRoom();
+	
+	test.setLocation(0,0);
+	test.setRightWall(true);
+	test.setLeftWall(true);
+	test.setTopWall(true);
+	test.setBottomWall(false);
+	test.setHasPlayer(true);
+	test.drawRoom();
+	test.displayRoomStats();
 
+	
+	test.setLocation(2,2);
+	test.setHasPlayer(false);
+	test.setHasKey(true);
+	test.setBottomWall(false);
+	test.drawRoom();
+	test.displayRoomStats();
 
-test.displayRoomStats();
+	test.setLocation(1,0);
+	test.setHasKey(false);
+	test.setHasDoor(true);
+	test.setBottomWall(true);
+	test.setRightWall(false);
+	test.displayRoomStats();
+	test.drawRoom();
 
-test.drawRoom();
+	test.setLocation(0,3);
+	test.setRightWall(false);
+	test.setBottomWall(true);
+	test.setHasDoor(false );
+	test.setHasMonster(true );
+	test.displayRoomStats();
+	test.drawRoom();
 
-
-test.setLocation(5,5);
-
-test.setRightWall(true);
-test.setBottomWall(true);
-
-test.setHasKey(true);
-
-
-test.displayRoomStats();
-test.drawRoom();
-
-test.setLocation(0,3);
-
-test.displayRoomStats();
-test.drawRoom();
-
-
-
-}
-
-
+	}
 }

@@ -26,12 +26,12 @@
 	            die(), isAlive() 
 	  Not yet Implemented: searchRoom(), attack(), openDoor()
 
+  Room:  Attributes: (x,y) point location, Booleans: leftWall, bottomWall, rightWall, topWall,
+			hasMonster, hasKey, hasDoor, doorPosition,
+	Methods:    displayRoomStats(), drawRoom()
+
 ////////////////////////// 
 	   
- Room:  Attributes: (x,y) point location, Booleans: leftWall, bottomWall, rightWall, topWall,
-			hasMonster, hasKey, hasDoor, leftDoor, topDoor, rightDoor, bottomDoor
-	Methods:    displaySearch()
- 
  Door:  Attributes:  (x,y) point, Room location, Boolean isLocked, 
 	Methods:     unLock() 
  
@@ -48,6 +48,36 @@
 		terminates the game when the door is unlocked.
  
  inputControl:   takes user input by scanner, and prompts user for input via system.
+ 
+ //////////////////////////////////////////////////////////////////////////////////////////////
+ 
+ Drawing of the Maze:
+ 
+ _____________________________
+ |      |      |      |      |
+ |  *   |  D                 |
+ |_    _|______|______|_    _|
+ |      |      |      |      |
+ |      |                    |
+ |_    _|_    _|______|_    _|
+ |      |      |      |      |
+ |             |   K  |      |
+ |______|_    _|__   _|_    _|
+ |      |      |      |      |
+ |  M          |             |
+ |______|______|______|______|
+ 
+ 
+ * is the player , M is a monster, K is the key and D is the door
+ 
+ The goal of the maze is to move (by user input u,d,l,r or arrow keys if possible) to the Key, collect it, with user input 
+ then move to the door and open it with user input which opens if you have collected the key, and terminates the game with a "You win!" message
+ 
+ 
+ 
+ 
+ 
+ 
  
  
  

@@ -23,8 +23,12 @@ public class Maze {
 
 
 
-
-
+// Use this to clear the screen taken from source: 	
+//  https://stackoverflow.com/questions/2979383/java-clear-the-console
+	public static void clearScreen() {  
+	 System.out.print("\033[H\033[2J");  
+	 System.out.flush();  
+	}  
 
 }
 

@@ -29,8 +29,8 @@ private boolean bottomWall;
 
 private boolean hasMonster;
 private boolean hasKey;
-
 private boolean hasDoor;
+private boolean hasPlayer;
 
 private int doorPosition;
 
@@ -40,12 +40,13 @@ private int doorPosition;
 	 location = new Point();  // floating in space
 	 
 	 leftWall=true;
-	 rightWall=false;
+	 rightWall=true;
 	 topWall=true;
-	 bottomWall=false;
+	 bottomWall=true;
 
 	 hasMonster=false;
 	 hasKey=false;
+	 hasPlayer=false;
 
 	 hasDoor=false;
 	 doorPosition=0; // 0 for no door 1 for left 2 for right , 3 for top, 4 for bottom
@@ -63,6 +64,7 @@ private int doorPosition;
 
 	 hasMonster=false;
 	 hasKey=false;
+	 hasPlayer=false;
 	 
 	 hasDoor=false;
 	 doorPosition=0; // 0 for no door 1 for left 2 for right , 3 for top, 4 for bottom
@@ -79,6 +81,7 @@ private int doorPosition;
 
 	 hasMonster=false;
 	 hasKey=false;
+	 hasPlayer=false;
 	 
 	 hasDoor=false;
 	 doorPosition=0; // 0 for no door 1 for left 2 for right , 3 for top, 4 for bottom
@@ -96,6 +99,7 @@ private int doorPosition;
 	 bottomWall=toCopy.bottomWall;
 	 hasMonster=toCopy.hasMonster;
 	 hasKey=toCopy.hasKey;
+	 hasPlayer=toCopy.hasPlayer;
 	 hasDoor=toCopy.hasDoor;
 	 doorPosition=toCopy.doorPosition; // 0 for no door 1 for left 2 for right , 3 for top, 4 for bottom
 	}
@@ -112,6 +116,9 @@ private int doorPosition;
 	}
 	public boolean getBottomWall(){
 	return bottomWall;
+	}
+	public boolean getHasPlayer(){
+	return hasPlayer;
 	}
 	public boolean getHasMonster(){
 	return hasMonster;
@@ -161,10 +168,15 @@ private int doorPosition;
 	bottomWall=value;
 	return;
 	}
+	
+	public void setHasPlayer(boolean value){
+	hasPlayer=value;
+	return;
+	}
 	public void setHasMonster(boolean value){
 	hasMonster=value;
 	return;
-	}
+	}	
 	public void setHasKey(boolean value){
 	hasKey = value;
 	return;
@@ -194,6 +206,7 @@ private int doorPosition;
 	}
 	
 	public void drawRoom(){
+	
 	// prints out one room for display purposes 
 	// more robust routine will be defined in drawMaze() method in Maze() class.
 	
@@ -207,8 +220,10 @@ private int doorPosition;
 	
 	/// routine to position the room in the array 
 		// move to the row
-		for (int j=0 ; j < row ; j++){
-		System.out.println("");
+		for (int i=0 ; i < row ; i++){
+			for (int j = 0 ; j<4 ; j++){ 
+			System.out.println("");
+			}
 		}
 		// move to column
 		for ( int i = 0 ; i < col ; i++){
@@ -240,51 +255,50 @@ private int doorPosition;
 		}
 		
 		returnCursorToRoom(col, RoomWidth);
-
+		
 		if (leftWall == true){
 		System.out.print("|");
-		/// move to the right by a room's width
-			for (int k = 0 ; k < RoomWidth ; k ++){		
-				if (hasKey == true  && k == RoomWidth/2){
-				System.out.print("K");
-				}else{		
-				System.out.print(" ");		
+		plotItem(RoomWidth);
+		}else{
+		
+		plotItem(RoomWidth);
+		
+		}
+		
+		if (rightWall == true){
+		System.out.print("|");
+		}
+		
+		returnCursorToRoom(col,RoomWidth);
+		
+		if (leftWall == true){
+		System.out.print("|");
+		
+			if ( bottomWall == true){	
+			/// Print the bottom wall
+				for (int k = 0 ; k < RoomWidth; k ++){
+					System.out.print("_");
+				}
+			}else {
+			/// move to the right by a room's width
+				for (int k = 0 ; k < RoomWidth ; k ++){
+				System.out.print(" ");
 				}
 			}
 		}
-		
-		if (rightWall == true){
-		System.out.print("|");
-		}
-		
-		returnCursorToRoom(col,RoomWidth);
-		
-		if (leftWall == true){
-		System.out.print("|");
-		/// move to the right by a room's width
-			for (int k = 0 ; k < RoomWidth ; k ++){
-			System.out.print(" ");
-			}
-		}
 
 		if (rightWall == true){
 		System.out.print("|");
 		}
-		
-		returnCursorToRoom(col,RoomWidth);
-
-		if ( bottomWall == true){	
-		/// Print the bottom wall
-			for (int k = 0 ; k < RoomWidth+2 ; k ++){
-				System.out.print("-");
-			}
-		}
-		
+			
+	// returnCursorToRoom(col,RoomWidth);	
 	System.out.print("\n");	
 	System.out.println("");	
 	}  // close brace for drawRoom()
 
-	public void returnCursorToRoom(int col, int RoomWidth){
+
+////////////////// PRIVATE HELPER FUNCTIONS ///////////////////////////////////////
+	private void returnCursorToRoom(int col, int RoomWidth){
 	
 	System.out.print("\n");  // move to the next line and return to the ce
 	// return to room position
@@ -296,10 +310,24 @@ private int doorPosition;
 		}
 	return;
 	}
-
-
-
-
+	
+	private void plotItem(int RoomWidth){
+	
+				for (int k = 0 ; k < RoomWidth ; k ++){		
+				if (hasKey == true  && k == RoomWidth/2){
+				System.out.print("K");
+				}else if (hasDoor == true  && k == RoomWidth/2){
+				System.out.print("D");
+				}else if (hasMonster == true  && k == RoomWidth/2){
+				System.out.print("M");
+				}else if (hasPlayer == true  && k == RoomWidth/2){
+				System.out.print("*");
+				}else{		
+				System.out.print(" ");		
+				}
+			}
+	}
+	
 
 } // class closing brace
 ///////////////////////////////   END OF FILE ///////////////////////////////////////////////
