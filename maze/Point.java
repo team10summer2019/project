@@ -94,5 +94,11 @@ private int yCoordinate;
 
 //////////////////////////   OTHER METHODS     ///////////////////////////////////////
 
+	public String toString(){
+	String temp = "";
+	temp = temp + "(" + xCoordinate+ "," + yCoordinate + ")";
+	return temp;
+	}
+	
 } // end of class definition
 ///////////////////////// END OF FILE //////////////////////////////////////////

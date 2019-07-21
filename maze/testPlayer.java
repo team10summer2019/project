@@ -1,7 +1,7 @@
 //////////////////////////////////////////////
 //
 // File: testPlayer.java
-// Description: Player class
+// Description: test for the Player class
 //
 // Author: (Ron) Zorondras Rodriguez
 // Course:  CPSC 233 Summer 2019

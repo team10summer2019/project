@@ -21,18 +21,12 @@
  
  Point:  (x,y) location integers
  
-////////////////////////// 
- 
  Player:  Attributes - (x,y) Point location, Health, hasKey, attackStrength
           Methods- moveLeft(), moveRight(), moveUp(), moveDown(),
-	           searchRoom(), attack(), openDoor() , die() , isAlive()
-		   
- Key:  Attributes: Point location , Room location? , DoorNumber
-	Methods:  unLockDoor() 
- 
- Monster:  Attibutes: (x,y) point location, Health, hasKey, attackStrength, 
-           Methods :   attack(), die(), isAlive(),
-	   
+	            die(), isAlive() 
+	  Not yet Implemented: searchRoom(), attack(), openDoor()
+
+////////////////////////// 
 	   
  Room:  Attributes: (x,y) point location, Booleans: leftWall, bottomWall, rightWall, topWall,
 			hasMonster, hasKey, hasDoor, leftDoor, topDoor, rightDoor, bottomDoor
@@ -40,8 +34,13 @@
  
  Door:  Attributes:  (x,y) point, Room location, Boolean isLocked, 
 	Methods:     unLock() 
-  
  
+ Key:  Attributes: Point location , Room location? , DoorNumber
+	Methods:  unLockDoor() 
+  
+ Monster:  Attibutes: (x,y) point location, Health, hasKey, attackStrength, 
+           Methods :   attack(), die(), isAlive(),
+	      
  Maze  Attributes:  size, RoomMatrix, Rooms, player, Monster, key, door
        Methods:    drawMap() 
  
