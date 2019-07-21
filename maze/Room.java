@@ -32,6 +32,8 @@ private boolean hasKey;
 private boolean hasDoor;
 private boolean hasPlayer;
 
+private boolean hasMap;
+
 private int doorPosition;
 
 //////////////////////////   CONSTRUCTORS ///////////////////////////////////////////////
@@ -44,6 +46,7 @@ private int doorPosition;
 	 topWall=true;
 	 bottomWall=true;
 
+	 hasMap = false;
 	 hasMonster=false;
 	 hasKey=false;
 	 hasPlayer=false;
@@ -62,6 +65,7 @@ private int doorPosition;
 	 topWall=top;
 	 bottomWall=bottom;
 
+	 hasMap = false;
 	 hasMonster=false;
 	 hasKey=false;
 	 hasPlayer=false;
@@ -79,6 +83,7 @@ private int doorPosition;
 	 topWall=top;
 	 bottomWall=bottom;
 
+	 hasMap = false;
 	 hasMonster=false;
 	 hasKey=false;
 	 hasPlayer=false;
@@ -101,6 +106,7 @@ private int doorPosition;
 	 hasKey=toCopy.hasKey;
 	 hasPlayer=toCopy.hasPlayer;
 	 hasDoor=toCopy.hasDoor;
+	 hasMap=toCopy.hasMap;
 	 doorPosition=toCopy.doorPosition; // 0 for no door 1 for left 2 for right , 3 for top, 4 for bottom
 	}
 	
@@ -131,6 +137,10 @@ private int doorPosition;
 	}
 	public int getDoorPosition(){
 	return doorPosition;
+	}
+	
+	public boolean getHasMap(){
+	return hasMap;
 	}
 	
 	public Point getLocation(){
@@ -181,6 +191,12 @@ private int doorPosition;
 	hasKey = value;
 	return;
 	}
+	
+	public void setHasMap(boolean value){
+	hasKey = value;
+	return;
+	}
+	
 	public void setHasDoor( boolean value){
 	hasDoor = value;
 	return;
@@ -200,7 +216,8 @@ private int doorPosition;
 	System.out.print("TopWall = " + topWall + " ");
 	System.out.println("BottomWall = " + bottomWall);
 	System.out.print("Monster = " + hasMonster+ " ");
-	System.out.println("HasKey = " + hasKey+ " ");
+	System.out.print("HasKey = " + hasKey + " ");
+	System.out.print("HasMap = " + hasMap + " ");
 	System.out.print("Door = " + hasDoor+ " ");
 	System.out.println("DoorPosition = " + doorPosition);
 	}
@@ -217,7 +234,8 @@ private int doorPosition;
 	Point corner = getLocation();
 	int row = corner.getYCoordinate();
 	int col = corner.getXCoordinate();
-	
+
+	/*	
 	/// routine to position the room in the array 
 		// move to the row
 		for (int i=0 ; i < row ; i++){
@@ -225,15 +243,14 @@ private int doorPosition;
 			System.out.println("");
 			}
 		}
+	*/	
 		// move to column
 		for ( int i = 0 ; i < col ; i++){
-			/// move to the right by a room's width
-			for (int k = 0 ; k < RoomWidth ; k ++){
-			System.out.print(" ");
-			}
+			printSpaceRight(RoomWidth);
 		}
 	// now you should be at the correct row and column to print out the room
-		
+
+			
 		if (topWall == true) {
 			for (int k = 0 ; k < RoomWidth+2; k ++){
 			System.out.print("_");
@@ -244,12 +261,9 @@ private int doorPosition;
 		
 		if (leftWall == true){
 		System.out.print("|");
-		/// move to the right by a room's width
-			for (int k = 0 ; k < RoomWidth ; k ++){
-			System.out.print(" ");
-			}
-		}
-
+		printSpaceRight(RoomWidth);
+		} else { printSpaceRight(RoomWidth+1);}
+		
 		if (rightWall == true){
 		System.out.print("|");
 		}
@@ -260,9 +274,7 @@ private int doorPosition;
 		System.out.print("|");
 		plotItem(RoomWidth);
 		}else{
-		
-		plotItem(RoomWidth);
-		
+		plotItem(RoomWidth+1);
 		}
 		
 		if (rightWall == true){
@@ -282,6 +294,18 @@ private int doorPosition;
 			}else {
 			/// move to the right by a room's width
 				for (int k = 0 ; k < RoomWidth ; k ++){
+				System.out.print(" ");
+				}
+			}
+		}else {
+			if ( bottomWall == true){	
+			/// Print the bottom wall
+				for (int k = 0 ; k < RoomWidth+2; k ++){
+					System.out.print("_");
+				}
+			}else {
+			/// move to the right by a room's width
+				for (int k = 0 ; k < RoomWidth+1 ; k ++){
 				System.out.print(" ");
 				}
 			}
@@ -327,6 +351,14 @@ private int doorPosition;
 				}
 			}
 	}
+	private void printSpaceRight(int RoomWidth){
+		/// move to the right by a room's width
+			for (int k = 0 ; k < RoomWidth ; k ++){
+			System.out.print(" ");
+			}
+	}
+	
+	
 	
 
 } // class closing brace

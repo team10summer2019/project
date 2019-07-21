@@ -36,10 +36,10 @@
            Methods :   attack(), die(), isAlive(),
 //////////////////////////    
 
- Maze  Attributes:  size, RoomMatrix with 16 Rooms each with wall and item attributes, Player, Monster, Key, Door
+ Maze  Attributes:  size, RoomMatrix with n x n Rooms each with wall and item attributes, Player, Monster, Key, Door
        Methods:    drawMap(), updateMap()
  
- MazeGame:   Draws the maze, and organizes the input control to move arround the maze , has main() function,
+ MazeGame:   Sets up the maze Draws the maze, and organizes the input control to move arround the maze , has main() function,
 		terminates the game when the door is unlocked.
  
  inputControl:   takes user input by scanner, and prompts user for input via system.

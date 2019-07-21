@@ -1,86 +1,130 @@
-MazeGame.java:49: error: cannot find symbol
-	gameBoard.setRoom(0,true, true , true, false, false, false,false); // setup the first room 
+MazeGame.java:65: error: ';' expected
+	clearScreen()
+	             ^
+MazeGame.java:73: error: illegal start of type
+	return;
 	^
-  symbol:   variable gameBoard
-  location: class MazeGame
-MazeGame.java:50: error: cannot find symbol
-	gameBoard.setRoom(0,true);  // place the player in the first room
+MazeGame.java:78: error: class, interface, or enum expected
+	public static void setBoard( Maze m){
+	              ^
+MazeGame.java:81: error: class, interface, or enum expected
+	m.setRoom(0,true);  // place the player in the first room
 	^
-  symbol:   variable gameBoard
-  location: class MazeGame
-MazeGame.java:52: error: cannot find symbol
-	gameBoard.setRoom(1,true,false, true, true,false,true, false);
+MazeGame.java:83: error: class, interface, or enum expected
+	m.setRoom(1,true,false, true, true,false,true, false);
 	^
-  symbol:   variable gameBoard
-  location: class MazeGame
-MazeGame.java:54: error: cannot find symbol
-	gameBoard.setRoom(2, false, false,true,true, false, false,false);
+MazeGame.java:85: error: class, interface, or enum expected
+	m.setRoom(2, false, false,true,true, false, false,false);
 	^
-  symbol:   variable gameBoard
-  location: class MazeGame
-MazeGame.java:56: error: cannot find symbol
-	gameBoard.setRoom(3, false, true ,true,false, false, false,false);
+MazeGame.java:87: error: class, interface, or enum expected
+	m.setRoom(3, false, true ,true,false, false, false,false);
 	^
-  symbol:   variable gameBoard
-  location: class MazeGame
-MazeGame.java:58: error: cannot find symbol
-	gameBoard.setRoom(4, true, true ,false,false, false, false,false);
+MazeGame.java:89: error: class, interface, or enum expected
+	m.setRoom(4, true, true ,false,false, false, false,false);
 	^
-  symbol:   variable gameBoard
-  location: class MazeGame
-MazeGame.java:60: error: cannot find symbol
-	gameBoard.setRoom(5, true, false ,true,false, false, false,false);
+MazeGame.java:91: error: class, interface, or enum expected
+	m.setRoom(5, true, false ,true,false, false, false,false);
 	^
-  symbol:   variable gameBoard
-  location: class MazeGame
-MazeGame.java:62: error: cannot find symbol
-	gameBoard.setRoom(6, false, false ,true,true, false, false,false);
+MazeGame.java:93: error: class, interface, or enum expected
+	m.setRoom(6, false, false ,true,true, false, false,false);
 	^
-  symbol:   variable gameBoard
-  location: class MazeGame
-MazeGame.java:64: error: cannot find symbol
-	gameBoard.setRoom(7, false, true ,false,false, false, false,false);
+MazeGame.java:95: error: class, interface, or enum expected
+	m.setRoom(7, false, true ,false,false, false, false,false);
 	^
-  symbol:   variable gameBoard
-  location: class MazeGame
-MazeGame.java:66: error: cannot find symbol
-	gameBoard.setRoom(8, true, false ,false,true, false, false,false);
+MazeGame.java:97: error: class, interface, or enum expected
+	m.setRoom(8, true, false ,false,true, false, false,false);
 	^
-  symbol:   variable gameBoard
-  location: class MazeGame
-MazeGame.java:68: error: cannot find symbol
-	gameBoard.setRoom(9, false, true ,false,true, false, false,false);
+MazeGame.java:99: error: class, interface, or enum expected
+	m.setRoom(9, false, true ,false,true, false, false,false);
 	^
-  symbol:   variable gameBoard
-  location: class MazeGame
-MazeGame.java:70: error: cannot find symbol
-	gameBoard.setRoom(10, true, true ,true, false, true, false,false);
+MazeGame.java:101: error: class, interface, or enum expected
+	m.setRoom(10, true, true ,true, false, true, false,false);
 	^
-  symbol:   variable gameBoard
-  location: class MazeGame
-MazeGame.java:72: error: cannot find symbol
-	gameBoard.setRoom(11, true, true ,false, false,false, false,false);
+MazeGame.java:103: error: class, interface, or enum expected
+	m.setRoom(11, true, true ,false, false,false, false,false);
 	^
-  symbol:   variable gameBoard
-  location: class MazeGame
-MazeGame.java:74: error: cannot find symbol
-	gameBoard.setRoom(12, true, false ,true, true ,false, false,true);
+MazeGame.java:105: error: class, interface, or enum expected
+	m.setRoom(12, true, false ,true, true ,false, false,true);
 	^
-  symbol:   variable gameBoard
-  location: class MazeGame
-MazeGame.java:76: error: cannot find symbol
-	gameBoard.setRoom(13, false, true , false, true ,false, false,false);
+MazeGame.java:107: error: class, interface, or enum expected
+	m.setRoom(13, false, true , false, true ,false, false,false);
 	^
-  symbol:   variable gameBoard
-  location: class MazeGame
-MazeGame.java:78: error: cannot find symbol
-	gameBoard.setRoom(14, true, false , false, true ,false, false,false);
+MazeGame.java:109: error: class, interface, or enum expected
+	m.setRoom(14, true, false , false, true ,false, false,false);
 	^
-  symbol:   variable gameBoard
-  location: class MazeGame
-MazeGame.java:80: error: cannot find symbol
-	gameBoard.setRoom(15, false, true , false, true ,false, false,false);	
+MazeGame.java:111: error: class, interface, or enum expected
+	m.setRoom(15, false, true , false, true ,false, false,false);	
 	^
-  symbol:   variable gameBoard
-  location: class MazeGame
-17 errors
+MazeGame.java:113: error: class, interface, or enum expected
+	return;
+	^
+MazeGame.java:114: error: class, interface, or enum expected
+	}
+	^
+MazeGame.java:116: error: class, interface, or enum expected
+	public static void printMap(){
+	              ^
+MazeGame.java:118: error: class, interface, or enum expected
+	System.out.println("");	
+	^
+MazeGame.java:119: error: class, interface, or enum expected
+	System.out.println("_____________________________");
+	^
+MazeGame.java:120: error: class, interface, or enum expected
+	System.out.println("|      |      |      |      |");
+	^
+MazeGame.java:121: error: class, interface, or enum expected
+	System.out.println("|  *   |  D                 |");
+	^
+MazeGame.java:122: error: class, interface, or enum expected
+	System.out.println("|_    _|______|______|_    _|");
+	^
+MazeGame.java:123: error: class, interface, or enum expected
+	System.out.println("|      |      |      |      |");
+	^
+MazeGame.java:124: error: class, interface, or enum expected
+	System.out.println("|      |                    |");
+	^
+MazeGame.java:125: error: class, interface, or enum expected
+	System.out.println("|_    _|_    _|______|_    _|");
+	^
+MazeGame.java:126: error: class, interface, or enum expected
+	System.out.println("|      |      |      |      |");
+	^
+MazeGame.java:127: error: class, interface, or enum expected
+	System.out.println("|             |   K  |      |");
+	^
+MazeGame.java:128: error: class, interface, or enum expected
+	System.out.println("|______|_    _|__   _|_    _|");
+	^
+MazeGame.java:129: error: class, interface, or enum expected
+	System.out.println("|      |      |      |      |");
+	^
+MazeGame.java:130: error: class, interface, or enum expected
+	System.out.println("|  M          |             |");
+	^
+MazeGame.java:131: error: class, interface, or enum expected
+	System.out.println("|______|______|______|______|");
+	^
+MazeGame.java:132: error: class, interface, or enum expected
+	System.out.println("");
+	^
+MazeGame.java:133: error: class, interface, or enum expected
+	System.out.println("Press r and Enter to return to the Maze");
+	^
+MazeGame.java:135: error: class, interface, or enum expected
+	return;
+	^
+MazeGame.java:136: error: class, interface, or enum expected
+	}
+	^
+MazeGame.java:140: error: class, interface, or enum expected
+	public static void clearScreen() {  
+	              ^
+MazeGame.java:142: error: class, interface, or enum expected
+	 System.out.flush();  
+	 ^
+MazeGame.java:143: error: class, interface, or enum expected
+	}  
+	^
+43 errors
