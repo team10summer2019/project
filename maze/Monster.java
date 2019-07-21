@@ -1,13 +1,13 @@
 //////////////////////////////////////////////
 //
 // File: Player.java
-// Description: Player class
+// Description: Monster class
 //
 // Author: (Ron) Zorondras Rodriguez
 // Course:  CPSC 233 Summer 2019
 // Creation Date: July 20, 2019
-// Version: 0.02
-// Revision Date: July 21, 2019
+// Version: 0.01
+// Revision Date: July 20, 2019
 //
 ///////////////////////////////////////////////
 
@@ -16,7 +16,7 @@
 //	           searchRoom(), attack(), openDoor() , die() , isAlive()
 
 
-public class Player {
+public class Monster {
 
 ////////////////////// MEMBER VARIABLES /////////////////////////////////////
 
@@ -28,42 +28,41 @@ private int attackStrength;
 //////////////////////  CONSTRUCTORS     //////////////////////////////////////////
 
 	// default constructor
-	public Player(){
-	position = new Point(0,0);
-	health = 30;
+	public Monster(){
+	position = new Point(0,3);
+	health = 15;
 	hasKey = false;
-	attackStrength = 4;
+	attackStrength = 3;
 	}
 
 	// input constructor
-	public Player(Point p, int heal, int strength ){
-	position = new Point(p);
+	public Monster(Point p, int heal, int strength ){
+	position = new Point(0,3);
 	hasKey = false;
 	
 		if (heal >5){
 		health = heal;
 		}
-		else { health = 30; }  
+		else { health = 15; }  
 	
 		if ( strength >=1){
 		attackStrength = strength;
-		}else { attackStrength = 4 ; }
+		}else { attackStrength = 3;}
 	}
 	
-	// copy constructor
-	public Player( Player p){
-	position = new Point(p.position);
-	hasKey = p.hasKey;
+	// copy  constructor
+	public Monster( Monster m ){
+	position = new Point(m.position);
+	hasKey = m.hasKey;
 	
-		if (p.health >0){
-		health = p.health;
+		if (m.health >=0){
+		health = m.health;
+		} 
+		if ( m.attackStrength >=1){
+		attackStrength = m.attackStrength;
 		}
-		else { health = 0; }  
-	
-		if ( p.attackStrength >=1){
-		attackStrength = p.attackStrength;
-		}else { attackStrength = 4 ; }
 	}
+	
 
 
 //////////////////////   ACCESSORS     ////////////////////////////////////////////
@@ -102,9 +101,9 @@ private int attackStrength;
 	
 	
 	public void setHealth( int healthIn){
-		if (healthIn > 0) {
+		if (healthIn >= 0) {
 		health= healthIn;
-		}
+		}else { health = 0;}
 	return;
 	}
 	
@@ -119,7 +118,6 @@ private int attackStrength;
 		}
 	}
 
-
 	public void takesDamage(int damage){
 		if (damage > 0){
 		health -= damage;
@@ -130,11 +128,12 @@ private int attackStrength;
 ///////////////////////   OTHER METHODS /////////////////////////////////////////////
 
 ////////////  FIGHTING METHODS ///////////////////////////////////////////////////
-	public void attacks(Monster m){
-	m.takesDamage(attackStrength);
+	public void attacks(Player p){
+	p.takesDamage(attackStrength);
 	return;
 	}
 
+	
 //////////////////////   Motion Methods /////////////////////////////////////////////
 
 	public void moveLeft(){
@@ -170,9 +169,9 @@ private int attackStrength;
 	
 	private void die() {
 	health = 0;
-	hasKey=false;
-	System.out.println("Our Hero Gasps and Screams:");
-	System.out.println("My quest is finished! Arrrgghhhh!");
+
+	System.out.println("Monster Gasps and Screams:");
+	System.out.println("Keith Richards Lives On!  Arrrgghhhh!");
 	return ;
 	}
 

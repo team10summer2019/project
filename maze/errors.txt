@@ -1,97 +1,217 @@
-Room.java:256: error: illegal start of type
-		if ( bottomWall == true){		
+./Monster.java:69: error: illegal start of expression
+	public Point getPosition(){
+	^
+./Monster.java:69: error: ';' expected
+	public Point getPosition(){
+	                        ^
+./Monster.java:74: error: illegal start of expression
+	public int getHealth(){
+	^
+./Monster.java:74: error: ';' expected
+	public int getHealth(){
+	                    ^
+./Monster.java:78: error: illegal start of expression
+	public boolean getHasKey(){
+	^
+./Monster.java:78: error: ';' expected
+	public boolean getHasKey(){
+	                        ^
+./Monster.java:82: error: illegal start of expression
+	public int getAttackStrength(){
+	^
+./Monster.java:82: error: ';' expected
+	public int getAttackStrength(){
+	                            ^
+./Monster.java:89: error: illegal start of expression
+	public void setPosition(Point p){
+	^
+./Monster.java:89: error: illegal start of expression
+	public void setPosition(Point p){
+	       ^
+./Monster.java:89: error: ';' expected
+	public void setPosition(Point p){
+	                       ^
+./Monster.java:89: error: ';' expected
+	public void setPosition(Point p){
+	                               ^
+./Monster.java:95: error: illegal start of expression
+	public void setPosition(int x, int y){
+	^
+./Monster.java:95: error: illegal start of expression
+	public void setPosition(int x, int y){
+	       ^
+./Monster.java:95: error: ';' expected
+	public void setPosition(int x, int y){
+	                       ^
+./Monster.java:95: error: <identifier> expected
+	public void setPosition(int x, int y){
+	                              ^
+./Monster.java:95: error: not a statement
+	public void setPosition(int x, int y){
+	                                   ^
+./Monster.java:95: error: ';' expected
+	public void setPosition(int x, int y){
+	                                    ^
+./Monster.java:102: error: illegal start of expression
+	public void setHealth( int healthIn){
+	^
+./Monster.java:102: error: illegal start of expression
+	public void setHealth( int healthIn){
+	       ^
+./Monster.java:102: error: ';' expected
+	public void setHealth( int healthIn){
+	                     ^
+./Monster.java:102: error: ';' expected
+	public void setHealth( int healthIn){
+	                                   ^
+./Monster.java:105: error: 'else' without 'if'
+		else { health = 0;}
 		^
-Room.java:256: error: <identifier> expected
-		if ( bottomWall == true){		
-		               ^
-Room.java:256: error: ';' expected
-		if ( bottomWall == true){		
-		                  ^
-Room.java:256: error: illegal start of type
-		if ( bottomWall == true){		
-		                       ^
-Room.java:256: error: <identifier> expected
-		if ( bottomWall == true){		
-		                        ^
-Room.java:256: error: ';' expected
-		if ( bottomWall == true){		
-		                         ^
-Room.java:257: error: illegal start of type
-			for ( int i = 0 ; i < col ; i++){
-			    ^
-Room.java:257: error: <identifier> expected
-			for ( int i = 0 ; i < col ; i++){
-			     ^
-Room.java:257: error: ';' expected
-			for ( int i = 0 ; i < col ; i++){
-			         ^
-Room.java:257: error: illegal start of type
-			for ( int i = 0 ; i < col ; i++){
-			            ^
-Room.java:257: error: <identifier> expected
-			for ( int i = 0 ; i < col ; i++){
-			             ^
-Room.java:257: error: > expected
-			for ( int i = 0 ; i < col ; i++){
-			                          ^
-Room.java:257: error: ';' expected
-			for ( int i = 0 ; i < col ; i++){
-			                           ^
-Room.java:257: error: illegal start of type
-			for ( int i = 0 ; i < col ; i++){
-			                             ^
-Room.java:257: error: <identifier> expected
-			for ( int i = 0 ; i < col ; i++){
-			                               ^
-Room.java:257: error: ';' expected
-			for ( int i = 0 ; i < col ; i++){
-			                                ^
-Room.java:259: error: illegal start of type
-				for (int k = 0 ; k < RoomWidth ; k ++){
-				^
-Room.java:259: error: <identifier> expected
-				for (int k = 0 ; k < RoomWidth ; k ++){
-				   ^
-Room.java:259: error: ';' expected
-				for (int k = 0 ; k < RoomWidth ; k ++){
-				     ^
-Room.java:259: error: <identifier> expected
-				for (int k = 0 ; k < RoomWidth ; k ++){
-				          ^
-Room.java:259: error: > expected
-				for (int k = 0 ; k < RoomWidth ; k ++){
-				                               ^
-Room.java:259: error: ';' expected
-				for (int k = 0 ; k < RoomWidth ; k ++){
-				                                ^
-Room.java:259: error: illegal start of type
-				for (int k = 0 ; k < RoomWidth ; k ++){
-				                                   ^
-Room.java:259: error: <identifier> expected
-				for (int k = 0 ; k < RoomWidth ; k ++){
-				                                     ^
-Room.java:259: error: ';' expected
-				for (int k = 0 ; k < RoomWidth ; k ++){
-				                                      ^
-Room.java:260: error: <identifier> expected
-				System.out.print(" ");
-				                ^
-Room.java:260: error: illegal start of type
-				System.out.print(" ");
-				                 ^
-Room.java:262: error: class, interface, or enum expected
-			}
-			^
-Room.java:264: error: class, interface, or enum expected
-			for (int k = 0 ; k < RoomWidth ; k ++){
-			                 ^
-Room.java:264: error: class, interface, or enum expected
-			for (int k = 0 ; k < RoomWidth ; k ++){
-			                                 ^
-Room.java:266: error: class, interface, or enum expected
-			}
-			^
-Room.java:268: error: class, interface, or enum expected
-		}
-		^
-32 errors
+./Monster.java:110: error: illegal start of expression
+	public void setHasKey( boolean val){
+	^
+./Monster.java:110: error: illegal start of expression
+	public void setHasKey( boolean val){
+	       ^
+./Monster.java:110: error: ';' expected
+	public void setHasKey( boolean val){
+	                     ^
+./Monster.java:110: error: ';' expected
+	public void setHasKey( boolean val){
+	                                  ^
+./Monster.java:115: error: illegal start of expression
+	public void setAttackStrength(int strength){
+	^
+./Monster.java:115: error: illegal start of expression
+	public void setAttackStrength(int strength){
+	       ^
+./Monster.java:115: error: ';' expected
+	public void setAttackStrength(int strength){
+	                             ^
+./Monster.java:115: error: ';' expected
+	public void setAttackStrength(int strength){
+	                                          ^
+./Monster.java:121: error: illegal start of expression
+	public void takesDamage(int damage){
+	^
+./Monster.java:121: error: illegal start of expression
+	public void takesDamage(int damage){
+	       ^
+./Monster.java:121: error: ';' expected
+	public void takesDamage(int damage){
+	                       ^
+./Monster.java:121: error: ';' expected
+	public void takesDamage(int damage){
+	                                  ^
+./Monster.java:131: error: illegal start of expression
+	public void attacks(Player p){
+	^
+./Monster.java:131: error: illegal start of expression
+	public void attacks(Player p){
+	       ^
+./Monster.java:131: error: ';' expected
+	public void attacks(Player p){
+	                   ^
+./Monster.java:131: error: ';' expected
+	public void attacks(Player p){
+	                            ^
+./Monster.java:139: error: illegal start of expression
+	public void moveLeft(){
+	^
+./Monster.java:139: error: illegal start of expression
+	public void moveLeft(){
+	       ^
+./Monster.java:139: error: ';' expected
+	public void moveLeft(){
+	                    ^
+./Monster.java:146: error: illegal start of expression
+	public void moveRight(){
+	^
+./Monster.java:146: error: illegal start of expression
+	public void moveRight(){
+	       ^
+./Monster.java:146: error: ';' expected
+	public void moveRight(){
+	                     ^
+./Monster.java:151: error: illegal start of expression
+	public void moveUp(){
+	^
+./Monster.java:151: error: illegal start of expression
+	public void moveUp(){
+	       ^
+./Monster.java:151: error: ';' expected
+	public void moveUp(){
+	                  ^
+./Monster.java:156: error: illegal start of expression
+	public void moveDown(){
+	^
+./Monster.java:156: error: illegal start of expression
+	public void moveDown(){
+	       ^
+./Monster.java:156: error: ';' expected
+	public void moveDown(){
+	                    ^
+./Monster.java:163: error: illegal start of expression
+	private boolean isAlive(){
+	^
+./Monster.java:163: error: ';' expected
+	private boolean isAlive(){
+	                       ^
+./Monster.java:170: error: illegal start of expression
+	private void die() {
+	^
+./Monster.java:170: error: illegal start of expression
+	private void die() {
+	        ^
+./Monster.java:170: error: ';' expected
+	private void die() {
+	                ^
+./Monster.java:180: error: illegal start of expression
+	public void displayStats(){
+	^
+./Monster.java:180: error: illegal start of expression
+	public void displayStats(){
+	       ^
+./Monster.java:180: error: ';' expected
+	public void displayStats(){
+	                        ^
+./Monster.java:195: error: reached end of file while parsing
+} // class definition brace
+ ^
+Player.java:119: error: cannot find symbol
+	m.takesDamage(attackStrength);
+	 ^
+  symbol:   method takesDamage(int)
+  location: variable m of type Monster
+./Monster.java:71: error: incompatible types: unexpected return value
+	return temp;
+	       ^
+./Monster.java:75: error: incompatible types: unexpected return value
+	return health;
+	       ^
+./Monster.java:79: error: incompatible types: unexpected return value
+	return hasKey;
+	       ^
+./Monster.java:83: error: incompatible types: unexpected return value
+	return attackStrength;
+	       ^
+./Monster.java:97: error: cannot find symbol
+	position.setYCoordinate(y);
+	                        ^
+  symbol:   variable y
+  location: class Monster
+./Monster.java:131: error: variable p is already defined in constructor Monster(Monster)
+	public void attacks(Player p){
+	                           ^
+./Monster.java:132: error: cannot find symbol
+	p.takesDamage(attackStrength);
+	 ^
+  symbol:   method takesDamage(int)
+  location: variable p of type Point
+./Monster.java:165: error: incompatible types: unexpected return value
+		return true;
+		       ^
+./Monster.java:167: error: incompatible types: unexpected return value
+	return false;
+	       ^
+70 errors
