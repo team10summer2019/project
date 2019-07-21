@@ -1,0 +1,62 @@
+//////////////////////////////////////////////
+//
+// File: MazeSpec.txt
+// Description: Specification for the Maze
+//
+// Author: (Ron) Zorondras Rodriguez
+// Course:  CPSC 233 Summer 2019
+// Creation Date: July 20, 2019
+// Version: 0.01
+// Revision Date: July 20, 2019
+//
+///////////////////////////////////////////////
+
+ Maze is a 20 x 20 Room sized puzzle.  
+ The objective is to navigate to a room that has a key get the key and move to the exit room with a locked door.
+ Applying the key to the door will open the door and terminate the puzzle.  This puzzle can be extended to have a
+ Monster that guards the key.
+
+
+ Connecting classes :  Point, Player, Key, Door, Monster, Room, Maze, MazeGame , inputControl
+ 
+ Point:  (x,y) location integers
+ 
+////////////////////////// 
+ 
+ Player:  Attributes - (x,y) Point location, Health, hasKey, attackStrength
+          Methods- moveLeft(), moveRight(), moveUp(), moveDown(),
+	           searchRoom(), attack(), openDoor() , die() , isAlive()
+		   
+ Key:  Attributes: Point location , Room location? , DoorNumber
+	Methods:  unLockDoor() 
+ 
+ Monster:  Attibutes: (x,y) point location, Health, hasKey, attackStrength, 
+           Methods :   attack(), die(), isAlive(),
+	   
+	   
+ Room:  Attributes: (x,y) point location, Booleans: leftWall, bottomWall, rightWall, topWall,
+			hasMonster, hasKey, hasDoor, leftDoor, topDoor, rightDoor, bottomDoor
+	Methods:    displaySearch()
+ 
+ Door:  Attributes:  (x,y) point, Room location, Boolean isLocked, 
+	Methods:     unLock() 
+  
+ 
+ Maze  Attributes:  size, RoomMatrix, Rooms, player, Monster, key, door
+       Methods:    drawMap() 
+ 
+ MazeGame:   Draws the maze, and organizes the input control to move arround the maze , has main() function,
+		terminates the game when the door is unlocked.
+ 
+ inputControl:   takes user input by scanner, and prompts user for input via system.
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
