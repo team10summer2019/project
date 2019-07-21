@@ -41,8 +41,8 @@ private int doorPosition;
 	 
 	 leftWall=true;
 	 rightWall=false;
-	 topWall=false;
-	 bottomWall=true;
+	 topWall=true;
+	 bottomWall=false;
 
 	 hasMonster=false;
 	 hasKey=false;
@@ -182,18 +182,123 @@ private int doorPosition;
 
 //////////////////////////  OTHER METHODS /////////////////////////////////////////////////
 	public void  displayRoomStats(){
-	
 	System.out.println("Location = "+ location.toString());
 	System.out.print("leftWall = " + leftWall + " ");	
 	System.out.print("RightWall = " + rightWall + " ");
 	System.out.print("TopWall = " + topWall + " ");
 	System.out.println("BottomWall = " + bottomWall);
-	System.out.println("Monster = " + hasMonster);
+	System.out.print("Monster = " + hasMonster+ " ");
+	System.out.println("HasKey = " + hasKey+ " ");
 	System.out.print("Door = " + hasDoor+ " ");
 	System.out.println("DoorPosition = " + doorPosition);
 	}
 	
-//    drawRoom()
+	public void drawRoom(){
+	// prints out one room for display purposes 
+	// more robust routine will be defined in drawMaze() method in Maze() class.
+	
+	int maxWidth = 10;  // number for room cells in a row
+	int maxHeight = 10; // number of rows						
+	int RoomWidth=6; // padding for each room 
+	
+	Point corner = getLocation();
+	int row = corner.getYCoordinate();
+	int col = corner.getXCoordinate();
+	
+	/// routine to position the room in the array 
+		// move to the row
+		for (int j=0 ; j < row ; j++){
+		System.out.println("");
+		}
+		// move to column
+		for ( int i = 0 ; i < col ; i++){
+			/// move to the right by a room's width
+			for (int k = 0 ; k < RoomWidth ; k ++){
+			System.out.print(" ");
+			}
+		}
+	// now you should be at the correct row and column to print out the room
+		
+		if (topWall == true) {
+			for (int k = 0 ; k < RoomWidth+2; k ++){
+			System.out.print("_");
+			}
+		}
+		
+		returnCursorToRoom(col,RoomWidth);
+		
+		if (leftWall == true){
+		System.out.print("|");
+		/// move to the right by a room's width
+			for (int k = 0 ; k < RoomWidth ; k ++){
+			System.out.print(" ");
+			}
+		}
+
+		if (rightWall == true){
+		System.out.print("|");
+		}
+		
+		returnCursorToRoom(col, RoomWidth);
+
+		if (leftWall == true){
+		System.out.print("|");
+		/// move to the right by a room's width
+			for (int k = 0 ; k < RoomWidth ; k ++){		
+				if (hasKey == true  && k == RoomWidth/2){
+				System.out.print("K");
+				}else{		
+				System.out.print(" ");		
+				}
+			}
+		}
+		
+		if (rightWall == true){
+		System.out.print("|");
+		}
+		
+		returnCursorToRoom(col,RoomWidth);
+		
+		if (leftWall == true){
+		System.out.print("|");
+		/// move to the right by a room's width
+			for (int k = 0 ; k < RoomWidth ; k ++){
+			System.out.print(" ");
+			}
+		}
+
+		if (rightWall == true){
+		System.out.print("|");
+		}
+		
+		returnCursorToRoom(col,RoomWidth);
+
+		if ( bottomWall == true){	
+		/// Print the bottom wall
+			for (int k = 0 ; k < RoomWidth+2 ; k ++){
+				System.out.print("-");
+			}
+		}
+		
+	System.out.print("\n");	
+	System.out.println("");	
+	}  // close brace for drawRoom()
+
+	public void returnCursorToRoom(int col, int RoomWidth){
+	
+	System.out.print("\n");  // move to the next line and return to the ce
+	// return to room position
+		for ( int i = 0 ; i < col ; i++){
+		/// move to the right by a room's width
+			for (int k = 0 ; k < RoomWidth ; k ++){
+			System.out.print(" ");
+			}
+		}
+	return;
+	}
+
+
+
 
 
 } // class closing brace

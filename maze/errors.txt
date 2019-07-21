@@ -1,0 +1,97 @@
+Room.java:256: error: illegal start of type
+		if ( bottomWall == true){		
+		^
+Room.java:256: error: <identifier> expected
+		if ( bottomWall == true){		
+		               ^
+Room.java:256: error: ';' expected
+		if ( bottomWall == true){		
+		                  ^
+Room.java:256: error: illegal start of type
+		if ( bottomWall == true){		
+		                       ^
+Room.java:256: error: <identifier> expected
+		if ( bottomWall == true){		
+		                        ^
+Room.java:256: error: ';' expected
+		if ( bottomWall == true){		
+		                         ^
+Room.java:257: error: illegal start of type
+			for ( int i = 0 ; i < col ; i++){
+			    ^
+Room.java:257: error: <identifier> expected
+			for ( int i = 0 ; i < col ; i++){
+			     ^
+Room.java:257: error: ';' expected
+			for ( int i = 0 ; i < col ; i++){
+			         ^
+Room.java:257: error: illegal start of type
+			for ( int i = 0 ; i < col ; i++){
+			            ^
+Room.java:257: error: <identifier> expected
+			for ( int i = 0 ; i < col ; i++){
+			             ^
+Room.java:257: error: > expected
+			for ( int i = 0 ; i < col ; i++){
+			                          ^
+Room.java:257: error: ';' expected
+			for ( int i = 0 ; i < col ; i++){
+			                           ^
+Room.java:257: error: illegal start of type
+			for ( int i = 0 ; i < col ; i++){
+			                             ^
+Room.java:257: error: <identifier> expected
+			for ( int i = 0 ; i < col ; i++){
+			                               ^
+Room.java:257: error: ';' expected
+			for ( int i = 0 ; i < col ; i++){
+			                                ^
+Room.java:259: error: illegal start of type
+				for (int k = 0 ; k < RoomWidth ; k ++){
+				^
+Room.java:259: error: <identifier> expected
+				for (int k = 0 ; k < RoomWidth ; k ++){
+				   ^
+Room.java:259: error: ';' expected
+				for (int k = 0 ; k < RoomWidth ; k ++){
+				     ^
+Room.java:259: error: <identifier> expected
+				for (int k = 0 ; k < RoomWidth ; k ++){
+				          ^
+Room.java:259: error: > expected
+				for (int k = 0 ; k < RoomWidth ; k ++){
+				                               ^
+Room.java:259: error: ';' expected
+				for (int k = 0 ; k < RoomWidth ; k ++){
+				                                ^
+Room.java:259: error: illegal start of type
+				for (int k = 0 ; k < RoomWidth ; k ++){
+				                                   ^
+Room.java:259: error: <identifier> expected
+				for (int k = 0 ; k < RoomWidth ; k ++){
+				                                     ^
+Room.java:259: error: ';' expected
+				for (int k = 0 ; k < RoomWidth ; k ++){
+				                                      ^
+Room.java:260: error: <identifier> expected
+				System.out.print(" ");
+				                ^
+Room.java:260: error: illegal start of type
+				System.out.print(" ");
+				                 ^
+Room.java:262: error: class, interface, or enum expected
+			}
+			^
+Room.java:264: error: class, interface, or enum expected
+			for (int k = 0 ; k < RoomWidth ; k ++){
+			                 ^
+Room.java:264: error: class, interface, or enum expected
+			for (int k = 0 ; k < RoomWidth ; k ++){
+			                                 ^
+Room.java:266: error: class, interface, or enum expected
+			}
+			^
+Room.java:268: error: class, interface, or enum expected
+		}
+		^
+32 errors

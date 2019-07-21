@@ -22,7 +22,24 @@ Room test = new Room();
 
 test.displayRoomStats();
 
+test.drawRoom();
 
+
+test.setLocation(5,5);
+
+test.setRightWall(true);
+test.setBottomWall(true);
+
+test.setHasKey(true);
+
+
+test.displayRoomStats();
+test.drawRoom();
+
+test.setLocation(0,3);
+
+test.displayRoomStats();
+test.drawRoom();
 
 
 
