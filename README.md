@@ -35,7 +35,7 @@ Folder contains three files. HaineRiddle.java, TestHaineRiddle.java and this REA
 Save to a directory and compile both HaineRiddle and TestHaineRiddle through command prompt/terminal. 
 If using Eclipse, import both HaineRiddle.java and TestHaineRiddle.java into a default package. If not in default package, add: <BR>
 
-package <package name>; at the very top/beginning of both files, and save. <BR>
+package packageNameHere; at the very top/beginning of both files, and save. <BR>
 
 Run the TestHaineRiddle.java file, and play through Eclipse console <BR>
 
