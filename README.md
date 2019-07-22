@@ -14,7 +14,7 @@ $java MazeGame <BR>
 
 In the game use the commands Enter to cycle through the rooms in the array list, <BR>
 
-Commands:  help, map, quit, left, right, down, up. <BR>
+Commands:  help, map, quit, left, right, down, up, take, open, escape. <BR>
 
 Commands are case insensitive. "Map" displays a static map of the maze. "Quit" exits the main loop and 
 terminates the program. The player moves around the map using the commands "Up","Down","Left",Right" where 
