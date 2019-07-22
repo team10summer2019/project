@@ -54,6 +54,10 @@ Compile files in the directory riverPuzzle directory and run using the following
 $ cd riverPuzzle <BR>
 $javac *.java <BR>
 $java TestStevenRiver <BR>
+  
+Using Eclipes: import the two files into the same package and run the TestStevenRiver
+
+This is currently incomplete since there are some bugs that I need to fix.
 
 
 # LockLeverPuzzle
