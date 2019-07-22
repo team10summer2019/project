@@ -29,7 +29,9 @@ STEP 6) Examine the class file
 in the folder ~/git/project/maze/diagram , you will find a pdf and *.dia file with the class descriptions for each file
 
 $ cd ~/git/project/maze/diagram/
+
 $ mupdf diagram.pdf
+$ okular diagram.pdf &
 
 GAME INSTRUCTIONS:  
 Read the prompts for user input, and use the command "HELP", to see the remainder of the commands.  
