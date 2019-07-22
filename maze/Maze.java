@@ -34,7 +34,7 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 	public Maze(){
 	hero = new Player();
 	mazeWraith = new Monster();
-	door = new Door();
+	door = new Door(1,0); // place a locked door at Location point (1,0) 
 	roomList = new ArrayList<Room>(mazeSize*mazeSize);
 	
 	int counter = 0 ;
@@ -150,6 +150,22 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 	return;
 	}
 
+	// reset the booleans in the array list room 
+	
+	public void setRoom(int k , boolean key, boolean door ,boolean map, boolean monster ){
+	
+	Room temp = roomList.get(k);  // get the pointer to the room in list at index k
+
+	temp.setHasKey(key);
+	temp.setHasDoor(door);
+	temp.setHasMonster(monster);
+	temp.setHasMap(map);
+	
+	return;
+	}	
+
+
+
 /////////////////////     Motion Operations  ////////////////////////////////////////////
 
 	/// NEED TO ADD INPUT VALIDATION to prevent over indexing past mazeSize = 4 (walls should stop it but still)
@@ -222,6 +238,52 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 		}
 	return;	
 	}
+	
+/////////////////////     Item Operations  ////////////////////////////////////////////	
+	
+	public void takeKey(){
+	Point currentPosition = hero.getPosition();
+	currentRoom = getRoom( currentPosition );	
+		// if the room has a key but the player doesn't
+		if (currentRoom.getHasKey() && !hero.getHasKey()){
+		// give the player a key
+		hero.setHasKey(true);
+		// reset the room to not have a key
+		setCurrentRoom(currentPosition); // point current room to the room in roomList 
+		currentRoom.setHasKey(false); // remove the key from the room	
+		}
+	// restore the pointer away from the roomList;
+	currentRoom = getRoom( currentPosition );
+	return;
+	}
+	
+	public void takeMap(){
+	Point currentPosition = hero.getPosition();
+	currentRoom = getRoom( currentPosition );	
+		// if the room has a key but the player doesn't
+		if (currentRoom.getHasMap() && !hero.getHasMap()){
+		// give the player a key
+		hero.setHasMap(true);
+		// reset the room to not have a key
+		setCurrentRoom(currentPosition); // point current room to the room in roomList 
+		currentRoom.setHasMap(false); // remove the key from the room	
+		}
+	// restore the pointer away from the roomList;
+	currentRoom = getRoom( currentPosition );
+	return;
+	}
+	
+	public void unlockDoor(){
+
+		if (hero.getHasKey()){
+		door.setIsLocked(false);   // Unlock the door
+		//setCurrentRoom(hero.getLocation());  // set currentRoom to point to the room with the door at current Location (checked in MazeGame) 
+		// currentRoom.setHasDoor(false); // remove the door  ... maybe leave the door there   
+		}
+	
+	return;
+	}
+
 	
 ///////////////////////    OTHER METHODS ///////////////////////////////////////////////////
 

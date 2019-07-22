@@ -23,6 +23,7 @@ public class Player {
 private Point position;
 private int health;
 private boolean hasKey;
+private boolean hasMap;
 private int attackStrength;
 
 //////////////////////  CONSTRUCTORS     //////////////////////////////////////////
@@ -32,6 +33,7 @@ private int attackStrength;
 	position = new Point(0,0);
 	health = 30;
 	hasKey = false;
+	hasMap = false;
 	attackStrength = 4;
 	}
 
@@ -39,7 +41,7 @@ private int attackStrength;
 	public Player(Point p, int heal, int strength ){
 	position = new Point(p);
 	hasKey = false;
-	
+	hasMap = false;
 		if (heal >5){
 		health = heal;
 		}
@@ -54,6 +56,7 @@ private int attackStrength;
 	public Player( Player p){
 	position = new Point(p.position);
 	hasKey = p.hasKey;
+	hasMap = p.hasMap;
 	
 		if (p.health >0){
 		health = p.health;
@@ -79,6 +82,10 @@ private int attackStrength;
 	
 	public boolean getHasKey(){
 	return hasKey;
+	}
+	
+	public boolean getHasMap(){
+	return hasMap;
 	}
 
 	public int getAttackStrength(){
@@ -110,6 +117,11 @@ private int attackStrength;
 	
 	public void setHasKey( boolean val){
 	hasKey= val;
+	return;
+	}
+	
+	public void setHasMap( boolean val){
+	hasMap= val;
 	return;
 	}
 
@@ -181,9 +193,10 @@ private int attackStrength;
 
 	public void displayStats(){
 	
-	System.out.println("Health = " + health); 
-	System.out.println("Attack Strength= " + attackStrength);
-	System.out.println("Has key = " + hasKey);
+	System.out.println("Health = " + health + " "); 
+	System.out.println("Attack Strength= " + attackStrength + " ");
+	System.out.print("Has Key = " + hasKey +", ");
+	System.out.println("Has Map = " + hasMap + " ");
 	System.out.println("Position = (" + position.getXCoordinate() + "," + position.getYCoordinate() + ")");  
 	
 	}

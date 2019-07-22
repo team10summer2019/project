@@ -29,17 +29,84 @@ public class MazeGame {
 	gameBoard.setCurrentRoom(0); // reset the current room after setting up the board
 	tempRoom = gameBoard.getCurrentRoom();  // set the tempRoom to be the current room at (0,0)
 	
-	// Main loop to run the Maze Game 
-		while ( gameBoard.getDoor().getIsLocked() == true  && moveCounter < 100 && !storeInput.equalsIgnoreCase("quit")  ){
+	
+	// clear the screen	
+	clearScreen();
 		
-		// if user input was "MAP" display map unit until user types return
+	// update the hero current condition
+	tempHero = gameBoard.getHero();
+	tempHero.displayStats();
+	// set the room to cycle through all rooms in array list 
+		
+	tempRoom.drawRoom();
+	//tempRoom.displayRoomStats();
+	
+	System.out.println("");
+	
+	printHelp();
+	pressEnter();
+	
+	
+	// Main loop to run the Maze Game 
+	
+	   //while ( gameBoard.getDoor().getIsLocked() == true  && moveCounter < 200 && !storeInput.equalsIgnoreCase("quit")  ){
+	
+		while ( moveCounter < 200 && !storeInput.equalsIgnoreCase("quit")  ){
+		
+			// if user input was "MAP" display map unit until user types return
 			if ( storeInput.equalsIgnoreCase("map") ) {
-				while (!storeInput.equalsIgnoreCase("Return")) {	
-				clearScreen();
-				printMap();  // print the map
-				storeInput = getUserInput();
+			
+				if (gameBoard.getHero().getHasMap() ) {
+			
+					while (!storeInput.equalsIgnoreCase("Return")) {	
+					clearScreen();
+					printMap();  // print the map
+					storeInput = getUserInput();
+					}
+				} else {
+				
+				System.out.println("You don't have a Map...");
+				pressEnter();
+				
+				}
+
+		        }
+			
+			// if user input was "OPEN" display map unit until user types return
+			if ( storeInput.equalsIgnoreCase("open") ) {
+			
+			// store the location of the door
+			Point doorLocation = gameBoard.getDoor().getLocation();
+			Point currentLocation = gameBoard.getCurrentRoom().getLocation();
+			
+				// check that player has the key, and is in the location that the door is in
+				if (gameBoard.getHero().getHasKey()  && currentLocation.isEqual(doorLocation) && gameBoard.getCurrentRoom().getHasDoor() ) {
+				gameBoard.unlockDoor();
+				System.out.println("The Door is now Open, you may now Escape...");
+				pressEnter();
+				} else {
+				System.out.println("You don't have a Key, or You're not at the Door...");
+				pressEnter();
 				}
 		        }
+			
+			
+			// if user input was "OPEN" display map unit until user types return
+			if ( storeInput.equalsIgnoreCase("Escape") ) {
+			
+			// store the location of the door
+			Point doorLocation = gameBoard.getDoor().getLocation();
+			Point currentLocation = gameBoard.getCurrentRoom().getLocation();
+			
+				// check that player has the key, and is in the location that the door is in
+				if (gameBoard.getHero().getHasKey()  && currentLocation.isEqual(doorLocation) && gameBoard.getCurrentRoom().getHasDoor()  && !gameBoard.getDoor().getIsLocked() ) {
+				break; // break the while loop you are free
+				} else {
+				System.out.println("Either the door isn't opened, or You're not at the Door...");
+				pressEnter();
+				}
+		        }	
+						
 		// if user input was "HELP" display help unit unitl user types return
 			if ( storeInput.equalsIgnoreCase("help") ) {
 				while (!storeInput.equalsIgnoreCase("Return")) {	
@@ -48,14 +115,7 @@ public class MazeGame {
 				storeInput = getUserInput();
 				}
 		        }
-			
-			// if user input was "Next" 	
-			if ( storeInput.equalsIgnoreCase("Next")){
-			// increment the move counter to change the room
-			tempRoom = gameBoard.getRoom(moveCounter % 16);
-			moveCounter++;
-			}
-			
+		
 			// if user input is "Down"	
 			if ( storeInput.equalsIgnoreCase("Down")){
 			// increment the move counter to change the room
@@ -87,6 +147,36 @@ public class MazeGame {
 			tempRoom = gameBoard.getCurrentRoom();
 			moveCounter++;
 			}
+			
+			// if user input is "Left"	
+			if ( storeInput.equalsIgnoreCase("Take")){
+			// increment the move counter to change the room
+			tempRoom = gameBoard.getCurrentRoom();
+				if (tempRoom.getHasKey()){
+				gameBoard.takeKey();
+				System.out.println("You took the key!");
+				moveCounter++;
+				}else if (tempRoom.getHasMap()){
+				gameBoard.takeMap();
+				System.out.println("You took the Map!");
+				moveCounter++;
+				}else{
+				System.out.println("There is nothing in the room to take...");
+				pressEnter();
+				}
+			// update the room 
+			tempRoom = gameBoard.getCurrentRoom();
+			}
+			
+			/// DEBUG METHOD to view map cell by cell	
+		/*	
+			// if user input was "Next" 	
+			if ( storeInput.equalsIgnoreCase("Next")){
+			// increment the move counter to change the room
+			tempRoom = gameBoard.getRoom(moveCounter % 16);
+			moveCounter++;
+			}
+		*/	
 					
 		// clear the screen	
 		clearScreen();
@@ -110,7 +200,16 @@ public class MazeGame {
 		// pause until press enter
 		// pressEnter();
 		}  // closing brace for while loop
-
+		
+		
+		
+		/// closing message to user
+		if ( gameBoard.getDoor().getIsLocked()){
+		System.out.println("Thanks for playing THE MAZE.  Better Luck Next Time!");
+		}else{
+		System.out.println("Congratulations! You are free from THE MAZE!");
+		}
+	
 	return; 
 	}// end of main function	
 	
@@ -185,11 +284,14 @@ public class MazeGame {
 	System.out.println("Quit : exits the maze");
 	System.out.println("Return: if in map or help dialog this returns to the maze from a help window");
 	System.out.println("Map: Prints out a static map version of the maze");
-	System.out.println("Next: Moves the displayed room to the next room in the list");
+	//System.out.println("Next: Moves the displayed room to the next room in the list");
 	System.out.println("Right: Moves the player to the right of current room if no wall");
 	System.out.println("Left: Moves the player to the left of current room if no wall");
 	System.out.println("Down: Moves the player to Room below the current room if no wall");
 	System.out.println("Up: Moves the player to Room above the current room if no wall");
+	System.out.println("Take: Takes either a key or map from the room and places it in the player inventory");
+	System.out.println("Open: Opens the Door if you Have a Key");
+	System.out.println("Escape: Escape the Maze if the Door is Open");
 	System.out.println("__________________________________________________");
 	System.out.println("");
 	System.out.println("Type \"Return\" and press Enter to return to the Maze");

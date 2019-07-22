@@ -100,5 +100,14 @@ private int yCoordinate;
 	return temp;
 	}
 	
+	public boolean isEqual(Point p){
+		if ( p.getXCoordinate() == xCoordinate && p.getYCoordinate() == yCoordinate){
+		return true;
+		}
+	return false;
+	}
+	
+	
+	
 } // end of class definition
 ///////////////////////// END OF FILE //////////////////////////////////////////

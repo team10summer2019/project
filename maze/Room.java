@@ -103,9 +103,9 @@ private int doorPosition;
 	 bottomWall=toCopy.bottomWall;
 	 hasMonster=toCopy.hasMonster;
 	 hasKey=toCopy.hasKey;
+	 hasMap=toCopy.hasMap;
 	 hasPlayer=toCopy.hasPlayer;
 	 hasDoor=toCopy.hasDoor;
-	 hasMap=toCopy.hasMap;
 	 doorPosition=toCopy.doorPosition; // 0 for no door 1 for left 2 for right , 3 for top, 4 for bottom
 	}
 	
@@ -131,15 +131,16 @@ private int doorPosition;
 	public boolean getHasKey(){
 	return hasKey;
 	}
+	
+	public boolean getHasMap(){
+	return hasMap;
+	}
+	
 	public boolean getHasDoor(){
 	return hasDoor;
 	}
 	public int getDoorPosition(){
 	return doorPosition;
-	}
-	
-	public boolean getHasMap(){
-	return hasMap;
 	}
 	
 	public Point getLocation(){
@@ -372,8 +373,6 @@ private int doorPosition;
 			System.out.print(" ");
 			}
 	}
-	
-	
 	
 
 } // class closing brace
