@@ -1,14 +1,16 @@
-
+/**
+ * @author Steven On
+ *
+ */ 
 import java.util.ArrayList;
 import java.util.Scanner;
  
 public class StevenRiver {
-	  
-// make game less confusing more spaces
+	//Instances variables.
 	private String object;
 	private ArrayList<String> right = new ArrayList<String>();
 	private ArrayList<String> left = new ArrayList<String>();
-	
+	//Constructor.
 	public StevenRiver() {
 		
 	}
@@ -106,11 +108,13 @@ public class StevenRiver {
 	//These three checkers below will check if there is a win or lose situation.
 	public void checkGoatDeath() {
 		if (left.contains("GOAT") && left.contains("WOLF") && right.contains("FARMER") || right.contains("GOAT") && right.contains("WOLF") && left.contains("FARMER")) {
+			System.out.println("The wolf ate the goat!\n");
 			reset();
 		}
 	}
 	public void checkCabbage() {
 		if (left.contains("GOAT") && left.contains("CABBAGE") && right.contains("FARMER") || right.contains("GOAT") && right.contains("CABBAGE") && left.contains("FARMER")) {
+			System.out.println("The goat ate the cabbage!\n");
 			reset();
 		}
 	}
@@ -131,7 +135,7 @@ public class StevenRiver {
 }
 	//When the player encounters a loss this will reset the game for them.
 	public void reset() {
-		System.out.println("You failed.");
+		System.out.println("You failed. The game will now reset.\n");
 		left.clear();
 		right.clear();
 		left.add("Left side of the river:");
