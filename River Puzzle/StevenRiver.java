@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class StevenRiver {
-	
+	  
 // make game less confusing more spaces
 	private String object;
 	private ArrayList<String> right = new ArrayList<String>();
