@@ -32,16 +32,19 @@ WHERE TO FIND THE FILE: <BR>
 Github --> team10summer2019 --> project --> haine (folder) <BR>
 
 Folder contains three files. HaineRiddle.java, TestHaineRiddle.java and this README file.
-Save to a directory and compile both HaineRiddle and TestHaineRiddle through command prompt/terminal. 
+Save to a directory and compile both HaineRiddle and TestHaineRiddle through command prompt/terminal using commands:
+
+$cd haine <BR>
+$javac *.java <BR>
+$java TestHaineRiddle <BR>
+  
+If above commands are run on Windows, remove $ from commands.
+
 If using Eclipse, import both HaineRiddle.java and TestHaineRiddle.java into a default package. If not in default package, add: <BR>
 
 package packageNameHere; at the very top/beginning of both files, and save. <BR>
 
 Run the TestHaineRiddle.java file, and play through Eclipse console <BR>
-
-$cd haine <BR>
-$javac *.java <BR>
-$java TestHaineRiddle <BR>
 
 
 # RiverPuzzle
@@ -53,3 +56,4 @@ $javac *.java <BR>
 $java TestStevenRiver <BR>
 
 
+# LockLeverPuzzle
