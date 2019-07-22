@@ -6,9 +6,9 @@ In the folder maze is a demo of a maze that has a key.  It is currently incomple
 with the key, collect the key and traverse to the room with the Door, use the key and exit the maze to win.
 
 currently to test the maze classes run the following commands
-cd maze
-javac *.java
-java MazeGame
+cd maze <BR>
+javac *.java <BR>
+java MazeGame <BR>
 
 
 In the game use the commands Enter to cycle through the rooms in the array list, 
