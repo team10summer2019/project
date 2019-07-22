@@ -13,7 +13,10 @@ $ java MazeGame
 
 In the game use the commands Enter to cycle through the rooms in the array list, 
 
-Commands:  map, quit.
+Commands:  help, map, quit, left, right, down, up.
 
 Commands are case insensitive. "Map" displays a static map of the maze. "Quit" exits the main loop and 
-terminates the program.  The program will terminate after 50 rounds of user input. 
+terminates the program. The player moves around the map using the commands "Up","Down","Left",Right" where 
+motion occurs to the adjacent room provided that there is no obstruction or Wall.  
+
+The program will terminate after 100 rounds of user input. 
