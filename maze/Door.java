@@ -16,8 +16,8 @@ public class Door {
 
 /////////////////// Member Variables ///////////////////////////////
 
-boolean isLocked;
-Point location;
+private boolean isLocked;
+private Point location;
 
 //////////////////// CONSTRUCTORS /////////////////////////////////////
 
