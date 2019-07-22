@@ -6,9 +6,9 @@ In the folder maze is a demo of a maze that has a key.  It is currently incomple
 with the key, collect the key and traverse to the room with the Door, use the key and exit the maze to win.
 
 currently to test the maze classes run the following commands
-$ cd maze
-$ javac *.java
-$ java MazeGame
+cd maze
+javac *.java
+java MazeGame
 
 
 In the game use the commands Enter to cycle through the rooms in the array list, 
@@ -35,16 +35,16 @@ package <package name>; at the very top/beginning of both files, and save.
 
 Run the TestHaineRiddle.java file, and play through Eclipse console
 
-$ cd haine
-$ javac *.java
-$ java TestHainRiddle
+cd haine
+javac *.java
+java TestHainRiddle
 
 
 # RiverPuzzle
 
 Compile files in the directory riverPuzzle directory and run using the following commands
 
-$ javac *.java
-$ java TestStevenRiver
+javac *.java
+java TestStevenRiver
 
 
