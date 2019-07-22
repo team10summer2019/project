@@ -103,7 +103,7 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 	
 ///////////////////////    MUTATORS     /////////////////////////////////////////////////
 	
-	public void setRoom(int k , boolean left, boolean right, boolean up, boolean down, boolean key, boolean door , boolean monster){
+	public void setRoom(int k , boolean left, boolean right, boolean up, boolean down, boolean key, boolean door ,boolean map, boolean monster ){
 	
 	Room temp = roomList.get(k);  // get the pointer to the room in list at index k
 	
@@ -115,6 +115,7 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 	temp.setHasKey(key);
 	temp.setHasDoor(door);
 	temp.setHasMonster(monster);
+	temp.setHasMap(map);
 	
 	return;
 	}
@@ -151,39 +152,85 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 
 /////////////////////     Motion Operations  ////////////////////////////////////////////
 
+	/// NEED TO ADD INPUT VALIDATION to prevent over indexing past mazeSize = 4 (walls should stop it but still)
+
 	public void moveLeft(){
 	
 	Point currentPosition = hero.getPosition();
-	currentRoom = getRoom( currentPosition );
-	
-	
-	
-	// hero.moveLeft()
-	
+	currentRoom = getRoom( currentPosition );	
+	// if there isn't a wall to the left of the current room
+	// get the hero's position and use it to set the currentRoom
+		if ( !currentRoom.getLeftWall()){
+		// update the hero's position
+		hero.moveLeft();
+		currentPosition = hero.getPosition();   // get hero's position
+		setCurrentRoom(currentPosition);   // set the current room to be the hero's position
+		} else {
+		System.out.println("You can't go that way, there is a wall blocking your path");
+		}
 	return;	
+	}
+		
+	public void moveRight(){
 	
+	Point currentPosition = hero.getPosition();
+	currentRoom = new Room(getRoom( currentPosition ));	
+	// if there isn't a wall to the right of the current room
+	// get the hero's position and use it to set the currentRoom
+		if ( !currentRoom.getRightWall() ){
+		// update the hero's position
+		hero.moveRight();
+		currentPosition = hero.getPosition();  
+		setCurrentRoom(currentPosition);   // set the current room to be the hero's position
+		} else {
+		System.out.println("You can't go that way, there is a wall blocking your path");
+		}
+	return;	
 	}
 	
-
-/////////////////////// CONSTRUCT MAZE //////////////////////////////////////////////////
-	// do this in the game class 
-	// use the setters and getters from maze to setup the maze 
-
+	public void moveUp(){
+	
+	Point currentPosition = hero.getPosition();
+	currentRoom = getRoom( currentPosition );	
+	// if there isn't a wall to the top of the current room
+	// get the hero's position and use it to set the currentRoom
+		if ( !currentRoom.getTopWall() ){
+		// update the hero's position
+		hero.moveUp();
+		currentPosition = hero.getPosition();  
+		setCurrentRoom(currentPosition);   // set the current room to be the hero's position
+		} else {
+		System.out.println("You can't go that way, there is a wall blocking your path");
+		}
+	return;	
+	}
+	
+	public void moveDown(){
+	
+	Point currentPosition = hero.getPosition();
+	currentRoom = getRoom( currentPosition );	
+	// if there isn't a wall to the base of the current room
+	// get the hero's position and use it to set the currentRoom
+		if ( !currentRoom.getBottomWall() ){
+		// update the hero's position
+		hero.moveDown();
+		currentPosition = hero.getPosition();  
+		System.out.println(currentPosition.toString() );
+		setCurrentRoom(currentPosition);   // set the current room to be the hero's position
+		} else {
+		System.out.println("You can't go that way, there is a wall blocking your path");
+		}
+	return;	
+	}
+	
 ///////////////////////    OTHER METHODS ///////////////////////////////////////////////////
 
-//   
+      /*
 	// look at drawRoom for inspiration
 	public void drawMaze() {
-	
-	
-	
 	return;
-	
 	}
-
-
-
-
+      */
 
 
 } // end of class brace

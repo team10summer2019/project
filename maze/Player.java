@@ -150,14 +150,15 @@ private int attackStrength;
 	}
 
 	public void moveUp(){
-	position.setYCoordinate(position.getYCoordinate() + 1) ;
+
+	if ( position.getYCoordinate() -1 >=0) {
+	position.setYCoordinate(position.getYCoordinate() - 1) ;
+	}
 	return;
 	}
 
 	public void moveDown(){
-		if ( position.getYCoordinate() -1 >=0){
-		position.setYCoordinate(position.getYCoordinate() - 1) ;
-		}	
+	position.setYCoordinate(position.getYCoordinate() + 1) ;
 	return;
 	}
 

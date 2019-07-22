@@ -33,30 +33,30 @@
 	Methods:     setIsLocked() setLocation() getLocation() getIsLocked() 
 
  Monster:  Attibutes: (x,y) point location, Health, hasKey, attackStrength, 
-           Methods :   attack(), die(), isAlive(),
-//////////////////////////    
-
+           Methods :   attack(), die(), isAlive(),	   
+	   
  Maze  Attributes:  size, RoomMatrix with n x n Rooms each with wall and item attributes, Player, Monster, Key, Door
        Methods:    drawMap(), updateMap()
  
  MazeGame:   Sets up the maze Draws the maze, and organizes the input control to move arround the maze , has main() function,
 		terminates the game when the door is unlocked.
  
- inputControl:   takes user input by scanner, and prompts user for input via system.
+/// helper fucntions:
  
- 
- /// not strictly required 
- Key:  Attributes: Point location , Room location? , DoorNumber
-	Methods:  unLockDoor() 
+inputControl:   takes user input by scanner, and prompts user for input via system.	   
+	   
+//////////////////////////    
 
-      
- //////////////////////////////////////////////////////////////////////////////////////////////
+/// not strictly required can be managed by the booleans
+ Key:  Attributes: Point location , Room location? , DoorNumber
+	Methods:  unLockDoor()       
+//////////////////////////////////////////////////////////////////////////////////////////////
  
  Drawing of the Maze:
  
  _____________________________
  |      |      |      |      |
- |  *   |  D                 |
+ |  *   |  D       W         |
  |_    _|______|______|_    _|
  |      |      |      |      |
  |      |                    |
@@ -69,25 +69,10 @@
  |______|______|______|______|
  
  
- * is the player , M is a monster, K is the key and D is the door
+ * is the player , M is a map, W is a Wraith Monster, K is the key and D is the door
  
  The goal of the maze is to move (by user input u,d,l,r or arrow keys if possible) to the Key, collect it, with user input 
  then move to the door and open it with user input which opens if you have collected the key, and terminates the game with a "You win!" message.
  Fighting the monster and winning gives a clue to the next puzzle. 
  
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
+//////////////////////////////////////////   END OF FILE /////////////////////////////////////////////////////////////////////////

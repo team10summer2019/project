@@ -1,12 +1,12 @@
 //////////////////////////////////////////////
 //
-// File: testMaze.java
+// File: MazeGame.java
 // Description: MazeGame class with main() function
 //
 // Author: (Ron) Zorondras Rodriguez
 // Course:  CPSC 233 Summer 2019
 // Creation Date: July 21, 2019
-// Version: 0.03
+// Version: 0.02
 // Revision Date: July 21, 2019
 //
 ///////////////////////////////////////////////
@@ -61,6 +61,8 @@ public class MazeGame {
 			// increment the move counter to change the room
 			gameBoard.moveDown();
 			tempRoom = gameBoard.getCurrentRoom();
+			
+			
 			moveCounter++;
 			}	
 				
@@ -83,10 +85,11 @@ public class MazeGame {
 			// if user input is "Left"	
 			if ( storeInput.equalsIgnoreCase("Left")){
 			// increment the move counter to change the room
-			gameBoard.moveLeft();
+			gameBoard.moveRight();
 			tempRoom = gameBoard.getCurrentRoom();
 			moveCounter++;
-			}
+			}	
+			
 					
 		// clear the screen	
 		clearScreen();
@@ -116,7 +119,7 @@ public class MazeGame {
 	
 		// sets up the walls and items, doors and monsters
 	public static void setBoard( Maze m){
-	// setRoom(room#,left,right,up,down,key,door,map,monster)
+	// setRoom( int room , left, right, up, down, key, door, map, monster)
 	m.setRoom(0,true,true,true,false,false,false,false,false); // setup the first room 
 	m.setRoom(0,true);  // place the player in the first room
 	// room (0.1)   
@@ -126,7 +129,6 @@ public class MazeGame {
 	// room (0,3)
 	m.setRoom(3,false,true,true,false,false,false,false,false);
 	// room (1,0)
-	// setRoom(room#,left,right,up,down,key,door,map,monster)
 	m.setRoom(4,true,true,false,false,false,false,false,false);
 	// room (1,1)
 	m.setRoom(5,true,false,true,false,false,false,false,false);
@@ -136,15 +138,13 @@ public class MazeGame {
 	m.setRoom(7,false,true,false,false,false,false,false,false);
 	// room (2,0)
 	m.setRoom(8,true,false,false,true,false,false,false,false);
-	// setRoom(room,left,right,up,down,key,door,map,monster)
 	// room (2,1)
-	m.setRoom(9,false,true,false,false,false,false,false,false);
+	m.setRoom(9,false,true,false,true,false,false,false,false);
 	// room (2,2)
 	m.setRoom(10,true,true,true,false,true,false,false,false);
 	// room (2,3)
 	m.setRoom(11,true,true,false, false,false,false,false,false);
 	// room (3,0)
-	// setRoom(room#,left,right,up,down,key,door,map,monster)
 	m.setRoom(12,true,false,true,true,false,false,true,false);
 	// room (3,1)
 	m.setRoom(13,false,true,false,true,false,false,false,false);
@@ -185,17 +185,14 @@ public class MazeGame {
 	System.out.println("Quit : exits the maze");
 	System.out.println("Return: if in map or help dialog this returns to the maze from a help window");
 	System.out.println("Map: Prints out a static map version of the maze");
-	System.out.println("Next: Moves the displayed room to the next room in the list");
-	System.out.println("Right: Moves the player to the right of current room if no wall");
-	System.out.println("Left: Moves the player to the left of current room if no wall");
-	System.out.println("Down: Moves the player to Room below the current room if no wall");
-	System.out.println("Up: Moves the player to Room above the current room if no wall");
+	System.out.println("Next: Moves the player to the next room in the list");
 	System.out.println("__________________________________________________");
 	System.out.println("");
 	System.out.println("Type \"Return\" and press Enter to return to the Maze");
 	return;
 	}
 		
+	
 	
 	// Use this to clear the screen taken from source: 	
 	//  https://stackoverflow.com/questions/2979383/java-clear-the-console
@@ -221,11 +218,6 @@ public class MazeGame {
 	return;
 	}
 	
-	
-	public static void handleInput(String storeInput, Maze gameBoard, int moveCounter){
-	
-	return;	
-	}
 	
 	
 } // class ending brace

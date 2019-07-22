@@ -8,7 +8,7 @@
 // Course:  CPSC 233 Summer 2019
 // Creation Date: July 20, 2019
 // Version: 0.02
-// Revision Date: July 21, 2019
+// Revision Date: July 21e, 2019
 //
 ///////////////////////////////////////////////
 
@@ -31,7 +31,6 @@ private boolean hasMonster;
 private boolean hasKey;
 private boolean hasDoor;
 private boolean hasPlayer;
-
 private boolean hasMap;
 
 private int doorPosition;
@@ -193,7 +192,7 @@ private int doorPosition;
 	}
 	
 	public void setHasMap(boolean value){
-	hasKey = value;
+	hasMap = value;
 	return;
 	}
 	
@@ -357,6 +356,8 @@ private int doorPosition;
 				}else if (hasDoor == true  && k == RoomWidth/2){
 				System.out.print("D");
 				}else if (hasMonster == true  && k == RoomWidth/2){
+				System.out.print("W");
+				}else if (hasMap == true  && k == RoomWidth/2){
 				System.out.print("M");
 				}else if (hasPlayer == true  && k == RoomWidth/2){
 				System.out.print("*");
