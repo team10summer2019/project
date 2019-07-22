@@ -22,6 +22,9 @@ motion occurs to the adjacent room provided that there is no obstruction or Wall
 
 The program will terminate after 100 rounds of user input. <BR>
 
+The class diagram is located in maze/diagram/ both in pdf and dia formats. <BR>
+
+
 # HaineRiddle
 HAINE KIM DEMO 1 <BR>
 
