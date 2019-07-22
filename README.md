@@ -45,6 +45,7 @@ $java TestHainRiddle <BR>
 
 Compile files in the directory riverPuzzle directory and run using the following commands <BR>
 
+$ cd riverPuzzle <BR>
 $javac *.java <BR>
 $java TestStevenRiver <BR>
 
