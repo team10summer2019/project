@@ -32,16 +32,19 @@ WHERE TO FIND THE FILE: <BR>
 Github --> team10summer2019 --> project --> haine (folder) <BR>
 
 Folder contains three files. HaineRiddle.java, TestHaineRiddle.java and this README file.
-Save to a directory and compile both HaineRiddle and TestHaineRiddle through command prompt/terminal. 
-If using Eclipse, import both HaineRiddle.java and TestHaineRiddle.java into a default package. If not in default package, add: <BR>
-
-package <package name>; at the very top/beginning of both files, and save. <BR>
-
-Run the TestHaineRiddle.java file, and play through Eclipse console <BR>
+Save to a directory and compile both HaineRiddle and TestHaineRiddle through command prompt/terminal using commands:
 
 $cd haine <BR>
 $javac *.java <BR>
-$java TestHainRiddle <BR>
+$java TestHaineRiddle <BR>
+  
+If above commands are run on Windows, remove $ from commands.
+
+If using Eclipse, import both HaineRiddle.java and TestHaineRiddle.java into a default package. If not in default package, add: <BR>
+
+package packageNameHere; at the very top/beginning of both files, and save. <BR>
+
+Run the TestHaineRiddle.java file, and play through Eclipse console <BR>
 
 
 # RiverPuzzle
@@ -53,3 +56,41 @@ $javac *.java <BR>
 $java TestStevenRiver <BR>
 
 
+# LockLeverPuzzle
+
+Folder LockLeverPuzzle has multiple demos of the pieces that would fit together for a specialized puzzle by a class called LockLeverPuzzle.
+
+The classes interact with each other properly and independently for the most part. 
+More work will be needed to piece the classes together better and have user/player interaction with it.
+Parent Inventory and children StaticObjects and DynamicObjects still require some review and processing with interactions with the user/player itself. 
+
+
+
+To run the GenericComboLock.java file,
+$cd LockLeverPuzzle 
+$javac *.java 
+$java GenericComboLockTest 
+
+
+To run the LockLeverPuzzle.java file, 
+$cd LockLeverPuzzle 
+$javac *.java 
+$java LockLeverPuzzleTest 
+
+
+To run the DynamicObjects.java file, 
+$cd LockLeverPuzzle 
+$javac *.java 
+$java DynamicObjectsTest 
+
+
+To run the StaticObjects.java file, 
+$cd LockLeverPuzzle 
+$javac *.java 
+$java StaticObjectsTest 
+
+
+To run the Inventory.java file, 
+$cd LockLeverPuzzle 
+$javac *.java 
+$java InventoryTest 
