@@ -1,7 +1,7 @@
 
 import java.util.ArrayList;
 import java.util.Scanner;
-
+ 
 public class StevenRiver {
 	  
 // make game less confusing more spaces
