@@ -1,7 +1,7 @@
 
 /**
  * @author Fiona
- *
+ * 
  */
 public class GenericComboLockTest {
 
