@@ -1,5 +1,3 @@
-package project;
-
 public class TestHaineRiddle {
 
 	public static void main(String[] args) {
