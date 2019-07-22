@@ -29,12 +29,33 @@ public class MazeGame {
 
 	// Main loop to run the Maze Game 
 	
-		while ( gameBoard.getDoor().getIsLocked() == true  && moveCounter < 50 && !storeInput.equalsIgnoreCase("quit")  ){
-		clearScreen();
+		while ( gameBoard.getDoor().getIsLocked() == true  && moveCounter < 100 && !storeInput.equalsIgnoreCase("quit")  ){
 		
+		// if user input was "MAP" display map unit until user types return
 			if ( storeInput.equalsIgnoreCase("map") ) {
-			printMap();  // print the map  
-			}
+				while (!storeInput.equalsIgnoreCase("Return")) {	
+				clearScreen();
+				printMap();  // print the map
+				storeInput = getUserInput();
+				}
+		        }
+		// if user input was "HELP" display help unit unitl user types return
+			if ( storeInput.equalsIgnoreCase("help") ) {
+				while (!storeInput.equalsIgnoreCase("Return")) {	
+				clearScreen();
+				printHelp();  // print the map
+				storeInput = getUserInput();
+				}
+		        }
+			
+			// if user input was next 	
+			if ( storeInput.equalsIgnoreCase("Next")){
+			// increment the move counter to change the room
+			moveCounter++;
+			}	
+					
+		// clear the screen	
+		clearScreen();
 		
 		// update the hero current condition
 		tempHero = gameBoard.getHero();
@@ -43,10 +64,17 @@ public class MazeGame {
 		tempRoom = gameBoard.getRoom(moveCounter % 16);
 		tempRoom.drawRoom();
 	        tempRoom.displayRoomStats();
-		moveCounter++;	
+		
 		System.out.println("There have been " + moveCounter + " moves in the maze");
-		System.out.println("Your input was: " + storeInput);
-		storeInput=getUserInput();
+		
+			if (!storeInput.equalsIgnoreCase("")){
+			System.out.println("Your input was: " + storeInput);
+			}
+			
+		// get user input
+		storeInput = getUserInput();
+		// pause until press enter
+		// pressEnter();
 		}
 
 
@@ -109,9 +137,26 @@ public class MazeGame {
 	System.out.println("|  M          |             |");
 	System.out.println("|______|______|______|______|");
 	System.out.println("");
-	//System.out.println("Press r and Enter to return to the Maze");
+	System.out.println("Type \"Return\" and press Enter to return to the Maze");
 	return;
 	}
+	
+	
+	public static void printHelp(){
+	System.out.println("Welcome to the Maze, Commands are case insensitive. Here are the current Commands:");
+	System.out.println("__________________________________________________");	
+	System.out.println("Help : prints the usage commands");
+	System.out.println("Quit : exits the maze");
+	System.out.println("Return: if in map or help dialog this returns to the maze from a help window");
+	System.out.println("Map: Prints out a static map version of the maze");
+	System.out.println("Next: Moves the player to the next room in the list");
+	System.out.println("__________________________________________________");
+	System.out.println("");
+	System.out.println("Type \"Return\" and press Enter to return to the Maze");
+	return;
+	}
+		
+	
 	
 	// Use this to clear the screen taken from source: 	
 	//  https://stackoverflow.com/questions/2979383/java-clear-the-console
@@ -128,6 +173,15 @@ public class MazeGame {
 	input = new String(keyboard.nextLine());
 	return input;
 	}
+	
+	public static void pressEnter(){
+	String input;
+	Scanner keyboard = new Scanner(System.in);
+	System.out.println("<<<<Press Enter>>>>:");
+	keyboard.nextLine();
+	return;
+	}
+	
 	
 	
 } // class ending brace

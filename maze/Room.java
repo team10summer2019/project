@@ -7,8 +7,8 @@
 // Author: (Ron) Zorondras Rodriguez
 // Course:  CPSC 233 Summer 2019
 // Creation Date: July 20, 2019
-// Version: 0.01
-// Revision Date: July 20, 2019
+// Version: 0.02
+// Revision Date: July 21, 2019
 //
 ///////////////////////////////////////////////
 
@@ -235,7 +235,7 @@ private int doorPosition;
 	int row = corner.getYCoordinate();
 	int col = corner.getXCoordinate();
 
-	/*	
+		
 	/// routine to position the room in the array 
 		// move to the row
 		for (int i=0 ; i < row ; i++){
@@ -243,7 +243,7 @@ private int doorPosition;
 			System.out.println("");
 			}
 		}
-	*/	
+		
 		// move to column
 		for ( int i = 0 ; i < col ; i++){
 			printSpaceRight(RoomWidth);
@@ -286,11 +286,19 @@ private int doorPosition;
 		if (leftWall == true){
 		System.out.print("|");
 		
-			if ( bottomWall == true){	
+			if ( bottomWall == true){
+			
 			/// Print the bottom wall
+				if (rightWall == true) {
 				for (int k = 0 ; k < RoomWidth; k ++){
 					System.out.print("_");
+					}
+				}else {	
+					for (int k = 0 ; k < RoomWidth+1; k ++){
+					System.out.print("_");
+					}
 				}
+				
 			}else {
 			/// move to the right by a room's width
 				for (int k = 0 ; k < RoomWidth ; k ++){
@@ -300,10 +308,16 @@ private int doorPosition;
 		}else {
 			if ( bottomWall == true){	
 			/// Print the bottom wall
-				for (int k = 0 ; k < RoomWidth+2; k ++){
+				if (rightWall == true) {
+				for (int k = 0 ; k < RoomWidth+1; k ++){
 					System.out.print("_");
+					}
+				}else {	
+					for (int k = 0 ; k < RoomWidth+2; k ++){
+					System.out.print("_");
+					}
 				}
-			}else {
+			} else {
 			/// move to the right by a room's width
 				for (int k = 0 ; k < RoomWidth+1 ; k ++){
 				System.out.print(" ");
