@@ -41,7 +41,7 @@ Run the TestHaineRiddle.java file, and play through Eclipse console <BR>
 
 $cd haine <BR>
 $javac *.java <BR>
-$java TestHainRiddle <BR>
+$java TestHaineRiddle <BR>
 
 
 # RiverPuzzle
