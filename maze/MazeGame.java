@@ -25,7 +25,9 @@ public class MazeGame {
 	Room tempRoom;    // temporary value to look at a room 
 	String storeInput="";  // storage for user input
 	int moveCounter = 0;  // count the number of moves
-
+        boolean victory=false;
+	 
+	
 	gameBoard.setCurrentRoom(0); // reset the current room after setting up the board
 	tempRoom = gameBoard.getCurrentRoom();  // set the tempRoom to be the current room at (0,0)
 	
@@ -100,6 +102,7 @@ public class MazeGame {
 			
 				// check that player has the key, and is in the location that the door is in
 				if (gameBoard.getHero().getHasKey()  && currentLocation.isEqual(doorLocation) && gameBoard.getCurrentRoom().getHasDoor()  && !gameBoard.getDoor().getIsLocked() ) {
+				victory=true;  // switch victory flag
 				break; // break the while loop you are free
 				} else {
 				System.out.println("Either the door isn't opened, or You're not at the Door...");
@@ -204,10 +207,10 @@ public class MazeGame {
 		
 		
 		/// closing message to user
-		if ( gameBoard.getDoor().getIsLocked()){
-		System.out.println("Thanks for playing THE MAZE.  Better Luck Next Time!");
-		}else{
+		if ( !gameBoard.getDoor().getIsLocked() && victory ){
 		System.out.println("Congratulations! You are free from THE MAZE!");
+		}else{
+		System.out.println("Thanks for playing THE MAZE.  Better Luck Next Time!");
 		}
 	
 	return; 

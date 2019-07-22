@@ -229,7 +229,7 @@ private int doorPosition;
 	
 	int maxWidth = 10;  // number for room cells in a row
 	int maxHeight = 10; // number of rows						
-	int RoomWidth=6; // padding for each room 
+	int roomWidth=6; // padding for each room 
 	
 	Point corner = getLocation();
 	int row = corner.getYCoordinate();
@@ -246,42 +246,42 @@ private int doorPosition;
 		
 		// move to column
 		for ( int i = 0 ; i < col ; i++){
-			printSpaceRight(RoomWidth);
+			printSpaceRight(roomWidth);
 		}
 	// now you should be at the correct row and column to print out the room
 
 			
 		if (topWall == true) {
-			for (int k = 0 ; k < RoomWidth+2; k ++){
+			for (int k = 0 ; k < roomWidth+2; k ++){
 			System.out.print("_");
 			}
 		}
 		
-		returnCursorToRoom(col,RoomWidth);
+		returnCursorToRoom(col,roomWidth);
 		
 		if (leftWall == true){
 		System.out.print("|");
-		printSpaceRight(RoomWidth);
-		} else { printSpaceRight(RoomWidth+1);}
+		printSpaceRight(roomWidth);
+		} else { printSpaceRight(roomWidth+1);}
 		
 		if (rightWall == true){
 		System.out.print("|");
 		}
 		
-		returnCursorToRoom(col, RoomWidth);
+		returnCursorToRoom(col, roomWidth);
 		
 		if (leftWall == true){
 		System.out.print("|");
-		plotItem(RoomWidth);
+		plotItem(roomWidth);
 		}else{
-		plotItem(RoomWidth+1);
+		plotItem(roomWidth+1);
 		}
 		
 		if (rightWall == true){
 		System.out.print("|");
 		}
 		
-		returnCursorToRoom(col,RoomWidth);
+		returnCursorToRoom(col,roomWidth);
 		
 		if (leftWall == true){
 		System.out.print("|");
@@ -290,18 +290,18 @@ private int doorPosition;
 			
 			/// Print the bottom wall
 				if (rightWall == true) {
-				for (int k = 0 ; k < RoomWidth; k ++){
+				for (int k = 0 ; k < roomWidth; k ++){
 					System.out.print("_");
 					}
 				}else {	
-					for (int k = 0 ; k < RoomWidth+1; k ++){
+					for (int k = 0 ; k < roomWidth+1; k ++){
 					System.out.print("_");
 					}
 				}
 				
 			}else {
 			/// move to the right by a room's width
-				for (int k = 0 ; k < RoomWidth ; k ++){
+				for (int k = 0 ; k < roomWidth ; k ++){
 				System.out.print(" ");
 				}
 			}
@@ -309,17 +309,17 @@ private int doorPosition;
 			if ( bottomWall == true){	
 			/// Print the bottom wall
 				if (rightWall == true) {
-				for (int k = 0 ; k < RoomWidth+1; k ++){
+				for (int k = 0 ; k < roomWidth+1; k ++){
 					System.out.print("_");
 					}
 				}else {	
-					for (int k = 0 ; k < RoomWidth+2; k ++){
+					for (int k = 0 ; k < roomWidth+2; k ++){
 					System.out.print("_");
 					}
 				}
 			} else {
 			/// move to the right by a room's width
-				for (int k = 0 ; k < RoomWidth+1 ; k ++){
+				for (int k = 0 ; k < roomWidth+1 ; k ++){
 				System.out.print(" ");
 				}
 			}
@@ -336,40 +336,40 @@ private int doorPosition;
 
 
 ////////////////// PRIVATE HELPER FUNCTIONS ///////////////////////////////////////
-	private void returnCursorToRoom(int col, int RoomWidth){
+	private void returnCursorToRoom(int col, int roomWidth){
 	
 	System.out.print("\n");  // move to the next line and return to the ce
 	// return to room position
 		for ( int i = 0 ; i < col ; i++){
 		/// move to the right by a room's width
-			for (int k = 0 ; k < RoomWidth ; k ++){
+			for (int k = 0 ; k < roomWidth ; k ++){
 			System.out.print(" ");
 			}
 		}
 	return;
 	}
 	
-	private void plotItem(int RoomWidth){
+	private void plotItem(int roomWidth){
 	
-				for (int k = 0 ; k < RoomWidth ; k ++){		
-				if (hasKey == true  && k == RoomWidth/2){
+				for (int k = 0 ; k < roomWidth ; k ++){		
+				if (hasKey == true  && k == roomWidth/2){
 				System.out.print("K");
-				}else if (hasDoor == true  && k == RoomWidth/2){
+				}else if (hasDoor == true  && k == roomWidth/2){
 				System.out.print("D");
-				}else if (hasMonster == true  && k == RoomWidth/2){
+				}else if (hasMonster == true  && k == roomWidth/2){
 				System.out.print("W");
-				}else if (hasMap == true  && k == RoomWidth/2){
+				}else if (hasMap == true  && k == roomWidth/2){
 				System.out.print("M");
-				}else if (hasPlayer == true  && k == RoomWidth/2){
+				}else if (hasPlayer == true  && k == roomWidth/2){
 				System.out.print("*");
 				}else{		
 				System.out.print(" ");		
 				}
 			}
 	}
-	private void printSpaceRight(int RoomWidth){
+	private void printSpaceRight(int roomWidth){
 		/// move to the right by a room's width
-			for (int k = 0 ; k < RoomWidth ; k ++){
+			for (int k = 0 ; k < roomWidth ; k ++){
 			System.out.print(" ");
 			}
 	}
