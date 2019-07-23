@@ -1,6 +1,10 @@
 # project
 Team Project Files
 
+The files for Team 10 may be found here:<BR>
+
+https://github.com/team10summer2019/project.git
+
 # maze 
 In the folder maze is a demo of a maze that has a key.  It is currently incomplete.   The player must traverse from room (0,0) to the room 
 with the key, collect the key and traverse to the room with the Door, use the key and exit the maze to win.
