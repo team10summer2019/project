@@ -1,0 +1,10 @@
+Currently:
+-Can only play one randomnly chosen riddle, with one attempt at answer
+	>Once riddle answered without spaces, program ends
+-Riddle answers are only one word
+-Riddles are not hard
+	>Plan to plant clue items in rooms to give hints to riddles
+
+Future:
+-Maybe make it so program keeps running if you haven't answered a riddle correctly, until you answer a riddle correctly
+-Add riddles that have multi-word answers, and implement way to detect a multi-word answer
