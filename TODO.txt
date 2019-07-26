@@ -5,25 +5,16 @@ Description: Active list of action items for maze code
 ################ RON #################################
 
 - Add a grid 2D array to each room 
-
 - Implement grid based room print out using 2D arrays 
-
 - Random placement of key and map items
-
 - Placement of Riddle, and ComboLock items
-
 - Make some different maze sizes and dificulties
-
 - Incorporate the book game and the riverGame
 
-########################################################
-
+/////////////////
 - Give players an array list for inventory
-
 - Make different keys ( Key object?)
-
 - Make Monsters move with each turn
-
 - Implement fighting dialouge     
 
 ######################################################
