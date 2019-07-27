@@ -1,5 +1,5 @@
 
-public class TestHaineRiddle {
+public class TestHaineRiddle { 
 	
 	public boolean notHamRid(){
 		

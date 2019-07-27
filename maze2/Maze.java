@@ -451,7 +451,7 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 	
 	return;
 	}
-	
+	 
 	
 	public void playRiddle(){
 		Point currentPosition = hero.getPosition();

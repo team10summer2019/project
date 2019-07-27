@@ -35,7 +35,7 @@ public class PlayRiddle {
 		if (inputAsString.contentEquals("EXIT")) {
 			exitPrompt();
 		}
-	}
+	} 
 	
 	public void addAnswer(CreateRiddle ans) {		//ADDS CORRECT ANSWER TO 
 		answer = ans.getAnswer();
