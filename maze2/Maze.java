@@ -440,7 +440,7 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 	currentRoom = getRoom( currentPosition );
 	return;
 	}
-	
+	 
 	public void unlockDoor(){
 
 		if (hero.getHasKey()){
@@ -451,7 +451,7 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 	
 	return;
 	}
-	
+	 
 	
 	public void playRiddle(){
 		Point currentPosition = hero.getPosition();
@@ -460,11 +460,16 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 			if (currentRoom.getHasRiddle() && !hero.getHasRiddle()){
 			// give the player a riddle
 			TestHaineRiddle yeet = new TestHaineRiddle();
-			yeet.notHamRid();
-			hero.setHasRiddle(true);
+			boolean solved = yeet.notHamRid();
+			hero.setHasRiddle(solved);
 			// reset the room to not have a key
 			setCurrentRoom(currentPosition); // point current room to the room in roomList 
-			currentRoom.setHasRiddle(false); // remove the key from the room	
+			if (solved == true) {			//If the riddle has been solved
+			currentRoom.setHasRiddle(false);
+			}
+			else {							//If riddle has not been solved
+			currentRoom.setHasRiddle(true); // remove the key from the room	
+			}
 			}
 		// restore the pointer away from the roomList;
 		currentRoom = getRoom( currentPosition );
