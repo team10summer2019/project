@@ -1,6 +1,6 @@
 
 public class TestHaineRiddle { 
-	
+	 
 	public boolean notHamRid(){
 		
 		///MAKE A LOT OF RIDDLES

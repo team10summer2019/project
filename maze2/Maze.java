@@ -440,7 +440,7 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 	currentRoom = getRoom( currentPosition );
 	return;
 	}
-	
+	 
 	public void unlockDoor(){
 
 		if (hero.getHasKey()){

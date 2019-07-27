@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class PlayRiddle {
-
+ 
 	private Scanner input = new Scanner(System.in);
 	private String inputAsString;
 	private String answer;
