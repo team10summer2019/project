@@ -54,7 +54,7 @@ public class StaticObjects extends Inventory {
 		System.out.println("There is a red Bird, a yellow Bird, and a green Bird.\nTo view type:\n'r'-red Bird\n'y'-yellow Bird\n'g'-greenbird");
 		System.out.println("To stop viewing shelf, type 'stop'");
 	}
-	//Haine
+	//aMirror by Haine
 	public void aMirror() {
 		System.out.println("It's a mirror. All you see is a reflection of you. Your human self.");
 	}

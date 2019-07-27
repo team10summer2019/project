@@ -89,7 +89,7 @@ public class Start {
 		}	
 	}
 	
-	public void viewRedBox() { //PROBLEM -> awaitImput is not working
+	public void viewRedBox() { 
 		System.out.println("<><>REDBOX<><>");
 		boolean awaitInput = true;
 		
@@ -131,7 +131,7 @@ public class Start {
 			}
 		}
 	}
-	
+	//viewMirror by Haine
 	public void viewMirror() {
 		System.out.println("<><>MIRROR<><>");
 		stat_item.aMirror();
