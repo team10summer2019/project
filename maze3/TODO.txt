@@ -1,0 +1,38 @@
+TODO.txt
+
+Description: Active list of action items for maze code
+
+################ RON #################################
+ 
+//////////////  BACKEND LOGIC UPGRADES
+ 
+ 
+   -- BUG FIX RIDDLE and random placement issues
+- Random placement of key and map items             1 hr
+- Placement of Riddle, and ComboLock items          1 hr
+
+/////////////////////////////////////////////////////////////////
+
+- Incorporate Riddle into game                      1 hr
+- Incorporate the book game and the riverGame       2 hrs
+
+/////////////////  NEW FEATURES   
+- Make Monsters move with each turn (Random Directon Motion)    3hrs
+- Implement fighting dialouge                   4 hrs
+
+- Give players an array list for inventory          1 hr
+- Make different keys ( Key object?)                2 hrs
+
+
+//////////////////  JAVAFX GUI  SUNDAY !!!!!
+
+-- read the code for ticTacToe     2-3hrs of study
+
+-- JavaFX implementation of displayRoomGrid()    3hrs
+-- JavaFX implementation of userInput() capture by textBox 1hr
+-- JavaFX while loop game updating   1hr
+
+////////////////////
+
+######################################################
+
