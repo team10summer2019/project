@@ -21,7 +21,7 @@ public class RiverPuzzle {
 		System.out.println("However, your boat can only fit one of them at a time.\nIf the wolf is left alone with the goat, the wolf will eat the goat.");
 		System.out.println("If the goat is left alone with the cabbage, it will devour the cabbage.\nIf the cabbage is left alone with the wolf, nothing happens.");
 		System.out.println("You can also move across the river by yourself.\n");
-		System.out.println("Instructions: to move the object left or right, type out the object and their direction. Type reset to reset the game.");
+		System.out.println("Instructions: to move the object left or right, type out the object and their direction. Type reset to reset the game and exit to exit the game.");
 		System.out.println("For example: Move the goat right.\n");
 	}
 	
@@ -66,7 +66,7 @@ public class RiverPuzzle {
 			System.out.println(right);
 			
 		}
-		if (object.contains("WOLF") && object.contains("RIGHT")) {
+		else if (object.contains("WOLF") && object.contains("RIGHT")) {
 			left.remove("Wolf");
 			left.remove("Player");
 			right.add("Player");
@@ -83,7 +83,7 @@ public class RiverPuzzle {
 			System.out.println(right);
 			
 		}
-		if (object.contains("CABBAGE") && object.contains("RIGHT")) {
+		else if (object.contains("CABBAGE") && object.contains("RIGHT")) {
 			left.remove("Cabbage");
 			left.remove("Player");
 			right.add("Player");
@@ -100,7 +100,7 @@ public class RiverPuzzle {
 			System.out.println(right);
 			
 		}
-		if (object.contains("PLAYER") && object.contains("RIGHT")) {
+		else if (object.contains("PLAYER") && object.contains("RIGHT")) {
 			left.remove("Player");
 			right.add("Player");
 			for(int i = 0; i < right.size(); i++) {
@@ -136,7 +136,7 @@ public class RiverPuzzle {
 			System.out.println(right);
 	
 		}
-		if (object.contains("WOLF") && object.contains("LEFT")) {
+		else if (object.contains("WOLF") && object.contains("LEFT")) {
 			right.remove("Wolf");
 			right.remove("Player");
 			left.add("Player");
@@ -153,7 +153,7 @@ public class RiverPuzzle {
 			System.out.println(right);
 			
 		}
-		if (object.contains("CABBAGE") && object.contains("LEFT")) {
+		else if (object.contains("CABBAGE") && object.contains("LEFT")) {
 			right.remove("Cabbage");
 			right.remove("Player");
 			left.add("Player");
@@ -170,7 +170,7 @@ public class RiverPuzzle {
 			System.out.println(right);
 			
 		}
-		if (object.contains("PLAYER") && object.contains("LEFT")) {
+		else if (object.contains("PLAYER") && object.contains("LEFT")) {
 			right.remove("Player");
 			left.add("Player");
 			for(int i = 0; i < left.size(); i++) {
@@ -183,10 +183,16 @@ public class RiverPuzzle {
 	        }
 			System.out.println(left);
 			System.out.println(right);
-			
 		}
 	}
-	//These three checkers below will check if there is a win or lose situation.
+	
+	public void invalidMove() {
+		if (!(object.contains("LEFT")) || !(object.contains("RIGHT")) && !(object.contains("CABBAGE")) && !(object.contains("WOLF")) && !(object.contains("GOAT")) && !(object.contains("PLAYER"))){
+			System.out.println("That is an invalid move. Please try again.\n");
+		}
+	}
+	
+	//These two checkers below will check if there is a win or lose situation.
 	public void checkGoatAndCabbage() {
 		
 		if (left.contains("Goat") && left.contains("Wolf") && right.contains("Player") || right.contains("Goat") && right.contains("Wolf") && left.contains("Player")) {
@@ -198,12 +204,14 @@ public class RiverPuzzle {
 			reset();
 		}
 	}
+	
 	public void checkWin() {
 		problem();
 		start();
 		boolean gameDone = false;
 		while (gameDone  == false) {
 			userInput();
+			invalidMove();
 			moveLeft();
 			moveRight();
 			checkGoatAndCabbage();
@@ -212,6 +220,10 @@ public class RiverPuzzle {
 				System.out.println("You solved it!");
 				gameDone = true;
 		}
+			if(object.contains("EXIT")) {
+				System.out.println("You have exit the puzzle.");
+				gameDone = true;
+			}
 	}
 }
 	
@@ -245,5 +257,10 @@ public class RiverPuzzle {
 			System.out.println(left);
 			System.out.println(right);
 		}
+	}
+	
+	public void playRiverPuzzle() {
+		RiverPuzzle play = new RiverPuzzle();
+		play.checkWin();
 	}
 }
