@@ -1,0 +1,36 @@
+Folder LockLeverPuzzle has multiple demos of the pieces that would fit together for a specialized puzzle by a class called LockLeverPuzzle.
+
+The classes interact with each other properly and independently for the most part. 
+More work will be needed to piece the classes together better and have user/player interaction with it.
+Parent Inventory and children StaticObjects and DynamicObjects still require some review and processing with interactions with the user/player itself. 
+
+
+
+To run the GenericComboLock.java file,
+$cd LockLeverPuzzle 
+$javac *.java 
+$java GenericComboLockTest 
+
+
+To run the LockLeverPuzzle.java file, 
+$cd LockLeverPuzzle 
+$javac *.java 
+$java LockLeverPuzzleTest 
+
+
+To run the DynamicObjects.java file, 
+$cd LockLeverPuzzle 
+$javac *.java 
+$java DynamicObjectsTest 
+
+
+To run the StaticObjects.java file, 
+$cd LockLeverPuzzle 
+$javac *.java 
+$java StaticObjectsTest 
+
+
+To run the Inventory.java file, 
+$cd LockLeverPuzzle 
+$javac *.java 
+$java InventoryTest 

@@ -27,10 +27,8 @@ public class MazeGame {
 	int moveCounter = 0;  // count the number of moves
         boolean victory=false;
 	 
-	
-	gameBoard.setCurrentRoom(0); // reset the current room after setting up the board
+	gameBoard.setCurrentRoom(0,0); // reset the current room after setting up the board
 	tempRoom = gameBoard.getCurrentRoom();  // set the tempRoom to be the current room at (0,0)
-	
 	
 	// clear the screen	
 	clearScreen();
@@ -48,11 +46,8 @@ public class MazeGame {
 	printHelp();
 	pressEnter();
 	
-	
 	// Main loop to run the Maze Game 
-	
-	   //while ( gameBoard.getDoor().getIsLocked() == true  && moveCounter < 200 && !storeInput.equalsIgnoreCase("quit")  ){
-	
+		
 		while ( moveCounter < 200 && !storeInput.equalsIgnoreCase("quit")  ){
 		
 			// if user input was "MAP" display map unit until user types return
@@ -93,14 +88,14 @@ public class MazeGame {
 		        }
 			
 			
-			// if user input was "OPEN" display map unit until user types return
+			// if user input was "ESCAPE"  if you are at the door and the door is open exit the game winning.
 			if ( storeInput.equalsIgnoreCase("Escape") ) {
 			
 			// store the location of the door
 			Point doorLocation = gameBoard.getDoor().getLocation();
 			Point currentLocation = gameBoard.getCurrentRoom().getLocation();
 			
-				// check that player has the key, and is in the location that the door is in
+				// check that player has the key, and is in the location that the door is in and that the door is open
 				if (gameBoard.getHero().getHasKey()  && currentLocation.isEqual(doorLocation) && gameBoard.getCurrentRoom().getHasDoor()  && !gameBoard.getDoor().getIsLocked() ) {
 				victory=true;  // switch victory flag
 				break; // break the while loop you are free
@@ -110,11 +105,11 @@ public class MazeGame {
 				}
 		        }	
 						
-		// if user input was "HELP" display help unit unitl user types return
+			// if user input was "HELP" display help unit unitl user types return
 			if ( storeInput.equalsIgnoreCase("help") ) {
 				while (!storeInput.equalsIgnoreCase("Return")) {	
 				clearScreen();
-				printHelp();  // print the map
+				printHelp();  // print the help message with user input keywords
 				storeInput = getUserInput();
 				}
 		        }
@@ -151,7 +146,7 @@ public class MazeGame {
 			moveCounter++;
 			}
 			
-			// if user input is "Left"	
+			// if user input is "Take"	
 			if ( storeInput.equalsIgnoreCase("Take")){
 			// increment the move counter to change the room
 			tempRoom = gameBoard.getCurrentRoom();
@@ -184,26 +179,26 @@ public class MazeGame {
 		// clear the screen	
 		clearScreen();
 		
-		// update the hero current condition
+		// update the hero current condition and display hero stats
 		tempHero = gameBoard.getHero();
 		tempHero.displayStats();
-		// set the room to cycle through all rooms in array list 
 		
+		//draw the current room and display the room stats 
 		tempRoom.drawRoom();
 	        tempRoom.displayRoomStats();
 		
 		System.out.println("There have been " + moveCounter + " moves in the maze");
 		
+			// Print out the user input from the previous turn  
 			if (!storeInput.equalsIgnoreCase("")){
 			System.out.println("Your input was: " + storeInput);
-			}
+			}		
 			
 		// get user input
 		storeInput = getUserInput();
 		// pause until press enter
 		// pressEnter();
 		}  // closing brace for while loop
-		
 		
 		
 		/// closing message to user
@@ -216,44 +211,44 @@ public class MazeGame {
 	return; 
 	}// end of main function	
 	
-		// sets up the walls and items, doors and monsters
+	// sets up the walls and items, doors and monsters
 	public static void setBoard( Maze m){
-	// setRoom(room#,left,right,up,down,key,door,map,monster)
-	m.setRoom(0,true,true,true,false,false,false,false,false); // setup the first room 
-	m.setRoom(0,true);  // place the player in the first room
-	// room (0.1)   
-	m.setRoom(1,true,false,true,true,false,true,false,false);
-	// room (0,2)
-	m.setRoom(2,false,false,true,true,false,false,false,true);
-	// room (0,3)
-	m.setRoom(3,false,true,true,false,false,false,false,false);
-	// room (1,0)
-	// setRoom(room#,left,right,up,down,key,door,map,monster)
-	m.setRoom(4,true,true,false,false,false,false,false,false);
-	// room (1,1)
-	m.setRoom(5,true,false,true,false,false,false,false,false);
-	// room (1,2)
-	m.setRoom(6,false,false,true,true,false,false,false,false);
-	// room (1,3)
-	m.setRoom(7,false,true,false,false,false,false,false,false);
+	// setRoom(x,y,left,right,up,down,key,door,map,monster)
+	m.setRoom(0,0,true,true,true,false,false,false,false,false); // setup the first room 
+	m.setRoom(0,0,true);  // place the player in the first room
+	// room (1.0)   
+	m.setRoom(1,0,true,false,true,true,false,true,false,false);
 	// room (2,0)
-	m.setRoom(8,true,false,false,true,false,false,false,false);
-	// setRoom(room,left,right,up,down,key,door,map,monster)
+	m.setRoom(2,0,false,false,true,true,false,false,false,true);
+	// room (0,3)
+	m.setRoom(3,0,false,true,true,false,false,false,false,false);
+	// room (1,0)
+	// setRoom(x,y,left,right,up,down,key,door,map,monster)
+	m.setRoom(0,1,true,true,false,false,false,false,false,false);
+	// room (1,1)
+	m.setRoom(1,1,true,false,true,false,false,false,false,false);
 	// room (2,1)
-	m.setRoom(9,false,true,false,false,false,false,false,false);
-	// room (2,2)
-	m.setRoom(10,true,true,true,false,true,false,false,false);
-	// room (2,3)
-	m.setRoom(11,true,true,false, false,false,false,false,false);
-	// room (3,0)
-	// setRoom(room#,left,right,up,down,key,door,map,monster)
-	m.setRoom(12,true,false,true,true,false,false,true,false);
+	m.setRoom(2,1,false,false,true,true,false,false,false,false);
 	// room (3,1)
-	m.setRoom(13,false,true,false,true,false,false,false,false);
+	m.setRoom(3,1,false,true,false,false,false,false,false,false);
+	// room (0,2)
+	m.setRoom(0,2,true,false,false,true,false,false,false,false);
+	// setRoom(x,y,left,right,up,down,key,door,map,monster)
+	// room (1,2)
+	m.setRoom(1,2,false,true,false,false,false,false,false,false);
+	// room (2,2)
+	m.setRoom(2,2,true,true,true,false,true,false,false,false);
 	// room (3,2)
-	m.setRoom(14,true,false,false,true,false,false,false,false);
+	m.setRoom(3,2,true,true,false, false,false,false,false,false);
+	// room (0,3)
+	// setRoom(x,y,left,right,up,down,key,door,map,monster)
+	m.setRoom(0,3,true,false,true,true,false,false,true,false);
+	// room (1,3)
+	m.setRoom(1,3,false,true,false,true,false,false,false,false);
+	// room (3,2)
+	m.setRoom(2,3,true,false,false,true,false,false,false,false);
 	// room (3,3)
-	m.setRoom(15,false,true,false,true,false,false,false,false);	
+	m.setRoom(3,3,false,true,false,true,false,false,false,false);	
 	
 	return;
 	}
@@ -279,9 +274,8 @@ public class MazeGame {
 	return;
 	}
 	
-	
 	public static void printHelp(){
-	System.out.println("Welcome to the Maze, Commands are case insensitive. Here are the current Commands:");
+	System.out.println("Welcome to THE MAZE, Commands are case insensitive. Here are the current Commands:");
 	System.out.println("__________________________________________________");	
 	System.out.println("Help : prints the usage commands");
 	System.out.println("Quit : exits the maze");
@@ -301,7 +295,6 @@ public class MazeGame {
 	return;
 	}
 		
-	
 	// Use this to clear the screen taken from source: 	
 	//  https://stackoverflow.com/questions/2979383/java-clear-the-console
 	public static void clearScreen() {  
@@ -309,7 +302,6 @@ public class MazeGame {
 	 System.out.flush();  
 	}  
 	
-
 	public static String getUserInput(){
 	String input;
 	Scanner keyboard = new Scanner(System.in);
@@ -321,12 +313,11 @@ public class MazeGame {
 	public static void pressEnter(){
 	String input;
 	Scanner keyboard = new Scanner(System.in);
-	System.out.println("<<<<Press Enter>>>>:");
+	System.out.println("<<<<Press Enter>>>>");
 	keyboard.nextLine();
 	return;
 	}
-	
-	
+		
 	public static void handleInput(String storeInput, Maze gameBoard, int moveCounter){
 	
 	return;	

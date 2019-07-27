@@ -1,6 +1,6 @@
 //////////////////////////////////////////////
 //
-// File: MazeGame.java
+// File: testMaze.java
 // Description: MazeGame class with main() function
 //
 // Author: (Ron) Zorondras Rodriguez
@@ -14,7 +14,7 @@
 import java.util.Scanner;
 import java.util.Random;
 
-public class MazeGame {
+public class testMaze {
 
 
 	public static void main(String[] args){
@@ -61,8 +61,6 @@ public class MazeGame {
 			// increment the move counter to change the room
 			gameBoard.moveDown();
 			tempRoom = gameBoard.getCurrentRoom();
-			
-			
 			moveCounter++;
 			}	
 				
@@ -85,11 +83,10 @@ public class MazeGame {
 			// if user input is "Left"	
 			if ( storeInput.equalsIgnoreCase("Left")){
 			// increment the move counter to change the room
-			gameBoard.moveRight();
+			gameBoard.moveLeft();
 			tempRoom = gameBoard.getCurrentRoom();
 			moveCounter++;
-			}	
-			
+			}
 					
 		// clear the screen	
 		clearScreen();
@@ -218,6 +215,11 @@ public class MazeGame {
 	return;
 	}
 	
+	
+	public static void handleInput(String storeInput, Maze gameBoard, int moveCounter){
+	
+	return;	
+	}
 	
 	
 } // class ending brace

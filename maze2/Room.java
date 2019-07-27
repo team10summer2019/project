@@ -32,6 +32,10 @@ private boolean hasKey;
 private boolean hasDoor;
 private boolean hasPlayer;
 private boolean hasMap;
+private boolean hasRiddle;
+private boolean hasBooks;
+private boolean hasComboLock;
+private boolean hasGoat;
 
 private int doorPosition;
 
@@ -49,6 +53,10 @@ private int doorPosition;
 	 hasMonster=false;
 	 hasKey=false;
 	 hasPlayer=false;
+	 hasRiddle = false;
+	 hasBooks = false;
+	 hasComboLock =false;
+	 hasGoat = false;
 
 	 hasDoor=false;
 	 doorPosition=0; // 0 for no door 1 for left 2 for right , 3 for top, 4 for bottom
@@ -68,6 +76,10 @@ private int doorPosition;
 	 hasMonster=false;
 	 hasKey=false;
 	 hasPlayer=false;
+	 hasRiddle = false;
+	 hasBooks = false;
+	 hasComboLock =false;
+	 hasGoat = false;
 	 
 	 hasDoor=false;
 	 doorPosition=0; // 0 for no door 1 for left 2 for right , 3 for top, 4 for bottom
@@ -86,6 +98,10 @@ private int doorPosition;
 	 hasMonster=false;
 	 hasKey=false;
 	 hasPlayer=false;
+	 hasRiddle = false;
+	 hasBooks = false;
+	 hasComboLock =false;
+	 hasGoat = false;
 	 
 	 hasDoor=false;
 	 doorPosition=0; // 0 for no door 1 for left 2 for right , 3 for top, 4 for bottom
@@ -139,8 +155,25 @@ private int doorPosition;
 	public boolean getHasDoor(){
 	return hasDoor;
 	}
+	
 	public int getDoorPosition(){
 	return doorPosition;
+	}
+	
+	public boolean getHasRiddle(){
+	return hasRiddle;
+	}
+	
+	public boolean getHasBooks(){
+	return hasBooks;
+	}
+	
+	public boolean getHasComboLock(){
+	return hasComboLock;
+	}	
+	
+	public boolean getHasGoat(){
+	return hasBooks;
 	}
 	
 	public Point getLocation(){
@@ -207,6 +240,27 @@ private int doorPosition;
 		}
 	return;
 	}
+
+	public void setHasRiddle(boolean value){
+	hasRiddle = value;
+	return;
+	}
+
+	public void setHasBooks(boolean value){
+	hasBooks = value;
+	return;
+	}
+
+	public void setHasComboLock(boolean value){
+	hasComboLock = value;
+	return;
+	}
+
+	public void setHasGoat(boolean value){
+	hasGoat = value;
+	return;
+	}
+
 
 //////////////////////////  OTHER METHODS /////////////////////////////////////////////////
 	public void  displayRoomStats(){
@@ -360,6 +414,14 @@ private int doorPosition;
 				System.out.print("W");
 				}else if (hasMap == true  && k == roomWidth/2){
 				System.out.print("M");
+				}else if (hasRiddle == true  && k == roomWidth/2){
+				System.out.print("R");
+				}else if (hasBooks == true  && k == roomWidth/2){
+				System.out.print("B");
+				}else if (hasComboLock == true  && k == roomWidth/2){
+				System.out.print("L");
+				}else if (hasGoat == true  && k == roomWidth/2){
+				System.out.print("G");
 				}else if (hasPlayer == true  && k == roomWidth/2){
 				System.out.print("*");
 				}else{		
