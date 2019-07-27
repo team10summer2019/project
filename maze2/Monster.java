@@ -15,7 +15,7 @@
 //          Methods- moveLeft(), moveRight(), moveUp(), moveDown(),
 //	           searchRoom(), attack(), openDoor() , die() , isAlive()
 
-
+package maze2;
 public class Monster {
 
 ////////////////////// MEMBER VARIABLES /////////////////////////////////////

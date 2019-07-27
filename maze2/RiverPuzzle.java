@@ -19,11 +19,11 @@ public class RiverPuzzle {
 	
 	//This just says what the problem that the player has to solve with instructions.
 	public void problem() {
-		System.out.println("You the player, have a wolf, a goat, and a cabbage on one side of the river.\nYou need to get all three across the river.");
+		System.out.println("\nYou the player, have a wolf, a goat, and a cabbage on one side of the river.\nYou need to get all three across the river.");
 		System.out.println("However, your boat can only fit one of them at a time.\nIf the wolf is left alone with the goat, the wolf will eat the goat.");
 		System.out.println("If the goat is left alone with the cabbage, it will devour the cabbage.\nIf the cabbage is left alone with the wolf, nothing happens.");
 		System.out.println("You can also move across the river by yourself.\n");
-		System.out.println("Instructions: to move the object left or right, type out the object and their direction. Type reset to reset the game and exit to exit the game.");
+		System.out.println("Instructions: to move the object left or right, type out the object and their direction, separated by a space. Type reset to restart the game and exit to quit the game.");
 		System.out.println("For example: Move the goat right.\n");
 	}
 	
@@ -189,7 +189,7 @@ public class RiverPuzzle {
 	}
 	
 	public void invalidMove() {
-		if (!(object.contains("LEFT")) || !(object.contains("RIGHT")) && !(object.contains("CABBAGE")) && !(object.contains("WOLF")) && !(object.contains("GOAT")) && !(object.contains("PLAYER"))){
+		if (!(object.contains("LEFT")) && !(object.contains("CABBAGE")) && !(object.contains("WOLF")) && !(object.contains("GOAT")) && !(object.contains("PLAYER"))|| !(object.contains("RIGHT")) && !(object.contains("CABBAGE")) && !(object.contains("WOLF")) && !(object.contains("GOAT")) && !(object.contains("PLAYER"))){
 			System.out.println("That is an invalid move. Please try again.\n");
 		}
 	}
@@ -214,7 +214,7 @@ public class RiverPuzzle {
 		while (gameDone  == false) {
 			userInput();
 			if(object.contains("EXIT")) {
-				System.out.println("You have exit the puzzle.");
+				System.out.println("\nYou have exited the puzzle.\n");	//Cleaned it up so it prints nicer in console HAINE KIM
 				break;
 			}
 			invalidMove();
@@ -223,7 +223,7 @@ public class RiverPuzzle {
 			checkGoatAndCabbage();
 			resetGame();
 			if(right.contains("Player") && right.contains("Goat") && right.contains("Wolf") && right.contains("Cabbage")) {
-				System.out.println("You solved it!");
+				System.out.println("\nYou solved it!\n");				//Cleaned it up so it prints nicer in console HAINE KIM
 				gameDone = true;
 		}
 	}

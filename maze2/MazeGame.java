@@ -147,6 +147,17 @@ public class MazeGame {
 			moveCounter++;
 			}
 			
+			// if user input is "Play"	
+			if ( storeInput.equalsIgnoreCase("Play")){					//Added a play input to play riddles/puzzles HAINE KIM
+			// increment the move counter to change the room
+				if (tempRoom.getHasRiddle()) {
+				gameBoard.playRiddle();
+				}else if (tempRoom.getHasGoat()) {
+				gameBoard.playTheRiverPuzzle();
+				}
+			tempRoom = gameBoard.getCurrentRoom();
+			}		
+			
 			// if user input is "Take"	
 			if ( storeInput.equalsIgnoreCase("Take")){
 			// increment the move counter to change the room
@@ -158,13 +169,7 @@ public class MazeGame {
 				}else if (tempRoom.getHasMap()){
 				gameBoard.takeMap();
 				System.out.println("You took the Map!");
-				moveCounter++;
-				}else if (tempRoom.getHasRiddle()) {
-				gameBoard.playRiddle();
-				
-				}else if (tempRoom.getHasGoat()) {
-				gameBoard.playTheRiverPuzzle();
-					
+				moveCounter++;	
 				}else{
 				System.out.println("There is nothing in the room to take...");
 				pressEnter();
@@ -220,7 +225,7 @@ public class MazeGame {
 	
 	// sets up the walls and items, doors and monsters
 	public static void setBoard( Maze m){
-	// setRoom(x,y,left,right,up,down,key,door,map,monster,riddle.puzzle)
+	// setRoom(x,y,left,right,up,down,key,door,map,monster,riddle,river)
 	m.setRoom(0,0,true,true,true,false,false,false,false,false,false,false); // setup the first room 
 	m.setRoom(0,0,true);  // place the player in the first room
 	// room (1.0)   
@@ -231,7 +236,7 @@ public class MazeGame {
 	m.setRoom(3,0,false,true,true,false,false,false,false,false,false,false);
 	// room (1,0)
 	// setRoom(x,y,left,right,up,down,key,door,map,monster,riddle,puzzle)
-	m.setRoom(0,1,true,true,false,false,false,false,false,false,true,false);
+	m.setRoom(0,1,true,true,false,false,false,false,false,false,false,false);
 	// room (1,1)
 	m.setRoom(1,1,true,false,true,false,false,false,false,false,false,false);
 	// room (2,1)
@@ -239,7 +244,7 @@ public class MazeGame {
 	// room (3,1)
 	m.setRoom(3,1,false,true,false,false,false,false,false,false,false,false);
 	// room (0,2)
-	m.setRoom(0,2,true,false,false,true,false,false,false,false,false,false);
+	m.setRoom(0,2,true,true,false,true,false,false,false,false,true,false);
 	// setRoom(x,y,left,right,up,down,key,door,map,monster,riddle,puzzle)
 	// room (1,2)
 	m.setRoom(1,2,false,true,false,false,false,false,false,false,false,false);
@@ -260,18 +265,18 @@ public class MazeGame {
 	return;
 	}
 	
-	public static void printMap(){
-	System.out.println("You unfold the map from your pocket and take a look:");
+	public static void printMap(){													//First riddle added to room (0,2) HAINE KIM
+	System.out.println("You unfold the map from your pocket and take a look:");		//River puzzle added to room (1,3) STEVEN ON
 	System.out.println("");	
 	System.out.println("_____________________________");
 	System.out.println("|      |      |      |      |");
 	System.out.println("|  *   |  D      W          |");
 	System.out.println("|_    _|______|______|_    _|");
 	System.out.println("|      |      |      |      |");
-	System.out.println("|  R   |                    |");
+	System.out.println("|      |                    |");
 	System.out.println("|_    _|_    _|______|_    _|");
 	System.out.println("|      |      |      |      |");
-	System.out.println("|             |   K  |      |");
+	System.out.println("|  R          |   K  |      |");		
 	System.out.println("|______|_    _|__   _|_    _|");
 	System.out.println("|      |      |      |      |");
 	System.out.println("|  M      G   |             |");

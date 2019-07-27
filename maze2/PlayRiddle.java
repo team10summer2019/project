@@ -1,3 +1,5 @@
+package maze2;
+
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,12 +30,12 @@ public class PlayRiddle {
 			input = new Scanner(System.in);
 			inputAsString = input.nextLine();
 			if (inputAsString.contentEquals("EXIT")) {
-				exitPrompt();
+				return;
 			}
 		}			//END OF WHILE
 		this.inputAsString =  inputAsString.toUpperCase();			//CHANGES INPUT TO AN ALL-CAPS STRING. JUMPS STRAIGHT HERE IF NO SPACES IN INPUT
 		if (inputAsString.contentEquals("EXIT")) {
-			exitPrompt();
+			return;
 		}
 	} 
 	
@@ -52,7 +54,7 @@ public class PlayRiddle {
 			return solved;
 		}
 	}
-	
+	/*
 	public void exitPrompt() {			//IF USER WANTS TO STOP AT SOME POINT
 		System.out.println("Are you sure? Type exit and press ENTER again to confirm.");
 		input = new Scanner(System.in);		//NEEDS USER INPUT AGAIN TO CONFIRM
@@ -61,6 +63,6 @@ public class PlayRiddle {
 		if (inputAsString.equals("EXIT")) {
 			return;
 		}
-	}
+	} */
 	
 }

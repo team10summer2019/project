@@ -456,7 +456,7 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 	}
 	 
 	
-	public void playRiddle(){
+	public void playRiddle(){													//HAINE KIM
 		Point currentPosition = hero.getPosition();
 		currentRoom = getRoom( currentPosition );	
 			// if the room has a key but the player doesn't
@@ -473,6 +473,7 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 			else {							//If riddle has not been solved
 			currentRoom.setHasRiddle(true); // remove the key from the room	
 			}
+			currentRoom.setRightWall(!solved);
 			}
 		// restore the pointer away from the roomList;
 		currentRoom = getRoom( currentPosition );
@@ -488,10 +489,10 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 			boolean solved = play.playRiverPuzzle();
 			// reset the room to not have a puzzle if it is solved
 			setCurrentRoom(currentPosition); // point current room to the room in roomList 
-			if (solved == true) {			//If the riddle has been solved
+			if (solved == true) {			//If the puzzle has been solved
 			currentRoom.setHasGoat(false);
 			}
-			else {							//If riddle has not been solved
+			else {							//If puzzle not solved
 			currentRoom.setHasGoat(true); // keep the puzzle in the room	
 			}
 			}

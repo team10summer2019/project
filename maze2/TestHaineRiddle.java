@@ -1,3 +1,4 @@
+package maze2;
 
 public class TestHaineRiddle { 
 	 
