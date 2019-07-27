@@ -18,9 +18,9 @@ public class StaticObjectsTest {
 		subjectiveObject.aCard();
 		
 		//Encounter with three bird
-		subjectiveObject.aBird1();
-		subjectiveObject.aBird2();
-		subjectiveObject.aBird3();
+		subjectiveObject.aBirdG();
+		subjectiveObject.aBirdR();
+		subjectiveObject.aBirdY();
 	}
 
 }

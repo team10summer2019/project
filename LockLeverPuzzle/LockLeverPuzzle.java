@@ -5,7 +5,11 @@
  */
 public class LockLeverPuzzle extends GenericComboLock {
 	/*
-	 * 
+	 * CLASS
+	 * LOCK LEVER PUZZLE
+	 * lock lever puzzle has the same traits as GenericComboLock
+	 * an additional lever key is set to act as a key
+	 * puzzle will unlock both combination and lever are put in the right position
 	 */
 	private boolean lever_canUse;
 	private String lever_position;

@@ -18,6 +18,8 @@ public class DynamicObjectsTest {
 		
 		lever_keys.removeItemFromInventory("leverPiece1");
 		lever_keys.viewInventory();
+		
+		////////////////////////////////
 
 	}
 

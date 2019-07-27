@@ -5,6 +5,8 @@
  */
 public class LockLever {
 	/*
+	 * CLASS
+	 * LOCK LEVER
 	 * Lever comes in two pieces. This class checks if the two lever pieces are in the player inventory or not, then combine it if it exists
 	 * LockLever works with dynamicObjects as well as LockLeverPuzzle 
 	 */
