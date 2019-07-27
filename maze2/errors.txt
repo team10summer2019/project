@@ -1,0 +1,85 @@
+Maze.java:263: error: illegal start of expression
+	public void setRoom(Point p , boolean inRoom){
+	^
+Maze.java:263: error: illegal start of expression
+	public void setRoom(Point p , boolean inRoom){
+	       ^
+Maze.java:263: error: ';' expected
+	public void setRoom(Point p , boolean inRoom){
+	                   ^
+Maze.java:263: error: <identifier> expected
+	public void setRoom(Point p , boolean inRoom){
+	                             ^
+Maze.java:263: error: not a statement
+	public void setRoom(Point p , boolean inRoom){
+	                                      ^
+Maze.java:263: error: ';' expected
+	public void setRoom(Point p , boolean inRoom){
+	                                            ^
+Maze.java:277: error: illegal start of expression
+	public void moveLeft(){
+	^
+Maze.java:277: error: illegal start of expression
+	public void moveLeft(){
+	       ^
+Maze.java:277: error: ';' expected
+	public void moveLeft(){
+	                    ^
+Maze.java:294: error: illegal start of expression
+	public void moveRight(){
+	^
+Maze.java:294: error: illegal start of expression
+	public void moveRight(){
+	       ^
+Maze.java:294: error: ';' expected
+	public void moveRight(){
+	                     ^
+Maze.java:311: error: illegal start of expression
+	public void moveUp(){
+	^
+Maze.java:311: error: illegal start of expression
+	public void moveUp(){
+	       ^
+Maze.java:311: error: ';' expected
+	public void moveUp(){
+	                  ^
+Maze.java:328: error: illegal start of expression
+	public void moveDown(){
+	^
+Maze.java:328: error: illegal start of expression
+	public void moveDown(){
+	       ^
+Maze.java:328: error: ';' expected
+	public void moveDown(){
+	                    ^
+Maze.java:348: error: illegal start of expression
+	public void takeKey(){
+	^
+Maze.java:348: error: illegal start of expression
+	public void takeKey(){
+	       ^
+Maze.java:348: error: ';' expected
+	public void takeKey(){
+	                   ^
+Maze.java:364: error: illegal start of expression
+	public void takeMap(){
+	^
+Maze.java:364: error: illegal start of expression
+	public void takeMap(){
+	       ^
+Maze.java:364: error: ';' expected
+	public void takeMap(){
+	                   ^
+Maze.java:380: error: illegal start of expression
+	public void unlockDoor(){
+	^
+Maze.java:380: error: illegal start of expression
+	public void unlockDoor(){
+	       ^
+Maze.java:380: error: ';' expected
+	public void unlockDoor(){
+	                      ^
+Maze.java:395: error: reached end of file while parsing
+} // end of class brace
+ ^
+28 errors
