@@ -240,7 +240,7 @@ public class RiverPuzzle {
 		left.add("Player"); 
 		System.out.println(left);
 		System.out.println(right);
-	}
+	} 
 	
 	//This allows the player to reset the game in case if anything messes up.
 	public void resetGame() {
