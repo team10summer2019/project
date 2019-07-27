@@ -211,6 +211,10 @@ public class RiverPuzzle {
 		boolean gameDone = false;
 		while (gameDone  == false) {
 			userInput();
+			if(object.contains("EXIT")) {
+				System.out.println("You have exit the puzzle.");
+				break;
+			}
 			invalidMove();
 			moveLeft();
 			moveRight();
@@ -220,10 +224,6 @@ public class RiverPuzzle {
 				System.out.println("You solved it!");
 				gameDone = true;
 		}
-			if(object.contains("EXIT")) {
-				System.out.println("You have exit the puzzle.");
-				gameDone = true;
-			}
 	}
 }
 	
