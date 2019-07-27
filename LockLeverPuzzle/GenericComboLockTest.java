@@ -30,6 +30,7 @@ public class GenericComboLockTest {
 		
 		//This is just for you to see what your key was. This might only be temporary
 		System.out.println("For developers information, code was set to:" + lock.getComboNum1_Key() + "," + lock.getComboNum2_Key() + "," + lock.getComboNum3_Key());
+		
 	}
 
 }
