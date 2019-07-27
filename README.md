@@ -52,21 +52,22 @@ $ cd riverPuzzle <BR>
 $javac *.java <BR>
 $java TestStevenRiver <BR>
 
-# EscapeRoom-LockLeverPuzzle
+# LockLeverPuzzle(plus Escape Room Implementations)
 
 ===Overview:===
 
-Folder LockLeverPuzzle has multiple demos of the pieces that would fit together for a specialized puzzle by a class called LockLeverPuzzle.
+Folder LockLeverPuzzle has multiple demos of the pieces that would fit together for a specialized puzzle by a class called LockLeverPuzzle. This program runs a text-based escape room styled interaction with the user.
 
 The program is run on java through the main class.
 Most classes are prompted and work with the start class.
 
 The classes interact with each other properly and independently for the most part. 
 
-===Bugs:===
+===Bugs and Future Updates:===
 
 More work will be needed to adjust inventory pick up as well as remove items when already picked up.
-Parent Inventory and child DynamicObjects still require some review and processing with interactions with the user/player itself. 
+Parent Inventory and child DynamicObjects still require some review and processing with interactions with the user/player. 
+LockLeverPuzzle requires review and editing to have it interacting with the user/player.
 
 ============
 
