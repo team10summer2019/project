@@ -14,9 +14,9 @@ package maze2;
 
 import java.util.Random;
 import java.util.ArrayList;
-
+ 
 public class Maze {
-
+ 
 ////////////////////////////////// MEMBER VARIABLES ////////////////////////////////////////
 
 private Player hero;

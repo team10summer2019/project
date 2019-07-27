@@ -11,7 +11,7 @@ package maze2;
 // Revision Date: July 21, 2019
 //
 ///////////////////////////////////////////////
-
+ 
 // Player:  Attributes - (x,y) Point location, Health, hasKey, attackStrength
 //          Methods- moveLeft(), moveRight(), moveUp(), moveDown(),
 //	           searchRoom(), attack(), openDoor() , die() , isAlive()

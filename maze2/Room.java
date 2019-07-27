@@ -16,7 +16,7 @@ package maze2;
 // Room:  Attributes: (x,y) point location, Booleans: leftWall, bottomWall, rightWall, topWall,
 //			hasMonster, hasKey, hasDoor, leftDoor, topDoor, rightDoor, bottomDoor
 //	Methods:    displaySearch()
-
+ 
 public class Room {
 
 /////////////////////////// MEMBER VARIABLES ///////////////////////////////////////////

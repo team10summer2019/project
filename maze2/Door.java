@@ -10,7 +10,7 @@
 // Revision Date: July 21, 2019
 //
 ///////////////////////////////////////////////
-
+ 
 package maze2;
 public class Door {
 

@@ -226,7 +226,7 @@ public class RiverPuzzle {
 				System.out.println("\nYou solved it!\n");				//Cleaned it up so it prints nicer in console HAINE KIM
 				gameDone = true;
 		}
-	}
+	}   
 		if (gameDone == true) {
 			solved = true;
 		}

@@ -26,7 +26,7 @@ private boolean hasKey;
 private int attackStrength;
 
 //////////////////////  CONSTRUCTORS     //////////////////////////////////////////
-
+ 
 	// default constructor
 	public Monster(){
 	position = new Point(0,3);

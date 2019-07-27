@@ -69,7 +69,7 @@ public class MazeGame {
 				}
 
 		        }
-			
+			 
 			// if user input was "OPEN" display map unit until user types return
 			if ( storeInput.equalsIgnoreCase("open") ) {
 			

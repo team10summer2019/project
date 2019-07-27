@@ -18,7 +18,7 @@ public class TestHaineRiddle {
 		CreateRiddle theRiddle = runner.chooseRiddle();
 		runner.addAnswer(theRiddle);
 		runner.sayRiddle(theRiddle);
-		
+		 
 		runner.instructions();
 		runner.getInput();
 		

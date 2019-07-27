@@ -12,7 +12,7 @@ public class PlayRiddle {
 	boolean solved = false;
 
 	public PlayRiddle() {}
-	
+	  
 	public void sayRiddle(CreateRiddle asd) {		//GIVES RIDDLE
 		System.out.print("\nAnswer this riddle: ");
 		System.out.println(asd.getRiddle());

@@ -13,7 +13,7 @@
 
 package maze2;
 public class Point {
-
+ 
 /////////////////  MEMBER VARIABLES  ///////////////////////////////////////
 
 private int xCoordinate;
