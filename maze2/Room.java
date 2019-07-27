@@ -141,6 +141,7 @@ private int roomRows=4;  // height of a room
 	 hasKey=toCopy.hasKey;
 	 hasMap=toCopy.hasMap;
 	 hasPlayer=toCopy.hasPlayer;
+	 hasRiddle=toCopy.hasRiddle;
 	 hasDoor=toCopy.hasDoor;
 	 doorPosition=toCopy.doorPosition; // 0 for no door 1 for left 2 for right , 3 for top, 4 for bottom
 	 
@@ -345,6 +346,7 @@ private int roomRows=4;  // height of a room
 	System.out.print("Monster = " + hasMonster+ " ");
 	System.out.print("HasKey = " + hasKey + " ");
 	System.out.print("HasMap = " + hasMap + " ");
+	System.out.print("Riddle = " + hasRiddle + " ");
 	System.out.print("Door = " + hasDoor+ " ");
 	System.out.println("DoorPosition = " + doorPosition);
 	}

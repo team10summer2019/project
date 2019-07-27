@@ -24,6 +24,7 @@ private Point position;
 private int health;
 private boolean hasKey;
 private boolean hasMap;
+private boolean hasRiddle;
 private int attackStrength;
 
 //////////////////////  CONSTRUCTORS     //////////////////////////////////////////
@@ -34,6 +35,7 @@ private int attackStrength;
 	health = 30;
 	hasKey = false;
 	hasMap = false;
+	hasRiddle = false;
 	attackStrength = 4;
 	}
 
@@ -41,6 +43,7 @@ private int attackStrength;
 	public Player(Point p, int heal, int strength ){
 	position = new Point(p);
 	hasKey = false;
+	hasRiddle = false;
 	hasMap = false;
 		if (heal >5){
 		health = heal;
@@ -56,6 +59,7 @@ private int attackStrength;
 	public Player( Player p){
 	position = new Point(p.position);
 	hasKey = p.hasKey;
+	hasRiddle = p.hasRiddle;
 	hasMap = p.hasMap;
 	
 		if (p.health >0){
@@ -86,6 +90,10 @@ private int attackStrength;
 	
 	public boolean getHasMap(){
 	return hasMap;
+	}
+	
+	public boolean getHasRiddle(){
+	return hasRiddle;
 	}
 
 	public int getAttackStrength(){
@@ -124,6 +132,11 @@ private int attackStrength;
 	hasMap= val;
 	return;
 	}
+	
+	public void setHasRiddle( boolean val){
+		hasRiddle= val;
+		return;
+		}
 
 	public void setAttackStrength(int strength){
 		if (strength >= 1){
@@ -197,6 +210,7 @@ private int attackStrength;
 	System.out.println("Attack Strength= " + attackStrength + " ");
 	System.out.print("Has Key = " + hasKey +", ");
 	System.out.println("Has Map = " + hasMap + " ");
+	System.out.print("Has Riddle = " + hasRiddle +", ");
 	System.out.println("Position = (" + position.getXCoordinate() + "," + position.getYCoordinate() + ")");  
 	
 	}

@@ -1,11 +1,7 @@
 
 public class TestHaineRiddle {
 	
-	public TestHaineRiddle() {
-		
-	}
-	
-	public void Riddle(){
+	public void notHamRid(){
 		
 		///MAKE A LOT OF RIDDLES
 		CreateRiddle runner = new CreateRiddle();

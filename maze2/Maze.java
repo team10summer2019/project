@@ -209,7 +209,7 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
        
        
        /// point input version 
-       public void setRoom(Point p, boolean left, boolean right, boolean up, boolean down, boolean key, boolean door ,boolean map, boolean monster ){
+       public void setRoom(Point p, boolean left, boolean right, boolean up, boolean down, boolean key, boolean door ,boolean map, boolean monster, boolean riddle ){
 	
 	if ( p.getXCoordinate() >= 0 && p.getXCoordinate() <= mazeSize-1 && p.getYCoordinate() >=0 && p.getYCoordinate() <= mazeSize-1) {
 	
@@ -224,6 +224,7 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 		temp.setHasDoor(door);
 		temp.setHasMonster(monster);
 		temp.setHasMap(map);
+		temp.setHasRiddle(riddle);
        
 		}
 	
@@ -232,7 +233,7 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
        
        
        // coordinate pair input version 
-       	public void setRoom(int x,int y, boolean left, boolean right, boolean up, boolean down, boolean key, boolean door ,boolean map, boolean monster ){
+       	public void setRoom(int x,int y, boolean left, boolean right, boolean up, boolean down, boolean key, boolean door ,boolean map, boolean monster, boolean riddle ){
 	
 	if ( x >= 0 && x <= mazeSize-1 && y >=0 && y<=mazeSize-1) {
 	
@@ -247,6 +248,7 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 		temp.setHasDoor(door);
 		temp.setHasMonster(monster);
 		temp.setHasMap(map);
+		temp.setHasRiddle(riddle);
        
 		}
 	
@@ -255,10 +257,11 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
        
        
        	// control variable room conditions
-	public void setCurrentRoom(boolean key, boolean map, boolean monster){
+	public void setCurrentRoom(boolean key, boolean map, boolean monster, boolean riddle){
 	currentRoom.setHasKey(key);
 	currentRoom.setHasMonster(monster);
 	currentRoom.setHasMap(map);
+	currentRoom.setHasRiddle(riddle);
 	
 	return;
 	}
@@ -300,7 +303,7 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 	}
 
 	// reset the booleans in the array list room 
-	public void setRoom(int x , int y,  boolean key, boolean door ,boolean map, boolean monster ){
+	public void setRoom(int x , int y,  boolean key, boolean door ,boolean map, boolean monster, boolean riddle ){
 		if ( x >= 0 && x <= mazeSize-1 && y >=0 && y<=mazeSize-1) {
 		Room temp = roomList[x][y];  // get the pointer to the room in list at index k
 		
@@ -308,6 +311,7 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 		temp.setHasDoor(door);
 		temp.setHasMonster(monster);
 		temp.setHasMap(map);
+		temp.setHasRiddle(riddle);
 		
 		}
 	
@@ -315,7 +319,7 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 	}	
 
 	// reset the booleans in the array list room 
-	public void setRoom(Point p , boolean key, boolean door ,boolean map, boolean monster ){
+	public void setRoom(Point p , boolean key, boolean door ,boolean map, boolean monster, boolean riddle ){
 		if ( p.getXCoordinate() >= 0 && p.getXCoordinate() <= mazeSize-1 && p.getYCoordinate() >=0 && p.getYCoordinate() <= mazeSize-1) {
 		Room temp = roomList[p.getXCoordinate()][p.getYCoordinate()];  // get the pointer to the room in list at index k
 		
@@ -323,6 +327,7 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 		temp.setHasDoor(door);
 		temp.setHasMonster(monster);
 		temp.setHasMap(map);
+		temp.setHasRiddle(riddle);
 		
 		}
 	
@@ -446,6 +451,29 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 	
 	return;
 	}
+	
+	
+	public void playRiddle(){
+		Point currentPosition = hero.getPosition();
+		currentRoom = getRoom( currentPosition );	
+			// if the room has a key but the player doesn't
+			if (currentRoom.getHasRiddle() && !hero.getHasRiddle()){
+			// give the player a riddle
+			TestHaineRiddle yeet = new TestHaineRiddle();
+			yeet.notHamRid();
+			hero.setHasRiddle(true);
+			// reset the room to not have a key
+			setCurrentRoom(currentPosition); // point current room to the room in roomList 
+			currentRoom.setHasRiddle(false); // remove the key from the room	
+			}
+		// restore the pointer away from the roomList;
+		currentRoom = getRoom( currentPosition );
+		return;
+		}
+		
+	
+	
+	
 
 	
 ///////////////////////    OTHER METHODS ///////////////////////////////////////////////////
