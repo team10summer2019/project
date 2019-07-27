@@ -1,3 +1,4 @@
+package maze2;
 //////////////////////////////////////////////
 //
 // File: Player.java
@@ -25,6 +26,7 @@ private int health;
 private boolean hasKey;
 private boolean hasMap;
 private boolean hasRiddle;
+private boolean hasGoat;
 private int attackStrength;
 
 //////////////////////  CONSTRUCTORS     //////////////////////////////////////////
@@ -36,6 +38,7 @@ private int attackStrength;
 	hasKey = false;
 	hasMap = false;
 	hasRiddle = false;
+	hasGoat = false;
 	attackStrength = 4;
 	}
 
@@ -44,6 +47,7 @@ private int attackStrength;
 	position = new Point(p);
 	hasKey = false;
 	hasRiddle = false;
+	hasGoat = false;
 	hasMap = false;
 		if (heal >5){
 		health = heal;
@@ -60,6 +64,7 @@ private int attackStrength;
 	position = new Point(p.position);
 	hasKey = p.hasKey;
 	hasRiddle = p.hasRiddle;
+	hasGoat = p.hasGoat;
 	hasMap = p.hasMap;
 	
 		if (p.health >0){
@@ -94,6 +99,10 @@ private int attackStrength;
 	
 	public boolean getHasRiddle(){
 	return hasRiddle;
+	}
+	
+	public boolean getHasGoat(){
+	return hasGoat;
 	}
 
 	public int getAttackStrength(){
@@ -134,9 +143,14 @@ private int attackStrength;
 	}
 	
 	public void setHasRiddle( boolean val){
-		hasRiddle= val;
-		return;
-		}
+	hasRiddle= val;
+	return;
+	}
+	
+	public void setHasGoat( boolean val){
+	hasGoat= val;
+	return;
+	}
 
 	public void setAttackStrength(int strength){
 		if (strength >= 1){
@@ -211,6 +225,7 @@ private int attackStrength;
 	System.out.print("Has Key = " + hasKey +", ");
 	System.out.println("Has Map = " + hasMap + " ");
 	System.out.print("Has Riddle = " + hasRiddle +", ");
+	System.out.print("Has Riddle = " + hasGoat +", ");
 	System.out.println("Position = (" + position.getXCoordinate() + "," + position.getYCoordinate() + ")");  
 	
 	}
