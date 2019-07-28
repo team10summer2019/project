@@ -227,9 +227,6 @@ public class MazeGame {
 			currentLevel++; // track the current level
 			}
 			
-		// move the monster
-		monsterWalk(randGen, gameBoard);	
-			
 		// clear the screen	
 		clearScreen();
 		
@@ -244,6 +241,10 @@ public class MazeGame {
 		tempMonster = gameBoard.getMonster();
 		tempMonster.displayStats();
 		
+		
+		
+		
+		
 		System.out.println("===========================================");
 		System.out.println("There have been " + moveCounter + " moves in the maze, you are on Level " + level);
 		
@@ -256,6 +257,10 @@ public class MazeGame {
 		storeInput = getUserInput();
 		// pause until press enter
 		// pressEnter();
+		
+		// move the monster
+		monsterWalk(randGen, gameBoard);
+		//monsterWalk(randGen, gameBoard);
 	
 		}  // closing brace for while loop
 		
