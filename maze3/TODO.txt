@@ -17,7 +17,7 @@ Description: Active list of action items for maze code
 - Placement of ComboLock, Book and Goat items       2 hr
 
 /////////////////  NEW FEATURES   
-- Make Monsters move with each turn (Random Directon Motion)   3 hrs
+
 - Implement fighting dialouge                                  4 hrs
 - Monsters Block your path (reason to need to fight them)      1 hr
 

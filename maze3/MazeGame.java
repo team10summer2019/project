@@ -241,10 +241,6 @@ public class MazeGame {
 		tempMonster = gameBoard.getMonster();
 		tempMonster.displayStats();
 		
-		
-		
-		
-		
 		System.out.println("===========================================");
 		System.out.println("There have been " + moveCounter + " moves in the maze, you are on Level " + level);
 		

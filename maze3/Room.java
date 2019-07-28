@@ -623,11 +623,11 @@ private int roomRows=4;  // height of a room
 	System.out.print("HasKey = " + hasKey + " ");
 	System.out.print("HasMap = " + hasMap + " ");
 	System.out.print("Door = " + hasDoor+ " ");
+	System.out.println("DoorPosition = " + doorPosition);
 	System.out.print("Riddle = " + hasRiddle+ " ");
 	System.out.print("Books = " + hasBooks+ " ");
 	System.out.print("ComboLock = " + hasComboLock+ " ");
-	System.out.print("Goat = " + hasGoat+ " ");
-	System.out.println("DoorPosition = " + doorPosition);
+	System.out.println("Goat = " + hasGoat+ " ");
 	}
 
 } // class closing brace
