@@ -613,6 +613,7 @@ private int roomRows=4;  // height of a room
 	
 
 	public void  displayRoomStats(){
+	System.out.println("============ROOM STATS==============");
 	System.out.println("Location = "+ location.toString());
 	System.out.print("leftWall = " + leftWall + " ");	
 	System.out.print("RightWall = " + rightWall + " ");

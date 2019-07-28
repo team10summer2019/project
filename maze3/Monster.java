@@ -149,17 +149,18 @@ private int attackStrength;
 	}
 
 	public void moveUp(){
+
+	if ( position.getYCoordinate() -1 >=0) {
 	position.setYCoordinate(position.getYCoordinate() - 1) ;
+	}
 	return;
 	}
 
 	public void moveDown(){
-		if ( position.getYCoordinate() -1 >=0){
-		position.setYCoordinate(position.getYCoordinate() + 1) ;
-		}	
+	position.setYCoordinate(position.getYCoordinate() + 1) ;
 	return;
 	}
-
+	
 	public boolean isAlive(){
 		if (health >= 0){
 		return true;
@@ -178,7 +179,7 @@ private int attackStrength;
 ///////////////////////////// DISPLAY INFORMATION METHODS ///////////////////////////////////
 
 	public void displayStats(){
-	
+	System.out.println("=======MONSTER STATS=======");
 	System.out.println("Health = " + health); 
 	System.out.println("Attack Strength= " + attackStrength);
 	System.out.println("Has key = " + hasKey);

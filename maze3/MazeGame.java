@@ -40,6 +40,7 @@ public class MazeGame {
 	int currentLevel=level;
 	Player tempHero;  // temporary value to look at Hero stats
 	Room tempRoom;    // temporary value to look at a room 
+	Monster tempMonster; // temporary value to look at Monster stats
 	String storeInput="";  // storage for user input
 	int moveCounter = 0;  // count the number of moves
         boolean victory=false;
@@ -240,6 +241,10 @@ public class MazeGame {
 		tempRoom.drawRoomGrid();
 	        tempRoom.displayRoomStats();
 		
+		tempMonster = gameBoard.getMonster();
+		tempMonster.displayStats();
+		
+		System.out.println("===========================================");
 		System.out.println("There have been " + moveCounter + " moves in the maze, you are on Level " + level);
 		
 			// Print out the user input from the previous turn  
@@ -670,14 +675,14 @@ public class MazeGame {
 	
 	public static void monsterWalk(Random randGen, Maze gameBoard){
 	
-	int randNum = randGen.nextInt(5);  // 5 options for motion:  left,right,up,down,do nothing
-		if (randNum % 5 == 1){
+	int randNum = randGen.nextInt(4);  // 4 options for motion: left,right,up,down,  
+		if (randNum % 4 == 0){
 		 gameBoard.moveMonsterLeft();
-		} else if (randNum % 5 == 2){
+		} else if (randNum % 4 == 1){
 		 gameBoard.moveMonsterRight();
-		} else if (randNum % 5 == 3){
+		} else if (randNum % 4 == 2){
 		 gameBoard.moveMonsterUp();	
-		} else if (randNum % 5 == 4){
+		} else if (randNum % 4 == 3){
 		 gameBoard.moveMonsterDown();
 		} 
 	return;

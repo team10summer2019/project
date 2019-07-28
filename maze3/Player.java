@@ -193,7 +193,7 @@ private int attackStrength;
 ///////////////////////////// DISPLAY INFORMATION METHODS ///////////////////////////////////
 
 	public void displayStats(){
-	
+	System.out.println("=======PLAYER STATS=======");
 	System.out.println("Health = " + health + " "); 
 	System.out.println("Attack Strength= " + attackStrength + " ");
 	System.out.print("Has Key = " + hasKey +", ");

@@ -455,7 +455,7 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 	Room monsterRoom = getRoom(monsterPosition);	
 	// if there isn't a wall to the right of the current room
 	// get the hero's position and use it to set the currentRoom
-		if ( !currentRoom.getRightWall() ){
+		if ( !monsterRoom.getRightWall()  ){
 		setRoomMonster(monsterPosition,false);  // remove the monster from the current room
 		wraith.moveRight();  // monster updates it's location by moving left 
 		monsterPosition = wraith.getPosition();   // get monster's new position
@@ -470,7 +470,7 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 	Room monsterRoom = getRoom(monsterPosition);	
 	// if there isn't a wall to the top of the current room
 	// get the hero's position and use it to set the currentRoom
-		if ( !currentRoom.getTopWall() ){
+		if ( !monsterRoom.getTopWall() ){
 		// update the hero's position
 		setRoomMonster(monsterPosition,false);  // remove the monster from the current room
 		wraith.moveUp();  // monster updates it's location by moving left 
@@ -486,7 +486,7 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 	Room monsterRoom = getRoom(monsterPosition);		
 	// if there isn't a wall to the base of the current room
 	// get the hero's position and use it to set the currentRoom
-		if ( !currentRoom.getBottomWall() ){
+		if ( !monsterRoom.getBottomWall() ){
 		// update the hero's position
 		setRoomMonster(monsterPosition,false);  // remove the monster from the current room
 		wraith.moveDown();  // monster updates it's location by moving left 
