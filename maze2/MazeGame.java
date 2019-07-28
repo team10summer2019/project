@@ -299,7 +299,7 @@ public class MazeGame {
 	System.out.println("Down: Moves the player to Room below the current room if no wall");
 	System.out.println("Up: Moves the player to Room above the current room if no wall");
 	System.out.println("Take: Takes either a key or map from the room and places it in the player inventory");
-	System.out.println("Play: Plays R(Riddles) for the player to solve");
+	System.out.println("Play: Plays riddles for the player to solve");
 	System.out.println("Open: Opens the Door if you Have a Key");
 	System.out.println("Escape: Escape the Maze if the Door is Open");
 	System.out.println("__________________________________________________");
