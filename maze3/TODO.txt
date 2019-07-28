@@ -5,16 +5,22 @@ Description: Active list of action items for maze code
 ################ RON #################################
  
 //////////////  BACKEND LOGIC UPGRADES
- 
- 
-   -- BUG FIX RIDDLE and random placement issues
+  
+-- BUG FIX RIDDLE and random placement issues       1 hr 
+
+
 - Random placement of key and map items             1 hr
+
+
 - Placement of Riddle, and ComboLock items          1 hr
 
 /////////////////////////////////////////////////////////////////
 
 - Incorporate Riddle into game                      1 hr
 - Incorporate the book game and the riverGame       2 hrs
+
+
+
 
 /////////////////  NEW FEATURES   
 - Make Monsters move with each turn (Random Directon Motion)    3hrs

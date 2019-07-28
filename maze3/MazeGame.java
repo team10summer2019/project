@@ -35,15 +35,27 @@ public class MazeGame {
 ///////////////////////////////////////////////////////////////////////////////////////
 
 	public static void main(String[] args){
-	int mazeSize = 4;	
-	Maze gameBoard = new Maze(mazeSize);  // make a 4x4 room maze 
-	setBoard(gameBoard);   // construct the maze 
+	int mazeSize=4;	 // initalize with 4x4 maze for level 1 
+
+	int currentLevel=level;
 	Player tempHero;  // temporary value to look at Hero stats
 	Room tempRoom;    // temporary value to look at a room 
 	String storeInput="";  // storage for user input
 	int moveCounter = 0;  // count the number of moves
         boolean victory=false;
-	int currentLevel=1;
+	
+	
+	/// bug fix for manually switching the level number for testing (causes maze breakage)
+	if (level == 1 )	{
+	mazeSize=4;
+	}else if (level ==2){
+	mazeSize=6;
+	}else if (level==3){
+	mazeSize=8;
+	}
+	
+	Maze gameBoard = new Maze(mazeSize);  // make a 4x4 room maze 
+	setBoard(gameBoard);   // construct the maze 
 	
 	Random randgen = new Random(gameBoard.getMazeSize());
 		 
@@ -68,7 +80,7 @@ public class MazeGame {
 	
 	// Main loop to run the Maze Game 
 		
-		while ( moveCounter < 200 && !storeInput.equalsIgnoreCase("quit")  ){
+		while ( moveCounter < 300 && !storeInput.equalsIgnoreCase("quit")  ){
 		
 			// if user input was "MAP" display map unit until user types return
 			if ( storeInput.equalsIgnoreCase("map") ) {
@@ -379,7 +391,7 @@ public class MazeGame {
 		m.setRoomWalls(0,0,true,false,true,true); // setup the first room 
 		m.setRoomPlayer(0,0,true);  // place the player in the first room
 		m.setRoomWalls(1,0,false,false,true,false);
-		m.setRoomWalls(2,0,false,true,true,true);
+		m.setRoomWalls(2,0,false,false,true,true);
 		m.setRoomWalls(3,0,false,true,true,true);
 		m.setRoomWalls(4,0,true,false,true,false);
 		m.setRoomWalls(5,0,false,true,true,true);
@@ -397,13 +409,13 @@ public class MazeGame {
 		// ROW 2
 		m.setRoomWalls(0,2,true,false,false,true);
 		m.setRoomWalls(1,2,false,false,true,true);
-		m.setRoomWalls(2,2,false,true,true,false);
-		m.setRoomWalls(3,2,true,false,true,false);
+		m.setRoomWalls(2,2,false,false,true,true);
+		m.setRoomWalls(3,2,false,false,true,true);
 		m.setRoomWalls(4,2,false,true,true,false);
-		m.setRoomWalls(5,2,true,true,false,false);
-		m.setRoomWalls(6,2,false,true,true,true);
-		m.setRoomWalls(7,2,false,true,true,true);
-		// ROW 3   //// continue here
+		m.setRoomWalls(5,2,true,false,false,false);
+		m.setRoomWalls(6,2,false,false,true,true);
+		m.setRoomWalls(7,2,false,true,false,false);
+		// ROW 3  
 		m.setRoomWalls(0,3,true,false,true,false);
 		m.setRoomWalls(1,3,false,true,true,true);
 		m.setRoomWalls(2,3,true,false,true,false);
@@ -475,7 +487,7 @@ public class MazeGame {
 		
 		randPoint = getRandomPoint(mazeSize);
 		// place the key 
-		m.setRoomItems(0,5,true,false,false,false,false);
+		m.setRoomItems(0,7,true,false,false,false,false);
 		// place the riddle in a specific location infront of the key (opens wall to get key)
 		m.setRoomItems(5,4,false,false,false,false,true);
 			
@@ -527,7 +539,7 @@ public class MazeGame {
 		System.out.println("|             |      |      |      |      |");
 		System.out.println("|_    _|_    _|_    _|_    _|_    _|_    _|");
 		System.out.println("|      |      |      |      |      |      |");
-		System.out.println("|             |      |      |             |");
+		System.out.println("|             |      |  M   |             |");
 		System.out.println("|_    _|_    _|_    _|______|_    _|_    _|");
 		System.out.println("|      |      |      |      |      |      |");
 		System.out.println("|   D  |                           |      |");
@@ -554,7 +566,7 @@ public class MazeGame {
 		System.out.println("|             |             |      |             |      |");
 		System.out.println("|_    _|______|_    _|_    _|_    _|_    _|_    _|______|");
 		System.out.println("|      |      |      |      |      |      |      |      |");
-		System.out.println("|             |      |      |             |             |");
+		System.out.println("|             |      |   M  |             |             |");
 		System.out.println("|_    _|_    _|_    _|______|_    _|_    _|______|_    _|");
 		System.out.println("|      |      |      |      |      |      |      |      |");
 		System.out.println("|      |                           |      |      |   D  |");
