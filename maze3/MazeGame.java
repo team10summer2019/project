@@ -1,13 +1,13 @@
 //////////////////////////////////////////////
 //
-// File: testMaze.java
+// File: MazeGame.java
 // Description: MazeGame class with main() function
 //
 // Author: (Ron) Zorondras Rodriguez
 // Course:  CPSC 233 Summer 2019
 // Creation Date: July 21, 2019
-// Version: 0.04
-// Revision Date: July 26, 2019
+// Version: 0.05
+// Revision Date: July 28, 2019
 //
 ///////////////////////////////////////////////
 
@@ -57,7 +57,7 @@ public class MazeGame {
 	Maze gameBoard = new Maze(mazeSize);  // make a 4x4 room maze 
 	setBoard(gameBoard);   // construct the maze 
 	
-	Random randgen = new Random(gameBoard.getMazeSize());
+	Random randGen = new Random(100);
 		 
 	gameBoard.setCurrentRoom(0,0); // reset the current room after setting up the board
 	tempRoom = gameBoard.getCurrentRoom();  // set the tempRoom to be the current room at (0,0)
@@ -80,7 +80,7 @@ public class MazeGame {
 	
 	// Main loop to run the Maze Game 
 		
-		while ( moveCounter < 300 && !storeInput.equalsIgnoreCase("quit")  ){
+		while ( moveCounter < 300 && !storeInput.equalsIgnoreCase("quit")  && gameBoard.getHero().isAlive()  ){
 		
 			// if user input was "MAP" display map unit until user types return
 			if ( storeInput.equalsIgnoreCase("map") ) {
@@ -214,7 +214,7 @@ public class MazeGame {
 				mazeSize=8; // 64 rooms
 				}
 			gameBoard = new Maze(mazeSize);  // make a mazeSize x mazeSize room maze 
-			randgen = new Random(gameBoard.getMazeSize());
+	
 			gameBoard.copyHero(tempHero);	// copy over the current character 
 			
 			gameBoard.setPlayerLocation(0,0) ; // return to the initial location for next level 
@@ -225,7 +225,9 @@ public class MazeGame {
 			tempRoom = gameBoard.getCurrentRoom();  // update the tempRoom 
 			currentLevel++; // track the current level
 			}
-		
+			
+		// move the monster
+		monsterWalk(randGen, gameBoard);	
 			
 		// clear the screen	
 		clearScreen();
@@ -314,6 +316,8 @@ public class MazeGame {
 		Point randLocation = new Point();
 		randLocation.setRandom(m.getMazeSize());
 		Room tempRoom = m.getRoom(randLocation);  // get a copy of the room at randLocation
+		// set the monster to be at the location 
+		m.setMonsterLocation(randLocation);  
 		// randomize monster start location but don't overwrite previous conditions except moster variable 
 		m.setRoomItems(randLocation,tempRoom.getHasKey(),tempRoom.getHasDoor(),tempRoom.getHasMap(),true,tempRoom.getHasRiddle());  // Working
 		
@@ -398,6 +402,8 @@ public class MazeGame {
 		randLocation.setRandom(m.getMazeSize());
 		Room tempRoom = new Room();
 		tempRoom = m.getRoom(randLocation);  // get a copy of the room at randLocation
+		// set the monster to be at the location 
+		m.setMonsterLocation(randLocation);  
 		// randomize monster start location but don't overwrite previous conditions except moster variable 
 		m.setRoomItems(randLocation,tempRoom.getHasKey(),tempRoom.getHasDoor(),tempRoom.getHasMap(),true,tempRoom.getHasRiddle());  // Working
 		
@@ -495,6 +501,8 @@ public class MazeGame {
 		// get a random location within the map 
 		randPoint.setRandom(mazeSize); // get a new random point 
 		tempRoom = m.getRoom(randPoint);  // get a copy of the room at randLocation
+		// set the monster to be at the location 
+		m.setMonsterLocation(randPoint);  
 		// randomize monster start location but don't overwrite previous conditions except moster variable 
 		m.setRoomItems(randPoint,tempRoom.getHasKey(),tempRoom.getHasDoor(),tempRoom.getHasMap(),true,tempRoom.getHasRiddle());  // Working
 		
@@ -658,6 +666,23 @@ public class MazeGame {
 	keyboard.nextLine();
 	return;
 	}
+	
+	
+	public static void monsterWalk(Random randGen, Maze gameBoard){
+	
+	int randNum = randGen.nextInt(5);  // 5 options for motion:  left,right,up,down,do nothing
+		if (randNum % 5 == 1){
+		 gameBoard.moveMonsterLeft();
+		} else if (randNum % 5 == 2){
+		 gameBoard.moveMonsterRight();
+		} else if (randNum % 5 == 3){
+		 gameBoard.moveMonsterUp();	
+		} else if (randNum % 5 == 4){
+		 gameBoard.moveMonsterDown();
+		} 
+	return;
+	
+	}
 		
 	
 	public static void handleInput(Maze gameBoard){
@@ -665,6 +690,7 @@ public class MazeGame {
 	return;	
 	}
 	
+			
 	
 } // class ending brace
 ///////////////////////////////  END OF FILE //////////////////////////////////////////////////

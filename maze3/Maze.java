@@ -1,13 +1,13 @@
 //////////////////////////////////////////////
 //
 // File: Maze.java
-// Description: Char Manager
+// Description: Maze Class for maze game
 //
 // Author: (Ron) Zorondras Rodriguez
 // Course:  CPSC 233 Summer 2019
 // Creation Date: July 20, 2019
-// Version: 0.03
-// Revision Date: July 26, 2019
+// Version: 0.04
+// Revision Date: July 28, 2019
 //
 ///////////////////////////////////////////////
 
@@ -19,7 +19,7 @@ public class Maze {
 ////////////////////////////////// MEMBER VARIABLES ////////////////////////////////////////
 
 private Player hero;
-private Monster mazeWraith;
+private Monster wraith;
 private Door door;
 
  // private ArrayList<Room> roomList ; // make an array list of rooms size 16 for a 4x4 maze as specified in the spec
@@ -35,7 +35,7 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 	// default constructor 
 	public Maze(){
 	hero = new Player();
-	mazeWraith = new Monster();
+	wraith = new Monster();
 	door = new Door(1,0); // place a locked door at Location point (1,0) 
 	// roomList = new ArrayList<Room>(mazeSize*mazeSize);
 	roomList = new Room[mazeSize][mazeSize];   // make a room list with double arrays 
@@ -53,7 +53,7 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 	public Maze(int size){
 	mazeSize=size;
 	hero = new Player();
-	mazeWraith = new Monster();
+	wraith = new Monster();
 	door = new Door();
 
 	//roomList = new ArrayList<Room>(mazeSize*mazeSize);
@@ -78,7 +78,7 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 	}
 
 	public Monster getMonster(){
-	Monster temp = new Monster(mazeWraith) ;
+	Monster temp = new Monster(wraith) ;
 	return temp;
 	}
 	
@@ -120,8 +120,6 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 	public int getMazeSize(){
 	return mazeSize;
 	}
-	
-
 	
 ///////////////////////    MUTATORS     /////////////////////////////////////////////////
 	 
@@ -180,7 +178,7 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 	return;
 	}
 
-
+	// Point input to set the current room 
 	public void setCurrentRoom(Point p){
 	
 	if ( p.getXCoordinate() >= 0 && p.getXCoordinate() <= mazeSize-1 && p.getYCoordinate() >=0 && p.getYCoordinate() <= mazeSize-1) {
@@ -189,6 +187,8 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 	
 	return;
 	}
+	
+	// Coordinate pair input to set the current room 
 	public void setCurrentRoom(int x, int y){
 	
 	if ( x >= 0 && x <= mazeSize-1 && y >=0 && y<=mazeSize-1) {
@@ -198,7 +198,7 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 	return;
 	}
 
-	// coordinate pair input version of set room 
+	// coordinate pair input version of setRoomPlayer 
 	public void setRoomPlayer(int x, int y , boolean inRoom){
 		if ( x >= 0 && x <= mazeSize-1 && y >=0 && y<=mazeSize-1) {
 		Room temp = roomList[x][y];  // get the pointer to the room in list at index k
@@ -207,7 +207,7 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 	return;
 	}
          
-	// point input version of set room  
+	// point input version of setRoomPlayer  
 	public void setRoomPlayer(Point p , boolean inRoom){
 		if ( p.getXCoordinate() >= 0 && p.getXCoordinate() <= mazeSize-1 && p.getYCoordinate() >=0 && p.getYCoordinate() <= mazeSize-1) {
 		Room temp = roomList[p.getXCoordinate()][p.getYCoordinate()];  // get the pointer to the room in list at index k
@@ -215,6 +215,25 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 		}	
 	return;
 	}
+
+	// coordinate pair input version of setRoomMonster 
+	public void setRoomMonster(int x, int y , boolean inRoom){
+		if ( x >= 0 && x <= mazeSize-1 && y >=0 && y<=mazeSize-1) {
+		Room temp = roomList[x][y];  // get the pointer to the room in list at index k
+		temp.setHasMonster(inRoom); // set the player in the room
+		}
+	return;
+	}
+         
+	// point input version of setRoomMonster  
+	public void setRoomMonster(Point p , boolean inRoom){
+		if ( p.getXCoordinate() >= 0 && p.getXCoordinate() <= mazeSize-1 && p.getYCoordinate() >=0 && p.getYCoordinate() <= mazeSize-1) {
+		Room temp = roomList[p.getXCoordinate()][p.getYCoordinate()];  // get the pointer to the room in list at index k
+		temp.setHasMonster(inRoom); // set the player in the room
+		}	
+	return;
+	}
+
 
 	// reset the booleans in the array list room 
 	public void setRoomItems(int x , int y,  boolean key, boolean door ,boolean map, boolean monster, boolean riddle ){
@@ -287,14 +306,34 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 	}
 
 	public void setPlayerLocation(int x , int y){
-	hero.setPosition(x,y);
+		if ( x >= 0 && x <= mazeSize-1 && y >=0 && y<=mazeSize-1) {
+		hero.setPosition(x,y);
+		}
 	return;	
 	}
 	
 	public void setPlayerLocation(Point p){
-	hero.setPosition(p);
+		if ( p.getXCoordinate() >= 0 && p.getXCoordinate() <= mazeSize-1 && p.getYCoordinate() >=0 && p.getYCoordinate() <=mazeSize-1) {
+		hero.setPosition(p);
+		}
 	return;	
 	}
+	
+	
+	public void setMonsterLocation( int x, int y){
+		if ( x >= 0 && x <= mazeSize-1 && y >=0 && y<=mazeSize-1) {
+		wraith.setPosition(x,y);
+		}
+	return;
+	}
+	
+	public void setMonsterLocation( Point p){
+		if ( p.getXCoordinate() >= 0 && p.getXCoordinate() <= mazeSize-1 && p.getYCoordinate() >=0 && p.getYCoordinate() <=mazeSize-1) {
+		wraith.setPosition(p);
+		}
+	return;
+	}
+	
 	
 	public void resetPlayerItems() {
 	
@@ -316,7 +355,7 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 	}
 
 
-/////////////////////     Motion Operations  ////////////////////////////////////////////
+/////////////////////    Player Motion Operations  ////////////////////////////////////////////
 
 	/// NEED TO ADD INPUT VALIDATION to prevent over indexing past mazeSize = 4 (walls should stop it but still)
 
@@ -389,6 +428,76 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 	return;	
 	}
 	
+/////////////////////    Monster Motion Operations  //////////////////////////////////////////////
+	
+	// NEED TO ADD INPUT VALIDATION to prevent over indexing past mazeSize (walls should stop it but still)
+
+	public void moveMonsterLeft(){
+	
+	Point monsterPosition = wraith.getPosition();
+	Room monsterRoom = getRoom(monsterPosition);	
+	// if there isn't a wall to the left of the current room
+	// get the hero's position and use it to set the currentRoom
+		if ( !monsterRoom.getLeftWall()){
+		// update the monster's position
+		setRoomMonster(monsterPosition,false);  // remove the monster from the current room
+		wraith.moveLeft();  // monster updates it's location by moving left 
+		monsterPosition = wraith.getPosition();   // get monster's new position
+		setRoomMonster(monsterPosition,true);   // set the current room to be the hero's position
+		} 
+		
+	return;	
+	}
+		
+	public void moveMonsterRight(){
+	
+	Point monsterPosition = wraith.getPosition();
+	Room monsterRoom = getRoom(monsterPosition);	
+	// if there isn't a wall to the right of the current room
+	// get the hero's position and use it to set the currentRoom
+		if ( !currentRoom.getRightWall() ){
+		setRoomMonster(monsterPosition,false);  // remove the monster from the current room
+		wraith.moveRight();  // monster updates it's location by moving left 
+		monsterPosition = wraith.getPosition();   // get monster's new position
+		setRoomMonster(monsterPosition,true);   // set the current room to be the hero's position
+		} 
+	return;	
+	}
+	
+	public void moveMonsterUp(){
+	
+	Point monsterPosition = wraith.getPosition();
+	Room monsterRoom = getRoom(monsterPosition);	
+	// if there isn't a wall to the top of the current room
+	// get the hero's position and use it to set the currentRoom
+		if ( !currentRoom.getTopWall() ){
+		// update the hero's position
+		setRoomMonster(monsterPosition,false);  // remove the monster from the current room
+		wraith.moveUp();  // monster updates it's location by moving left 
+		monsterPosition = wraith.getPosition();   // get monster's new position
+		setRoomMonster(monsterPosition,true);   // set the current room to be the hero's position
+		} 
+	return;	
+	}
+	
+	public void moveMonsterDown(){
+	
+	Point monsterPosition = wraith.getPosition();
+	Room monsterRoom = getRoom(monsterPosition);		
+	// if there isn't a wall to the base of the current room
+	// get the hero's position and use it to set the currentRoom
+		if ( !currentRoom.getBottomWall() ){
+		// update the hero's position
+		setRoomMonster(monsterPosition,false);  // remove the monster from the current room
+		wraith.moveDown();  // monster updates it's location by moving left 
+		monsterPosition = wraith.getPosition();   // get monster's new position
+		setRoomMonster(monsterPosition,true);   // set the current room to be the hero's position
+		} 
+	return;	
+	}
+	
+	
+	
 /////////////////////     Item Operations  ////////////////////////////////////////////	
 	
 	public void takeKey(){
@@ -428,7 +537,6 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 		if (hero.getHasKey()){
 		door.setIsLocked(false);   // Unlock the door
 		//setCurrentRoom(hero.getLocation());  // set currentRoom to point to the room with the door at current Location (checked in MazeGame) 
-		// currentRoom.setHasDoor(false); // remove the door  ... maybe leave the door there   
 		}
 	
 	return;

@@ -23,7 +23,7 @@ public class Player {
 private Point position;
 private int health;
 private boolean hasKey;
-private boolean hasMap;
+private boolean hasMap;    // extra to monster
 private int attackStrength;
 
 //////////////////////  CONSTRUCTORS     //////////////////////////////////////////
@@ -174,7 +174,7 @@ private int attackStrength;
 	return;
 	}
 
-	private boolean isAlive(){
+	public boolean isAlive(){
 		if (health >= 0){
 		return true;
 		} 
@@ -184,6 +184,7 @@ private int attackStrength;
 	private void die() {
 	health = 0;
 	hasKey=false;
+	hasMap=false;
 	System.out.println("Our Hero Gasps and Screams:");
 	System.out.println("My quest is finished! Arrrgghhhh!");
 	return ;
@@ -204,7 +205,7 @@ private int attackStrength;
 ////////////////////////////   METHODS TO IMPLEMENT      //////////////////////////////////	
 
 ///////////////////////   OTHER METHODS  ////////////////////////////////////////////
-//    searchRoom(), openDoor() , 
+//    searchRoom(),
 
 		
 } // class definition brace

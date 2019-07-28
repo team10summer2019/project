@@ -1,131 +1,298 @@
-MazeGame.java:314: error: cannot find symbol
-		Point randLocation = getRandomPoint(m.getMazeSize());
-		                     ^
-  symbol:   method getRandomPoint(int)
-  location: class MazeGame
-MazeGame.java:402: error: cannot find symbol
-		m.setRoomItems(randLocation,temp.getHasKey(),temp.getHasDoor(),temp.getHasMap(),true,temp.getHasRiddle());  // Working
-		                            ^
-  symbol:   variable temp
-  location: class MazeGame
-MazeGame.java:402: error: cannot find symbol
-		m.setRoomItems(randLocation,temp.getHasKey(),temp.getHasDoor(),temp.getHasMap(),true,temp.getHasRiddle());  // Working
-		                                             ^
-  symbol:   variable temp
-  location: class MazeGame
-MazeGame.java:402: error: cannot find symbol
-		m.setRoomItems(randLocation,temp.getHasKey(),temp.getHasDoor(),temp.getHasMap(),true,temp.getHasRiddle());  // Working
-		                                                               ^
-  symbol:   variable temp
-  location: class MazeGame
-MazeGame.java:402: error: cannot find symbol
-		m.setRoomItems(randLocation,temp.getHasKey(),temp.getHasDoor(),temp.getHasMap(),true,temp.getHasRiddle());  // Working
-		                                                                                     ^
-  symbol:   variable temp
-  location: class MazeGame
-MazeGame.java:499: error: cannot find symbol
-		m.setRoomItems(randPoint,temp.getHasKey(),temp.getHasDoor(),temp.getHasMap(),true,temp.getHasRiddle());  // Working
-		                         ^
-  symbol:   variable temp
-  location: class MazeGame
-MazeGame.java:499: error: cannot find symbol
-		m.setRoomItems(randPoint,temp.getHasKey(),temp.getHasDoor(),temp.getHasMap(),true,temp.getHasRiddle());  // Working
-		                                          ^
-  symbol:   variable temp
-  location: class MazeGame
-MazeGame.java:499: error: cannot find symbol
-		m.setRoomItems(randPoint,temp.getHasKey(),temp.getHasDoor(),temp.getHasMap(),true,temp.getHasRiddle());  // Working
-		                                                            ^
-  symbol:   variable temp
-  location: class MazeGame
-MazeGame.java:499: error: cannot find symbol
-		m.setRoomItems(randPoint,temp.getHasKey(),temp.getHasDoor(),temp.getHasMap(),true,temp.getHasRiddle());  // Working
-		                                                                                  ^
-  symbol:   variable temp
-  location: class MazeGame
-MazeGame.java:507: error: cannot find symbol
-		m.setRoomItems(randPoint,temp.getHasKey(),temp.getHasDoor(),true,temp.getHasMonster(),temp.getHasRiddle()); // Place the map 
-		                         ^
-  symbol:   variable temp
-  location: class MazeGame
-MazeGame.java:507: error: cannot find symbol
-		m.setRoomItems(randPoint,temp.getHasKey(),temp.getHasDoor(),true,temp.getHasMonster(),temp.getHasRiddle()); // Place the map 
-		                                          ^
-  symbol:   variable temp
-  location: class MazeGame
-MazeGame.java:507: error: cannot find symbol
-		m.setRoomItems(randPoint,temp.getHasKey(),temp.getHasDoor(),true,temp.getHasMonster(),temp.getHasRiddle()); // Place the map 
-		                                                                 ^
-  symbol:   variable temp
-  location: class MazeGame
-MazeGame.java:507: error: cannot find symbol
-		m.setRoomItems(randPoint,temp.getHasKey(),temp.getHasDoor(),true,temp.getHasMonster(),temp.getHasRiddle()); // Place the map 
-		                                                                                      ^
-  symbol:   variable temp
-  location: class MazeGame
-MazeGame.java:513: error: cannot find symbol
-		m.setRoomItems(randPoint,temp.getHasKey(),true,temp.getHasMap(),temp.getHasMonster(),temp.getHasRiddle());
-		                         ^
-  symbol:   variable temp
-  location: class MazeGame
-MazeGame.java:513: error: cannot find symbol
-		m.setRoomItems(randPoint,temp.getHasKey(),true,temp.getHasMap(),temp.getHasMonster(),temp.getHasRiddle());
-		                                               ^
-  symbol:   variable temp
-  location: class MazeGame
-MazeGame.java:513: error: cannot find symbol
-		m.setRoomItems(randPoint,temp.getHasKey(),true,temp.getHasMap(),temp.getHasMonster(),temp.getHasRiddle());
-		                                                                ^
-  symbol:   variable temp
-  location: class MazeGame
-MazeGame.java:513: error: cannot find symbol
-		m.setRoomItems(randPoint,temp.getHasKey(),true,temp.getHasMap(),temp.getHasMonster(),temp.getHasRiddle());
-		                                                                                     ^
-  symbol:   variable temp
-  location: class MazeGame
-MazeGame.java:517: error: cannot find symbol
-		temp = m.getRoom(randPoint);  // get a copy of the room at randLocation
+Maze.java:323: error: ';' expected
+	public void setMonsterLocation( int x, int y)
+	                                             ^
+Maze.java:327: error: illegal start of type
+	return;
+	^
+Maze.java:330: error: class, interface, or enum expected
+	public void setMonsterLocation( point p)
+	       ^
+Maze.java:333: error: class, interface, or enum expected
+		}
 		^
-  symbol:   variable temp
-  location: class MazeGame
-MazeGame.java:519: error: cannot find symbol
-		m.setRoomItems(randPoint,true,temp.getHasDoor(),temp.getHasMap(),temp.getHasMonster(),temp.getHasRiddle());
-		                              ^
-  symbol:   variable temp
-  location: class MazeGame
-MazeGame.java:519: error: cannot find symbol
-		m.setRoomItems(randPoint,true,temp.getHasDoor(),temp.getHasMap(),temp.getHasMonster(),temp.getHasRiddle());
-		                                                ^
-  symbol:   variable temp
-  location: class MazeGame
-MazeGame.java:519: error: cannot find symbol
-		m.setRoomItems(randPoint,true,temp.getHasDoor(),temp.getHasMap(),temp.getHasMonster(),temp.getHasRiddle());
-		                                                                 ^
-  symbol:   variable temp
-  location: class MazeGame
-MazeGame.java:519: error: cannot find symbol
-		m.setRoomItems(randPoint,true,temp.getHasDoor(),temp.getHasMap(),temp.getHasMonster(),temp.getHasRiddle());
-		                                                                                      ^
-  symbol:   variable temp
-  location: class MazeGame
-MazeGame.java:524: error: cannot find symbol
-		m.setRoomItems(randPoint,temp.getHasKey(),temp.getHasDoor(),temp.getHasMap(),temp.getHasMonster(),true);	
-		                         ^
-  symbol:   variable temp
-  location: class MazeGame
-MazeGame.java:524: error: cannot find symbol
-		m.setRoomItems(randPoint,temp.getHasKey(),temp.getHasDoor(),temp.getHasMap(),temp.getHasMonster(),true);	
-		                                          ^
-  symbol:   variable temp
-  location: class MazeGame
-MazeGame.java:524: error: cannot find symbol
-		m.setRoomItems(randPoint,temp.getHasKey(),temp.getHasDoor(),temp.getHasMap(),temp.getHasMonster(),true);	
-		                                                            ^
-  symbol:   variable temp
-  location: class MazeGame
-MazeGame.java:524: error: cannot find symbol
-		m.setRoomItems(randPoint,temp.getHasKey(),temp.getHasDoor(),temp.getHasMap(),temp.getHasMonster(),true);	
-		                                                                             ^
-  symbol:   variable temp
-  location: class MazeGame
-26 errors
+Maze.java:335: error: class, interface, or enum expected
+	}
+	^
+Maze.java:338: error: class, interface, or enum expected
+	public void resetPlayerItems() {
+	       ^
+Maze.java:341: error: class, interface, or enum expected
+	hero.setHasKey(false);
+	^
+Maze.java:343: error: class, interface, or enum expected
+	}
+	^
+Maze.java:345: error: class, interface, or enum expected
+	public void setDoorLocation(int x , int y){
+	       ^
+Maze.java:348: error: class, interface, or enum expected
+		}
+		^
+Maze.java:351: error: class, interface, or enum expected
+	public void setDoorLocation(Point p) {
+	       ^
+Maze.java:354: error: class, interface, or enum expected
+		}
+		^
+Maze.java:362: error: class, interface, or enum expected
+	public void moveLeft(){
+	       ^
+Maze.java:365: error: class, interface, or enum expected
+	currentRoom = getRoom( currentPosition );	
+	^
+Maze.java:368: error: class, interface, or enum expected
+		if ( !currentRoom.getLeftWall()){
+		^
+Maze.java:371: error: class, interface, or enum expected
+		currentPosition = hero.getPosition();   // get hero's position
+		^
+Maze.java:372: error: class, interface, or enum expected
+		setCurrentRoom(currentPosition);   // set the current room to be the hero's position
+		^
+Maze.java:373: error: class, interface, or enum expected
+		} else {
+		^
+Maze.java:375: error: class, interface, or enum expected
+		}
+		^
+Maze.java:377: error: class, interface, or enum expected
+	}
+	^
+Maze.java:379: error: class, interface, or enum expected
+	public void moveRight(){
+	       ^
+Maze.java:382: error: class, interface, or enum expected
+	currentRoom = new Room(getRoom( currentPosition ));	
+	^
+Maze.java:385: error: class, interface, or enum expected
+		if ( !currentRoom.getRightWall() ){
+		^
+Maze.java:388: error: class, interface, or enum expected
+		currentPosition = hero.getPosition();  
+		^
+Maze.java:389: error: class, interface, or enum expected
+		setCurrentRoom(currentPosition);   // set the current room to be the hero's position
+		^
+Maze.java:390: error: class, interface, or enum expected
+		} else {
+		^
+Maze.java:392: error: class, interface, or enum expected
+		}
+		^
+Maze.java:394: error: class, interface, or enum expected
+	}
+	^
+Maze.java:396: error: class, interface, or enum expected
+	public void moveUp(){
+	       ^
+Maze.java:399: error: class, interface, or enum expected
+	currentRoom = getRoom( currentPosition );	
+	^
+Maze.java:402: error: class, interface, or enum expected
+		if ( !currentRoom.getTopWall() ){
+		^
+Maze.java:405: error: class, interface, or enum expected
+		currentPosition = hero.getPosition();  
+		^
+Maze.java:406: error: class, interface, or enum expected
+		setCurrentRoom(currentPosition);   // set the current room to be the hero's position
+		^
+Maze.java:407: error: class, interface, or enum expected
+		} else {
+		^
+Maze.java:409: error: class, interface, or enum expected
+		}
+		^
+Maze.java:411: error: class, interface, or enum expected
+	}
+	^
+Maze.java:413: error: class, interface, or enum expected
+	public void moveDown(){
+	       ^
+Maze.java:416: error: class, interface, or enum expected
+	currentRoom = getRoom( currentPosition );	
+	^
+Maze.java:419: error: class, interface, or enum expected
+		if ( !currentRoom.getBottomWall() ){
+		^
+Maze.java:422: error: class, interface, or enum expected
+		currentPosition = hero.getPosition();  
+		^
+Maze.java:423: error: class, interface, or enum expected
+		System.out.println(currentPosition.toString() );
+		^
+Maze.java:424: error: class, interface, or enum expected
+		setCurrentRoom(currentPosition);   // set the current room to be the hero's position
+		^
+Maze.java:425: error: class, interface, or enum expected
+		} else {
+		^
+Maze.java:427: error: class, interface, or enum expected
+		}
+		^
+Maze.java:429: error: class, interface, or enum expected
+	}
+	^
+Maze.java:435: error: class, interface, or enum expected
+	public void moveMonsterLeft(){
+	       ^
+Maze.java:438: error: class, interface, or enum expected
+	Room monsterRoom = getRoom(monsterPosition);	
+	^
+Maze.java:441: error: class, interface, or enum expected
+		if ( !monsterRoom.getLeftWall()){
+		^
+Maze.java:444: error: class, interface, or enum expected
+		wraith.moveLeft();  // monster updates it's location by moving left 
+		^
+Maze.java:445: error: class, interface, or enum expected
+		monsterPosition = wraith.getPosition();   // get monster's new position
+		^
+Maze.java:446: error: class, interface, or enum expected
+		setRoomMonster(monsterPosition,true);   // set the current room to be the hero's position
+		^
+Maze.java:447: error: class, interface, or enum expected
+		} 
+		^
+Maze.java:450: error: class, interface, or enum expected
+	}
+	^
+Maze.java:452: error: class, interface, or enum expected
+	public void moveMonsterRight(){
+	       ^
+Maze.java:455: error: class, interface, or enum expected
+	Room monsterRoom = getRoom(monsterPosition);	
+	^
+Maze.java:458: error: class, interface, or enum expected
+		if ( !currentRoom.getRightWall() ){
+		^
+Maze.java:460: error: class, interface, or enum expected
+		wraith.moveRight();  // monster updates it's location by moving left 
+		^
+Maze.java:461: error: class, interface, or enum expected
+		monsterPosition = wraith.getPosition();   // get monster's new position
+		^
+Maze.java:462: error: class, interface, or enum expected
+		setRoomMonster(monsterPosition,true);   // set the current room to be the hero's position
+		^
+Maze.java:463: error: class, interface, or enum expected
+		} 
+		^
+Maze.java:465: error: class, interface, or enum expected
+	}
+	^
+Maze.java:467: error: class, interface, or enum expected
+	public void moveMonsterUp(){
+	       ^
+Maze.java:470: error: class, interface, or enum expected
+	Room monsterRoom = getRoom(monsterPosition);	
+	^
+Maze.java:473: error: class, interface, or enum expected
+		if ( !currentRoom.getTopWall() ){
+		^
+Maze.java:476: error: class, interface, or enum expected
+		wraith.moveUp();  // monster updates it's location by moving left 
+		^
+Maze.java:477: error: class, interface, or enum expected
+		monsterPosition = wraith.getPosition();   // get monster's new position
+		^
+Maze.java:478: error: class, interface, or enum expected
+		setRoomMonster(monsterPosition,true);   // set the current room to be the hero's position
+		^
+Maze.java:479: error: class, interface, or enum expected
+		} 
+		^
+Maze.java:481: error: class, interface, or enum expected
+	}
+	^
+Maze.java:483: error: class, interface, or enum expected
+	public void moveMonsterDown(){
+	       ^
+Maze.java:486: error: class, interface, or enum expected
+	Room monsterRoom = getRoom(monsterPosition);		
+	^
+Maze.java:489: error: class, interface, or enum expected
+		if ( !currentRoom.getBottomWall() ){
+		^
+Maze.java:492: error: class, interface, or enum expected
+		wraith.moveDown();  // monster updates it's location by moving left 
+		^
+Maze.java:493: error: class, interface, or enum expected
+		monsterPosition = wraith.getPosition();   // get monster's new position
+		^
+Maze.java:494: error: class, interface, or enum expected
+		setRoomMonster(monsterPosition,true);   // set the current room to be the hero's position
+		^
+Maze.java:495: error: class, interface, or enum expected
+		} 
+		^
+Maze.java:497: error: class, interface, or enum expected
+	}
+	^
+Maze.java:503: error: class, interface, or enum expected
+	public void takeKey(){
+	       ^
+Maze.java:505: error: class, interface, or enum expected
+	currentRoom = getRoom( currentPosition );	
+	^
+Maze.java:507: error: class, interface, or enum expected
+		if (currentRoom.getHasKey() && !hero.getHasKey()){
+		^
+Maze.java:511: error: class, interface, or enum expected
+		setCurrentRoom(currentPosition); // point current room to the room in roomList 
+		^
+Maze.java:512: error: class, interface, or enum expected
+		currentRoom.setHasKey(false); // remove the key from the room	
+		^
+Maze.java:513: error: class, interface, or enum expected
+		}
+		^
+Maze.java:516: error: class, interface, or enum expected
+	return;
+	^
+Maze.java:517: error: class, interface, or enum expected
+	}
+	^
+Maze.java:519: error: class, interface, or enum expected
+	public void takeMap(){
+	       ^
+Maze.java:521: error: class, interface, or enum expected
+	currentRoom = getRoom( currentPosition );	
+	^
+Maze.java:523: error: class, interface, or enum expected
+		if (currentRoom.getHasMap() && !hero.getHasMap()){
+		^
+Maze.java:527: error: class, interface, or enum expected
+		setCurrentRoom(currentPosition); // point current room to the room in roomList 
+		^
+Maze.java:528: error: class, interface, or enum expected
+		currentRoom.setHasMap(false); // remove the key from the room	
+		^
+Maze.java:529: error: class, interface, or enum expected
+		}
+		^
+Maze.java:532: error: class, interface, or enum expected
+	return;
+	^
+Maze.java:533: error: class, interface, or enum expected
+	}
+	^
+Maze.java:535: error: class, interface, or enum expected
+	public void unlockDoor(){
+	       ^
+Maze.java:540: error: class, interface, or enum expected
+		}
+		^
+Maze.java:543: error: class, interface, or enum expected
+	}
+	^
+Maze.java:545: error: class, interface, or enum expected
+	public void lockDoor(){
+	       ^
+Maze.java:547: error: class, interface, or enum expected
+	return;
+	^
+Maze.java:548: error: class, interface, or enum expected
+	}
+	^
+99 errors

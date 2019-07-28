@@ -341,6 +341,7 @@ private int roomRows=4;  // height of a room
 
 //////////////////////////  OTHER METHODS /////////////////////////////////////////////////
 	
+	// LEGACY METHOD , now using drawRoomGrid() 
 	public void drawRoom(){
 	
 	// prints out one room for display purposes 
