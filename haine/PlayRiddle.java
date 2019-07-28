@@ -13,9 +13,9 @@ public class PlayRiddle {
 
 	public PlayRiddle() {}
 	  
-	public void sayRiddle(CreateRiddle asd) {		//GIVES RIDDLE
-		System.out.print("\nAnswer this riddle: ");
-		System.out.println(asd.getRiddle());
+	public void sayRiddle(CreateRiddle riddle) {		//GIVES RIDDLE
+		System.out.print("\nCan you answer this riddle? ");
+		System.out.println(riddle.getRiddle());
 	}
 	
 	public void instructions() {		//INSTRUCTIONS FOR WHAT USER CAN INPUT
