@@ -548,6 +548,22 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 	}
 ///////////////////////    OTHER METHODS ///////////////////////////////////////////////////
 
+	// routine to manage fighting the monster
+	public void fight() {
+	
+		// loop while player and monster are alive / have health points 
+		while ( getHero().isAlive() && getMonster().isAlive()){
+		hero.attacks(wraith);
+		wraith.attacks(hero);
+		}
+	
+	
+	 return;
+	}	
+	// public void fightDialogue()
+	//
+
+
 
 } // end of class brace
 ////////////////////////////////   END OF FILE ////////////////////////////////////////////////

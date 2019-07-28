@@ -129,11 +129,10 @@ private int attackStrength;
 
 ////////////  FIGHTING METHODS ///////////////////////////////////////////////////
 	public void attacks(Player p){
-	p.takesDamage(attackStrength);
+	p.takesDamage(attackStrength);  // maybe make this random from 0 - attackStrentgh*2
 	return;
 	}
 
-	
 //////////////////////   Motion Methods /////////////////////////////////////////////
 
 	public void moveLeft(){

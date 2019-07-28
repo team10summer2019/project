@@ -142,8 +142,10 @@ private int attackStrength;
 ///////////////////////   OTHER METHODS /////////////////////////////////////////////
 
 ////////////  FIGHTING METHODS ///////////////////////////////////////////////////
+
+
 	public void attacks(Monster m){
-	m.takesDamage(attackStrength);
+	m.takesDamage(attackStrength);   // maybe make this random from 0 - attackStrentgh*2
 	return;
 	}
 
