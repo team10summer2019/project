@@ -9,11 +9,13 @@ public class DynamicObjectsTest {
 		DynamicObjects lever_keys = new DynamicObjects();
 		
 		//Finding first dynamic object 
-		lever_keys.dynObj_leverPiece1();
+		lever_keys.changeStatus_dynObj(lever_keys.leverP1);
+		lever_keys.addItemToInventory(lever_keys.leverP1);
 		lever_keys.viewInventory();
 		
 		//Finding second dynamic object 
-		lever_keys.dynObj_leverPiece2();
+		lever_keys.changeStatus_dynObj(lever_keys.leverP2);
+		lever_keys.addItemToInventory(lever_keys.leverP2);
 		lever_keys.viewInventory();
 		
 		lever_keys.removeItemFromInventory("leverPiece1");
