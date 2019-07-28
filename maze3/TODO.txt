@@ -1,13 +1,21 @@
-TODO.txt
-
-Description: Active list of action items for maze code
-
-################ RON #################################
+/////////////////////////////////////////////////////////////
+// 
+// File:   TODO.txt
+// Title: TODO list
+// Author: (Ron) Zorondras Rodriguez
+// Creation Date: July 26, 2019
+// Version: 0.02
+// Revision Date: July 28, 2019
+//
+/////////////////////////////////////////////////////////////
+// Description: Active list of action items for maze code
+/////////////////////////////////////////////////////////////
+############################# RON #################################
+/////////////////////// CURRENTLY WORKING ON: ////////////////////////////////
  
-///////////// CURRENTLY WORKING ON: ////////////////////////////////
- 
--- Read the code for ticTacToe        3 hrs
--- Incorporate Riddle into game       3 hrs
+-- Read the code for ticTacToe                      3 hrs
+-- JavaFX implementation of displayRoomGrid()       3 hrs
+-- Incorporate Riddle into game                     3 hrs
  
 //////////////////     BACKEND LOGIC UPGRADES     ////////////////////////////////
   
@@ -16,7 +24,7 @@ Description: Active list of action items for maze code
 - Incorporate the book game and the riverGame       5 hrs
 - Placement of ComboLock, Book and Goat items       2 hr
 
-/////////////////  NEW FEATURES   
+///////////////////        NEW FEATURES          ///////////////////////////////////  
 
 - Implement fighting dialouge                                  4 hrs
 - Monsters Block your path (reason to need to fight them)      1 hr
@@ -24,7 +32,7 @@ Description: Active list of action items for maze code
 - Give players an array list for inventory          1 hr
 - Make different keys ( Key object?)                2 hrs
 
-//////////////////  JAVAFX GUI  SUNDAY !!!!!
+////////////////////        JAVAFX GUI           ////////////////////////////////// 
 
 -- Read the code for ticTacToe     2-3hrs of study
 
@@ -32,7 +40,4 @@ Description: Active list of action items for maze code
 -- JavaFX implementation of userInput() capture by textBox 1hr
 -- JavaFX while loop game updating   1hr
 
-////////////////////
-
-######################################################
-
+/////////////////////////////////////////////////////////////////////////////////////
