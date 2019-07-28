@@ -1,3 +1,5 @@
+package maze2;
+
 
 /**
  * @author Fiona
