@@ -158,6 +158,11 @@ public class MazeGame {
 			tempRoom = gameBoard.getCurrentRoom();
 			}		
 			
+			if ( storeInput.equalsIgnoreCase("Look")){
+			gameBoard.searchRoom();
+			tempRoom = gameBoard.getCurrentRoom();
+			}
+			
 			// if user input is "Take"	
 			if ( storeInput.equalsIgnoreCase("Take")){
 			// increment the move counter to change the room
@@ -225,42 +230,42 @@ public class MazeGame {
 	
 	// sets up the walls and items, doors and monsters
 	public static void setBoard( Maze m){
-	// setRoom(x,y,left,right,up,down,key,door,map,monster,riddle,river)
-	m.setRoom(0,0,true,true,true,false,false,false,false,false,false,false); // setup the first room 
+	// setRoom(x,y,left,right,up,down,key,door,map,monster,riddle,hint,goat)
+	m.setRoom(0,0,true,true,true,false,false,false,false,false,false,false,false); // setup the first room 
 	m.setRoom(0,0,true);  // place the player in the first room
 	// room (1.0)   
-	m.setRoom(1,0,true,false,true,true,false,true,false,false,false,false);
+	m.setRoom(1,0,true,false,true,true,false,true,false,false,false,false,false);
 	// room (2,0)
-	m.setRoom(2,0,false,false,true,true,false,false,false,true,false,false);
+	m.setRoom(2,0,false,false,true,true,false,false,false,true,false,false,false);
 	// room (0,3)
-	m.setRoom(3,0,false,true,true,false,false,false,false,false,false,false);
+	m.setRoom(3,0,false,true,true,false,false,false,false,false,false,false,false);
 	// room (1,0)
 	// setRoom(x,y,left,right,up,down,key,door,map,monster,riddle,puzzle)
-	m.setRoom(0,1,true,true,false,false,false,false,false,false,false,false);
+	m.setRoom(0,1,true,true,false,false,false,false,false,false,false,true,false);
 	// room (1,1)
-	m.setRoom(1,1,true,false,true,false,false,false,false,false,false,false);
+	m.setRoom(1,1,true,false,true,false,false,false,false,false,false,false,false);
 	// room (2,1)
-	m.setRoom(2,1,false,false,true,true,false,false,false,false,false,false);
+	m.setRoom(2,1,false,false,true,true,false,false,false,false,false,false,false);
 	// room (3,1)
-	m.setRoom(3,1,false,true,false,false,false,false,false,false,false,false);
+	m.setRoom(3,1,false,true,false,false,false,false,false,false,false,false,false);
 	// room (0,2)
-	m.setRoom(0,2,true,true,false,true,false,false,false,false,true,false);
+	m.setRoom(0,2,true,true,false,true,false,false,false,false,true,false,false);
 	// setRoom(x,y,left,right,up,down,key,door,map,monster,riddle,puzzle)
 	// room (1,2)
-	m.setRoom(1,2,false,true,false,false,false,false,false,false,false,false);
+	m.setRoom(1,2,false,true,false,false,false,false,false,false,false,false,false);
 	// room (2,2)
-	m.setRoom(2,2,true,true,true,false,true,false,false,false,false,false);
+	m.setRoom(2,2,true,true,true,false,true,false,false,false,false,false,false);
 	// room (3,2)
-	m.setRoom(3,2,true,true,false, false,false,false,false,false,false,false);
+	m.setRoom(3,2,true,true,false, false,false,false,false,false,false,false,false);
 	// room (0,3)
 	// setRoom(x,y,left,right,up,down,key,door,map,monster,riddle,puzzle)
-	m.setRoom(0,3,true,false,true,true,false,false,true,false,false,false);
+	m.setRoom(0,3,true,false,true,true,false,false,true,false,false,false,false);
 	// room (1,3)
-	m.setRoom(1,3,false,true,false,true,false,false,false,false,false,true);
+	m.setRoom(1,3,false,true,false,true,false,false,false,false,false,false,true);
 	// room (3,2)
-	m.setRoom(2,3,true,false,false,true,false,false,false,false,false,false);
+	m.setRoom(2,3,true,false,false,true,false,false,false,false,false,false,false);
 	// room (3,3)
-	m.setRoom(3,3,false,true,false,true,false,false,false,false,false,false);	
+	m.setRoom(3,3,false,true,false,true,false,false,false,false,false,false,false);	
 	
 	return;
 	}
@@ -273,7 +278,7 @@ public class MazeGame {
 	System.out.println("|  *   |  D      W          |");
 	System.out.println("|_    _|______|______|_    _|");
 	System.out.println("|      |      |      |      |");
-	System.out.println("|      |                    |");
+	System.out.println("|  ?   |                    |");
 	System.out.println("|_    _|_    _|______|_    _|");
 	System.out.println("|      |      |      |      |");
 	System.out.println("|  R          |   K  |      |");		

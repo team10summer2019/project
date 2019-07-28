@@ -37,6 +37,7 @@ private boolean hasRiddle;
 private boolean hasBooks;
 private boolean hasComboLock;
 private boolean hasGoat;
+private boolean hasHint;
 
 private int doorPosition;
 
@@ -64,6 +65,7 @@ private int roomRows=4;  // height of a room
 	 hasBooks = false;
 	 hasComboLock =false;
 	 hasGoat = false;
+	 hasHint = false;
 
 	 hasDoor=false;
 	 doorPosition=0; // 0 for no door 1 for left 2 for right , 3 for top, 4 for bottom
@@ -91,6 +93,7 @@ private int roomRows=4;  // height of a room
 	 hasBooks = false;
 	 hasComboLock =false;
 	 hasGoat = false;
+	 hasHint = false;
 	 
 	 hasDoor=false;
 	 doorPosition=0; // 0 for no door 1 for left 2 for right , 3 for top, 4 for bottom
@@ -119,6 +122,7 @@ private int roomRows=4;  // height of a room
 	 hasBooks = false;
 	 hasComboLock =false;
 	 hasGoat = false;
+	 hasHint = false;
 	 
 	 hasDoor=false;
 	 doorPosition=0; // 0 for no door 1 for left 2 for right , 3 for top, 4 for bottom
@@ -144,6 +148,7 @@ private int roomRows=4;  // height of a room
 	 hasPlayer=toCopy.hasPlayer;
 	 hasRiddle=toCopy.hasRiddle;
 	 hasGoat=toCopy.hasGoat;
+	 hasHint=toCopy.hasHint;
 	 hasDoor=toCopy.hasDoor;
 	 doorPosition=toCopy.doorPosition; // 0 for no door 1 for left 2 for right , 3 for top, 4 for bottom
 	 
@@ -197,6 +202,10 @@ private int roomRows=4;  // height of a room
 	
 	public boolean getHasRiddle(){
 	return hasRiddle;
+	}
+	
+	public boolean getHasHint(){
+	return hasHint;
 	}
 	
 	public boolean getHasBooks(){
@@ -308,6 +317,11 @@ private int roomRows=4;  // height of a room
 	return;
 	}
 
+    public void setHasHint(boolean value){
+	hasHint = value;
+	return;
+	}
+	
 	public void setHasBooks(boolean value){
 	hasBooks = value;
 	return;
@@ -349,6 +363,7 @@ private int roomRows=4;  // height of a room
 	System.out.print("HasKey = " + hasKey + " ");
 	System.out.print("HasMap = " + hasMap + " ");
 	System.out.print("Riddle = " + hasRiddle + " ");
+	System.out.print("HasHint = " + hasHint + " ");
 	System.out.print("Riddle = " + hasGoat + " ");
 	System.out.print("Door = " + hasDoor+ " ");
 	System.out.println("DoorPosition = " + doorPosition);
@@ -508,15 +523,17 @@ private int roomRows=4;  // height of a room
 		roomGrid[roomCols/2][roomRows/2]='K';
 		}else if (hasMonster){
 		roomGrid[roomCols/2][roomRows/2]='W';
-		} else if (hasRiddle){
-		roomGrid[roomCols/2][roomRows/2]='R';
-		} else if (hasBooks){
+		}else if (hasRiddle){
+		roomGrid[roomCols/2][roomRows/2]='R';		//If room has riddle
+		}else if (hasBooks){
 		roomGrid[roomCols/2][roomRows/2]='B';
 		}else if (hasComboLock){
 		roomGrid[roomCols/2][roomRows/2]='L';
-		}else if (hasGoat){
-		roomGrid[roomCols/2][roomRows/2]='G';
-		} else {
+		}else if (hasGoat){		
+		roomGrid[roomCols/2][roomRows/2]='G';		//If room has goat puzzle
+		}else if (hasHint){		
+		roomGrid[roomCols/2][roomRows/2]='?';		//If room has goat puzzle
+		}else {
 		roomGrid[roomCols/2][roomRows/2]=' ';
 		} 
 		

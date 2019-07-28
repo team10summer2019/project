@@ -26,6 +26,7 @@ private int health;
 private boolean hasKey;
 private boolean hasMap;
 private boolean hasRiddle;
+private boolean hasHint;
 private boolean hasGoat;
 private int attackStrength;
 
@@ -38,6 +39,7 @@ private int attackStrength;
 	hasKey = false;
 	hasMap = false;
 	hasRiddle = false;
+	hasHint = false;
 	hasGoat = false;
 	attackStrength = 4;
 	}
@@ -47,6 +49,7 @@ private int attackStrength;
 	position = new Point(p);
 	hasKey = false;
 	hasRiddle = false;
+	hasHint = false;
 	hasGoat = false;
 	hasMap = false;
 		if (heal >5){
@@ -64,6 +67,7 @@ private int attackStrength;
 	position = new Point(p.position);
 	hasKey = p.hasKey;
 	hasRiddle = p.hasRiddle;
+	hasRiddle = p.hasHint;
 	hasGoat = p.hasGoat;
 	hasMap = p.hasMap;
 	
@@ -99,6 +103,10 @@ private int attackStrength;
 	
 	public boolean getHasRiddle(){
 	return hasRiddle;
+	}
+	
+	public boolean getHasHint(){
+	return hasHint;
 	}
 	
 	public boolean getHasGoat(){
@@ -144,6 +152,11 @@ private int attackStrength;
 	
 	public void setHasRiddle( boolean val){
 	hasRiddle= val;
+	return;
+	}
+	
+	public void setHasHint( boolean val){
+	hasHint= val;
 	return;
 	}
 	
@@ -225,7 +238,7 @@ private int attackStrength;
 	System.out.print("Has Key = " + hasKey +", ");
 	System.out.println("Has Map = " + hasMap + " ");
 	System.out.print("Has Riddle = " + hasRiddle +", ");
-	System.out.print("Has Riddle = " + hasGoat +", ");
+	System.out.print("Has Hint = " + hasHint +", ");
 	System.out.println("Position = (" + position.getXCoordinate() + "," + position.getYCoordinate() + ")");  
 	
 	}
