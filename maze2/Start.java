@@ -93,14 +93,17 @@ public class Start {
 			//If item was not encountered before 
 			//RECOMMENDED TO USE THIS FOR REFERENCE:FOR ENCOUNTERING DYNAMIC OBJECTS THAT WILL BE PICKED UP)
 			if (playerInventory.hasItemInInventory(dyn_item.leverP1) == false) {
-				System.out.println("It is holding an object.\nView object? 'y'/'n'");
-				userInput = keyboard.next();
-				if (userInput.equalsIgnoreCase("y")) {
-					dyn_item.itemInfo_dynObj(dyn_item.leverP1);
-					uniqueObject_toInventory(dyn_item.leverP1);
-				} else if (userInput.equalsIgnoreCase("n")) {
-					System.out.println("You decided not to view the object.");			
-				}
+				while (awaitInput1 == true) {
+					System.out.println("It is holding an object.\nView object? 'y'/'n'");
+					userInput = keyboard.next();
+					if (userInput.equalsIgnoreCase("y")) {
+						dyn_item.itemInfo_dynObj(dyn_item.leverP1);
+						uniqueObject_toInventory(dyn_item.leverP1);
+						awaitInput1 = false;
+					} else if (userInput.equalsIgnoreCase("n")) {
+						System.out.println("You decided not to view the object.");		
+						awaitInput1 = false;
+					}
 			}
 			awaitInput = false;
 		}	
