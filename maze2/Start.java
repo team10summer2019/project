@@ -37,7 +37,6 @@ public class Start {
 			System.out.println("Exiting..");
 			gameMethods.inRoom1 = false;
 			gameRunning = false;
-			keyboard.close();
 		}
 	}
 	
