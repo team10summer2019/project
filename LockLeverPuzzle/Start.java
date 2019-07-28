@@ -5,9 +5,6 @@
 import java.util.Scanner;
 
 public class Start {
-	///CREATE:ROOM: HAS LIST OF OBJECTS-> IF TAKEN AWAY ROOM SHOULD NOT HAVE IT
-	
-	//CONSTANTS PUT INSIDE INTERFACE
 	private static boolean gameRunning = true;
 	private static boolean inRoom1 = true;
 	private static Start gameMethods = new Start();
@@ -18,6 +15,7 @@ public class Start {
 	private StaticObjects stat_item = new StaticObjects();
 	private DynamicObjects dyn_item = new DynamicObjects();
 	private Inventory playerInventory = new Inventory();
+	private FloorInventory roomInventory = new FloorInventory();
 	
 	public static void gameMenu() {
 		while (gameRunning == true) {
@@ -29,7 +27,7 @@ public class Start {
 				System.out.println("Initializing..");
 				gameMethods.room1();
 			} 
-			if (userInput.equalsIgnoreCase("exit")) {
+			if (userInput.equalsIgnoreCase("exit")) { //don't need to prompt for each item(aka. make a new method to call it) because it'll be combined later on
 				System.out.println("Exiting..");
 				gameRunning = false;
 				keyboard.close();
@@ -41,7 +39,7 @@ public class Start {
 	public void room1() {
 		while (inRoom1 == true) {
 			System.out.println("//////////Room 1://///////////\nThis room has a bear with a red box beside it. There is a shelf with three birds sitting on it: a red bird, yellow bird, and green bird.");
-			System.out.println("To view Inventory:\n'i'");
+			System.out.println("To view your Inventory:\n'i'");
 			System.out.println("To view certain items, type:\n'Bear'\n'RedBox'\n'Shelf'\n'Mirror'");
 			userInput = keyboard.next();
 			///////VIEW INVENTORY
@@ -67,28 +65,43 @@ public class Start {
 			}
 		}
 	}
-	////////////////////////METHODS////////////////////////////////
+////////////////////////METHODS////////////////////////////////
 	public void viewInventory() {
 		playerInventory.viewInventory();
 	}
+	//////////Add Unique Object to Inventory////////////
+	//change status of dynamic object(ANY!)
+	//Adds unique item to Inventory and removes unique item from FloorInventory
+	public void uniqueObject_toInventory(String item) { 
+		System.out.println("You added '" + item + "' to your inventory.");
+		dyn_item.changeStatus_dynObj(item);
+		playerInventory.addUniqueItemToInventory(item); //adds item to Inventory
+		roomInventory.remove_flrInv(item); //removes item from FloorInventory
+		//roomInventory.viewFloorInventory();
+	}
+	//////////BEAR////////////
 	public void viewBear() {
 		System.out.println("<><>BEAR<><>");
 		boolean awaitInput = true;
-			
+	
 		while (awaitInput == true) {
 			stat_item.aBear();
-			userInput = keyboard.next();
-			if (userInput.equalsIgnoreCase("y")) {
-				playerInventory.addItemToInventory(dyn_item.dynObj_leverPiece1());
-				//dyn_item.dynObj_leverPiece1();
-				awaitInput = false;
-			} else if (userInput.equalsIgnoreCase("n")) {
-				System.out.println("you decided not to view the object");
-				awaitInput = false;				
+			//If item was not encountered before 
+			//RECOMMENDED TO USE THIS FOR REFERENCE:FOR ENCOUNTERING DYNAMIC OBJECTS THAT WILL BE PICKED UP)
+			if (playerInventory.hasItemInInventory(dyn_item.leverP1) == false) {
+				System.out.println("It is holding an object.\nView object? 'y'/'n'");
+				userInput = keyboard.next();
+				if (userInput.equalsIgnoreCase("y")) {
+					dyn_item.itemInfo_dynObj(dyn_item.leverP1);
+					uniqueObject_toInventory(dyn_item.leverP1);
+				} else if (userInput.equalsIgnoreCase("n")) {
+					System.out.println("You decided not to view the object.");			
+				}
 			}
+			awaitInput = false;
 		}	
 	}
-	
+	//////////REDBOX////////////
 	public void viewRedBox() { 
 		System.out.println("<><>REDBOX<><>");
 		boolean awaitInput = true;
@@ -105,25 +118,22 @@ public class Start {
 			}
 		}
 	}
-	
+	//////////SHELF////////////
 	public void viewShelf() {
-		System.out.println("<><>SHELF<><>");
 		boolean awaitInput = true;
 		
 		while (awaitInput == true) {
+			System.out.println("<><>SHELF<><>");
 			stat_item.aShelf();
 			userInput = keyboard.next();
 			if (userInput.equalsIgnoreCase("r")) {
 				stat_item.aBirdR();
-				awaitInput = false;
 			}
 			if (userInput.equalsIgnoreCase("y")) {
 				stat_item.aBirdY();
-				awaitInput = false;
 			} 
 			if (userInput.equalsIgnoreCase("g")) {
 				stat_item.aBirdG();
-				awaitInput = false;
 			}
 			if (userInput.equalsIgnoreCase("stop")) {
 				System.out.println("you left the shelf");
@@ -131,6 +141,7 @@ public class Start {
 			}
 		}
 	}
+	//////////MIRROR////////////
 	//viewMirror by Haine
 	public void viewMirror() {
 		System.out.println("<><>MIRROR<><>");

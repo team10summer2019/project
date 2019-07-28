@@ -9,7 +9,7 @@ public class StaticObjects extends Inventory {
 	 * STATIC OBJECTS
 	 * These are objects that only provide a description.
 	 * They may be neutral objects or objects that provide clues.
-	 * (Some of these objects are things that are taken from the room and placed into the inventory.)
+	 * (Some of these objects are things that are taken from the room and placed into the inventory. NOT IMPLEMENTED)
 	 */
 	public StaticObjects() {
 		
@@ -18,7 +18,7 @@ public class StaticObjects extends Inventory {
 
 	//UNIQUE METHODS
 	public void aBear() {
-		System.out.println("This is a bear. It is holding an object.\nView object? 'y'/'n'");
+		System.out.println("This is a bear.");
 		
 	}
 	
@@ -51,8 +51,9 @@ public class StaticObjects extends Inventory {
 		System.out.println("It is a red box.\nOpen? 'y'/'n'");
 	}
 	public void aShelf() {
+		System.out.println("You are viewing the shelf.");
 		System.out.println("There is a red Bird, a yellow Bird, and a green Bird.\nTo view type:\n'r'-red Bird\n'y'-yellow Bird\n'g'-greenbird");
-		System.out.println("To stop viewing shelf, type 'stop'");
+		System.out.println("To stop viewing the shelf, type 'Stop'.");
 	}
 	//aMirror by Haine
 	public void aMirror() {

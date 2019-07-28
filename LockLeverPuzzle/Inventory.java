@@ -13,7 +13,6 @@ public class Inventory {
 	 * Dynamic objects that are viewed will be taken from the room setting and placed/added into the inventory.
 	 */
 	private ArrayList<String> inventory;
-	FloorInventory floor = new FloorInventory();
 	
 	public Inventory() {
 		this.inventory = new ArrayList<String>();
@@ -35,14 +34,18 @@ public class Inventory {
 	public void addItemToInventory(String item) {
 		this.inventory.add(item);
 		System.out.println("item added to inventory");
-		floor.remove_flrInv(item);
 		
+	}
+	public void addUniqueItemToInventory(String item) { //only add to inventory if the unique item is not in inventory 
+		if (hasItemInInventory(item) == false) { 
+			this.inventory.add(item);
+		}
 	}
 	//FOR DEVELOPER
 	public void removeItemFromInventory(String item) {
 		this.inventory.remove(item);
 		System.out.println("item removed from inventory");
-		floor.add_unique_flrInv(item);
+		
 	}
 	//HAS ITEM IN INVENTORY
 	public boolean hasItemInInventory(String item) {

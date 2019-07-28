@@ -14,7 +14,9 @@ public class InventoryTest {
 		
 		myInventory.removeItemFromInventory("Apple");
 		myInventory.viewInventory();
-
+		
+		myInventory.addItemToInventory("leverPiece1");
+		myInventory.viewInventory();
 	}
 
 }
