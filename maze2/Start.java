@@ -6,7 +6,7 @@ package maze2;
 import java.util.Scanner;
 
 public class Start {
-	private boolean gameRunning = true;
+	private static boolean gameRunning = true;
 	private static boolean inRoom1 = true;
 	private static Start gameMethods = new Start();
 	private static Scanner keyboard = new Scanner(System.in);
@@ -18,30 +18,34 @@ public class Start {
 	private Inventory playerInventory = new Inventory();
 	private FloorInventory roomInventory = new FloorInventory();
 	
-	public void gameMenu() {
-		gameRunning = true;
+	public static void gameMenu() {
 		while (gameRunning == true) {
 			//////////GAME MENU
-			System.out.println("You look around the room. There are some things that catch your eye..");
+			System.out.println("Welcome, time to visit the room.");
 			System.out.println("Type 'Start' to begin and 'Exit'");
 			String userInput = keyboard.next();
 			if (userInput.equalsIgnoreCase("start")) {
 				System.out.println("Initializing..");
 				gameMethods.room1();
 			} 
-			if (userInput.equalsIgnoreCase("exit")) { //don't need to prompt for each item(aka. make a new method to call it) because it'll be combined later on
-				System.out.println("Exiting..");
-				gameRunning = false;
-			}
+			gameMethods.exitView(userInput);
+				
+		}
+	}
+	private void exitView(String userInput) {
+		if (userInput.equalsIgnoreCase("exit")) { //don't need to prompt for each item(aka. make a new method to call it) because it'll be combined later on
+			System.out.println("Exiting..");
+			gameMethods.inRoom1 = false;
+			gameRunning = false;
+			keyboard.close();
 		}
 	}
 	
 	public void room1() {
 		while (inRoom1 == true) {
-			System.out.println("\n//////////Room 1://///////////\nThis room has a bear with a red box beside it. There is a shelf with three birds sitting on it: a red bird, yellow bird, and green bird.");
-			System.out.println("To view your Inventory, type:\n'i'");
+			System.out.println("//////////Room 1://///////////\nThis room has a bear with a red box beside it. There is a shelf with three birds sitting on it: a red bird, yellow bird, and green bird.");
+			System.out.println("To view your Inventory:\n'i'");
 			System.out.println("To view certain items, type:\n'Bear'\n'RedBox'\n'Shelf'\n'Mirror'");
-			System.out.println("To stop looking around the room, type: exit");
 			userInput = keyboard.next();
 			///////VIEW INVENTORY
 			if (userInput.equalsIgnoreCase("i")) {
@@ -64,12 +68,10 @@ public class Start {
 			if (userInput.equalsIgnoreCase("mirror")) {
 				gameMethods.viewMirror();
 			}
-			if (userInput.equalsIgnoreCase("exit")) {
-				return;
-			}
+			gameMethods.exitView(userInput);
 		}
 	}
-////////////////////////METHODS////////////////////////////////
+////////////////////////ITEM METHODS////////////////////////////////
 	public void viewInventory() {
 		playerInventory.viewInventory();
 	}
@@ -77,7 +79,7 @@ public class Start {
 	//change status of dynamic object(ANY!)
 	//Adds unique item to Inventory and removes unique item from FloorInventory
 	public void uniqueObject_toInventory(String item) { 
-		System.out.println("\nYou added '" + item + "' to your inventory.");
+		System.out.println("You added '" + item + "' to your inventory.");
 		dyn_item.changeStatus_dynObj(item);
 		playerInventory.addUniqueItemToInventory(item); //adds item to Inventory
 		roomInventory.remove_flrInv(item); //removes item from FloorInventory
@@ -87,6 +89,7 @@ public class Start {
 	public void viewBear() {
 		System.out.println("<><>BEAR<><>");
 		boolean awaitInput = true;
+		boolean awaitInput1 = true;
 	
 		while (awaitInput == true) {
 			stat_item.aBear();
@@ -104,8 +107,9 @@ public class Start {
 						System.out.println("You decided not to view the object.");		
 						awaitInput1 = false;
 					}
+				}
 			}
-			awaitInput = false;
+		awaitInput = false;
 		}	
 	}
 	//////////REDBOX////////////
@@ -154,6 +158,5 @@ public class Start {
 		System.out.println("<><>MIRROR<><>");
 		stat_item.aMirror();
 	}
-	
 	
 }
