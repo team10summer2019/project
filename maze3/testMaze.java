@@ -26,7 +26,7 @@ public class testMaze {
 	String storeInput="";  // storage for user input
 	int moveCounter = 0;  // count the number of moves
 
-	gameBoard.setCurrentRoom(0); // reset the current room after setting up the board
+	gameBoard.setCurrentRoom(0,0); // reset the current room after setting up the board
 	tempRoom = gameBoard.getCurrentRoom();  // set the tempRoom to be the current room at (0,0)
 	
 	// Main loop to run the Maze Game 
@@ -52,7 +52,7 @@ public class testMaze {
 			// if user input was "Next" 	
 			if ( storeInput.equalsIgnoreCase("Next")){
 			// increment the move counter to change the room
-			tempRoom = gameBoard.getRoom(moveCounter % 16);
+			tempRoom = gameBoard.getRoom(moveCounter % 4, moveCounter);
 			moveCounter++;
 			}
 			
@@ -117,38 +117,38 @@ public class testMaze {
 		// sets up the walls and items, doors and monsters
 	public static void setBoard( Maze m){
 	// setRoom( int room , left, right, up, down, key, door, map, monster)
-	m.setRoom(0,true,true,true,false,false,false,false,false); // setup the first room 
-	m.setRoom(0,true);  // place the player in the first room
+	m.setRoom(0,0,true,true,true,false,false,false,false,false); // setup the first room 
+	m.setRoomPlayer(0,0,true);  // place the player in the first room
 	// room (0.1)   
-	m.setRoom(1,true,false,true,true,false,true,false,false);
+	m.setRoom(0,1,true,false,true,true,false,true,false,false);
 	// room (0,2)
-	m.setRoom(2,false,false,true,true,false,false,false,true);
+	m.setRoom(0,2,false,false,true,true,false,false,false,true);
 	// room (0,3)
-	m.setRoom(3,false,true,true,false,false,false,false,false);
+	m.setRoom(0,3,false,true,true,false,false,false,false,false);
 	// room (1,0)
-	m.setRoom(4,true,true,false,false,false,false,false,false);
+	m.setRoom(0,4,true,true,false,false,false,false,false,false);
 	// room (1,1)
-	m.setRoom(5,true,false,true,false,false,false,false,false);
+	m.setRoom(0,5,true,false,true,false,false,false,false,false);
 	// room (1,2)
-	m.setRoom(6,false,false,true,true,false,false,false,false);
+	m.setRoom(0,6,false,false,true,true,false,false,false,false);
 	// room (1,3)
-	m.setRoom(7,false,true,false,false,false,false,false,false);
+	m.setRoom(0,7,false,true,false,false,false,false,false,false);
 	// room (2,0)
-	m.setRoom(8,true,false,false,true,false,false,false,false);
+	m.setRoom(0,8,true,false,false,true,false,false,false,false);
 	// room (2,1)
-	m.setRoom(9,false,true,false,true,false,false,false,false);
+	m.setRoom(0,9,false,true,false,true,false,false,false,false);
 	// room (2,2)
-	m.setRoom(10,true,true,true,false,true,false,false,false);
+	m.setRoom(0,10,true,true,true,false,true,false,false,false);
 	// room (2,3)
-	m.setRoom(11,true,true,false, false,false,false,false,false);
+	m.setRoom(0,11,true,true,false, false,false,false,false,false);
 	// room (3,0)
-	m.setRoom(12,true,false,true,true,false,false,true,false);
+	m.setRoom(0,12,true,false,true,true,false,false,true,false);
 	// room (3,1)
-	m.setRoom(13,false,true,false,true,false,false,false,false);
+	m.setRoom(0,13,false,true,false,true,false,false,false,false);
 	// room (3,2)
-	m.setRoom(14,true,false,false,true,false,false,false,false);
+	m.setRoom(0,14,true,false,false,true,false,false,false,false);
 	// room (3,3)
-	m.setRoom(15,false,true,false,true,false,false,false,false);	
+	m.setRoom(0,15,false,true,false,true,false,false,false,false);	
 	
 	return;
 	}
