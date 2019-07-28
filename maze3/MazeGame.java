@@ -268,38 +268,45 @@ public class MazeGame {
 	
 		if (level ==1){
 		// setRoom(x,y,left,right,up,down,key,door,map,monster)
-		m.setRoom(0,0,true,true,true,false,false,false,false,false); // setup the first room 
+		// setRoomWalls(int x,int y, boolean left, boolean right, boolean up, boolean down){
+		//setRoomItems(int x, int y ,boolean key, boolean door ,boolean map, boolean monster, boolean riddle ){ 
+		//ROW 0
+		m.setRoomWalls(0,0,true,true,true,false); // setup the first room 
 		m.setRoomPlayer(0,0,true);  // place the player in the first room
 		// room (1.0)   
-		m.setRoom(1,0,true,false,true,true,false,true,false,false);
+		m.setRoomWalls(1,0,true,false,true,true);
+		m.setRoomItems(1,0,false,true,false,false,false); // has door
 		// room (2,0)
-		m.setRoom(2,0,false,false,true,true,false,false,false,true);
+		m.setRoomWalls(2,0,false,false,true,true);
+		m.setRoomItems(2,0,false,false,false,true,false); // has monster
 		// room (0,3)
-		m.setRoom(3,0,false,true,true,false,false,false,false,false);
+		m.setRoomWalls(3,0,false,true,true,false);
 		// room (1,0)
-		m.setRoom(0,1,true,true,false,false,false,false,false,false);
+		m.setRoomWalls(0,1,true,true,false,false);
 		// room (1,1)
-		m.setRoom(1,1,true,false,true,false,false,false,false,false);
+		m.setRoomWalls(1,1,true,false,true,false); 
 		// room (2,1)
-		m.setRoom(2,1,false,false,true,true,false,false,false,false);
+		m.setRoomWalls(2,1,false,false,true,true);
 		// room (3,1)
-		m.setRoom(3,1,false,true,false,false,false,false,false,false);
+		m.setRoomWalls(3,1,false,true,false,false);
 		// room (0,2)
-		m.setRoom(0,2,true,false,false,true,false,false,false,false);
+		m.setRoomWalls(0,2,true,false,false,true);
 		// room (1,2)
-		m.setRoom(1,2,false,true,false,false,false,false,false,false);
+		m.setRoomWalls(1,2,false,true,false,false);
 		// room (2,2)
-		m.setRoom(2,2,true,true,true,false,true,false,false,false);
+		m.setRoomWalls(2,2,true,true,true,false);
+		m.setRoomItems(2,2,true,false,false,false,false); // has key
 		// room (3,2)
-		m.setRoom(3,2,true,true,false, false,false,false,false,false);
+		m.setRoomWalls(3,2,true,true,false, false);
 		// room (0,3)
-		m.setRoom(0,3,true,false,true,true,false,false,true,false);
+		m.setRoomWalls(0,3,true,false,true,true);
+		m.setRoomItems(0,3,false,false,true,false,false); // has map
 		// room (1,3)
-		m.setRoom(1,3,false,true,false,true,false,false,false,false);
+		m.setRoomWalls(1,3,false,true,false,true);
 		// room (3,2)
-		m.setRoom(2,3,true,false,false,true,false,false,false,false);
+		m.setRoomWalls(2,3,true,false,false,true);
 		// room (3,3)
-		m.setRoom(3,3,false,true,false,true,false,false,false,false);	
+		m.setRoomWalls(3,3,false,true,false,true);
 		}
 	
 	
@@ -357,18 +364,20 @@ public class MazeGame {
 		
 			int x=0; 
 			int y=0;
+			int rand;
 			//get random location 
 			int sz=m.getMazeSize();
-			x=randGen.nextInt()%sz;
-			y=randGen.nextInt()%sz;
+			
+			x=randGen.nextInt(sz);
+			y=randGen.nextInt(sz);
 			
 		// randomize monster start location
 		m.setRoomItems(x,y,false,false,false,true,false);  // doesn't seem to be placing the Wraith...?
 		
-		
-		if (randGen.nextInt()%3 ==0){
+		rand = randGen.nextInt(); 
+		if (rand % 3 ==0){
 		m.setRoomItems(3,4,false,false,true,false,false); // Place the map in (3,5)
-		} else if (randGen.nextInt()%3 ==1){
+		} else if (rand% 3 ==1){
 		m.setRoomItems(2,0,false,false,true,false,false); // Place the map in (2,0)
 		} else { 
 		m.setRoomItems(5,5,false,false,true,false,false); // Place the map in (2,0)

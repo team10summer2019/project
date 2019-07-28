@@ -142,6 +142,10 @@ private int roomRows=4;  // height of a room
 	 hasMap=toCopy.hasMap;
 	 hasPlayer=toCopy.hasPlayer;
 	 hasDoor=toCopy.hasDoor;
+	 hasRiddle=toCopy.hasRiddle;
+	 hasBooks =toCopy.hasBooks;
+	 hasComboLock = toCopy.hasComboLock;
+	 hasGoat = toCopy.hasGoat;
 	 doorPosition=toCopy.doorPosition; // 0 for no door 1 for left 2 for right , 3 for top, 4 for bottom
 	 
 	 roomCols = toCopy.roomCols;
@@ -336,18 +340,6 @@ private int roomRows=4;  // height of a room
 	*/
 
 //////////////////////////  OTHER METHODS /////////////////////////////////////////////////
-	public void  displayRoomStats(){
-	System.out.println("Location = "+ location.toString());
-	System.out.print("leftWall = " + leftWall + " ");	
-	System.out.print("RightWall = " + rightWall + " ");
-	System.out.print("TopWall = " + topWall + " ");
-	System.out.println("BottomWall = " + bottomWall);
-	System.out.print("Monster = " + hasMonster+ " ");
-	System.out.print("HasKey = " + hasKey + " ");
-	System.out.print("HasMap = " + hasMap + " ");
-	System.out.print("Door = " + hasDoor+ " ");
-	System.out.println("DoorPosition = " + doorPosition);
-	}
 	
 	public void drawRoom(){
 	
@@ -503,15 +495,15 @@ private int roomRows=4;  // height of a room
 		roomGrid[roomCols/2][roomRows/2]='K';
 		}else if (hasMonster){
 		roomGrid[roomCols/2][roomRows/2]='W';
-		} else if (hasRiddle){
+		}else if (hasRiddle){
 		roomGrid[roomCols/2][roomRows/2]='R';
-		} else if (hasBooks){
+		}else if (hasBooks){
 		roomGrid[roomCols/2][roomRows/2]='B';
 		}else if (hasComboLock){
 		roomGrid[roomCols/2][roomRows/2]='L';
 		}else if (hasGoat){
 		roomGrid[roomCols/2][roomRows/2]='G';
-		} else {
+		}else {
 		roomGrid[roomCols/2][roomRows/2]=' ';
 		} 
 		
@@ -618,7 +610,23 @@ private int roomRows=4;  // height of a room
 	// now you should be at the correct row and column to print out the room
 	}
 	
-	
+
+	public void  displayRoomStats(){
+	System.out.println("Location = "+ location.toString());
+	System.out.print("leftWall = " + leftWall + " ");	
+	System.out.print("RightWall = " + rightWall + " ");
+	System.out.print("TopWall = " + topWall + " ");
+	System.out.println("BottomWall = " + bottomWall);
+	System.out.print("Monster = " + hasMonster+ " ");
+	System.out.print("HasKey = " + hasKey + " ");
+	System.out.print("HasMap = " + hasMap + " ");
+	System.out.print("Door = " + hasDoor+ " ");
+	System.out.print("Riddle = " + hasRiddle+ " ");
+	System.out.print("Books = " + hasBooks+ " ");
+	System.out.print("ComboLock = " + hasComboLock+ " ");
+	System.out.print("Goat = " + hasGoat+ " ");
+	System.out.println("DoorPosition = " + doorPosition);
+	}
 
 } // class closing brace
 ///////////////////////////////   END OF FILE ///////////////////////////////////////////////
