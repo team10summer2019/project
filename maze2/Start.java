@@ -1,5 +1,6 @@
 package maze2;
 
+
 /**
  * @author Fiona
  *
@@ -20,6 +21,8 @@ public class Start {
 	private FloorInventory roomInventory = new FloorInventory();
 	
 	public static void gameMenu() {
+		gameRunning = true;
+		inRoom1 = true;
 		while (gameRunning == true) {
 			//////////GAME MENU
 			System.out.println("Welcome, time to visit the room.");
@@ -43,7 +46,7 @@ public class Start {
 	
 	public void room1() {
 		while (inRoom1 == true) {
-			System.out.println("//////////Room 1://///////////\nThis room has a bear with a red box beside it. There is a shelf with three birds sitting on it: a red bird, yellow bird, and green bird.");
+			System.out.println("\n//////////Room 1://///////////\nThis room has a bear with a red box beside it. There is a shelf with three birds sitting on it: a red bird, yellow bird, and green bird.");
 			System.out.println("To view your Inventory:\n'i'");
 			System.out.println("To view certain items, type:\n'Bear'\n'RedBox'\n'Shelf'\n'Mirror'");
 			userInput = keyboard.next();
@@ -104,7 +107,7 @@ public class Start {
 						uniqueObject_toInventory(dyn_item.leverP1);
 						awaitInput1 = false;
 					} else if (userInput.equalsIgnoreCase("n")) {
-						System.out.println("You decided not to view the object.");		
+						System.out.println("You decided not to view the object.\n");		
 						awaitInput1 = false;
 					}
 				}
@@ -124,7 +127,7 @@ public class Start {
 				stat_item.aCard();
 				awaitInput = false;
 			} else if (userInput.equalsIgnoreCase("n")) {
-				System.out.println("you decided not to open the box");
+				System.out.println("you decided not to open the box.\n");
 				awaitInput = false;
 			}
 		}
@@ -147,7 +150,7 @@ public class Start {
 				stat_item.aBirdG();
 			}
 			if (userInput.equalsIgnoreCase("stop")) {
-				System.out.println("you left the shelf");
+				System.out.println("you left the shelf.\n");
 				awaitInput = false;
 			}
 		}
