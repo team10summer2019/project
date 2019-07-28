@@ -65,8 +65,6 @@ The classes interact with each other properly and independently for the most par
 
 ===Bugs and Future Updates:===
 
-More work will be needed to adjust inventory pick up as well as remove items when already picked up.
-Parent Inventory and child DynamicObjects still require some review and processing with interactions with the user/player. 
 LockLeverPuzzle requires review and editing to have it interacting with the user/player.
 
 ============
