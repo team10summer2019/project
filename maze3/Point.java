@@ -11,6 +11,9 @@
 //
 ///////////////////////////////////////////////
 
+import java.util.Random;
+
+
 public class Point {
 
 /////////////////  MEMBER VARIABLES  ///////////////////////////////////////
@@ -105,6 +108,14 @@ private int yCoordinate;
 		return true;
 		}
 	return false;
+	}
+	
+	public void setRandom(int sz){
+	Random randGen = new Random();
+	int x; 
+	int y;
+	xCoordinate = randGen.nextInt(sz);
+	yCoordinate = randGen.nextInt(sz);
 	}
 	
 	

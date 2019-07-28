@@ -1,0 +1,131 @@
+MazeGame.java:314: error: cannot find symbol
+		Point randLocation = getRandomPoint(m.getMazeSize());
+		                     ^
+  symbol:   method getRandomPoint(int)
+  location: class MazeGame
+MazeGame.java:402: error: cannot find symbol
+		m.setRoomItems(randLocation,temp.getHasKey(),temp.getHasDoor(),temp.getHasMap(),true,temp.getHasRiddle());  // Working
+		                            ^
+  symbol:   variable temp
+  location: class MazeGame
+MazeGame.java:402: error: cannot find symbol
+		m.setRoomItems(randLocation,temp.getHasKey(),temp.getHasDoor(),temp.getHasMap(),true,temp.getHasRiddle());  // Working
+		                                             ^
+  symbol:   variable temp
+  location: class MazeGame
+MazeGame.java:402: error: cannot find symbol
+		m.setRoomItems(randLocation,temp.getHasKey(),temp.getHasDoor(),temp.getHasMap(),true,temp.getHasRiddle());  // Working
+		                                                               ^
+  symbol:   variable temp
+  location: class MazeGame
+MazeGame.java:402: error: cannot find symbol
+		m.setRoomItems(randLocation,temp.getHasKey(),temp.getHasDoor(),temp.getHasMap(),true,temp.getHasRiddle());  // Working
+		                                                                                     ^
+  symbol:   variable temp
+  location: class MazeGame
+MazeGame.java:499: error: cannot find symbol
+		m.setRoomItems(randPoint,temp.getHasKey(),temp.getHasDoor(),temp.getHasMap(),true,temp.getHasRiddle());  // Working
+		                         ^
+  symbol:   variable temp
+  location: class MazeGame
+MazeGame.java:499: error: cannot find symbol
+		m.setRoomItems(randPoint,temp.getHasKey(),temp.getHasDoor(),temp.getHasMap(),true,temp.getHasRiddle());  // Working
+		                                          ^
+  symbol:   variable temp
+  location: class MazeGame
+MazeGame.java:499: error: cannot find symbol
+		m.setRoomItems(randPoint,temp.getHasKey(),temp.getHasDoor(),temp.getHasMap(),true,temp.getHasRiddle());  // Working
+		                                                            ^
+  symbol:   variable temp
+  location: class MazeGame
+MazeGame.java:499: error: cannot find symbol
+		m.setRoomItems(randPoint,temp.getHasKey(),temp.getHasDoor(),temp.getHasMap(),true,temp.getHasRiddle());  // Working
+		                                                                                  ^
+  symbol:   variable temp
+  location: class MazeGame
+MazeGame.java:507: error: cannot find symbol
+		m.setRoomItems(randPoint,temp.getHasKey(),temp.getHasDoor(),true,temp.getHasMonster(),temp.getHasRiddle()); // Place the map 
+		                         ^
+  symbol:   variable temp
+  location: class MazeGame
+MazeGame.java:507: error: cannot find symbol
+		m.setRoomItems(randPoint,temp.getHasKey(),temp.getHasDoor(),true,temp.getHasMonster(),temp.getHasRiddle()); // Place the map 
+		                                          ^
+  symbol:   variable temp
+  location: class MazeGame
+MazeGame.java:507: error: cannot find symbol
+		m.setRoomItems(randPoint,temp.getHasKey(),temp.getHasDoor(),true,temp.getHasMonster(),temp.getHasRiddle()); // Place the map 
+		                                                                 ^
+  symbol:   variable temp
+  location: class MazeGame
+MazeGame.java:507: error: cannot find symbol
+		m.setRoomItems(randPoint,temp.getHasKey(),temp.getHasDoor(),true,temp.getHasMonster(),temp.getHasRiddle()); // Place the map 
+		                                                                                      ^
+  symbol:   variable temp
+  location: class MazeGame
+MazeGame.java:513: error: cannot find symbol
+		m.setRoomItems(randPoint,temp.getHasKey(),true,temp.getHasMap(),temp.getHasMonster(),temp.getHasRiddle());
+		                         ^
+  symbol:   variable temp
+  location: class MazeGame
+MazeGame.java:513: error: cannot find symbol
+		m.setRoomItems(randPoint,temp.getHasKey(),true,temp.getHasMap(),temp.getHasMonster(),temp.getHasRiddle());
+		                                               ^
+  symbol:   variable temp
+  location: class MazeGame
+MazeGame.java:513: error: cannot find symbol
+		m.setRoomItems(randPoint,temp.getHasKey(),true,temp.getHasMap(),temp.getHasMonster(),temp.getHasRiddle());
+		                                                                ^
+  symbol:   variable temp
+  location: class MazeGame
+MazeGame.java:513: error: cannot find symbol
+		m.setRoomItems(randPoint,temp.getHasKey(),true,temp.getHasMap(),temp.getHasMonster(),temp.getHasRiddle());
+		                                                                                     ^
+  symbol:   variable temp
+  location: class MazeGame
+MazeGame.java:517: error: cannot find symbol
+		temp = m.getRoom(randPoint);  // get a copy of the room at randLocation
+		^
+  symbol:   variable temp
+  location: class MazeGame
+MazeGame.java:519: error: cannot find symbol
+		m.setRoomItems(randPoint,true,temp.getHasDoor(),temp.getHasMap(),temp.getHasMonster(),temp.getHasRiddle());
+		                              ^
+  symbol:   variable temp
+  location: class MazeGame
+MazeGame.java:519: error: cannot find symbol
+		m.setRoomItems(randPoint,true,temp.getHasDoor(),temp.getHasMap(),temp.getHasMonster(),temp.getHasRiddle());
+		                                                ^
+  symbol:   variable temp
+  location: class MazeGame
+MazeGame.java:519: error: cannot find symbol
+		m.setRoomItems(randPoint,true,temp.getHasDoor(),temp.getHasMap(),temp.getHasMonster(),temp.getHasRiddle());
+		                                                                 ^
+  symbol:   variable temp
+  location: class MazeGame
+MazeGame.java:519: error: cannot find symbol
+		m.setRoomItems(randPoint,true,temp.getHasDoor(),temp.getHasMap(),temp.getHasMonster(),temp.getHasRiddle());
+		                                                                                      ^
+  symbol:   variable temp
+  location: class MazeGame
+MazeGame.java:524: error: cannot find symbol
+		m.setRoomItems(randPoint,temp.getHasKey(),temp.getHasDoor(),temp.getHasMap(),temp.getHasMonster(),true);	
+		                         ^
+  symbol:   variable temp
+  location: class MazeGame
+MazeGame.java:524: error: cannot find symbol
+		m.setRoomItems(randPoint,temp.getHasKey(),temp.getHasDoor(),temp.getHasMap(),temp.getHasMonster(),true);	
+		                                          ^
+  symbol:   variable temp
+  location: class MazeGame
+MazeGame.java:524: error: cannot find symbol
+		m.setRoomItems(randPoint,temp.getHasKey(),temp.getHasDoor(),temp.getHasMap(),temp.getHasMonster(),true);	
+		                                                            ^
+  symbol:   variable temp
+  location: class MazeGame
+MazeGame.java:524: error: cannot find symbol
+		m.setRoomItems(randPoint,temp.getHasKey(),temp.getHasDoor(),temp.getHasMap(),temp.getHasMonster(),true);	
+		                                                                             ^
+  symbol:   variable temp
+  location: class MazeGame
+26 errors

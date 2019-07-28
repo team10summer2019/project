@@ -18,7 +18,7 @@ public class MazeGame {
 
 ////////////////////////// INSTANCE VARIABLES ///////////////////////////////////
 
-	private static int level = 1 ;   // set the level to increase through 4 levels
+	static int level = 1 ;   // set the level to increase through 4 levels
 
 ////////////////////////  METHODS //////////////////////////////////////////////
 
@@ -267,6 +267,7 @@ public class MazeGame {
 	public static void setBoard( Maze m){
 	
 		if (level ==1){
+		//////////////////// MAZE IS HAND DESIGNED //////////////////////////////
 		// setRoom(x,y,left,right,up,down,key,door,map,monster)
 		// setRoomWalls(int x,int y, boolean left, boolean right, boolean up, boolean down){
 		//setRoomItems(int x, int y ,boolean key, boolean door ,boolean map, boolean monster, boolean riddle ){ 
@@ -278,7 +279,6 @@ public class MazeGame {
 		m.setRoomItems(1,0,false,true,false,false,false); // has door
 		// room (2,0)
 		m.setRoomWalls(2,0,false,false,true,true);
-		m.setRoomItems(2,0,false,false,false,true,false); // has monster
 		// room (0,3)
 		m.setRoomWalls(3,0,false,true,true,false);
 		// room (1,0)
@@ -305,12 +305,24 @@ public class MazeGame {
 		m.setRoomWalls(1,3,false,true,false,true);
 		// room (3,2)
 		m.setRoomWalls(2,3,true,false,false,true);
+		m.setRoomItems(2,3,false,false,false,false,true); //place the riddle in the room below the key
 		// room (3,3)
 		m.setRoomWalls(3,3,false,true,false,true);
+		
+		
+		// get a random location within the map 
+		Point randLocation = new Point();
+		randLocation.setRandom(m.getMazeSize());
+		Room tempRoom = m.getRoom(randLocation);  // get a copy of the room at randLocation
+		// randomize monster start location but don't overwrite previous conditions except moster variable 
+		m.setRoomItems(randLocation,tempRoom.getHasKey(),tempRoom.getHasDoor(),tempRoom.getHasMap(),true,tempRoom.getHasRiddle());  // Working
+		
 		}
 	
 	
 		if (level ==2){
+		
+		/////////////////// MAZE IS HAND DESIGNED ////////////////////////////
 		// setRoomWalls(int x,int y, boolean left, boolean right, boolean up, boolean down){
 		//ROW 0
 		m.setRoomWalls(0,0,true,true,true,false); // setup the first room 
@@ -360,21 +372,10 @@ public class MazeGame {
 		// set the items now  
 		//setRoomItems(Point p , boolean key, boolean door ,boolean map, boolean monster, boolean riddle ){
 		
-		Random randGen = new Random(100);
-		
-			int x=0; 
-			int y=0;
-			int rand;
-			//get random location 
-			int sz=m.getMazeSize();
-			
-			x=randGen.nextInt(sz);
-			y=randGen.nextInt(sz);
-			
-		// randomize monster start location
-		m.setRoomItems(x,y,false,false,false,true,false);  // doesn't seem to be placing the Wraith...?
-		
-		rand = randGen.nextInt(); 
+		// semi random Map Placement 
+		Random randGen = new Random(100); // make a random number generator 
+		int rand; // integer to hold random number
+		rand = randGen.nextInt(); // get a random number  
 		if (rand % 3 ==0){
 		m.setRoomItems(3,4,false,false,true,false,false); // Place the map in (3,5)
 		} else if (rand% 3 ==1){
@@ -386,15 +387,25 @@ public class MazeGame {
 		// place door in specific location
 		m.setRoomItems(0,5,false,true,false,false,false);
 		m.setDoorLocation(0,5);  // change the door location 
-		
 		// place the key in specific location
 		m.setRoomItems(5,0,true,false,false,false,false);
 		// place the riddle in a specific location infront of the key (opens wall to get key)
 		m.setRoomItems(4,0,false,false,false,false,true);
 		
+		
+		// get a random location within the map 
+		Point randLocation = new Point();
+		randLocation.setRandom(m.getMazeSize());
+		Room tempRoom = new Room();
+		tempRoom = m.getRoom(randLocation);  // get a copy of the room at randLocation
+		// randomize monster start location but don't overwrite previous conditions except moster variable 
+		m.setRoomItems(randLocation,tempRoom.getHasKey(),tempRoom.getHasDoor(),tempRoom.getHasMap(),true,tempRoom.getHasRiddle());  // Working
+		
 		}
 	
 		if (level ==3){
+		
+		//////////////// MAZE IS HAND DESIGNED /////////////////////////////////////////////
 		// setRoomWalls(int x,int y, boolean left, boolean right, boolean up, boolean down){
 		//ROW 0
 		m.setRoomWalls(0,0,true,false,true,true); // setup the first room 
@@ -469,37 +480,48 @@ public class MazeGame {
 		m.setRoomWalls(5,7,true,false,false,true);
 		m.setRoomWalls(6,7,false,false,true,true);
 		m.setRoomWalls(7,7,false,true,false,true);
+		/////////////////////////////////////////////////////////////////////
 		
-		/// set the items now
-				
+		// TOTAL RANDOMIZATION OF ITEMS AND RIDDLES
+		// USER MUST LOOK AT BOOLEANS for each room if there is more than one item in a room
 		// set the items now  
 		//setRoomItems(int x, int y,boolean key, boolean door ,boolean map, boolean monster, boolean riddle ){
-		
+				
 		int mazeSize=m.getMazeSize();
 		
-		Point randPoint;
+		Room tempRoom = new Room();  // make a temporary pointer of type Room
+		Point randPoint = new Point();  // make a pointer of type Point
 		
-		randPoint = getRandomPoint(mazeSize);	
-		// randomize monster start location
-		m.setRoomItems(7,7,false,false,false,true,false);  // doesn't seem to be placing the Wraith...?
+		// get a random location within the map 
+		randPoint.setRandom(mazeSize); // get a new random point 
+		tempRoom = m.getRoom(randPoint);  // get a copy of the room at randLocation
+		// randomize monster start location but don't overwrite previous conditions except moster variable 
+		m.setRoomItems(randPoint,tempRoom.getHasKey(),tempRoom.getHasDoor(),tempRoom.getHasMap(),true,tempRoom.getHasRiddle());  // Working
 		
-		randPoint = getRandomPoint(mazeSize);	
 		
-		// set MAP location
-		m.setRoomItems(3,4,false,false,true,false,false); // Place the map in (3,5)
-	
-		randPoint = getRandomPoint(mazeSize);	
+		// get a new random location within the maze
+		randPoint.setRandom(mazeSize);	// get a new random point
+		tempRoom = m.getRoom(randPoint);  // get a copy of the room at randLocation
+		
+		// set MAP location preserving prior booleans 
+		m.setRoomItems(randPoint,tempRoom.getHasKey(),tempRoom.getHasDoor(),true,tempRoom.getHasMonster(),tempRoom.getHasRiddle()); // Place the map 
+
+		randPoint.setRandom(mazeSize);	
+		tempRoom = m.getRoom(randPoint);  // get a copy of the room at randLocation
 		// place door
 	
-		m.setRoomItems(7,5,false,true,false,false,false);
-		m.setDoorLocation(7,5);  // change the door location 
+		m.setRoomItems(randPoint,tempRoom.getHasKey(),true,tempRoom.getHasMap(),tempRoom.getHasMonster(),tempRoom.getHasRiddle());
+		m.setDoorLocation(randPoint);  // change the door location 
 		
-		randPoint = getRandomPoint(mazeSize);
+		randPoint.setRandom(mazeSize); // get a new random point
+		tempRoom = m.getRoom(randPoint);  // get a copy of the room at randLocation
 		// place the key 
-		m.setRoomItems(0,7,true,false,false,false,false);
-		// place the riddle in a specific location infront of the key (opens wall to get key)
-		m.setRoomItems(5,4,false,false,false,false,true);
-			
+		m.setRoomItems(randPoint,true,tempRoom.getHasDoor(),tempRoom.getHasMap(),tempRoom.getHasMonster(),tempRoom.getHasRiddle());
+		
+		//place the riddle 
+		randPoint.setRandom(mazeSize);
+		tempRoom = m.getRoom(randPoint);  // get a copy of the room at randLocation
+		m.setRoomItems(randPoint,tempRoom.getHasKey(),tempRoom.getHasDoor(),tempRoom.getHasMap(),tempRoom.getHasMonster(),true);	
 					
 		}
 	
@@ -548,7 +570,7 @@ public class MazeGame {
 		System.out.println("|             |      |      |      |      |");
 		System.out.println("|_    _|_    _|_    _|_    _|_    _|_    _|");
 		System.out.println("|      |      |      |      |      |      |");
-		System.out.println("|             |      |  M   |             |");
+		System.out.println("|             |      |      |             |");
 		System.out.println("|_    _|_    _|_    _|______|_    _|_    _|");
 		System.out.println("|      |      |      |      |      |      |");
 		System.out.println("|   D  |                           |      |");
@@ -575,10 +597,10 @@ public class MazeGame {
 		System.out.println("|             |             |      |             |      |");
 		System.out.println("|_    _|______|_    _|_    _|_    _|_    _|_    _|______|");
 		System.out.println("|      |      |      |      |      |      |      |      |");
-		System.out.println("|             |      |   M  |             |             |");
+		System.out.println("|             |      |      |             |             |");
 		System.out.println("|_    _|_    _|_    _|______|_    _|_    _|______|_    _|");
 		System.out.println("|      |      |      |      |      |      |      |      |");
-		System.out.println("|      |                           |      |      |   D  |");
+		System.out.println("|      |                           |      |      |      |");
 		System.out.println("|______|______|______|_    _|______|______|_    _|______|");
 		System.out.println("|      |      |      |      |      |      |      |      |");
 		System.out.println("|             |      |                    |             |");
@@ -638,17 +660,7 @@ public class MazeGame {
 	}
 		
 	
-	public static Point getRandomPoint(int sz){
-	Random randGen = new Random(100);
-	Point p = new Point();  
-	p.setXCoordinate(randGen.nextInt()%sz);
-	p.setYCoordinate(randGen.nextInt()%sz);
-	return p;
-	}	
-		
-		
-		
-	public static void handleInput(String storeInput, Maze gameBoard, int moveCounter){
+	public static void handleInput(Maze gameBoard){
 	
 	return;	
 	}
