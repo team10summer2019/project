@@ -38,7 +38,7 @@ public class PlayRiddle {
 			return;
 		}
 	} 
-	 
+	  
 	public void addAnswer(CreateRiddle ans) {		//ADDS CORRECT ANSWER TO 
 		answer = ans.getAnswer();
 	}

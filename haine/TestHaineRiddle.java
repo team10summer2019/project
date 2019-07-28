@@ -14,7 +14,7 @@ public class TestHaineRiddle {
 		runner.addRiddles(riddle2);
 		runner.addRiddles(riddle4);
 		runner.addRiddles(riddle5);
-		 
+		  
 		CreateRiddle theRiddle = runner.chooseRiddle();
 		runner.addAnswer(theRiddle);
 		runner.sayRiddle(theRiddle);
