@@ -1,10 +1,11 @@
 package maze2;
+
 /**
  * @author Fiona
  *
  */
 import java.util.Scanner;
- 
+
 public class Start {
 	private static boolean gameRunning = true;
 	private static boolean inRoom1 = true;
