@@ -19,9 +19,11 @@ Most classes are prompted and work with the start class.
 The classes interact with each other properly and independently for the most part. 
 
 ===Permissions=== 
-Classes: 
+Classes such as: 
 StaticObjects,DynamicObjects,and Start 
-are permitted to be used as long as permission is granted and updates are verified for fair use of personal work.
+are permitted to be modified as long as permission is granted and updates are verified for fair use of personal work.
+
+All classes are permitted to be modified to function with the team code as long as permission is granted and updates are verified for fair use of personal work.
 
 ===Bugs and Future Updates:===
 
