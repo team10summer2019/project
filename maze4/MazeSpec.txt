@@ -1,0 +1,78 @@
+//////////////////////////////////////////////
+//
+// File: MazeSpec.txt
+// Description: Specification for the Maze
+//
+// Author: (Ron) Zorondras Rodriguez
+// Course:  CPSC 233 Summer 2019
+// Creation Date: July 20, 2019
+// Version: 0.01
+// Revision Date: July 20, 2019
+//
+///////////////////////////////////////////////
+
+ Maze is a 20 x 20 Room sized puzzle.  
+ The objective is to navigate to a room that has a key get the key and move to the exit room with a locked door.
+ Applying the key to the door will open the door and terminate the puzzle.  This puzzle can be extended to have a
+ Monster that guards the key.
+
+ Connecting classes :  Point, Player, Key, Door, Monster, Room, Maze, MazeGame , inputControl
+ 
+ Point:  (x,y) location integers
+ 
+ Player:  Attributes - (x,y) Point location, Health, hasKey, attackStrength
+          Methods- moveLeft(), moveRight(), moveUp(), moveDown(),
+	            die(), isAlive() 
+	  Not yet Implemented: searchRoom(), attack(), openDoor()
+
+ Room:  Attributes: (x,y) point location, Booleans: leftWall, bottomWall, rightWall, topWall,
+			hasMonster, hasKey, hasDoor, doorPosition,
+	Methods:    displayRoomStats(), drawRoom()
+
+ Door:  Attributes:  (x,y) point, Room location, Boolean isLocked, 
+	Methods:     setIsLocked() setLocation() getLocation() getIsLocked() 
+
+ Monster:  Attibutes: (x,y) point location, Health, hasKey, attackStrength, 
+           Methods :   attack(), die(), isAlive(),	   
+	   
+ Maze  Attributes:  size, RoomMatrix with n x n Rooms each with wall and item attributes, Player, Monster, Key, Door
+       Methods:    drawMap(), updateMap()
+ 
+ MazeGame:   Sets up the maze Draws the maze, and organizes the input control to move arround the maze , has main() function,
+		terminates the game when the door is unlocked.
+ 
+/// helper fucntions:
+ 
+inputControl:   takes user input by scanner, and prompts user for input via system.	   
+	   
+//////////////////////////    
+
+/// not strictly required can be managed by the booleans
+ Key:  Attributes: Point location , Room location? , DoorNumber
+	Methods:  unLockDoor()       
+//////////////////////////////////////////////////////////////////////////////////////////////
+ 
+ Drawing of the Maze:
+ 
+ _____________________________
+ |      |      |      |      |
+ |  *   |  D       W         |
+ |_    _|______|______|_    _|
+ |      |      |      |      |
+ |      |                    |
+ |_    _|_    _|______|_    _|
+ |      |      |      |      |
+ |             |   K  |      |
+ |______|_    _|__   _|_    _|
+ |      |      |      |      |
+ |  M          |             |
+ |______|______|______|______|
+ 
+ 
+ * is the player , M is a map, W is a Wraith Monster, K is the key and D is the door
+ 
+ The goal of the maze is to move (by user input u,d,l,r or arrow keys if possible) to the Key, collect it, with user input 
+ then move to the door and open it with user input which opens if you have collected the key, and terminates the game with a "You win!" message.
+ Fighting the monster and winning gives a clue to the next puzzle. 
+ 
+//////////////////////////////////////////   END OF FILE /////////////////////////////////////////////////////////////////////////
