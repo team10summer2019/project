@@ -1,9 +1,10 @@
 import java.util.Scanner;
 
 /**
-	 * @author Fiona
-	 *
-	 */
+ * @author Fiona
+ *
+ * Version Updated: July 29, 2019
+ */
 
 public class Room2 {
 	private static boolean gameRunning = true;
