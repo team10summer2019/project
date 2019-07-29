@@ -673,12 +673,7 @@ public class MazeGame {
 	return;
 	}
 		
-	// Use this to clear the screen taken from source: 	
-	//  https://stackoverflow.com/questions/2979383/java-clear-the-console
-	public static void clearScreen() {  
-	 System.out.print("\033[H\033[2J");  
-	 System.out.flush();  
-	}  
+
 	
 	public static String getUserInput(){
 	String input;
@@ -810,10 +805,35 @@ public class MazeGame {
 	return;	
 	}
 	
+	// Use this to clear the screen taken from source: 	
+	//  https://stackoverflow.com/questions/2979383/java-clear-the-console		
+	public final static void clearScreen()
+	{
+	    try
+	    {
+	        final String os = System.getProperty("os.name");
+
+	        if (os.contains("Windows"))
+	        {
+	            Runtime.getRuntime().exec("cls");
+	        }
+	        else
+	        {
+	            Runtime.getRuntime().exec("clear");
+	        }
+	    }
+	    catch (final Exception e)
+	    {
+	        //  Handle any exceptions.
+	    }
+	}
 			
-			
-			
-			
+	// Use this to clear the screen taken from source: 	
+	//  https://stackoverflow.com/questions/2979383/java-clear-the-console
+	//public static void clearScreen() {  
+	// System.out.print("\033[H\033[2J");  
+	// System.out.flush();  
+	//}  
 			
 			
 			
