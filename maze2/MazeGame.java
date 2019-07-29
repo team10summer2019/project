@@ -183,6 +183,11 @@ public class MazeGame {
 			tempRoom = gameBoard.getCurrentRoom();
 			}
 			
+			if ( storeInput.equalsIgnoreCase("Unlock")){
+				gameBoard.tryCombo();
+				tempRoom = gameBoard.getCurrentRoom();
+			}
+			
 			/// DEBUG METHOD to view map cell by cell	
 		/*	
 			// if user input was "Next" 	
@@ -220,7 +225,7 @@ public class MazeGame {
 		
 		/// closing message to user
 		if ( !gameBoard.getDoor().getIsLocked() && victory ){
-		System.out.println("\nCongratulations! You are free from THE MAZE!");
+		System.out.println("\nCongratulations! You escaped THE MAZE!");
 		}else{
 		System.out.println("Thanks for playing THE MAZE.  Better Luck Next Time!");
 		}
@@ -230,42 +235,42 @@ public class MazeGame {
 	
 	// sets up the walls and items, doors and monsters
 	public static void setBoard( Maze m){
-	// setRoom(x,y,left,right,up,down,key,door,map,monster,riddle,hint,goat)
-	m.setRoom(0,0,true,true,true,false,false,false,false,false,false,false,false); // setup the first room 
+	// setRoom(x,y,left,right,up,down,key,door,map,monster,riddle,hint,goat,comboLock)
+	m.setRoom(0,0,true,true,true,false,false,false,false,false,false,false,false,false); // setup the first room 
 	m.setRoom(0,0,true);  // place the player in the first room
 	// room (1.0)   
-	m.setRoom(1,0,true,false,true,true,false,true,false,false,false,false,false);
+	m.setRoom(1,0,true,false,true,true,false,true,false,false,false,false,false,false);
 	// room (2,0)
-	m.setRoom(2,0,false,false,true,true,false,false,false,false,false,false,false);
+	m.setRoom(2,0,false,false,true,true,false,false,false,false,false,false,false,false);
 	// room (0,3)
-	m.setRoom(3,0,false,true,true,false,false,false,false,false,false,false,false);
+	m.setRoom(3,0,true,true,true,false,false,false,false,false,false,false,false,true);
 	// room (1,0)
 	// setRoom(x,y,left,right,up,down,key,door,map,monster,riddle,puzzle)
-	m.setRoom(0,1,true,true,false,false,false,false,false,false,false,true,false);
+	m.setRoom(0,1,true,true,false,false,false,false,false,false,false,true,false,false);
 	// room (1,1)
-	m.setRoom(1,1,true,false,true,false,false,false,false,false,false,true,false);
+	m.setRoom(1,1,true,false,true,false,false,false,false,false,false,false,false,false);
 	// room (2,1)
-	m.setRoom(2,1,false,false,true,true,false,false,false,false,false,false,false);
+	m.setRoom(2,1,false,false,true,true,false,false,false,false,false,true,false,false);
 	// room (3,1)
-	m.setRoom(3,1,false,true,false,false,false,false,false,false,false,false,false);
+	m.setRoom(3,1,false,true,false,false,false,false,false,false,false,false,false,false);
 	// room (0,2)
-	m.setRoom(0,2,true,true,false,true,false,false,false,false,true,false,false);
+	m.setRoom(0,2,true,true,false,true,false,false,false,false,true,false,false,false);
 	// setRoom(x,y,left,right,up,down,key,door,map,monster,riddle,puzzle)
 	// room (1,2)
-	m.setRoom(1,2,false,true,false,false,false,false,false,false,false,false,false);
+	m.setRoom(1,2,false,true,false,false,false,false,false,false,false,false,false,false);
 	// room (2,2)
-	m.setRoom(2,2,true,true,true,false,true,false,false,false,false,false,false);
+	m.setRoom(2,2,true,true,true,false,true,false,false,false,false,false,false,false);
 	// room (3,2)
-	m.setRoom(3,2,true,true,false, false,false,false,false,false,false,false,false);
+	m.setRoom(3,2,true,true,false,false,false,false,false,false,false,false,false,false);
 	// room (0,3)
 	// setRoom(x,y,left,right,up,down,key,door,map,monster,riddle,puzzle)
-	m.setRoom(0,3,true,false,true,true,false,false,true,false,false,false,false);
+	m.setRoom(0,3,true,false,true,true,false,false,true,false,false,false,false,false);
 	// room (1,3)
-	m.setRoom(1,3,true,true,false,true,false,false,false,false,false,false,true);
+	m.setRoom(1,3,true,true,false,true,false,false,false,false,false,false,true,false);
 	// room (3,2)
-	m.setRoom(2,3,true,false,true,true,false,false,false,false,true,false,false);
+	m.setRoom(2,3,true,false,true,true,false,false,false,false,true,false,false,false);
 	// room (3,3)
-	m.setRoom(3,3,false,true,false,true,false,false,false,false,false,false,false);	
+	m.setRoom(3,3,false,true,false,true,false,false,false,false,false,false,false,false);	
 	
 	return;
 	}
@@ -275,10 +280,10 @@ public class MazeGame {
 	System.out.println("");	
 	System.out.println("_____________________________");
 	System.out.println("|      |      |      |      |");
-	System.out.println("|   *  |   D                |");
+	System.out.println("|   *  |   D             L  |");
 	System.out.println("|_    _|______|______|_    _|");
 	System.out.println("|      |      |      |      |");
-	System.out.println("|   ?  |   ?                |");
+	System.out.println("|   ?  |          ?         |");
 	System.out.println("|_    _|_    _|______|_    _|");
 	System.out.println("|      |      |      |      |");
 	System.out.println("|   R         |   K  |      |");		
@@ -294,7 +299,7 @@ public class MazeGame {
 	public static void printHelp(){
 	System.out.println("Welcome to THE MAZE, Commands are case insensitive. Here are the current Commands:");
 	System.out.println("__________________________________________________");	
-	System.out.println("Help : prints the usage commands");
+	System.out.println("Help : Prints the usage commands");
 	System.out.println("Quit : exits the maze");
 	System.out.println("Return: if in map or help dialog this returns to the maze from a help window");
 	System.out.println("Map: Prints out a static map version of the maze");
@@ -304,6 +309,7 @@ public class MazeGame {
 	System.out.println("Down: Moves the player to Room below the current room if no wall");
 	System.out.println("Up: Moves the player to Room above the current room if no wall");
 	System.out.println("Take: Takes either a key or map from the room and places it in the player inventory");
+	System.out.println("Unlock: Interacts with combination lock.");
 	System.out.println("Play: Plays riddles for the player to solve");
 	System.out.println("Open: Opens the Door if you Have a Key");
 	System.out.println("Escape: Escape the Maze if the Door is Open");

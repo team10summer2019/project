@@ -15,7 +15,9 @@ public class ComboLock {
 	}
 	
 	public void tryUnlock() {
-		System.out.println("From left to right, input the combination, one digit at a time. Press ENTER after every number.");
+		System.out.println("\nThere is a hole in one wall. It feels like some sort of mechanism was once in there..");
+		System.out.println("In the middle of the room, there is a combination lock- similar to a padlock. From left to right, you can put in three numbers between 0 and 9.\n"
+				+ "Input the combination, one digit at a time. Press ENTER after every input.");
 		for (int i = 0; i < 3; i += 1) {
 			Scanner input = new Scanner(System.in);
 			String userTry = input.next();
@@ -30,16 +32,19 @@ public class ComboLock {
 				userTry = input.next();
 			}
 			userInputs.add(userTry);
+			System.out.println("You put in a " + userTry + ".");
 		}
 		//By now, has gotten three inputs and stored to correctCombo array
 	}
 	
-	public void checkCombo() {
+	public boolean checkCombo() {
 		if (correctCombo.equals(userInputs)) {
-			System.out.println("You got the right combo!");
+			System.out.println("Something clicks.\n");
+			return true;
 		}
 		else {
-			System.out.println("Wrong combo!");
+			System.out.println("...Nothing happened.\n");
+			return false;
 		}
 	}
 	

@@ -210,7 +210,7 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
        
        
        /// point input version 
-       public void setRoom(Point p, boolean left, boolean right, boolean up, boolean down, boolean key, boolean door ,boolean map, boolean monster, boolean riddle, boolean hint, boolean goat ){
+       public void setRoom(Point p, boolean left, boolean right, boolean up, boolean down, boolean key, boolean door ,boolean map, boolean monster, boolean riddle, boolean hint, boolean goat, boolean comboLock ){
 	
 	if ( p.getXCoordinate() >= 0 && p.getXCoordinate() <= mazeSize-1 && p.getYCoordinate() >=0 && p.getYCoordinate() <= mazeSize-1) {
 	
@@ -228,6 +228,7 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 		temp.setHasRiddle(riddle);
 		temp.setHasHint(hint);
 		temp.setHasGoat(goat);
+		temp.setHasComboLock(comboLock);
        
 		}
 	
@@ -236,7 +237,7 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
        
        
        // coordinate pair input version 
-       	public void setRoom(int x,int y, boolean left, boolean right, boolean up, boolean down, boolean key, boolean door ,boolean map, boolean monster, boolean riddle, boolean hint, boolean goat ){
+       	public void setRoom(int x,int y, boolean left, boolean right, boolean up, boolean down, boolean key, boolean door ,boolean map, boolean monster, boolean riddle, boolean hint, boolean goat, boolean comboLock ){
 	
 	if ( x >= 0 && x <= mazeSize-1 && y >=0 && y<=mazeSize-1) {
 	
@@ -254,6 +255,7 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 		temp.setHasRiddle(riddle);
 		temp.setHasHint(hint);
         temp.setHasGoat(goat);
+        temp.setHasComboLock(comboLock);
 		}
 	
 	return;
@@ -261,13 +263,14 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
        
        
        	// control variable room conditions
-	public void setCurrentRoom(boolean key, boolean map, boolean monster, boolean riddle, boolean hint, boolean goat){
+	public void setCurrentRoom(boolean key, boolean map, boolean monster, boolean riddle, boolean hint, boolean goat, boolean comboLock){
 	currentRoom.setHasKey(key);
 	currentRoom.setHasMonster(monster);
 	currentRoom.setHasMap(map);
 	currentRoom.setHasRiddle(riddle);
 	currentRoom.setHasHint(hint);
 	currentRoom.setHasGoat(goat);
+	currentRoom.setHasComboLock(comboLock);
 	return;
 	}
 
@@ -308,7 +311,7 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 	}
 
 	// reset the booleans in the array list room 
-	public void setRoom(int x , int y,  boolean key, boolean door ,boolean map, boolean monster, boolean riddle, boolean hint, boolean goat ){
+	public void setRoom(int x , int y,  boolean key, boolean door ,boolean map, boolean monster, boolean riddle, boolean hint, boolean goat, boolean comboLock ){
 		if ( x >= 0 && x <= mazeSize-1 && y >=0 && y<=mazeSize-1) {
 		Room temp = roomList[x][y];  // get the pointer to the room in list at index k
 		
@@ -319,6 +322,7 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 		temp.setHasRiddle(riddle);
 		temp.setHasHint(hint);
 		temp.setHasGoat(goat);
+		temp.setHasComboLock(comboLock);
 		
 		}
 	
@@ -326,7 +330,7 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 	}	
 
 	// reset the booleans in the array list room 
-	public void setRoom(Point p , boolean key, boolean door ,boolean map, boolean monster, boolean riddle, boolean hint, boolean goat){
+	public void setRoom(Point p , boolean key, boolean door ,boolean map, boolean monster, boolean riddle, boolean hint, boolean goat, boolean comboLock){
 		if ( p.getXCoordinate() >= 0 && p.getXCoordinate() <= mazeSize-1 && p.getYCoordinate() >=0 && p.getYCoordinate() <= mazeSize-1) {
 		Room temp = roomList[p.getXCoordinate()][p.getYCoordinate()];  // get the pointer to the room in list at index k
 		
@@ -337,6 +341,8 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 		temp.setHasRiddle(riddle);
 		temp.setHasHint(hint);
 		temp.setHasGoat(goat);
+		temp.setHasComboLock(comboLock);
+		
 		}
 	
 	return;
@@ -531,21 +537,51 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 	public void searchRoom() {
 	Point currentPosition = hero.getPosition();
 	currentRoom = getRoom( currentPosition );
+	Point firstHints = new Point(0,1);
+	Point secondHints = new Point(2,1);
 	boolean leverOne = false;
+	boolean leverTwo = false;
 	// if room has hint(s)
-		if (currentRoom.getHasHint()) {
+	if (currentRoom.getHasHint() && currentPosition.isEqual(firstHints)) {	//If in first hint room
 		Start hint = new Start();
-		leverOne = hint.gameMenu();
+		leverOne = hint.gameMenuOne();
 		setCurrentRoom(currentPosition);	
-		}
+	}
 	if (leverOne == true) {
 		hero.setHasLeverOne(leverOne);
+	}
+	if (currentRoom.getHasHint() && currentPosition.isEqual(secondHints)) {
+		Start hint = new Start();
+		leverTwo = hint.gameMenuTwo();
+		setCurrentRoom(currentPosition);	
+	}
+	if (leverTwo == true) {
+		hero.setHasLeverTwo(leverTwo);
 	}
 	currentRoom = getRoom( currentPosition );
 	return;
 	}
 	
-	
+	public void tryCombo() {
+		Point currentPosition = hero.getPosition();
+		currentRoom = getRoom( currentPosition );
+		boolean allowProgress = hero.getHasLeverOne() && hero.getHasLeverTwo();
+		boolean unlockedCombo = false;
+		
+		if (currentRoom.getHasComboLock()) {	//If in first hint room
+			ComboLock lock = new ComboLock("7","2","8");
+			lock.tryUnlock();
+			unlockedCombo = lock.checkCombo();
+			setCurrentRoom(currentPosition);	
+		}
+		if (unlockedCombo == true && allowProgress == true) {
+			System.out.println("You put together the two metal rods. It combines into a trusty lever.\nYou stick the lever into the hole in the wall, and it fits perfectly.");
+			System.out.println("The wall vanishes once you pull the lever. You see a door far in the distance..");
+			currentRoom.setHasComboLock(!allowProgress);
+			currentRoom.setLeftWall(!allowProgress);
+		}
+	}	
+		
 
 	
 ///////////////////////    OTHER METHODS ///////////////////////////////////////////////////

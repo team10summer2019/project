@@ -54,7 +54,7 @@ public class DynamicObjects extends StaticObjects{
 	}
 	/////////////leverP2//////////////////
 	private String string_leverP2() {
-		System.out.println("It is a metal rod that is hollow on one end and a red round knob. It almost looks like a toy lollipop. There are grooves inside the hollow end of the rod.\n");
+		System.out.println("You find another metal rod, but this one is hollow on one end and has a red round knob on the other side.\nIt almost looks like a toy lollipop. There are grooves inside the hollow end of the rod.\n");
 		return "leverPiece2";
 	}
 	

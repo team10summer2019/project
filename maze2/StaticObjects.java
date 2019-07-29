@@ -28,12 +28,17 @@ public class StaticObjects extends Inventory {
 	}
 	
 	public void aCard() {
-		System.out.println("A black seven of spades playing card.");
+		System.out.println("\nA black seven of spades playing card.\n");
 	}
 	
-	public void aPaper() {
-		System.out.println("You unfold the paper. It is torn and looks like it came from a nursery book.");
-		System.out.println("On it, there writes: '--two, tie your shoe.'. There is a drawing of a green shoe right beneath it.");
+	public void aNote() {
+		System.out.println("You find a folded sticky note inside. You unfold the note. It is a torn page from a nursery book. The note reads:");
+		System.out.println("__________________");
+		System.out.println("|'One,Two'        |");
+		System.out.println("|'Tie your Shoe.' |");
+		System.out.println("|_________________|");
+		System.out.println();
+		System.out.println("The 'Two' has been circled in crayon. There is a picture of a green shoe right below the nursery rhyme.\n");
 	}
 	
 	public void aLeftPhoto() {
@@ -49,8 +54,17 @@ public class StaticObjects extends Inventory {
 	}
 	
 	public void redBox() {
-		System.out.println("It is a red box.\nOpen? 'y'/'n'");
+		System.out.println("It is a red box. Someone painted a white 1 on the lid.\nOpen? 'y'/'n'");
 	}
+	
+	public void yellowBox() {
+		System.out.println("A very bright, yellow box.\nOpen? 'y'/'n'");
+	}
+	
+	public void greenBox() {
+		System.out.println("Someone wrote a sloppy 3 on the lid with sharpie.\nOpen? 'y'/'n'\"");
+	}
+	
 	public void aShelf() {
 		System.out.println("You are viewing the shelf.");
 		System.out.println("There are three framed photos, neatly lined up next to each other.");

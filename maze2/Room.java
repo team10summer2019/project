@@ -150,6 +150,7 @@ private int roomRows=4;  // height of a room
 	 hasGoat=toCopy.hasGoat;
 	 hasHint=toCopy.hasHint;
 	 hasDoor=toCopy.hasDoor;
+	 hasComboLock=toCopy.hasComboLock;
 	 doorPosition=toCopy.doorPosition; // 0 for no door 1 for left 2 for right , 3 for top, 4 for bottom
 	 
 	 roomCols = toCopy.roomCols;
@@ -358,15 +359,16 @@ private int roomRows=4;  // height of a room
 	System.out.print("leftWall = " + leftWall + " ");	
 	System.out.print("RightWall = " + rightWall + " ");
 	System.out.print("TopWall = " + topWall + " ");
-	System.out.println("BottomWall = " + bottomWall);
+	System.out.print("BottomWall = " + bottomWall);
 	System.out.print("Monster = " + hasMonster+ " ");
-	System.out.print("HasKey = " + hasKey + " ");
+	System.out.println("HasKey = " + hasKey + " ");
 	System.out.print("HasMap = " + hasMap + " ");
 	System.out.print("Riddle = " + hasRiddle + " ");
 	System.out.print("HasHint = " + hasHint + " ");
 	System.out.print("Riddle = " + hasGoat + " ");
 	System.out.print("Door = " + hasDoor+ " ");
 	System.out.println("DoorPosition = " + doorPosition);
+	System.out.println("HasComboLock = " + hasComboLock + " ");
 	}
 	
 	public void drawRoom(){

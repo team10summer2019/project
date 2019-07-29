@@ -263,7 +263,8 @@ private int attackStrength;
 	System.out.println("Attack Strength= " + attackStrength + " ");
 	System.out.print("Has Key = " + hasKey +", ");
 	System.out.println("Has Map = " + hasMap + ",");
-	System.out.print("Has leverOne = " + hasLeverOne + ",");
+	System.out.print("Has leverOne = " + hasLeverOne + ", ");
+	System.out.print("Has leverTwo = " + hasLeverTwo + ", ");
 	System.out.print("Has Hint = " + hasHint +", ");
 	System.out.println("Position = (" + position.getXCoordinate() + "," + position.getYCoordinate() + ")");  
 	
