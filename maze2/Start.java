@@ -20,35 +20,33 @@ public class Start {
 	private Inventory playerInventory = new Inventory();
 	private FloorInventory roomInventory = new FloorInventory();
 	
-	public static void gameMenu() {
+	public void gameMenu() {
 		gameRunning = true;
 		inRoom1 = true;
 		while (gameRunning == true) {
 			//////////GAME MENU
-			System.out.println("Welcome, time to visit the room.");
-			System.out.println("Type 'Start' to begin and 'Exit'");
-			String userInput = keyboard.next();
-			if (userInput.equalsIgnoreCase("start")) {
-				System.out.println("Initializing..");
-				gameMethods.room1();
+			System.out.println("\nYou decide to take a look around the room. Some things stand out to you.");
+			System.out.println("In the centre of the room, there is a blackboard on one wall. Next to that wall, there is a shelf with three photos displayed.");
+			System.out.println("Looking down at the ground, you realize you have stepped into a shallow puddle.\n");
+			userInput = gameMethods.room1();
 			} 
-			gameMethods.exitView(userInput);
 				
-		}
 	}
+
 	private void exitView(String userInput) {
 		if (userInput.equalsIgnoreCase("exit")) { //don't need to prompt for each item(aka. make a new method to call it) because it'll be combined later on
-			System.out.println("Exiting..");
+			System.out.println("\nYou decide to stop looking around the room.");
 			gameMethods.inRoom1 = false;
 			gameRunning = false;
 		}
 	}
 	
-	public void room1() {
+	public String room1() {
 		while (inRoom1 == true) {
-			System.out.println("\n//////////Room 1://///////////\nThis room has a bear with a red box beside it. There is a shelf with three birds sitting on it: a red bird, yellow bird, and green bird.");
-			System.out.println("To view your Inventory:\n'i'");
-			System.out.println("To view certain items, type:\n'Bear'\n'RedBox'\n'Shelf'\n'Mirror'");
+			System.out.println("To view your Inventory, type:\n'i'");
+			System.out.println("To view certain items, type:\n'Bear'\n'Blackboard'\n'Shelf'\n'Puddle'");
+			System.out.println("To stop looking around the room, type:\n'Exit'");
+			System.out.println("..and then press ENTER.");
 			userInput = keyboard.next();
 			///////VIEW INVENTORY
 			if (userInput.equalsIgnoreCase("i")) {
@@ -60,19 +58,20 @@ public class Start {
 				gameMethods.viewBear();
 			}
 			////////VIEW REDBOX
-			if (userInput.equalsIgnoreCase("redbox")) {
-				gameMethods.viewRedBox();
+			if (userInput.equalsIgnoreCase("blackboard")) {
+				gameMethods.viewBlackboard();
 			}
 			////////VIEW SHELF
 			if (userInput.equalsIgnoreCase("shelf")) {
 				gameMethods.viewShelf();
 			}
 			////////////VIEW MIRROR
-			if (userInput.equalsIgnoreCase("mirror")) {
-				gameMethods.viewMirror();
+			if (userInput.equalsIgnoreCase("puddle")) {
+				gameMethods.viewPuddle();
 			}
 			gameMethods.exitView(userInput);
 		}
+		return userInput;
 	}
 ////////////////////////ITEM METHODS////////////////////////////////
 	public void viewInventory() {
@@ -130,24 +129,25 @@ public class Start {
 				System.out.println("you decided not to open the box.\n");
 				awaitInput = false;
 			}
-		}
-	}
+		}  
+	} 
+	
 	//////////SHELF////////////
 	public void viewShelf() {
 		boolean awaitInput = true;
 		
 		while (awaitInput == true) {
-			System.out.println("<><>SHELF<><>");
+			System.out.println("\n<><>SHELF<><>");
 			stat_item.aShelf();
 			userInput = keyboard.next();
-			if (userInput.equalsIgnoreCase("r")) {
-				stat_item.aBirdR();
+			if (userInput.equalsIgnoreCase("left")) {
+				stat_item.aLeftPhoto();
 			}
-			if (userInput.equalsIgnoreCase("y")) {
-				stat_item.aBirdY();
+			if (userInput.equalsIgnoreCase("middle")) {
+				stat_item.aMiddlePhoto();
 			} 
-			if (userInput.equalsIgnoreCase("g")) {
-				stat_item.aBirdG();
+			if (userInput.equalsIgnoreCase("right")) {
+				stat_item.aRightPhoto();
 			}
 			if (userInput.equalsIgnoreCase("stop")) {
 				System.out.println("you left the shelf.\n");
@@ -155,11 +155,26 @@ public class Start {
 			}
 		}
 	}
-	//////////MIRROR////////////
-	//viewMirror by Haine
-	public void viewMirror() {
-		System.out.println("<><>MIRROR<><>");
-		stat_item.aMirror();
+	//////////PUDDLE////////////		//Haine
+	public void viewPuddle() {
+		System.out.println("\n<><>PUDDLE<><>");
+		stat_item.aPuddle();
+	}
+	////////BLACKBOARD//////////		//Haine
+	public void viewBlackboard() { 
+		System.out.println("\n<><>BLACKBOARD<><>");
+		boolean awaitInput = true;
+		while (awaitInput == true) {
+			stat_item.aBlackboard();
+			userInput = keyboard.next();
+			if (userInput.equalsIgnoreCase("y")) {
+				System.out.println("\nYou can't write on it. There is no chalk or eraser to be found, but several rolls of pennies.\n");
+				awaitInput = false;
+			} else if (userInput.equalsIgnoreCase("n")) {
+				System.out.println("\nYou decided not to vandalize the already vandalized blackboard.\n");
+				awaitInput = false;
+			}
+		}
 	}
 	
 }
