@@ -1,9 +1,7 @@
 
-
-
 /**
  * @author Fiona
- *
+ * Version Updated: July 29, 2019
  */
 public class DynamicObjects extends StaticObjects{
 	/*
@@ -16,6 +14,7 @@ public class DynamicObjects extends StaticObjects{
 	private LockLever changeStatus = new LockLever();
 	final String leverP1 = "leverPiece1";
 	final String leverP2 = "leverPiece2";
+	final String cabinetKey = "cabinetKey";
 	
 	public DynamicObjects() {
 		
@@ -27,6 +26,9 @@ public class DynamicObjects extends StaticObjects{
 		}
 		if (item == "leverPiece2") {
 			string_leverP2();
+		}
+		if (item == "cabinetKey") {
+			string_cabinetKey();
 		}
 		
 	}
@@ -61,8 +63,9 @@ public class DynamicObjects extends StaticObjects{
 	private void changeStatus_leverP2() {
 		changeStatus.setLeverPiece2(true);
 	}
-	/////////UNUSED KEY///////////////////
-	public void dynObj_regularKey() {
-		System.out.println("It is a key.");
+	/////////KEY///////////////////
+	public String string_cabinetKey() {
+		System.out.println("It is a key for the cabinet.");
+		return "cabinetKey";
 	}
 }

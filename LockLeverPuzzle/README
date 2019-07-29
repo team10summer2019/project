@@ -1,0 +1,38 @@
+
+/**
+ * @author Fiona
+ *
+ */
+/////////////////////////////
+Last Updated: JUL 29,2019 
+
+# LockLeverPuzzle(plus Escape Room Implementations)
+
+===Overview:===
+
+Folder LockLeverPuzzle has multiple demos of the pieces that would fit together for a specialized puzzle by a class called LockLeverPuzzle. 
+This program runs a text-based escape room styled interaction with the user.
+
+The program is run on java through the main class.
+Most classes are prompted and work with the start class.
+
+The classes interact with each other properly and independently for the most part. 
+
+===Permissions=== 
+Classes such as: 
+StaticObjects,DynamicObjects,and Start 
+are permitted to be modified as long as permission is granted and updates are verified for fair use of personal work.
+
+All classes are permitted to be modified to function with the team code as long as permission is granted and updates are verified for fair use of personal work.
+
+===Bugs and Future Updates:===
+
+More work will be needed to adjust inventory to carry it through Room1,Room2 and any other rooms in the MazeGame.(Making a parent class for all rooms)
+LockLeverPuzzle requires review and editing to have it interacting with the user/player.
+
+===File Information=========
+
+To run the game(Main.java file),
+$cd LockLeverPuzzle 
+$javac *.java 
+$java Main

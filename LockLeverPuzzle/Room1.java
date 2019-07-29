@@ -1,14 +1,14 @@
 
 /**
  * @author Fiona
- * Version Updated: July 27, 2019
+ * Version Updated: July 29, 2019
  */
 import java.util.Scanner;
 
-public class Start {
+public class Room1 {
 	private static boolean gameRunning = true;
 	private static boolean inRoom1 = true;
-	private static Start gameMethods = new Start();
+	private static Room1 gameMethods = new Room1();
 	private static Scanner keyboard = new Scanner(System.in);
 	private String userInput;
 	
@@ -21,19 +21,23 @@ public class Start {
 	public static void gameMenu() {
 		while (gameRunning == true) {
 			//////////GAME MENU
-			System.out.println("Welcome, time to visit the room.");
+			System.out.println("Welcome to Room 1, time to visit the room.");
 			System.out.println("Type 'Start' to begin and 'Exit'");
 			String userInput = keyboard.next();
 			if (userInput.equalsIgnoreCase("start")) {
 				System.out.println("Initializing..");
 				gameMethods.room1();
 			} 
-			if (userInput.equalsIgnoreCase("exit")) { //don't need to prompt for each item(aka. make a new method to call it) because it'll be combined later on
-				System.out.println("Exiting..");
-				gameRunning = false;
-				keyboard.close();
-			}
+			gameMethods.exitView(userInput);
 				
+		}
+	}
+	private void exitView(String userInput) {
+		if (userInput.equalsIgnoreCase("exit")) { //don't need to prompt for each item(aka. make a new method to call it) because it'll be combined later on
+			System.out.println("Exiting Room 1..");
+			gameMethods.inRoom1 = false;
+			gameRunning = false;
+			//keyboard.close(); //for isolated game from MazeGame only (DEVELOPERS USE)
 		}
 	}
 	
@@ -64,9 +68,10 @@ public class Start {
 			if (userInput.equalsIgnoreCase("mirror")) {
 				gameMethods.viewMirror();
 			}
+			gameMethods.exitView(userInput);
 		}
 	}
-////////////////////////METHODS////////////////////////////////
+////////////////////////ITEM METHODS////////////////////////////////
 	public void viewInventory() {
 		playerInventory.viewInventory();
 	}
@@ -84,22 +89,27 @@ public class Start {
 	public void viewBear() {
 		System.out.println("<><>BEAR<><>");
 		boolean awaitInput = true;
+		boolean awaitInput1 = true;
 	
 		while (awaitInput == true) {
 			stat_item.aBear();
 			//If item was not encountered before 
 			//RECOMMENDED TO USE THIS FOR REFERENCE:FOR ENCOUNTERING DYNAMIC OBJECTS THAT WILL BE PICKED UP)
 			if (playerInventory.hasItemInInventory(dyn_item.leverP1) == false) {
-				System.out.println("It is holding an object.\nView object? 'y'/'n'");
-				userInput = keyboard.next();
-				if (userInput.equalsIgnoreCase("y")) {
-					dyn_item.itemInfo_dynObj(dyn_item.leverP1);
-					uniqueObject_toInventory(dyn_item.leverP1);
-				} else if (userInput.equalsIgnoreCase("n")) {
-					System.out.println("You decided not to view the object.");			
+				while (awaitInput1 == true) {
+					System.out.println("It is holding an object.\nView object? 'y'/'n'");
+					userInput = keyboard.next();
+					if (userInput.equalsIgnoreCase("y")) {
+						dyn_item.itemInfo_dynObj(dyn_item.leverP1);
+						uniqueObject_toInventory(dyn_item.leverP1);
+						awaitInput1 = false;
+					} else if (userInput.equalsIgnoreCase("n")) {
+						System.out.println("You decided not to view the object.");		
+						awaitInput1 = false;
+					}
 				}
 			}
-			awaitInput = false;
+		awaitInput = false;
 		}	
 	}
 	//////////REDBOX////////////
