@@ -187,8 +187,11 @@ public class RiverPuzzle {
 	}
 	
 	public void invalidMove() {
-		if (!(object.contains("LEFT")) || !(object.contains("RIGHT")) && !(object.contains("CABBAGE")) && !(object.contains("WOLF")) && !(object.contains("GOAT")) && !(object.contains("PLAYER"))){
-			System.out.println("That is an invalid move. Please try again.\n");
+		if(!object.contains("LEFT") && !object.contains("RIGHT")) {
+			System.out.println("That is an invalid move. Please try again.");
+		}
+		else if(!object.contains("GOAT") && !object.contains("WOLF") && !object.contains("PLAYER") && !object.contains("CABBAGE")) {
+			System.out.println("That is an invalid move. Please try again.");
 		}
 	}
 	
