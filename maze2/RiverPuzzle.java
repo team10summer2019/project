@@ -1,3 +1,4 @@
+package maze2;
 /**
  * @author Steven On
  *
@@ -208,7 +209,7 @@ public class RiverPuzzle {
 		}
 	}
 	
-	public void checkWin() {
+	public boolean checkWin() {
 		problem();
 		start();
 		boolean gameDone = false;
@@ -223,11 +224,12 @@ public class RiverPuzzle {
 			moveRight();
 			checkGoatAndCabbage();
 			resetGame();
-			if(right.contains("Player") && right.contains("Goat") && right.contains("Wolf") && right.contains("Cabbage")) {
-				System.out.println("You solved it!");
-				gameDone = true;
-		}
-	}
+				if(right.contains("Player") && right.contains("Goat") && right.contains("Wolf") && right.contains("Cabbage")) {
+					System.out.println("You solved it!");
+					gameDone = true;
+				}
+			}
+		return gameDone;
 }
 	
 	//When the player encounters a loss this will reset the game for them.
@@ -262,8 +264,9 @@ public class RiverPuzzle {
 		}
 	}
 	
-	public void playRiverPuzzle() {
+	public boolean playRiverPuzzle() {
 		RiverPuzzle play = new RiverPuzzle();
-		play.checkWin();
+		boolean solved = play.checkWin();
+		return solved;
 	}
 }

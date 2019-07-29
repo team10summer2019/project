@@ -464,22 +464,41 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 	public void playRiddle(){													//HAINE KIM
 	Point currentPosition = hero.getPosition();
 	currentRoom = getRoom( currentPosition );	
-		// if the room has a riddle but the player technically doesn't
-		if (currentRoom.getHasRiddle() && !hero.getHasRiddle()){
+	Point firstRiddle = new Point(0,2);
+	Point secondRiddle = new Point(2,3);
+	boolean solved = false;
+		// if the room has a riddle 
+		if (currentRoom.getHasRiddle() && currentPosition.isEqual(firstRiddle)) {
 		// give the player a riddle
-		TestHaineRiddle rid = new TestHaineRiddle();
-		boolean solved = rid.notHamRid();
-		hero.setHasRiddle(solved);
-		// reset the room to not have a key
-		setCurrentRoom(currentPosition); // point current room to the room in roomList 
-		if (solved == true) {			//If the riddle has been solved
-		currentRoom.setHasRiddle(false);
-		System.out.println("\nThe right wall disappeared to reveal a path..\n");
+			TestHaineRiddle rid = new TestHaineRiddle();
+			solved = rid.riddleOne();
+			setCurrentRoom(currentPosition); // point current room to the room in roomList 
+			if (solved == true) {			//If the riddle has been solved
+				currentRoom.setHasRiddle(false);
+				System.out.println("The right wall disappeared to reveal a path..\n");
+			}
+			else {							//If riddle has not been solved
+				currentRoom.setHasRiddle(true); // remove the key from the room	
+			}
 		}
-		else {							//If riddle has not been solved
-		currentRoom.setHasRiddle(true); // remove the key from the room	
+		if (currentRoom.getHasRiddle() && currentPosition.isEqual(secondRiddle)) {
+			// give the player a riddle
+			TestHaineRiddle rid = new TestHaineRiddle();
+			solved = rid.riddleTwo();
+			setCurrentRoom(currentPosition); // point current room to the room in roomList 
+			if (solved == true) {			//If the riddle has been solved
+				currentRoom.setHasRiddle(false);
+				System.out.println("The wall in front of you disappeared. You see a key in the distance...\n");
+			}
+			else {							//If riddle has not been solved
+				currentRoom.setHasRiddle(true); // remove the key from the room	
+			}
 		}
-		currentRoom.setRightWall(!solved);
+		if (currentPosition.isEqual(firstRiddle)) {
+			currentRoom.setRightWall(!solved);
+		}
+		if (currentPosition.isEqual(secondRiddle)) {
+			currentRoom.setTopWall(!solved);
 		}
 		// restore the pointer away from the roomList;
 	currentRoom = getRoom( currentPosition );

@@ -263,7 +263,7 @@ public class MazeGame {
 	// room (1,3)
 	m.setRoom(1,3,true,true,false,true,false,false,false,false,false,false,true);
 	// room (3,2)
-	m.setRoom(2,3,true,false,false,true,false,false,false,false,false,false,false);
+	m.setRoom(2,3,true,false,true,true,false,false,false,false,true,false,false);
 	// room (3,3)
 	m.setRoom(3,3,false,true,false,true,false,false,false,false,false,false,false);	
 	
@@ -284,7 +284,7 @@ public class MazeGame {
 	System.out.println("|   R         |   K  |      |");		
 	System.out.println("|______|_    _|__   _|_    _|");
 	System.out.println("|      |      |      |      |");
-	System.out.println("|   M      P  |             |");
+	System.out.println("|   M      P  |   R         |");
 	System.out.println("|______|______|______|______|");
 	System.out.println("");
 	System.out.println("Type \"Return\" and press Enter to return to the Maze");
