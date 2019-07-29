@@ -1,5 +1,3 @@
-
-
 /**
  * @author Fiona
  *
@@ -18,6 +16,7 @@ public class FloorInventory {
 		this.floorInventory = new ArrayList<String>();
 		add_unique_flrInv("leverPiece1");
 		add_unique_flrInv("leverPiece2");
+		add_unique_flrInv("cabinetKey");
 	}
 	public void remove_flrInv(String item) {
 		floorInventory.remove(item);
