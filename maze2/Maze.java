@@ -500,6 +500,7 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 		else {							//If puzzle not solved
 		currentRoom.setHasGoat(true); // keep the puzzle in the room	
 		}
+		currentRoom.setLeftWall(!solved);
 		}
 		// restore the pointer away from the roomList;
 	currentRoom = getRoom( currentPosition );
