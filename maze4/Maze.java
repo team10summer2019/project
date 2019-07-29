@@ -505,6 +505,14 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 	return;
 	}
 	
+	
+	public void deleteHero(){
+	hero.die();  // kill the hero
+	return;
+	}
+	
+	
+	
 /////////////////////     Item Operations  ////////////////////////////////////////////	
 	
 	public void takeKey(){

@@ -268,6 +268,8 @@ public class MazeGame {
 				System.out.println("There is nobody in the room to fight...");
 				pressEnter();
 				}
+			// update the room 
+			tempRoom = gameBoard.getCurrentRoom();
 			}			
 			
 		
@@ -746,23 +748,47 @@ public class MazeGame {
 	gameBoard.getHero().displayStats();
 	gameBoard.getMonster().displayStats();	
 	String userCommand  = getUserInput();
-	
-	
+
 		while ( !userCommand.equalsIgnoreCase("Run") && gameBoard.getMonster().isAlive() && gameBoard.getHero().isAlive() ){
 		
-				if (userCommand.equalsIgnoreCase("Attack") || userCommand.equalsIgnoreCase("Fight") ) {
+			if (userCommand.equalsIgnoreCase("Attack") || userCommand.equalsIgnoreCase("Fight") ) {
 				gameBoard.fightTurn();
 				} 
 				
-				if (userCommand.equalsIgnoreCase("Run") ) {
+			if (userCommand.equalsIgnoreCase("Run") ) {
 				break;
-				} 	
+				} 
+		
+		
 			clearScreen(); // clear the screen 		
 			displayMazeWraith(); // show the ASCII Art 
+			
+			if ( gameBoard.getMonster().getHealth() >12 ) {
+			System.out.println("The MAZE WRAITH LAUGHS IN GLEE!!!") ;
+			}else if ( gameBoard.getMonster().getHealth() < 12 && gameBoard.getMonster().getHealth()> 6 ){
 			System.out.println("The MAZE WRAITH SCREAMS IN ANGER!!!") ;
+			}else if ( gameBoard.getMonster().getHealth() < 6 && gameBoard.getMonster().getHealth()> 0 ){
+			System.out.println("The MAZE WRAITH CRYS IN TERROR!!!") ;
+			}else if ( gameBoard.getMonster().getHealth()<=0 ){
+			System.out.println("The MAZE WRAITH SHREAKS IN PAIN!!!" ) ;
 			gameBoard.getHero().displayStats();  // display player stats
 			gameBoard.getMonster().displayStats(); // display monster stats
+			break;
+			}
+			gameBoard.getHero().displayStats();  // display player stats
+			gameBoard.getMonster().displayStats(); // display monster stats
+			
+			if ( ! gameBoard.getHero().isAlive()){
+			gameBoard.deleteHero();
+			System.out.println("The Hero has been vanquished ...");
+			pressEnter();
+			break;
+			}			
+			
 			userCommand  = getUserInput();  // get user input 
+			
+	
+	
 			
 			}
 		
