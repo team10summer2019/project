@@ -118,7 +118,7 @@ public class HandleKeyBoardInput implements EventHandler<KeyEvent> {
 			storeInput="up";
 			messageLabel.setText("Move Up");
 		} else if (event.getCharacter().charAt(0) == 'r') {
-			storeInput="return";
+			storeInput="Return";
 			messageLabel.setText("Return");
 		} else if (event.getCharacter().charAt(0) == 't') {
 			storeInput="take";
@@ -132,12 +132,19 @@ public class HandleKeyBoardInput implements EventHandler<KeyEvent> {
 		} else if (event.getCharacter().charAt(0) == 'h') {
 			storeInput="help";
 			messageLabel.setText(storeInput);
+		} else if (event.getCharacter().charAt(0) == 'f') {
+			storeInput="fight";
+			messageLabel.setText(storeInput);
+		} else if (event.getCharacter().charAt(0) == 'm') {
+			storeInput="map";
+			messageLabel.setText(storeInput);
 		} else if (event.getCharacter().charAt(0) == 'l') {
 			messageLabel.setText(storeInput);
 	}
 	
 		// display the textMode output 
 		textModeOutput();
+		monsterWalk(randGen,gameBoard);// move the monster
 		
 	}
 }
@@ -152,7 +159,8 @@ public class HandleInputSendClick implements EventHandler<ActionEvent> {
 			messageLabel.setText("Command: " + storeInput);
 			
 			// show the textMode display in the console 
-			textModeOutput();			
+			textModeOutput();	
+			monsterWalk(randGen,gameBoard);// move the monster
 		}
 	}
 
@@ -171,6 +179,7 @@ public class HandleInputStartClick implements EventHandler<ActionEvent> {
 		postCurrentRoom();   // display the current room 
         // show the text mode output
 		textModeOutput();
+		printHelp();
 		}
 	}
 
@@ -534,10 +543,10 @@ public void textModeOutput() {
 		
 				while (!storeInput.equalsIgnoreCase("Return")) {	
 				printMap();  // print the map
-				storeInput = getUserInput();
 				}
 			} else {
 			messageLabel.setText("You don't have a Map...");
+			System.out.println("You don't have a Map...");
 			}
 
 	        }
@@ -554,9 +563,11 @@ public void textModeOutput() {
 			if (gameBoard.getHero().getHasKey()  && currentLocation.isEqual(doorLocation) && gameBoard.getCurrentRoom().getHasDoor() ) {
 			gameBoard.unlockDoor();
 			messageLabel.setText("The Door is now Open, you may now Escape...");
+			System.out.println("The Door is now Open, you may now Escape...");
 
 			} else {
 			messageLabel.setText("You don't have a Key, or You're not at the Door...");
+			System.out.println("You don't have a Key, or You're not at the Door...");
 			}
 	        }
 		
@@ -578,7 +589,8 @@ public void textModeOutput() {
 				
 			} else {
 			messageLabel.setText("Either the door isn't opened, or You're not at the Door...");
-
+			System.out.println("Either the door isn't opened, or You're not at the Door...");
+			
 			}
 	        }	
 		
@@ -629,13 +641,16 @@ public void textModeOutput() {
 			if (tempRoom.getHasKey()){
 			gameBoard.takeKey();
 			System.out.println("You took the key!");
+			messageLabel.setText("You took the key!");
 			moveCounter++;
 			}else if (tempRoom.getHasMap()){
 			gameBoard.takeMap();
 			System.out.println("You took the Map!");
+			messageLabel.setText("You took the Map!");
 			moveCounter++;
 			}else{
 			System.out.println("There is nothing in the room to take...");
+			messageLabel.setText("There is nothing in the room to take...");
 			}
 		// update the room 
 		tempRoom = gameBoard.getCurrentRoom();
