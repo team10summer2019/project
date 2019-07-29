@@ -573,7 +573,7 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 			lock.tryUnlock();
 			unlockedCombo = lock.checkCombo();
 			setCurrentRoom(currentPosition);	
-		}
+		} 
 		if (unlockedCombo == true && allowProgress == true) {
 			System.out.println("You put together the two metal rods. It combines into a trusty lever.\nYou stick the lever into the hole in the wall, and it fits perfectly.");
 			System.out.println("The wall vanishes once you pull the lever. You see a door far in the distance..");

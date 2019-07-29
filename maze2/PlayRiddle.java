@@ -31,7 +31,7 @@ public class PlayRiddle {
 			inputAsString = input.nextLine();
 			if (inputAsString.contentEquals("EXIT")) {
 				return;
-			}
+			} 
 		}			//END OF WHILE
 		this.inputAsString =  inputAsString.toUpperCase();			//CHANGES INPUT TO AN ALL-CAPS STRING. JUMPS STRAIGHT HERE IF NO SPACES IN INPUT
 		if (inputAsString.contentEquals("EXIT")) {

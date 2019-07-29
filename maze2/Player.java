@@ -3,7 +3,7 @@ package maze2;
 //
 // File: Player.java
 // Description: Player class
-//
+// 
 // Author: (Ron) Zorondras Rodriguez
 // Course:  CPSC 233 Summer 2019
 // Creation Date: July 20, 2019

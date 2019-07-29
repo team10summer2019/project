@@ -135,7 +135,7 @@ private int roomRows=4;  // height of a room
 	
 	// copy constructor 
 	public Room ( Room toCopy){
-	
+	 
 	 location = new Point ( toCopy.location);
 	
 	 leftWall=toCopy.leftWall;

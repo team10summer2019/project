@@ -11,7 +11,7 @@ public class Start {
 	private static boolean gameRunning = true;
 	private static boolean inRoom1 = true;
 	private static Start gameMethods = new Start();
-	private static Scanner keyboard = new Scanner(System.in);
+	private static Scanner keyboard = new Scanner(System.in); 
 	private String userInput;
 	
 	private Player p1 = new Player();//transfer player input into player

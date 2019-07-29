@@ -4,7 +4,7 @@ package maze2;
 /**
  * @author Fiona
  *
- */
+ */ 
 public class DynamicObjects extends StaticObjects{
 	/*
 	 * CLASS

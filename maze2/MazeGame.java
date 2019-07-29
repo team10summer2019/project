@@ -229,7 +229,7 @@ public class MazeGame {
 		}else{
 		System.out.println("Thanks for playing THE MAZE.  Better Luck Next Time!");
 		}
-	
+	 
 	return; 
 	}// end of main function	
 	

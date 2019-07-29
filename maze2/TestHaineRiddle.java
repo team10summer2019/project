@@ -3,7 +3,7 @@ package maze2;
 public class TestHaineRiddle { 
 	 
 	public boolean riddleOne(){
-		///MAKE A LOT OF RIDDLES
+		///MAKE A LOT OF RIDDLES 
 		CreateRiddle runner = new CreateRiddle();
 		CreateRiddle riddle1 = new CreateRiddle("HUMAN" ,"What is the creature that walks on four legs in the morning,\ntwo legs at noon, and three in the evening?\n");
 		CreateRiddle riddle2 = new CreateRiddle("PENNY", "What has a head, a tail, is brown, and has no legs?\n");

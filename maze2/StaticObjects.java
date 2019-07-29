@@ -65,7 +65,7 @@ public class StaticObjects extends Inventory {
 		System.out.println("Someone wrote a sloppy 3 on the lid with sharpie.\nOpen? 'y'/'n'\"");
 	}
 	
-	public void aShelf() {
+	public void aShelf() { 
 		System.out.println("You are viewing the shelf.");
 		System.out.println("There are three framed photos, neatly lined up next to each other.");
 		System.out.println("For a closer look at the photo on the left, type: 'Left'.");
