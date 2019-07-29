@@ -19,32 +19,33 @@ public class Start {
 	private DynamicObjects dyn_item = new DynamicObjects();
 	private Inventory playerInventory = new Inventory();
 	private FloorInventory roomInventory = new FloorInventory();
+	private boolean gotBearLever = false;
 	
-	public void gameMenu() {
+	public boolean gameMenu() {
 		gameRunning = true;
 		inRoom1 = true;
 		while (gameRunning == true) {
 			//////////GAME MENU
 			System.out.println("\nYou decide to take a look around the room. Some things stand out to you.");
-			System.out.println("In the centre of the room, there is a blackboard on one wall. Next to that wall, there is a shelf with three photos displayed.");
+			System.out.println("In the centre of the room, you can see a teddy bear on the floor, holding something. There is a blackboard on one wall. Next to that wall, there is a shelf with three photos displayed.");
 			System.out.println("Looking down at the ground, you realize you have stepped into a shallow puddle.\n");
-			userInput = gameMethods.room1();
+			this.gotBearLever = gameMethods.room1();
 			} 
-				
+		return this.gotBearLever;		
 	}
 
 	private void exitView(String userInput) {
 		if (userInput.equalsIgnoreCase("exit")) { //don't need to prompt for each item(aka. make a new method to call it) because it'll be combined later on
-			System.out.println("\nYou decide to stop looking around the room.");
+			System.out.println("\nYou decide to stop looking around the room.\n");
 			gameMethods.inRoom1 = false;
 			gameRunning = false;
 		}
 	}
 	
-	public String room1() {
+	public boolean room1() {
 		while (inRoom1 == true) {
 			System.out.println("To view your Inventory, type:\n'i'");
-			System.out.println("To view certain items, type:\n'Bear'\n'Blackboard'\n'Shelf'\n'Puddle'");
+			System.out.println("To view certain things, type:\n'Bear'\n'Blackboard'\n'Shelf'\n'Puddle'");
 			System.out.println("To stop looking around the room, type:\n'Exit'");
 			System.out.println("..and then press ENTER.");
 			userInput = keyboard.next();
@@ -70,8 +71,9 @@ public class Start {
 				gameMethods.viewPuddle();
 			}
 			gameMethods.exitView(userInput);
-		}
-		return userInput;
+			
+		}		//End of while loop
+		return gotBearLever;
 	}
 ////////////////////////ITEM METHODS////////////////////////////////
 	public void viewInventory() {
@@ -83,13 +85,13 @@ public class Start {
 	public void uniqueObject_toInventory(String item) { 
 		System.out.println("You added '" + item + "' to your inventory.");
 		dyn_item.changeStatus_dynObj(item);
-		playerInventory.addUniqueItemToInventory(item); //adds item to Inventory
+		this.playerInventory.addUniqueItemToInventory(item); //adds item to Inventory
 		roomInventory.remove_flrInv(item); //removes item from FloorInventory
 		//roomInventory.viewFloorInventory();
 	}
 	//////////BEAR////////////
 	public void viewBear() {
-		System.out.println("<><>BEAR<><>");
+		System.out.println("\n<><>BEAR<><>");
 		boolean awaitInput = true;
 		boolean awaitInput1 = true;
 	
@@ -99,14 +101,15 @@ public class Start {
 			//RECOMMENDED TO USE THIS FOR REFERENCE:FOR ENCOUNTERING DYNAMIC OBJECTS THAT WILL BE PICKED UP)
 			if (playerInventory.hasItemInInventory(dyn_item.leverP1) == false) {
 				while (awaitInput1 == true) {
-					System.out.println("It is holding an object.\nView object? 'y'/'n'");
+					System.out.println("It is holding ...something.\nView object? 'y'/'n'");
 					userInput = keyboard.next();
 					if (userInput.equalsIgnoreCase("y")) {
 						dyn_item.itemInfo_dynObj(dyn_item.leverP1);
 						uniqueObject_toInventory(dyn_item.leverP1);
+						this.gotBearLever = true;
 						awaitInput1 = false;
 					} else if (userInput.equalsIgnoreCase("n")) {
-						System.out.println("You decided not to view the object.\n");		
+						System.out.println("You decided not to take a closer look.\n");		
 						awaitInput1 = false;
 					}
 				}

@@ -27,6 +27,8 @@ private boolean hasKey;
 private boolean hasMap;
 private boolean hasRiddle;
 private boolean hasHint;
+private boolean hasLeverOne;
+private boolean hasLeverTwo;
 private boolean hasGoat;
 private int attackStrength;
 
@@ -41,6 +43,8 @@ private int attackStrength;
 	hasRiddle = false;
 	hasHint = false;
 	hasGoat = false;
+	hasLeverOne = false;
+	hasLeverTwo = false;
 	attackStrength = 4;
 	}
 
@@ -51,6 +55,8 @@ private int attackStrength;
 	hasRiddle = false;
 	hasHint = false;
 	hasGoat = false;
+	hasLeverOne = false;
+	hasLeverTwo = false;
 	hasMap = false;
 		if (heal >5){
 		health = heal;
@@ -69,6 +75,8 @@ private int attackStrength;
 	hasRiddle = p.hasRiddle;
 	hasRiddle = p.hasHint;
 	hasGoat = p.hasGoat;
+	hasLeverOne=p.hasLeverOne;
+	hasLeverTwo=p.hasLeverTwo;
 	hasMap = p.hasMap;
 	
 		if (p.health >0){
@@ -111,6 +119,14 @@ private int attackStrength;
 	
 	public boolean getHasGoat(){
 	return hasGoat;
+	}
+	
+	public boolean getHasLeverOne(){
+	return hasLeverOne;
+	}
+	
+	public boolean getHasLeverTwo(){
+	return hasLeverTwo;
 	}
 
 	public int getAttackStrength(){
@@ -164,7 +180,17 @@ private int attackStrength;
 	hasGoat= val;
 	return;
 	}
-
+	
+	public void setHasLeverOne( boolean val){
+	hasLeverOne= val;
+	return;
+	}
+	
+	public void setHasLeverTwo( boolean val){
+	hasLeverTwo= val;
+	return;
+	}
+	
 	public void setAttackStrength(int strength){
 		if (strength >= 1){
 		attackStrength=strength;
@@ -236,8 +262,8 @@ private int attackStrength;
 	System.out.println("Health = " + health + " "); 
 	System.out.println("Attack Strength= " + attackStrength + " ");
 	System.out.print("Has Key = " + hasKey +", ");
-	System.out.println("Has Map = " + hasMap + " ");
-	System.out.print("Has Riddle = " + hasRiddle +", ");
+	System.out.println("Has Map = " + hasMap + ",");
+	System.out.print("Has leverOne = " + hasLeverOne + ",");
 	System.out.print("Has Hint = " + hasHint +", ");
 	System.out.println("Position = (" + position.getXCoordinate() + "," + position.getYCoordinate() + ")");  
 	

@@ -474,6 +474,7 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 		setCurrentRoom(currentPosition); // point current room to the room in roomList 
 		if (solved == true) {			//If the riddle has been solved
 		currentRoom.setHasRiddle(false);
+		System.out.println("\nThe right wall disappeared to reveal a path..\n");
 		}
 		else {							//If riddle has not been solved
 		currentRoom.setHasRiddle(true); // remove the key from the room	
@@ -496,6 +497,7 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 		setCurrentRoom(currentPosition); // point current room to the room in roomList 
 		if (solved == true) {			//If the puzzle has been solved
 		currentRoom.setHasGoat(false);
+		System.out.println("\nThe wall to your left has vanished.\n");
 		}
 		else {							//If puzzle not solved
 		currentRoom.setHasGoat(true); // keep the puzzle in the room	
@@ -510,12 +512,16 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 	public void searchRoom() {
 	Point currentPosition = hero.getPosition();
 	currentRoom = getRoom( currentPosition );
+	boolean leverOne = false;
 	// if room has hint(s)
 		if (currentRoom.getHasHint()) {
 		Start hint = new Start();
-		hint.gameMenu();
+		leverOne = hint.gameMenu();
 		setCurrentRoom(currentPosition);	
 		}
+	if (leverOne == true) {
+		hero.setHasLeverOne(leverOne);
+	}
 	currentRoom = getRoom( currentPosition );
 	return;
 	}

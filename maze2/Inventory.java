@@ -26,11 +26,14 @@ public class Inventory {
 	public void viewInventory() {
 		if (this.inventory.isEmpty() == false) {
 			System.out.println("Here is your inventory.");
-			System.out.println(this.inventory);
+			System.out.println(this.inventory + "\n");
 		} else {
-			System.out.println("You have nothing in your inventory.");
-			System.out.println(this.inventory);
+			System.out.println("You have nothing in your inventory.\n");
 		}
+	}
+	
+	public ArrayList getInventory() {
+		return inventory;
 	}
 	
 	public void addItemToInventory(String item) {

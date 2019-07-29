@@ -101,13 +101,13 @@ public class MazeGame {
 				victory=true;  // switch victory flag
 				break; // break the while loop you are free
 				} else {
-				System.out.println("Either the door isn't opened, or You're not at the Door...");
+				System.out.println("Either the door isn't opened, or you're not at the Door...");
 				pressEnter();
 				}
 		        }	
 						
 			// if user input was "HELP" display help unit unitl user types return
-			if ( storeInput.equalsIgnoreCase("help") ) {
+			if ( storeInput.equalsIgnoreCase("Help") ) {
 				while (!storeInput.equalsIgnoreCase("Return")) {	
 				clearScreen();
 				printHelp();  // print the help message with user input keywords
@@ -220,7 +220,7 @@ public class MazeGame {
 		
 		/// closing message to user
 		if ( !gameBoard.getDoor().getIsLocked() && victory ){
-		System.out.println("Congratulations! You are free from THE MAZE!");
+		System.out.println("\nCongratulations! You are free from THE MAZE!");
 		}else{
 		System.out.println("Thanks for playing THE MAZE.  Better Luck Next Time!");
 		}
@@ -236,14 +236,14 @@ public class MazeGame {
 	// room (1.0)   
 	m.setRoom(1,0,true,false,true,true,false,true,false,false,false,false,false);
 	// room (2,0)
-	m.setRoom(2,0,false,false,true,true,false,false,false,true,false,false,false);
+	m.setRoom(2,0,false,false,true,true,false,false,false,false,false,false,false);
 	// room (0,3)
 	m.setRoom(3,0,false,true,true,false,false,false,false,false,false,false,false);
 	// room (1,0)
 	// setRoom(x,y,left,right,up,down,key,door,map,monster,riddle,puzzle)
 	m.setRoom(0,1,true,true,false,false,false,false,false,false,false,true,false);
 	// room (1,1)
-	m.setRoom(1,1,true,false,true,false,false,false,false,false,false,false,false);
+	m.setRoom(1,1,true,false,true,false,false,false,false,false,false,true,false);
 	// room (2,1)
 	m.setRoom(2,1,false,false,true,true,false,false,false,false,false,false,false);
 	// room (3,1)
@@ -275,16 +275,16 @@ public class MazeGame {
 	System.out.println("");	
 	System.out.println("_____________________________");
 	System.out.println("|      |      |      |      |");
-	System.out.println("|  *   |  D      W          |");
+	System.out.println("|   *  |   D                |");
 	System.out.println("|_    _|______|______|_    _|");
 	System.out.println("|      |      |      |      |");
-	System.out.println("|  ?   |                    |");
+	System.out.println("|   ?  |   ?                |");
 	System.out.println("|_    _|_    _|______|_    _|");
 	System.out.println("|      |      |      |      |");
-	System.out.println("|  R          |   K  |      |");		
+	System.out.println("|   R         |   K  |      |");		
 	System.out.println("|______|_    _|__   _|_    _|");
 	System.out.println("|      |      |      |      |");
-	System.out.println("|  M      G   |             |");
+	System.out.println("|   M      P  |             |");
 	System.out.println("|______|______|______|______|");
 	System.out.println("");
 	System.out.println("Type \"Return\" and press Enter to return to the Maze");

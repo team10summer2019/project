@@ -530,9 +530,9 @@ private int roomRows=4;  // height of a room
 		}else if (hasComboLock){
 		roomGrid[roomCols/2][roomRows/2]='L';
 		}else if (hasGoat){		
-		roomGrid[roomCols/2][roomRows/2]='G';		//If room has goat puzzle
+		roomGrid[roomCols/2][roomRows/2]='P';		//If room has goat puzzle
 		}else if (hasHint){		
-		roomGrid[roomCols/2][roomRows/2]='?';		//If room has goat puzzle
+		roomGrid[roomCols/2][roomRows/2]='?';		//If room has hints
 		}else {
 		roomGrid[roomCols/2][roomRows/2]=' ';
 		} 
