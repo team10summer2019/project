@@ -169,7 +169,8 @@ public class HandleInputStartClick implements EventHandler<ActionEvent> {
 		tempRoom = gameBoard.getCurrentRoom();  // set the tempRoom to be the current room at (0,0)
 		tempHero = gameBoard.getHero();
 		postCurrentRoom();   // display the current room 
-        //////////////// Probably put this somewhere else 
+        // show the text mode output
+		textModeOutput();
 		}
 	}
 
