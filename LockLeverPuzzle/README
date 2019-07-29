@@ -10,12 +10,18 @@ Last Updated: JUL 29,2019
 
 ===Overview:===
 
-Folder LockLeverPuzzle has multiple demos of the pieces that would fit together for a specialized puzzle by a class called LockLeverPuzzle. This program runs a text-based escape room styled interaction with the user.
+Folder LockLeverPuzzle has multiple demos of the pieces that would fit together for a specialized puzzle by a class called LockLeverPuzzle. 
+This program runs a text-based escape room styled interaction with the user.
 
 The program is run on java through the main class.
 Most classes are prompted and work with the start class.
 
 The classes interact with each other properly and independently for the most part. 
+
+===Permissions=== 
+Classes: 
+StaticObjects,DynamicObjects,and Start 
+are permitted to be used as long as permission is granted and updates are verified for fair use of personal work.
 
 ===Bugs and Future Updates:===
 
