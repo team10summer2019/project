@@ -36,16 +36,16 @@ public class StaticObjects extends Inventory {
 		System.out.println("On it, there writes: '--two, tie your shoe.'. There is a drawing of a green shoe right beneath it.");
 	}
 	
-	public void aBirdR() {
-		System.out.println("It is a red Bird. There is a circle stamped on it.");
+	public void aLeftPhoto() {
+		System.out.println("\nA baby smiles at the camera. It looks like it's having the time of it's life on all fours.");
 	}
 	
-	public void aBirdY() {
-		System.out.println("It is a yellow Bird. There is a asterisk stamped on it.");
+	public void aMiddlePhoto() {
+		System.out.println("\nThere is a young man in a graduation gown. He stands victoriously on stage.");
 	}
 	
-	public void aBirdG() {
-		System.out.println("It is a green Bird. There is a diamond stamped on it.");
+	public void aRightPhoto() {
+		System.out.println("\nIt's a picture perfect family photo. The elderly man in the middle leans heavily on his cane, as if it were a third leg helping him stand.");
 	}
 	
 	public void redBox() {
@@ -53,11 +53,21 @@ public class StaticObjects extends Inventory {
 	}
 	public void aShelf() {
 		System.out.println("You are viewing the shelf.");
-		System.out.println("There is a red Bird, a yellow Bird, and a green Bird.\nTo view type:\n'r'-red Bird\n'y'-yellow Bird\n'g'-greenbird");
+		System.out.println("There are three framed photos, neatly lined up next to each other.");
+		System.out.println("For a closer look at the photo on the left, type: 'Left'.");
+		System.out.println("For a closer look at the photo in the middle, type: 'Middle'.");
+		System.out.println("For a closer look at the photo on the right, type: 'Right'.");
 		System.out.println("To stop viewing the shelf, type 'Stop'.");
+		System.out.println("..and then press ENTER.");
 	}
-	//aMirror by Haine
-	public void aMirror() {
-		System.out.println("It's a mirror. All you see is a reflection of you. Your human self.");
+	//added items by Haine
+	public void aPuddle() {
+		System.out.println("Upon closer inspection, it's not much of a puddle. It just looks like someone dropped\nice cubes where you're standing, and it melted.\n");
 	}
+	
+	public void aBlackboard() {
+		System.out.println("It is a regular blackboard, about as big as the ones in classrooms.\nIt's covered in chalk profanities. Write on it? 'y'/'n'");
+	}
+		
+		
 }
