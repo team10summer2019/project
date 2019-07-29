@@ -28,7 +28,7 @@ are permitted to be used as long as permission is granted and updates are verifi
 More work will be needed to adjust inventory to carry it through Room1,Room2 and any other rooms in the MazeGame.(Making a parent class for all rooms)
 LockLeverPuzzle requires review and editing to have it interacting with the user/player.
 
-============
+===File Information=========
 
 To run the game(Main.java file),
 $cd LockLeverPuzzle 
