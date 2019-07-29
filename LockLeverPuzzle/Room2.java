@@ -2,7 +2,6 @@ import java.util.Scanner;
 
 /**
  * @author Fiona
- *
  * Version Updated: July 29, 2019
  */
 
