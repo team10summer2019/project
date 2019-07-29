@@ -261,7 +261,7 @@ public class MazeGame {
 	// setRoom(x,y,left,right,up,down,key,door,map,monster,riddle,puzzle)
 	m.setRoom(0,3,true,false,true,true,false,false,true,false,false,false,false);
 	// room (1,3)
-	m.setRoom(1,3,false,true,false,true,false,false,false,false,false,false,true);
+	m.setRoom(1,3,true,true,false,true,false,false,false,false,false,false,true);
 	// room (3,2)
 	m.setRoom(2,3,true,false,false,true,false,false,false,false,false,false,false);
 	// room (3,3)
