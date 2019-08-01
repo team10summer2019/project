@@ -24,7 +24,7 @@ public Test(int awesome) {
 
 
 //////////////////// MUTATORS ////////////////////////////
-//new Fiona
+	//setVal1 by Fiona
 	public void setVal1(String aString) {
 		this.var1 = aString;
 	}
