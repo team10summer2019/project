@@ -9,10 +9,18 @@ private String var2;
 
 
 ///////////////   CONSTRUCTORS /////////////////////////////
+
 public test() {
-	this.var1 = "Hey";
-	this.var2 = "There";
+	this.val1 = "Hey";
+	this.val2 = "There";
 }
+
+	// default constructor
+public test(int awesome) {
+
+}
+
+>>>>>>> branch 'master' of https://github.com/team10summer2019/project.git
 
 
 
