@@ -1,19 +1,13 @@
 
 
 
-public class test {
+public class Test {
 
 /////////////// Instance Variable ////////////////////////
 
 
 
 ///////////////   CONSTRUCTORS /////////////////////////////
-
-	// default constructor
-	public Test() {
-
-
-	}
 
 
 
