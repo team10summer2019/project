@@ -27,10 +27,12 @@ public Test(int awesome) {
 
 //////////////////// MUTATORS ////////////////////////////
 //new Fiona
-	public void setVal(String aString) {
+	public void setVal1(String aString) {
 		this.var1 = aString;
 	}
-
+	public void setVal2(String aString2) {
+		this.var2 = aString;
+	}
 
 
 
