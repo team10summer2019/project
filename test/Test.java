@@ -11,13 +11,13 @@ private String var2;
 ///////////////   CONSTRUCTORS /////////////////////////////
 
 <<<<<<< HEAD
-public test() {
+public Test() {
 	this.val1 = "Hey";
 	this.val2 = "There";
 }
 
 	// default constructor
-public test(int awesome) {
+public Test(int awesome) {
 
 }
 
