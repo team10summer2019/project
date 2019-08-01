@@ -19,13 +19,17 @@ public Test() {
 public Test(int awesome) {
 
 }
+
 //////////////////   ACCESSORS /////////////////////////////
 
 
 
 
 //////////////////// MUTATORS ////////////////////////////
-
+//new Fiona
+	public void setVal(String aString) {
+		this.var1 = aString;
+	}
 
 
 
