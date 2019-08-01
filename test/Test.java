@@ -4,11 +4,15 @@
 public class test {
 
 /////////////// Instance Variable ////////////////////////
-
+private String var1;
+private String var2;
 
 
 ///////////////   CONSTRUCTORS /////////////////////////////
-
+public test() {
+	this.var1 = "Hey";
+	this.var2 = "There";
+}
 
 
 
