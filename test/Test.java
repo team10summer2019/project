@@ -1,6 +1,3 @@
-
-
-
 public class Test {
 
 /////////////// Instance Variable ////////////////////////
@@ -11,12 +8,13 @@ private String var2;
 ///////////////   CONSTRUCTORS /////////////////////////////
 
 public Test() {
-	this.val1 = "Hey";
-	this.val2 = "There";
+	this.var1 = "Hey";
+	this.var2 = "There";
 }
 
 	// default constructor
 public Test(int awesome) {
+
 
 }
 
