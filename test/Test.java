@@ -9,6 +9,11 @@ public class test {
 
 ///////////////   CONSTRUCTORS /////////////////////////////
 
+	// default constructor
+	public Test() {
+
+
+	}
 
 
 
