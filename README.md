@@ -28,12 +28,11 @@ The class diagram is located in /project/maze4/diagram/ both in pdf and dia form
 
 # mazeGUI
 This is fork of maze4 with a preliminary javafx display and control pannel implemented in javafx.  
-To run these files, create a folder in eclipse, and add the jar file jfxrt.jar to the build path as a library.  
-Then run the class MazeGameGUI.java as a java application.<BR>
+To run these files, create a folder in eclipse, and copy all the .java files into the src folder.
+Add the jar file jfxrt.jar to the build path as a library. Then run the class MazeGameGUI.java as a java application.<BR>
 
 Create a folder in eclipse and copy all of the files from /project/mazeGUI/*.java into the eclipse source folder.
 Then link jfxrt.jar into the library path.  Finally Run MazeGameGUI.java.<BR>
-
 
 # HaineRiddle
 HAINE KIM DEMO 1 <BR>
