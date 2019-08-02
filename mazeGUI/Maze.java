@@ -102,7 +102,7 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 	// x,y coordinate version for input 
 	public Room getRoom( int x , int y ){
 		
-	Room temp = new Room (currentRoom);  // if point is out of bounds just return the curent room  	
+	Room temp = new Room (currentRoom);  // if point is out of bounds just return the current room  	
 	
 		if ( x <= mazeSize-1 && y <= mazeSize-1 && x >=0  && y >=0)
 		{

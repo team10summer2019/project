@@ -35,262 +35,268 @@ public class MazeGame {
 ///////////////////////////////////////////////////////////////////////////////////////
 
 	public static void main(String[] args){
-	int mazeSize=4;	 // initalize with 4x4 maze for level 1 
-
-	int currentLevel=level;
-	Player tempHero;  // temporary value to look at Hero stats
-	Room tempRoom;    // temporary value to look at a room 
-	Monster tempMonster; // temporary value to look at Monster stats
-	String storeInput="";  // storage for user input
-	int moveCounter = 0;  // count the number of moves
-        boolean victory=false;
-	
-	
-	/// bug fix for manually switching the level number for testing (causes maze breakage)
-	if (level == 1 )	{
-	mazeSize=4;
-	}else if (level ==2){
-	mazeSize=6;
-	}else if (level==3){
-	mazeSize=8;
-	}
-	
-	Maze gameBoard = new Maze(mazeSize);  // make a 4x4 room maze 
-	setBoard(gameBoard);   // construct the maze 
-	
-	Random randGen = new Random(100);
-		 
-	gameBoard.setCurrentRoom(0,0); // reset the current room after setting up the board
-	tempRoom = gameBoard.getCurrentRoom();  // set the tempRoom to be the current room at (0,0)
-	
-	// clear the screen	
-	clearScreen();
-		
-	// update the hero current condition
-	tempHero = gameBoard.getHero();
-	tempHero.displayStats();
-	// set the room to cycle through all rooms in array list 
-		
-	tempRoom.drawRoomGrid();
-	//tempRoom.displayRoomStats();
-	
-	System.out.println("");
-	
-	printHelp();
-	pressEnter();
-	
-	// Main loop to run the Maze Game 
-		
-		while ( moveCounter < 300 && !storeInput.equalsIgnoreCase("quit")  && gameBoard.getHero().isAlive()  ){
-		
-			// if user input was "MAP" display map unit until user types return
-			if ( storeInput.equalsIgnoreCase("map") ) {
-			
-				if (gameBoard.getHero().getHasMap() ) {
-			
-					while (!storeInput.equalsIgnoreCase("Return")) {	
-					clearScreen();
-					printMap();  // print the map
-					storeInput = getUserInput();
-					}
-				} else {
-				
-				System.out.println("You don't have a Map...");
-				pressEnter();
-				
-				}
-
-		        }
-			
-			// if user input was "OPEN" display map unit until user types return
-			if ( storeInput.equalsIgnoreCase("open") ) {
-			
-			// store the location of the door
-			Point doorLocation = gameBoard.getDoor().getLocation();
-			Point currentLocation = gameBoard.getCurrentRoom().getLocation();
-			
-				// check that player has the key, and is in the location that the door is in
-				if (gameBoard.getHero().getHasKey()  && currentLocation.isEqual(doorLocation) && gameBoard.getCurrentRoom().getHasDoor() ) {
-				gameBoard.unlockDoor();
-				System.out.println("The Door is now Open, you may now Escape...");
-				pressEnter();
-				} else {
-				System.out.println("You don't have a Key, or You're not at the Door...");
-				pressEnter();
-				}
-		        }
-			
-			
-			// if user input was "ESCAPE"  if you are at the door and the door is open exit the game winning.
-			if ( storeInput.equalsIgnoreCase("Escape") ) {
-			
-			// store the location of the door
-			Point doorLocation = gameBoard.getDoor().getLocation();
-			Point currentLocation = gameBoard.getCurrentRoom().getLocation();
-				// check that player has the key, and is in the location that the door is in and that the door is open
-				if (gameBoard.getHero().getHasKey()  && currentLocation.isEqual(doorLocation) && gameBoard.getCurrentRoom().getHasDoor()  && !gameBoard.getDoor().getIsLocked() ) {
-					
-					level++; 
-					if (level == 4){
-						victory=true;  // switch victory flag		
-						break; // break the while loop you are free
-					}
-					gameBoard.lockDoor(); // lock the exit door for the next level 
-					// increment to the next level 	
-					
-				} else {
-				System.out.println("Either the door isn't opened, or You're not at the Door...");
-				pressEnter();
-				}
-		        }	
-						
-			// if user input was "HELP" display help unit unitl user types return
-			if ( storeInput.equalsIgnoreCase("help") ) {
-				while (!storeInput.equalsIgnoreCase("Return")) {	
-				clearScreen();
-				printHelp();  // print the help message with user input keywords
-				storeInput = getUserInput();
-				}
-		        }
-		
-			// if user input is "Down"	
-			if ( storeInput.equalsIgnoreCase("Down")){
-			// increment the move counter to change the room
-			gameBoard.moveDown();
-			tempRoom = gameBoard.getCurrentRoom();
-			moveCounter++;
-			}	
-				
-			// if user input is "Up"	
-			if ( storeInput.equalsIgnoreCase("Up")){
-			// increment the move counter to change the room
-			gameBoard.moveUp();
-			tempRoom = gameBoard.getCurrentRoom();
-			moveCounter++;
-			}	
-			
-			// if user input is "Right"	
-			if ( storeInput.equalsIgnoreCase("Right")){
-			// increment the move counter to change the room
-			gameBoard.moveRight();
-			tempRoom = gameBoard.getCurrentRoom();
-			moveCounter++;
-			}	
-			
-			// if user input is "Left"	
-			if ( storeInput.equalsIgnoreCase("Left")){
-			// increment the move counter to change the room
-			gameBoard.moveLeft();
-			tempRoom = gameBoard.getCurrentRoom();
-			moveCounter++;
-			}
-			
-			// if user input is "Take"	
-			if ( storeInput.equalsIgnoreCase("Take")){
-			// increment the move counter to change the room
-			tempRoom = gameBoard.getCurrentRoom();
-				if (tempRoom.getHasKey()){
-				gameBoard.takeKey();
-				System.out.println("You took the key!");
-				moveCounter++;
-				}else if (tempRoom.getHasMap()){
-				gameBoard.takeMap();
-				System.out.println("You took the Map!");
-				moveCounter++;
-				}else{
-				System.out.println("There is nothing in the room to take...");
-				pressEnter();
-				}
-			// update the room 
-			tempRoom = gameBoard.getCurrentRoom();
-			}
-			
-			
-			// routine for beating a level and setting up the next level 
-			if (currentLevel == level -1) {	
-				if (level==2){
-				mazeSize=6; // 36 rooms 
-				
-				} else if (level == 3) {
-				mazeSize=8; // 64 rooms
-				}
-			gameBoard = new Maze(mazeSize);  // make a mazeSize x mazeSize room maze 
-	
-			gameBoard.copyHero(tempHero);	// copy over the current character 
-			
-			gameBoard.setPlayerLocation(0,0) ; // return to the initial location for next level 
-			gameBoard.resetPlayerItems(); // remove the key and the map from the player
-			
-			setBoard(gameBoard);   // construct the maze 
-			gameBoard.setCurrentRoom(0,0); // reset the current room after setting up the board
-			tempRoom = gameBoard.getCurrentRoom();  // update the tempRoom 
-			currentLevel++; // track the current level
-			}
-			
-		// clear the screen	
-		clearScreen();
-		
-		// update the hero current condition and display Hero stats
-		tempHero = gameBoard.getHero();
-		tempHero.displayStats();
-		
-		//draw the current room and display the room stats 
-		tempRoom.drawRoomGrid();
-	        tempRoom.displayRoomStats();
-		
-		// update the monster's current condition and display Monster stats
-		tempMonster = gameBoard.getMonster();
-		tempMonster.displayStats();
-		
-		System.out.println("=======================  MAZE LEVEL STATS  ==========================");
-		System.out.println("There have been " + moveCounter + " moves in the maze, you are on Level " + level);
-		
-			// Print out the user input from the previous turn  
-			if (!storeInput.equalsIgnoreCase("")){
-			System.out.println("Your input was: " + storeInput);
-			}		
-			
-		// get user input
-		storeInput = getUserInput();
-		// pause until press enter
-		// pressEnter();
-		
-		// if user input is "Fight"	
-			if ( storeInput.equalsIgnoreCase("Fight")){
-			
-			tempRoom = gameBoard.getCurrentRoom();
-			tempHero = gameBoard.getHero();
-			tempMonster = gameBoard.getMonster();
-			
-				if (tempRoom.getHasMonster() && tempMonster.isAlive() && tempMonster.getPosition().isEqual(tempHero.getPosition()) ){
-				fightMonster(gameBoard);
-				} else {
-				System.out.println("There is nobody in the room to fight...");
-				pressEnter();
-				}
-			// update the room 
-			tempRoom = gameBoard.getCurrentRoom();
-			}			
-			
-		
-			// move the monster if alive
-			if (gameBoard.getMonster().isAlive() && !storeInput.equalsIgnoreCase("Fight")){
-			monsterWalk(randGen, gameBoard);
-			//monsterWalk(randGen, gameBoard);
-			}
-	
-		}  // closing brace for while loop
-		
-		
-		/// closing message to user
-		if ( !gameBoard.getDoor().getIsLocked() && victory ){
-		System.out.println("Congratulations! You are free from THE MAZE!");
-		}else{
-		System.out.println("Thanks for playing THE MAZE.  Better Luck Next Time!");
-		}
-	
+	playGame();
 	return; 
 	}// end of main function	
+	
+	public static void playGame() {
+		
+		int mazeSize=4;	 // initalize with 4x4 maze for level 1 
+		int currentLevel=level;
+		Player tempHero;  // temporary value to look at Hero stats
+		Room tempRoom;    // temporary value to look at a room 
+		Monster tempMonster; // temporary value to look at Monster stats
+		String storeInput="";  // storage for user input
+		int moveCounter = 0;  // count the number of moves
+	        boolean victory=false;
+		
+		
+		/// bug fix for manually switching the level number for testing (causes maze breakage)
+		if (level == 1 )	{
+		mazeSize=4;
+		}else if (level ==2){
+		mazeSize=6;
+		}else if (level==3){
+		mazeSize=8;
+		}
+		
+		Maze gameBoard = new Maze(mazeSize);  // make a 4x4 room maze 
+		setBoard(gameBoard);   // construct the maze 
+		
+		Random randGen = new Random(100);
+			 
+		gameBoard.setCurrentRoom(0,0); // reset the current room after setting up the board
+		tempRoom = gameBoard.getCurrentRoom();  // set the tempRoom to be the current room at (0,0)
+		
+		// clear the screen	
+		clearScreen();
+			
+		// update the hero current condition
+		tempHero = gameBoard.getHero();
+		tempHero.displayStats();
+		// set the room to cycle through all rooms in array list 
+			
+		tempRoom.drawRoomGrid();
+		//tempRoom.displayRoomStats();
+		
+		System.out.println("");
+		
+		printHelp();
+		pressEnter();
+		
+		// Main loop to run the Maze Game 
+			
+			while ( moveCounter < 300 && !storeInput.equalsIgnoreCase("quit")  && gameBoard.getHero().isAlive()  ){
+			
+				// if user input was "MAP" display map unit until user types return
+				if ( storeInput.equalsIgnoreCase("map") ) {
+				
+					if (gameBoard.getHero().getHasMap() ) {
+				
+						while (!storeInput.equalsIgnoreCase("Return")) {	
+						clearScreen();
+						printMap();  // print the map
+						storeInput = getUserInput();
+						}
+					} else {
+					
+					System.out.println("You don't have a Map...");
+					pressEnter();
+					
+					}
+
+			        }
+				
+				// if user input was "OPEN" display map unit until user types return
+				if ( storeInput.equalsIgnoreCase("open") ) {
+				
+				// store the location of the door
+				Point doorLocation = gameBoard.getDoor().getLocation();
+				Point currentLocation = gameBoard.getCurrentRoom().getLocation();
+				
+					// check that player has the key, and is in the location that the door is in
+					if (gameBoard.getHero().getHasKey()  && currentLocation.isEqual(doorLocation) && gameBoard.getCurrentRoom().getHasDoor() ) {
+					gameBoard.unlockDoor();
+					System.out.println("The Door is now Open, you may now Escape...");
+					pressEnter();
+					} else {
+					System.out.println("You don't have a Key, or You're not at the Door...");
+					pressEnter();
+					}
+			        }
+				
+				
+				// if user input was "ESCAPE"  if you are at the door and the door is open exit the game winning.
+				if ( storeInput.equalsIgnoreCase("Escape") ) {
+				
+				// store the location of the door
+				Point doorLocation = gameBoard.getDoor().getLocation();
+				Point currentLocation = gameBoard.getCurrentRoom().getLocation();
+					// check that player has the key, and is in the location that the door is in and that the door is open
+					if (gameBoard.getHero().getHasKey()  && currentLocation.isEqual(doorLocation) && gameBoard.getCurrentRoom().getHasDoor()  && !gameBoard.getDoor().getIsLocked() ) {
+						
+						level++; 
+						if (level == 4){
+							victory=true;  // switch victory flag		
+							break; // break the while loop you are free
+						}
+						gameBoard.lockDoor(); // lock the exit door for the next level 
+						// increment to the next level 	
+						
+					} else {
+					System.out.println("Either the door isn't opened, or You're not at the Door...");
+					pressEnter();
+					}
+			        }	
+							
+				// if user input was "HELP" display help unit unitl user types return
+				if ( storeInput.equalsIgnoreCase("help") ) {
+					while (!storeInput.equalsIgnoreCase("Return")) {	
+					clearScreen();
+					printHelp();  // print the help message with user input keywords
+					storeInput = getUserInput();
+					}
+			        }
+			
+				// if user input is "Down"	
+				if ( storeInput.equalsIgnoreCase("Down")){
+				// increment the move counter to change the room
+				gameBoard.moveDown();
+				tempRoom = gameBoard.getCurrentRoom();
+				moveCounter++;
+				}	
+					
+				// if user input is "Up"	
+				if ( storeInput.equalsIgnoreCase("Up")){
+				// increment the move counter to change the room
+				gameBoard.moveUp();
+				tempRoom = gameBoard.getCurrentRoom();
+				moveCounter++;
+				}	
+				
+				// if user input is "Right"	
+				if ( storeInput.equalsIgnoreCase("Right")){
+				// increment the move counter to change the room
+				gameBoard.moveRight();
+				tempRoom = gameBoard.getCurrentRoom();
+				moveCounter++;
+				}	
+				
+				// if user input is "Left"	
+				if ( storeInput.equalsIgnoreCase("Left")){
+				// increment the move counter to change the room
+				gameBoard.moveLeft();
+				tempRoom = gameBoard.getCurrentRoom();
+				moveCounter++;
+				}
+				
+				// if user input is "Take"	
+				if ( storeInput.equalsIgnoreCase("Take")){
+				// increment the move counter to change the room
+				tempRoom = gameBoard.getCurrentRoom();
+					if (tempRoom.getHasKey()){
+					gameBoard.takeKey();
+					System.out.println("You took the key!");
+					moveCounter++;
+					}else if (tempRoom.getHasMap()){
+					gameBoard.takeMap();
+					System.out.println("You took the Map!");
+					moveCounter++;
+					}else{
+					System.out.println("There is nothing in the room to take...");
+					pressEnter();
+					}
+				// update the room 
+				tempRoom = gameBoard.getCurrentRoom();
+				}
+				
+				
+				// routine for beating a level and setting up the next level 
+				if (currentLevel == level -1) {	
+					if (level==2){
+					mazeSize=6; // 36 rooms 
+					
+					} else if (level == 3) {
+					mazeSize=8; // 64 rooms
+					}
+				gameBoard = new Maze(mazeSize);  // make a mazeSize x mazeSize room maze 
+		
+				gameBoard.copyHero(tempHero);	// copy over the current character 
+				
+				gameBoard.setPlayerLocation(0,0) ; // return to the initial location for next level 
+				gameBoard.resetPlayerItems(); // remove the key and the map from the player
+				
+				setBoard(gameBoard);   // construct the maze 
+				gameBoard.setCurrentRoom(0,0); // reset the current room after setting up the board
+				tempRoom = gameBoard.getCurrentRoom();  // update the tempRoom 
+				currentLevel++; // track the current level
+				}
+				
+			// clear the screen	
+			clearScreen();
+			
+			// update the hero current condition and display Hero stats
+			tempHero = gameBoard.getHero();
+			tempHero.displayStats();
+			
+			//draw the current room and display the room stats 
+			tempRoom.drawRoomGrid();
+		        tempRoom.displayRoomStats();
+			
+			// update the monster's current condition and display Monster stats
+			tempMonster = gameBoard.getMonster();
+			tempMonster.displayStats();
+			
+			System.out.println("=======================  MAZE LEVEL STATS  ==========================");
+			System.out.println("There have been " + moveCounter + " moves in the maze, you are on Level " + level);
+			
+				// Print out the user input from the previous turn  
+				if (!storeInput.equalsIgnoreCase("")){
+				System.out.println("Your input was: " + storeInput);
+				}		
+				
+			// get user input
+			storeInput = getUserInput();
+			// pause until press enter
+			// pressEnter();
+			
+			// if user input is "Fight"	
+				if ( storeInput.equalsIgnoreCase("Fight")){
+				
+				tempRoom = gameBoard.getCurrentRoom();
+				tempHero = gameBoard.getHero();
+				tempMonster = gameBoard.getMonster();
+				
+					if (tempRoom.getHasMonster() && tempMonster.isAlive() && tempMonster.getPosition().isEqual(tempHero.getPosition()) ){
+					fightMonster(gameBoard);
+					} else {
+					System.out.println("There is nobody in the room to fight...");
+					pressEnter();
+					}
+				// update the room 
+				tempRoom = gameBoard.getCurrentRoom();
+				}			
+				
+			
+				// move the monster if alive
+				if (gameBoard.getMonster().isAlive() && !storeInput.equalsIgnoreCase("Fight")){
+				monsterWalk(randGen, gameBoard);
+				//monsterWalk(randGen, gameBoard);
+				}
+		
+			}  // closing brace for while loop
+			
+			
+			/// closing message to user
+			if ( !gameBoard.getDoor().getIsLocked() && victory ){
+			System.out.println("Congratulations! You are free from THE MAZE!");
+			}else{
+			System.out.println("Thanks for playing THE MAZE.  Better Luck Next Time!");
+			}
+		
+		return;
+	}
+	
 	
 	// sets up the walls and items, doors and monsters
 	public static void setBoard( Maze m){
@@ -796,8 +802,6 @@ public class MazeGame {
 	return;	
 
 	}
-
-
 
 
 	public static void handleInput(Maze gameBoard){
