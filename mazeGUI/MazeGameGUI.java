@@ -724,9 +724,10 @@ public void textModeOutput() {
 		}	
 		
 		/// closing message to user if Win
-		if ( level ==4 && !gameBoard.getDoor().getIsLocked() && victory ){
+		if ( level ==4 && victory ){
 		 System.out.println("Congratulations! You are free from THE MAZE!");
 		 messageLabel.setText("Congratulations! You are free from THE MAZE!");
+		 System.exit(0);
 		}
 		
 		/// closing message to user if fail to win or quit
