@@ -53,6 +53,7 @@ public class MazeGameGUI extends Application {
 	
 	
 	private Label playerLabel1 = new Label("Hero Stats:" + gameBoard.getHero().getHealth()+" " +gameBoard.getHero().getPosition().toString());
+	private Label playerLabel2 = new Label("Hero Items: Map=" + gameBoard.getHero().getHasMap()+" Key= " +gameBoard.getHero().getHasKey());
 	
 ///////////////////////////// START METHOD //////////////////////////////////////////////////	
 	
@@ -86,9 +87,9 @@ public class MazeGameGUI extends Application {
 		// send the text field to the storeInput string
 		Button sendButton = new Button("Enter");
 		// attempt a cold boot setup of the room 
-		Button startButton = new Button("Start");
+		Button startButton = new Button("Restart");
 		
-		Button updateButton = new Button("Update");
+	//	Button updateButton = new Button("Update");
 		
 		Canvas canvas = new Canvas(200,200);
 		GraphicsContext gc = canvas.getGraphicsContext2D();
@@ -110,6 +111,7 @@ public class MazeGameGUI extends Application {
 		verticalBox.getChildren().add(textIn);
 		verticalBox.getChildren().add(sendButton);
 		verticalBox.getChildren().add(playerLabel1);
+		verticalBox.getChildren().add(playerLabel2);
 		verticalBox.getChildren().add(startButton);	
 		// verticalBox.getChildren().add(updateButton);
 		
@@ -205,7 +207,10 @@ public class HandleKeyBoardInput implements EventHandler<KeyEvent> {
 		monsterWalk(randGen,gameBoard);// move the monster
 		}
 		
+		// Update Hero Statistics 
 		playerLabel1.setText("Hero HEALTH: " + gameBoard.getHero().getHealth()+" Position: " +gameBoard.getHero().getPosition().toString());
+		playerLabel2.setText("Hero Items: Map=" + gameBoard.getHero().getHasMap()+" Key= " +gameBoard.getHero().getHasKey());
+			
 		/// Routines to update the boxes
 		postCurrentRoom();
 
@@ -229,7 +234,14 @@ public class HandleInputSendClick implements EventHandler<ActionEvent> {
 			if(gameBoard.getMonster().isAlive()) {
 			monsterWalk(randGen,gameBoard);// move the monster
 			}
-			postCurrentRoom();  // post the current room 
+			
+			// Update Hero Statistics
+			playerLabel1.setText("Hero HEALTH: " + gameBoard.getHero().getHealth()+" Position: " +gameBoard.getHero().getPosition().toString());
+			playerLabel2.setText("Hero Items: Map=" + gameBoard.getHero().getHasMap()+" Key= " +gameBoard.getHero().getHasKey());
+				
+			/// Routines to update the current room boxes
+			postCurrentRoom();
+
 		}
 	}
 
@@ -1014,16 +1026,16 @@ public void textModeOutput() {
 			postCurrentRoom();
 	
 			if ( gameBoard.getMonster().getHealth() >12 ) {
-				System.out.println("The MAZE WRAITH LAUGHS IN GLEE!!!") ;
+				System.out.println("The MAZE WRAITH LAUGHS IN GLEE!!!"+"  Monster HEALTH: " + gameBoard.getMonster().getHealth()) ;
 				messageLabel.setText("The MAZE WRAITH LAUGHS IN GLEE!!!"+"  Monster HEALTH: " + gameBoard.getMonster().getHealth());
 			}else if ( gameBoard.getMonster().getHealth() < 12 && gameBoard.getMonster().getHealth()> 6 ){
 				System.out.println("The MAZE WRAITH SCREAMS IN ANGER!!!"+"  Monster HEALTH: " + gameBoard.getMonster().getHealth()) ;
-				messageLabel.setText("The MAZE WRAITH SCREAMS IN ANGER!!!");
+				messageLabel.setText("The MAZE WRAITH SCREAMS IN ANGER!!!"+"  Monster HEALTH: " + gameBoard.getMonster().getHealth());
 			}else if ( gameBoard.getMonster().getHealth() < 6 && gameBoard.getMonster().getHealth()> 0 ){
 				System.out.println("The MAZE WRAITH CRYS IN TERROR!!!"+"  Monster HEALTH: " + gameBoard.getMonster().getHealth()) ;
 				messageLabel.setText("The MAZE WRAITH CRYS IN TERROR!!!"+"  Monster HEALTH: " + gameBoard.getMonster().getHealth());
 			}else if ( gameBoard.getMonster().getHealth()<=0 ){
-				System.out.println("The MAZE WRAITH SHREAKS IN PAIN!!!") ;
+				System.out.println("The MAZE WRAITH SHREAKS IN PAIN!!!"+"  Monster HEALTH: " + gameBoard.getMonster().getHealth()) ;
 				messageLabel.setText("The MAZE WRAITH SHREAKS IN PAIN!!!"+"  Monster HEALTH: " + gameBoard.getMonster().getHealth() );
 			}
 			
@@ -1048,6 +1060,9 @@ public void textModeOutput() {
 			tempHero.displayStats();
 			tempMonster = gameBoard.getMonster();
 			tempMonster.displayStats();
+			
+			// 2D graphics counterpart
+			postCurrentRoom();
 			
 		}
 		
