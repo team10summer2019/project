@@ -1,10 +1,14 @@
 import java.util.Random;
-import java.util.concurrent.TimeUnit;
 import java.util.Scanner;
 
 import javafx.application.Application;
-import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.Group;
 import javafx.stage.Stage;
+import javafx.scene.Scene;
+import javafx.scene.paint.Color;
 import javafx.scene.layout.*;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -20,7 +24,7 @@ public class MazeGameGUI extends Application {
 	private int mazeSize=4;	 // Initialize with 4x4 maze for level 1 
 	private int currentLevel=level;
 	
-	private Room tempRoom;    // temporary value to look at a room 
+
 	private Monster tempMonster; // temporary value to look at Monster stats
 	private String storeInput="";  // storage for user input
 	private int moveCounter = 0;  // count the number of moves
@@ -30,6 +34,7 @@ public class MazeGameGUI extends Application {
     
 	private  Maze gameBoard = new Maze(mazeSize);  // make a 4x4 room maze 
 	
+	private Room tempRoom = gameBoard.getCurrentRoom();    // temporary value to look at a room 
 	private Player tempHero = gameBoard.getHero();  // temporary value to look at Hero stats
 	
     /// get the number of columns and rows in a roomGrid in a Room object in gameBoard
@@ -38,10 +43,16 @@ public class MazeGameGUI extends Application {
     
     // make a button grid with the same number of columns and rows as a roomGrid
 	private Button[][] buttonGrid = new Button[cols][rows];  
+	
+	private Rectangle[][] rectGrid = new Rectangle[cols][rows];
+	
 	// make a messageLabel with a message for user interaction / Prompts
 	private Label messageLabel = new Label("Welcome to the Maze");
 	
 	private TextField textIn = new TextField(); // javafx.scene.control.TextField
+	
+	
+	private Label playerLabel1 = new Label("Hero Stats:" + gameBoard.getHero().getHealth()+" " +gameBoard.getHero().getPosition().toString());
 	
 ///////////////////////////// START METHOD //////////////////////////////////////////////////	
 	
@@ -49,8 +60,10 @@ public class MazeGameGUI extends Application {
 	public void start(Stage primaryStage) { // this is like the main method 
 		
 		// use the GridPane layout (instead of vBox, hBox or Group)
-		  GridPane grid = new GridPane();
+		  GridPane grid = new GridPane();  
 
+		  GridPane grid2 = new GridPane();  // grid for rectangle objects 
+	
 		  // make a key input handler
 		  HandleKeyBoardInput keyInput =  new HandleKeyBoardInput(); 
 		  HandleInputSendClick sendClick = new HandleInputSendClick();
@@ -63,7 +76,7 @@ public class MazeGameGUI extends Application {
 				Button b = new Button(" ");  // make a new button with blank space as text
 			//	b.setOnKeyTyped( keyInput);  // set on a key press
 				buttonGrid[i][j] = b;       // add the new button to the buttonGrid
-				grid.add(buttonGrid[i][j], i, j);	
+				grid.add(buttonGrid[i][j], i, j);		
 			}
 		}
 		
@@ -75,29 +88,52 @@ public class MazeGameGUI extends Application {
 		// attempt a cold boot setup of the room 
 		Button startButton = new Button("Start");
 		
+		Button updateButton = new Button("Update");
+		
+		Canvas canvas = new Canvas(200,200);
+		GraphicsContext gc = canvas.getGraphicsContext2D();
+		
+		for (int i = 0; i < cols; i++) {
+			for (int j = 0; j < rows; j++){
+				Rectangle rect = new Rectangle();  // make a new rectangle 
+				rect.setWidth(50);
+				rect.setHeight(50);
+				rect.setFill(Color.BLACK);
+				rect.setOnKeyPressed( new HandleKeyBoardInput());
+				rectGrid[i][j] = rect;       // add the new rectangle to the rectGrid
+				grid2.add(rectGrid[i][j], i, j);		
+			}
+		}
+		
+
 		// Add the items to the vertical box 
 		verticalBox.getChildren().add(textIn);
 		verticalBox.getChildren().add(sendButton);
+		verticalBox.getChildren().add(playerLabel1);
 		verticalBox.getChildren().add(startButton);	
+		// verticalBox.getChildren().add(updateButton);
+		
 		// set the sendButton to pass the text field above it to storeInput string
 		sendButton.setOnAction( sendClick ); 
 		// set the startButton to perform a setup operation
 		startButton.setOnAction( startClick ); 
 		
-	
+		
 ///////////////////////////// SCENE and STAGE SHOW ////////////////////////////////////////////
 		// build entire scene: grid and label
 		
 		BorderPane root = new BorderPane();
 		//root.setCenter(grid);
-		root.setCenter(grid);
-		root.setRight(verticalBox);
+		root.setCenter(grid);  // add a grid to the center pane 
+		root.setRight(verticalBox);  // add a vbox to the right pane
 		root.setBottom(messageLabel);  // place to put the messages to user output
-		
-		Scene scene = new Scene(root, 400, 300);
+		root.setTop(canvas); // add a canvas to the left pane
+		Scene scene = new Scene(root, 500, 500);
 		
 		// key press action events
 		root.setOnKeyTyped( keyInput );
+		
+		startMeUp(); // setup the game
 			
 		// setup and show the stage and scene 
 		primaryStage.setTitle("Maze Game");
@@ -155,10 +191,9 @@ public class HandleKeyBoardInput implements EventHandler<KeyEvent> {
 		} else if (event.getCharacter().charAt(0) == 'l') {
 			messageLabel.setText(storeInput);
 	}
-		// update the room 
-		tempRoom = gameBoard.getCurrentRoom();
+
 		// display the textMode output 
-		if (storeInput.equalsIgnoreCase("map") || storeInput.equalsIgnoreCase("help") ) {
+		if (storeInput.equalsIgnoreCase("map") || storeInput.equalsIgnoreCase("help") || storeInput.equalsIgnoreCase("fight") ) {
 		inputControl(); // parse the input
 		} else {
 		inputControl(); // parse the input
@@ -170,7 +205,8 @@ public class HandleKeyBoardInput implements EventHandler<KeyEvent> {
 		monsterWalk(randGen,gameBoard);// move the monster
 		}
 		
-		/// Routines to update the boxes (not working)
+		playerLabel1.setText("Hero HEALTH: " + gameBoard.getHero().getHealth()+" Position: " +gameBoard.getHero().getPosition().toString());
+		/// Routines to update the boxes
 		postCurrentRoom();
 
 	}
@@ -179,6 +215,9 @@ public class HandleKeyBoardInput implements EventHandler<KeyEvent> {
 // input text box with send button handler 
 public class HandleInputSendClick implements EventHandler<ActionEvent> {	
 	public void handle(ActionEvent event){
+			gameBoard.setCurrentRoom(gameBoard.getHero().getPosition()); 
+			//tempRoom = gameBoard.getCurrentRoom();  // set the tempRoom to be the current room at (0,0)
+			tempHero = gameBoard.getHero();
 			// grab the input text from the text box
 			storeInput=textIn.getText();
 			// output to the message label
@@ -199,7 +238,11 @@ public class HandleInputStartClick implements EventHandler<ActionEvent> {
 	public void handle(ActionEvent event){
 		
 		resetGameBoard(); // reset the gameBoard
-		//gameBoard.setCurrentRoom(0,0); // reset the current room after setting up the board
+		gameBoard.setCurrentRoom(0,0); // reset the current room after setting up the board
+		// get the current room
+		//gameBoard.setCurrentRoom(gameBoard.getHero().getPosition()); 
+		
+		// THIS CALL IS CAUSING A BUG I DONT GET IT!!
 		tempRoom = gameBoard.getCurrentRoom();  // set the tempRoom to be the current room at (0,0)
 		tempHero = gameBoard.getHero();
 		
@@ -211,7 +254,28 @@ public class HandleInputStartClick implements EventHandler<ActionEvent> {
 		}
 	}
 
+	
+
 ///////////////////////////     OTHER METHODS      ////////////////////////////////////////
+
+public void startMeUp() {
+	
+	resetGameBoard(); // reset the gameBoard
+	gameBoard.setCurrentRoom(0,0); // reset the current room after setting up the board
+	// get the current room
+	//gameBoard.setCurrentRoom(gameBoard.getHero().getPosition()); 
+	
+	// THIS CALL IS CAUSING A BUG I DONT GET IT!!
+	tempRoom = gameBoard.getCurrentRoom();  // set the tempRoom to be the current room at (0,0)
+	tempHero = gameBoard.getHero();
+	
+	postCurrentRoom();   // display the current room 
+    // show the text mode output
+	textModeOutput();
+	printHelp();
+	inputControl();
+}
+
 
  public void resetGameBoard() {
 		setLevel(level);   // set the level to 1 
@@ -223,13 +287,18 @@ public class HandleInputStartClick implements EventHandler<ActionEvent> {
 		gameBoard.resetPlayerItems(); // remove the key and the map from the player
 		// set the current room to current position 
 		gameBoard.setCurrentRoom(gameBoard.getHero().getPosition()); 
+
  }
 
 
 // attempt at graphics display
 public void postCurrentRoom() {
 	// get the current room
-	tempRoom = gameBoard.getCurrentRoom();  // get the tempRoom to be the current room.
+	gameBoard.setCurrentRoom(gameBoard.getHero().getPosition()); 
+	
+	// THE FOLLOWING LINE CAUSES A BUG TO NOT DISPLAY THE CURRENT ROOM...????
+	//tempRoom = gameBoard.getCurrentRoom();  // get the tempRoom to be the current room.
+	
 	char ch='A';
 	String temp="";
 	wipeGrid();  // clear previous text
@@ -243,8 +312,10 @@ public void postCurrentRoom() {
 			buttonGrid[i][j].setText(temp);
 			if (ch == ' ' ) {
 			buttonGrid[i][j].setOpacity(0.3);
+			rectGrid[i][j].setFill(Color.GREY);
 			} else {
 			buttonGrid[i][j].setOpacity(1);
+			rectGrid[i][j].setFill(Color.RED);
 			}
 		}
 	}
@@ -255,7 +326,8 @@ public void wipeGrid() {
 	// copy it into the button grid for display
 	for (int i = 0; i < cols; i++) {
 		for (int j = 0; j < rows; j++){
-			buttonGrid[i][j].setText(" ");		
+			buttonGrid[i][j].setText(" ");	
+			rectGrid[i][j].setFill(Color.WHITE);
 		}
 	}
 }
@@ -301,6 +373,12 @@ public void textModeOutput() {
  // sets up the walls and items, doors and monsters
  	public void setBoard( Maze m){
  	
+ 		// local variables 
+ 		int mazeSize=m.getMazeSize();
+ 		Room tempRoom = new Room();  // make a temporary pointer of type Room
+ 		Point randPoint = new Point();  // make a pointer of type Point
+ 		
+ 		
  		if (level ==1){
  		//////////////////// MAZE IS HAND DESIGNED //////////////////////////////
  		// setRoom(x,y,left,right,up,down,key,door,map,monster)
@@ -348,13 +426,13 @@ public void textModeOutput() {
  		// get a random location within the map 
  		Point randLocation = new Point();
  		randLocation.setRandom(m.getMazeSize());
- 		Room tempRoom = m.getRoom(randLocation);  // get a copy of the room at randLocation
+ 		tempRoom = m.getRoom(randLocation);  // get a copy of the room at randLocation
  		// set the monster to be at the location 
  		m.setMonsterLocation(randLocation);  
  		// randomize monster start location but don't overwrite previous conditions except moster variable 
  		m.setRoomItems(randLocation,tempRoom.getHasKey(),tempRoom.getHasDoor(),tempRoom.getHasMap(),true,tempRoom.getHasRiddle());  // Working
  		
- 		}
+ 		} // level 1 end if brace
  	
  	
  		if (level ==2){
@@ -405,43 +483,38 @@ public void textModeOutput() {
  		m.setRoomWalls(4,5,false,true,false,true);
  		m.setRoomWalls(5,5,true,true,false,true);
  		
- 		
+ 		////////////////////////////////////////////////////////////////////////
  		// set the items now  
  		//setRoomItems(Point p , boolean key, boolean door ,boolean map, boolean monster, boolean riddle ){
  		
- 		// semi random Map Placement 
- 		Random randGen = new Random(100); // make a random number generator 
- 		int rand; // integer to hold random number
- 		rand = randGen.nextInt(); // get a random number  
- 		if (rand % 3 ==0){
- 		m.setRoomItems(3,4,false,false,true,false,false); // Place the map in (3,5)
- 		} else if (rand% 3 ==1){
- 		m.setRoomItems(2,0,false,false,true,false,false); // Place the map in (2,0)
- 		} else { 
- 		m.setRoomItems(5,5,false,false,true,false,false); // Place the map in (2,0)
- 		}
  		
+ 		///// RANDOM PLACEMENT OF THE MONSTER ////////////////
+ 		// get a random location within the map 
+ 		randPoint.setRandom(mazeSize); // get a new random point 
+ 		tempRoom = m.getRoom(randPoint);  // get a copy of the room at randLocation
+ 		// set the monster to be at the location 
+ 		m.setMonsterLocation(randPoint);  
+ 		// randomize monster start location but don't overwrite previous conditions except moster variable 
+ 		m.setRoomItems(randPoint,tempRoom.getHasKey(),tempRoom.getHasDoor(),tempRoom.getHasMap(),true,tempRoom.getHasRiddle());  // Working
+ 		
+ 		////// RANDOM PLACEMENT OF THE MAP ////////////////
+ 		// get a new random location within the maze
+ 		randPoint.setRandom(mazeSize);	// get a new random point
+ 		tempRoom = m.getRoom(randPoint);  // get a copy of the room at randLocation
+ 		// set MAP location preserving prior booleans 
+ 		m.setRoomItems(randPoint,tempRoom.getHasKey(),tempRoom.getHasDoor(),true,tempRoom.getHasMonster(),tempRoom.getHasRiddle()); // Place the map 
+
+ 		/////////////////// NON RANDOM ITEMS ////////////////////////////
  		// place door in specific location
  		m.setRoomItems(0,5,false,true,false,false,false);
  		m.setDoorLocation(0,5);  // change the door location 
  		// place the key in specific location
  		m.setRoomItems(5,0,true,false,false,false,false);
- 		// place the riddle in a specific location infront of the key (opens wall to get key)
+ 		// place the riddle in a specific location in front of the key (opens wall to get key)
  		m.setRoomItems(4,0,false,false,false,false,true);
  		
- 		
- 		// get a random location within the map 
- 		Point randLocation = new Point();
- 		randLocation.setRandom(m.getMazeSize());
- 		Room tempRoom = new Room();
- 		tempRoom = m.getRoom(randLocation);  // get a copy of the room at randLocation
- 		// set the monster to be at the location 
- 		m.setMonsterLocation(randLocation);  
- 		// randomize monster start location but don't overwrite previous conditions except moster variable 
- 		m.setRoomItems(randLocation,tempRoom.getHasKey(),tempRoom.getHasDoor(),tempRoom.getHasMap(),true,tempRoom.getHasRiddle());  // Working
- 		
- 		}
- 	
+ 		} // level 2 end if brace
+ 		////////////////////////     LEVEL 3   ///////////////////////////////////////
  		if (level ==3){
  		
  		//////////////// MAZE IS HAND DESIGNED /////////////////////////////////////////////
@@ -526,10 +599,10 @@ public void textModeOutput() {
  		// set the items now  
  		//setRoomItems(int x, int y,boolean key, boolean door ,boolean map, boolean monster, boolean riddle ){
  				
- 		int mazeSize=m.getMazeSize();
+ 		mazeSize=m.getMazeSize();
  		
- 		Room tempRoom = new Room();  // make a temporary pointer of type Room
- 		Point randPoint = new Point();  // make a pointer of type Point
+ 		tempRoom = new Room();  // make a temporary pointer of type Room
+ 		randPoint = new Point();  // make a pointer of type Point
  		
  		// get a random location within the map 
  		randPoint.setRandom(mazeSize); // get a new random point 
@@ -564,7 +637,8 @@ public void textModeOutput() {
  		tempRoom = m.getRoom(randPoint);  // get a copy of the room at randLocation
  		m.setRoomItems(randPoint,tempRoom.getHasKey(),tempRoom.getHasDoor(),tempRoom.getHasMap(),tempRoom.getHasMonster(),true);	
  					
- 		}
+ 		} // level 3 end if brace
+ 		
  		return;
  	}
     
@@ -720,7 +794,9 @@ public void textModeOutput() {
 
 			}
 		// update the room 
-		tempRoom = gameBoard.getCurrentRoom();
+		//tempRoom = gameBoard.getCurrentRoom();
+		
+		postCurrentRoom();
 		}	
 		
 		/// closing message to user if Win
@@ -731,7 +807,7 @@ public void textModeOutput() {
 		}
 		
 		/// closing message to user if fail to win or quit
-		if (moveCounter >300 || !gameBoard.getHero().isAlive() || storeInput.equalsIgnoreCase("quit")){
+		if ( moveCounter > 400 || !gameBoard.getHero().isAlive() || storeInput.equalsIgnoreCase("quit") ){
 		 System.out.println("Thanks for playing THE MAZE.  Better Luck Next Time!");
 		 messageLabel.setText("Thanks for playing THE MAZE.  Better Luck Next Time!");
 		 System.exit(0);
@@ -763,7 +839,7 @@ public void textModeOutput() {
 	System.out.println("Open: Opens the Door if you Have a Key");
 	System.out.println("Escape: Escape the Maze if the Door is Open");
 	System.out.println("Control Keys: a: left, s: down,d: right,w: up");
-	System.out.println("Control Keys: r: return, m: map, t: take , q: quit, h: help o: open, e: escape, f:fight, a :attack, r:run");
+	System.out.println("Control Keys: r: return, m: map, t: take , q: quit, h: help o: open, e: escape, f:fight");
 	System.out.println("__________________________________________________");
 	System.out.println("");
 	System.out.println("Type \"Return\" and press Enter to return to the Maze");
@@ -911,76 +987,68 @@ public void textModeOutput() {
 	System.out.println("...................  ....          ....   ..................");
 	System.out.println(".....................                   ....................");
 	System.out.println("........................            ........................");
-	System.out.println("........................          ..........................");
-	System.out.println(".........................        ...........................");
-	System.out.println(".........................        ...........................");
-	System.out.println(".........................        ...........................");
-	System.out.println("...........................     ............................");
-	System.out.println("...........................   ..............................");
-	System.out.println("............................  ..............................");
-	System.out.println("............................. ..............................");
-	System.out.println("............................. ..............................");
-	System.out.println(" ");
 	}
 		
 
 	public void fightMonster(Maze gameBoard){	
 	
-	clearScreen(); // clear the screen 
-	displayMazeWraith(); // show the ASCII Art 
-	System.out.println("A MAZE WRAITH APPEARS") ;
-	gameBoard.getHero().displayStats();
-	gameBoard.getMonster().displayStats();	
 
-
-		while ( !storeInput.equalsIgnoreCase("Run") && gameBoard.getMonster().isAlive() && gameBoard.getHero().isAlive() ){
+		if (  gameBoard.getMonster().isAlive() && gameBoard.getHero().isAlive() ){
 		
 			if (storeInput.equalsIgnoreCase("Attack") || storeInput.equalsIgnoreCase("Fight") ) {
 				gameBoard.fightTurn();
 				} 
-				
+			
+			
+			// obsolete remove this if statement
 			if (storeInput.equalsIgnoreCase("Run") ) {
-				break;
+				textModeOutput();
+				return;
 				} 
 		
-		
+			System.out.println("You Attacked the MAZE WRAITH ") ;
 			clearScreen(); // clear the screen 		
 			displayMazeWraith(); // show the ASCII Art 
 			
-			if ( gameBoard.getMonster().getHealth() >12 ) {
-			System.out.println("The MAZE WRAITH LAUGHS IN GLEE!!!") ;
-			messageLabel.setText("The MAZE WRAITH LAUGHS IN GLEE!!!");
-			}else if ( gameBoard.getMonster().getHealth() < 12 && gameBoard.getMonster().getHealth()> 6 ){
-			System.out.println("The MAZE WRAITH SCREAMS IN ANGER!!!") ;
-			messageLabel.setText("The MAZE WRAITH SCREAMS IN ANGER!!!");
-			}else if ( gameBoard.getMonster().getHealth() < 6 && gameBoard.getMonster().getHealth()> 0 ){
-			System.out.println("The MAZE WRAITH CRYS IN TERROR!!!") ;
-			messageLabel.setText("The MAZE WRAITH CRYS IN TERROR!!!");
-			}else if ( gameBoard.getMonster().getHealth()<=0 ){
-			System.out.println("The MAZE WRAITH SHREAKS IN PAIN!!!") ;
-			messageLabel.setText("The MAZE WRAITH SHREAKS IN PAIN!!!");
-			gameBoard.getHero().displayStats();  // display player stats
-			gameBoard.getMonster().displayStats(); // display monster stats
-			break;
-			}
-			gameBoard.getHero().displayStats();  // display player stats
-			gameBoard.getMonster().displayStats(); // display monster stats
-			
-			if ( ! gameBoard.getHero().isAlive()){
-			gameBoard.deleteHero();
-			System.out.println("The Hero has been vanquished ...");
-			messageLabel.setText("The Hero has been vanquished ...");
-			break;
-			}			
+			// 2D graphics counterpart
+			postCurrentRoom();
 	
-			
+			if ( gameBoard.getMonster().getHealth() >12 ) {
+				System.out.println("The MAZE WRAITH LAUGHS IN GLEE!!!") ;
+				messageLabel.setText("The MAZE WRAITH LAUGHS IN GLEE!!!"+"  Monster HEALTH: " + gameBoard.getMonster().getHealth());
+			}else if ( gameBoard.getMonster().getHealth() < 12 && gameBoard.getMonster().getHealth()> 6 ){
+				System.out.println("The MAZE WRAITH SCREAMS IN ANGER!!!"+"  Monster HEALTH: " + gameBoard.getMonster().getHealth()) ;
+				messageLabel.setText("The MAZE WRAITH SCREAMS IN ANGER!!!");
+			}else if ( gameBoard.getMonster().getHealth() < 6 && gameBoard.getMonster().getHealth()> 0 ){
+				System.out.println("The MAZE WRAITH CRYS IN TERROR!!!"+"  Monster HEALTH: " + gameBoard.getMonster().getHealth()) ;
+				messageLabel.setText("The MAZE WRAITH CRYS IN TERROR!!!"+"  Monster HEALTH: " + gameBoard.getMonster().getHealth());
+			}else if ( gameBoard.getMonster().getHealth()<=0 ){
+				System.out.println("The MAZE WRAITH SHREAKS IN PAIN!!!") ;
+				messageLabel.setText("The MAZE WRAITH SHREAKS IN PAIN!!!"+"  Monster HEALTH: " + gameBoard.getMonster().getHealth() );
 			}
+			
+			// if during the fight turn hero dies
+			if ( ! gameBoard.getHero().isAlive()){
+				gameBoard.deleteHero();
+				System.out.println("The Hero has been vanquished ...");
+				messageLabel.setText("The Hero has been vanquished ...");
+				System.out.println("Thanks for playing THE MAZE.  Better Luck Next Time!");
+				messageLabel.setText("Thanks for playing THE MAZE.  Better Luck Next Time!");
+				System.exit(0);
+			}			
+			
+			} // end of check if hero is alive and monster is alive
 		
 		if ( ! gameBoard.getMonster().isAlive() ) {
 		    gameBoard.deleteMonster();  // remove the icon 
 		    System.out.println("The Maze Wraith has been vanquished ...");
 		    messageLabel.setText("The Maze Wraith has been vanquished ...");
 
+			tempHero = gameBoard.getHero();
+			tempHero.displayStats();
+			tempMonster = gameBoard.getMonster();
+			tempMonster.displayStats();
+			
 		}
 		
 	return;	

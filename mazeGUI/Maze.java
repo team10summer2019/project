@@ -113,7 +113,9 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 	}
 	
 	public Room getCurrentRoom(){
-	Room temp = new Room( currentRoom);  // copy construct and return the copy 
+	
+	currentRoom = getRoom(getHero().getPosition());
+	Room temp = getRoom(getHero().getPosition());;  // copy construct and return the copy 
 	return temp;
 	}
 	
