@@ -199,7 +199,7 @@ public class HandleKeyBoardInput implements EventHandler<KeyEvent> {
 		inputControl(); // parse the input
 		} else {
 		inputControl(); // parse the input
-		textModeOutput();  // output the textmode response
+		textModeOutput();  // output the text-mode response
 		}
 		
 		// move the monster if alive
@@ -221,7 +221,9 @@ public class HandleKeyBoardInput implements EventHandler<KeyEvent> {
 public class HandleInputSendClick implements EventHandler<ActionEvent> {	
 	public void handle(ActionEvent event){
 			gameBoard.setCurrentRoom(gameBoard.getHero().getPosition()); 
-			//tempRoom = gameBoard.getCurrentRoom();  // set the tempRoom to be the current room at (0,0)
+			tempRoom = gameBoard.getCurrentRoom();  // set the tempRoom to be the current room at (0,0)
+			tempRoom.populateRoomGrid(); // load the information and characters currently set for the room into the roomGrid
+
 			tempHero = gameBoard.getHero();
 			// grab the input text from the text box
 			storeInput=textIn.getText();
@@ -256,6 +258,8 @@ public class HandleInputStartClick implements EventHandler<ActionEvent> {
 		
 		// THIS CALL IS CAUSING A BUG I DONT GET IT!!
 		tempRoom = gameBoard.getCurrentRoom();  // set the tempRoom to be the current room at (0,0)
+		tempRoom.populateRoomGrid(); // load the information and characters currently set for the room into the roomGrid
+
 		tempHero = gameBoard.getHero();
 		
 		postCurrentRoom();   // display the current room 
@@ -279,6 +283,8 @@ public void startMeUp() {
 	
 	// THIS CALL IS CAUSING A BUG I DONT GET IT!!
 	tempRoom = gameBoard.getCurrentRoom();  // set the tempRoom to be the current room at (0,0)
+	tempRoom.populateRoomGrid(); // load the information and characters currently set for the room into the roomGrid
+
 	tempHero = gameBoard.getHero();
 	
 	postCurrentRoom();   // display the current room 
@@ -298,7 +304,10 @@ public void startMeUp() {
 		gameBoard.setPlayerLocation(0,0); // reset to the top
 		gameBoard.resetPlayerItems(); // remove the key and the map from the player
 		// set the current room to current position 
-		gameBoard.setCurrentRoom(gameBoard.getHero().getPosition()); 
+		gameBoard.setCurrentRoom(gameBoard.getHero().getPosition());
+		tempRoom = gameBoard.getCurrentRoom();  // get the tempRoom to be the current room.
+		tempRoom.populateRoomGrid(); // load the information and characters currently set for the room into the roomGrid
+
 
  }
 
@@ -309,8 +318,9 @@ public void postCurrentRoom() {
 	gameBoard.setCurrentRoom(gameBoard.getHero().getPosition()); 
 	
 	// THE FOLLOWING LINE CAUSES A BUG TO NOT DISPLAY THE CURRENT ROOM...????
-	//tempRoom = gameBoard.getCurrentRoom();  // get the tempRoom to be the current room.
-	
+	tempRoom = gameBoard.getCurrentRoom();  // get the tempRoom to be the current room.
+	tempRoom.populateRoomGrid(); // load the information and characters currently set for the room into the roomGrid
+
 	char ch='A';
 	String temp="";
 	wipeGrid();  // clear previous text
@@ -347,8 +357,16 @@ public void wipeGrid() {
 public void textModeOutput() {
 	//draw the current room and display the room stats 
 	tempRoom = gameBoard.getCurrentRoom();
-	tempRoom.drawRoomGrid();
-    tempRoom.displayRoomStats();
+	tempRoom.populateRoomGrid(); // load the information and characters currently set for the room into the roomGrid
+
+	
+	/// THIS IS THE CRITICAL ITEM THAT IS REQUIRED (LOAD THE GRID INFO)
+	//tempRoom.populateRoomGrid(); // load the information and characters currently set for the room into the roomGrid
+
+	tempRoom.drawRoomGrid();  
+    
+	
+	tempRoom.displayRoomStats();
 	// update the hero current condition and display Hero stats
 	tempHero = gameBoard.getHero();
 	tempHero.displayStats();
@@ -743,6 +761,8 @@ public void textModeOutput() {
 		// increment the move counter to change the room
 		gameBoard.moveDown();
 		tempRoom = gameBoard.getCurrentRoom();
+		tempRoom.populateRoomGrid(); // load the information and characters currently set for the room into the roomGrid
+
 		moveCounter++;
 		}	
 			
@@ -751,6 +771,8 @@ public void textModeOutput() {
 		// increment the move counter to change the room
 		gameBoard.moveUp();
 		tempRoom = gameBoard.getCurrentRoom();
+		tempRoom.populateRoomGrid(); // load the information and characters currently set for the room into the roomGrid
+
 		moveCounter++;
 		}	
 		
@@ -759,6 +781,8 @@ public void textModeOutput() {
 		// increment the move counter to change the room
 		gameBoard.moveRight();
 		tempRoom = gameBoard.getCurrentRoom();
+		tempRoom.populateRoomGrid(); // load the information and characters currently set for the room into the roomGrid
+
 		moveCounter++;
 		}	
 		
@@ -767,6 +791,8 @@ public void textModeOutput() {
 		// increment the move counter to change the room
 		gameBoard.moveLeft();
 		tempRoom = gameBoard.getCurrentRoom();
+		tempRoom.populateRoomGrid(); // load the information and characters currently set for the room into the roomGrid
+
 		moveCounter++;
 		}
 		
@@ -774,6 +800,8 @@ public void textModeOutput() {
 		if ( storeInput.equalsIgnoreCase("Take")){
 		// increment the move counter to change the room
 		tempRoom = gameBoard.getCurrentRoom();
+		tempRoom.populateRoomGrid(); // load the information and characters currently set for the room into the roomGrid
+
 			if (tempRoom.getHasKey()){
 			gameBoard.takeKey();
 			System.out.println("You took the key!");
@@ -790,12 +818,16 @@ public void textModeOutput() {
 			}
 		// update the room 
 		tempRoom = gameBoard.getCurrentRoom();
+		tempRoom.populateRoomGrid(); // load the information and characters currently set for the room into the roomGrid
+
 		}
 		
 		// if user input is "Fight"	
 		if ( storeInput.equalsIgnoreCase("Fight")){
 		
 		tempRoom = gameBoard.getCurrentRoom();
+		tempRoom.populateRoomGrid(); // load the information and characters currently set for the room into the roomGrid
+
 		tempHero = gameBoard.getHero();
 		tempMonster = gameBoard.getMonster();
 		
@@ -806,7 +838,9 @@ public void textModeOutput() {
 
 			}
 		// update the room 
-		//tempRoom = gameBoard.getCurrentRoom();
+		tempRoom = gameBoard.getCurrentRoom();
+		tempRoom.populateRoomGrid(); // load the information and characters currently set for the room into the roomGrid
+
 		
 		postCurrentRoom();
 		}	
