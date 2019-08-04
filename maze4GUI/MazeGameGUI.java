@@ -1,5 +1,6 @@
 import java.util.Random;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit; // for delay before exit
 
 import javafx.application.Application;
 import javafx.scene.canvas.Canvas;
@@ -25,6 +26,7 @@ public class MazeGameGUI extends Application {
 	private int mazeSize=4;	 // Initialize with 4x4 maze for level 1 
 	//private int currentLevel=level;
 	
+	private boolean gameOn = true;
 
 	private Monster tempMonster; // temporary value to look at Monster stats
 	private String storeInput="";  // storage for user input
@@ -51,7 +53,7 @@ public class MazeGameGUI extends Application {
 	
 	private TextField textIn = new TextField(); // javafx.scene.control.TextField
 	
-	private Label playerLabel1 = new Label("Hero HEALTH: " + gameBoard.getHero().getHealth()+"Position: " +gameBoard.getHero().getPosition().toString());
+	private Label playerLabel1 = new Label("Hero HEALTH: " + gameBoard.getHero().getHealth()+" Position: " +gameBoard.getHero().getPosition().toString());
 	private Label playerLabel2 = new Label("Hero Items: Map=" + gameBoard.getHero().getHasMap()+" Key= " +gameBoard.getHero().getHasKey());
 	private Label playerLabel3 = new Label("Level: " + level + " Moves: " + moveCounter);
 
@@ -134,7 +136,7 @@ public class MazeGameGUI extends Application {
 		sticky.add(canvasRight, 1, 0);
 		sticky.add(grid, 0, 1);
 		sticky.add(grid2, 1, 1);
-		sticky.add(verticalBox, 2, 1);
+		sticky.add(verticalBox, 1, 2);
 		
 		BorderPane root = new BorderPane();
 		
@@ -233,7 +235,8 @@ public class HandleKeyBoardInput implements EventHandler<KeyEvent> {
 		playerLabel3.setText("Level: " + level + " Moves: " + moveCounter);
 		/// Routines to update the boxes
 		postCurrentRoom();
-
+		
+		
 	}
 }
 
@@ -263,7 +266,13 @@ public class HandleInputSendClick implements EventHandler<ActionEvent> {
 			playerLabel3.setText("Level: " + level + " Moves: " + moveCounter);	
 			/// Routines to update the current room boxes
 			postCurrentRoom();
-
+			
+			
+			if (!gameOn ) {
+				shutDown();
+			}
+			
+			
 		}
 	}
 
@@ -287,6 +296,11 @@ public class HandleInputStartClick implements EventHandler<ActionEvent> {
 		textModeOutput();
 		printHelp();
 		inputControl();
+		
+		if (!gameOn ) {
+			shutDown();
+		}
+		
 		}
 	}
 
@@ -322,7 +336,7 @@ public void startMeUp() {
 		resetMazeSize();  // reset the Maze Size  
 		gameBoard = new Maze(mazeSize); // make a new gameBoard of the proper size
 		setBoard(gameBoard);   // construct the maze for the current level
-		//gameBoard.copyHero(tempHero); // copy over the player from the previous level
+		gameBoard.copyHero(tempHero); // copy over the player from the previous level
 		gameBoard.setPlayerLocation(0,0); // reset to the top
 		gameBoard.resetPlayerItems(); // remove the key and the map from the player
 		// set the current room to current position 
@@ -338,7 +352,7 @@ public void startMeUp() {
 		resetMazeSize();  // reset the Maze Size  
 		gameBoard = new Maze(mazeSize); // make a new gameBoard of the proper size
 		setBoard(gameBoard);   // construct the maze for the current level
-		gameBoard.copyHero(tempHero); // copy over the player from the previous level
+		//gameBoard.copyHero(tempHero); // copy over the player from the previous level
 		gameBoard.setPlayerLocation(0,0); // reset to the top
 		gameBoard.resetPlayerItems(); // remove the key and the map from the player
 		// set the current room to current position 
@@ -347,11 +361,17 @@ public void startMeUp() {
 		tempRoom.populateRoomGrid(); // load the information and characters currently set for the room into the roomGrid
 		tempHero = gameBoard.getHero();
 		
+		// return to regular logo
+		image = new Image("images/Logo.png");
+		drawImage(gcL,image);
+					
 		postCurrentRoom();   // display the current room 
 	    // show the text mode output
 		textModeOutput();
 		printHelp();
 		inputControl();
+		
+		
  }
  
  
@@ -764,7 +784,7 @@ public void textModeOutput() {
 	
 	}
 	
-	public void inputControl() {
+	public void inputControl()  {
 		
 		// if user input was "MAP" display map unit until user types return
 		if ( storeInput.equalsIgnoreCase("map") ) {
@@ -952,20 +972,29 @@ public void textModeOutput() {
 		 System.out.println("Congratulations! You are free from THE MAZE!");
 		 messageLabel.setText("Congratulations! You are free from THE MAZE!");
 		 wipeGrid();
+		 
+		 
 		 image = new Image("images/win.png");
 		 drawImage(gcL,image);
-		 //System.exit(0);
+
+		 
+		 gameOn=false;
+		 
+	
 		}
 		
 		/// closing message to user if fail to win or quit
 		if ( moveCounter > 1000 || !gameBoard.getHero().isAlive() || storeInput.equalsIgnoreCase("quit") ){
 		 System.out.println("Thanks for playing THE MAZE.  Better Luck Next Time!");
 		 messageLabel.setText("Thanks for playing THE MAZE.  Better Luck Next Time!");
+		 
 		 image = new Image("images/lose.png");
 		 drawImage(gcL,image);
-		 //System.exit(0);
+		
+		 gameOn=false;
 		}
-			
+	
+		
 	return;
 	}
 	
@@ -1242,7 +1271,21 @@ public void textModeOutput() {
 	        
 	    }
 	     
-	
+	public void shutDown() {
+		
+		//https://stackoverflow.com/questions/23283041/how-to-make-java-delay-for-a-few-seconds?rq=1
+		try        
+		{
+		    Thread.sleep(1000);
+		    
+		} 
+		catch(InterruptedException ex) 
+		{
+		    Thread.currentThread().interrupt();
+		}
+		
+		System.exit(0);
+	}
 	
 		
 /////////////////////////////////////////////////////////////////////////////////////////////////
