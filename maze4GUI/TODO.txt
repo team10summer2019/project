@@ -1,43 +1,29 @@
 TODO.txt
 
-Description: Active list of action items for maze code
+Description: Active list of action items for maze4GUI code
 
 ################ RON #################################
  
-///////////// CURRENTLY WORKING ON: ////////////////////////////////
- -
--- Generalized class diagram  1 hr
--- specific classes   2 hr 
- 
--- Read the code for ticTacToe        3 hrs
--- Incorporate Riddle into game       3 hrs
+///////////// CURRENTLY WORKING ON: //////////////////////////////////////////////
 
--- JavaFX implementation of displayRoomGrid()    3hrs
--- JavaFX implementation of userInput() capture by textBox 1hr
--- JavaFX while loop game updating   1hr
- 
-//////////////////     BACKEND LOGIC UPGRADES     ////////////////////////////////
+-- Java Doc all mazeGame Classes and methods.        5 hrs
+-- Generalized class diagram                         2 hrs
+-- specific classes UML diagrams                     3 hrs 
   
+//////////////////     BACKEND LOGIC UPGRADES     ////////////////////////////////
+
+- Java Doc all classes                              5 hrs    // Ron responsible 
+
 - Incorporate Riddle into game                      3 hrs    // Haine and Steven Responsable 
 - Incorporate the book game and the riverGame       5 hrs    // Steven and Kate Reponsible 
 - Placement of ComboLock, Book and Goat items       2 hr     // Haine and Steven, Ron and Fiona Responsible
 
-/////////////////  NEW FEATURES   
-
-- Monsters Block your path (reason to need to fight them)      1 hr
+/////////////////  NEW FEATURES //////////////////////////////////////////////////
 
 - Give players an array list for inventory          1 hr
 - Make different keys ( Key object?)                2 hrs
 
-//////////////////  JAVAFX GUI  SUNDAY !!!!!
-
--- Read the code for ticTacToe     2-3hrs of study
-
--- JavaFX implementation of displayRoomGrid()    3hrs
--- JavaFX implementation of userInput() capture by textBox 1hr
--- JavaFX while loop game updating   1hr
-
-////////////////////
+//////////////////////////////////////////////////////////////////////////////////
 
 ######################################################
 
