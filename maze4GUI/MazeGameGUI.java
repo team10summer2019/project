@@ -12,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.scene.layout.*;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Button;
 import javafx.event.*;
@@ -52,6 +53,9 @@ public class MazeGameGUI extends Application {
 	private Label messageLabel = new Label("Welcome to the Maze");
 	
 	private TextField textIn = new TextField(); // javafx.scene.control.TextField
+	
+	private TextArea bigText = new TextArea(); // javafx.scene.control.TextArea
+	
 	
 	private Label playerLabel1 = new Label("Hero HEALTH: " + gameBoard.getHero().getHealth()+" Position: " +gameBoard.getHero().getPosition().toString());
 	private Label playerLabel2 = new Label("Hero Items: Map=" + gameBoard.getHero().getHasMap()+" Key= " +gameBoard.getHero().getHasKey());
@@ -127,6 +131,9 @@ public class MazeGameGUI extends Application {
 		startButton.setOnAction( startClick ); 
 		
 		
+		bigText.setWrapText(true);  // wrap text
+		bigText.setEditable(false); // no editing
+		
 ///////////////////////////// SCENE and STAGE SHOW ////////////////////////////////////////////
 		// build entire scene: grid and label
 		
@@ -137,6 +144,7 @@ public class MazeGameGUI extends Application {
 		sticky.add(grid, 0, 1);
 		sticky.add(grid2, 1, 1);
 		sticky.add(verticalBox, 1, 2);
+		sticky.add(bigText, 0, 2);
 		
 		BorderPane root = new BorderPane();
 		
@@ -216,27 +224,32 @@ public class HandleKeyBoardInput implements EventHandler<KeyEvent> {
 			messageLabel.setText(storeInput);
 	}
 
+		
+		if( gameOn) { // disable post game motion
 		// display the textMode output 
-		if (storeInput.equalsIgnoreCase("map") || storeInput.equalsIgnoreCase("help") || storeInput.equalsIgnoreCase("fight") ) {
-		inputControl(); // parse the input
+			if (storeInput.equalsIgnoreCase("map") || storeInput.equalsIgnoreCase("help") || storeInput.equalsIgnoreCase("fight") ) {
+				inputControl(); // parse the input
+			} else {
+				inputControl(); // parse the input
+				textModeOutput();  // output the text-mode response
+			}
+		
+			// move the monster if alive
+			if(gameBoard.getMonster().isAlive()) {
+				monsterWalk(randGen,gameBoard);// move the monster
+			}
+		
+			// Update Hero Statistics 
+			playerLabel1.setText("Hero HEALTH: " + gameBoard.getHero().getHealth()+" Position: " +gameBoard.getHero().getPosition().toString());
+			playerLabel2.setText("Hero Items: Map=" + gameBoard.getHero().getHasMap()+" Key= " +gameBoard.getHero().getHasKey());
+			playerLabel3.setText("Level: " + level + " Moves: " + moveCounter);
+			/// Routines to update the boxes
+			postCurrentRoom();
+		
 		} else {
-		inputControl(); // parse the input
-		textModeOutput();  // output the text-mode response
+			
+			wipeGrid();
 		}
-		
-		// move the monster if alive
-		if(gameBoard.getMonster().isAlive()) {
-		monsterWalk(randGen,gameBoard);// move the monster
-		}
-		
-		// Update Hero Statistics 
-		playerLabel1.setText("Hero HEALTH: " + gameBoard.getHero().getHealth()+" Position: " +gameBoard.getHero().getPosition().toString());
-		playerLabel2.setText("Hero Items: Map=" + gameBoard.getHero().getHasMap()+" Key= " +gameBoard.getHero().getHasKey());
-		playerLabel3.setText("Level: " + level + " Moves: " + moveCounter);
-		/// Routines to update the boxes
-		postCurrentRoom();
-		
-		
 	}
 }
 
@@ -269,6 +282,7 @@ public class HandleInputSendClick implements EventHandler<ActionEvent> {
 			
 			
 			if (!gameOn ) {
+				wipeGrid();
 				shutDown();
 			}
 			
@@ -298,6 +312,7 @@ public class HandleInputStartClick implements EventHandler<ActionEvent> {
 		inputControl();
 		
 		if (!gameOn ) {
+			wipeGrid();
 			shutDown();
 		}
 		
@@ -370,8 +385,7 @@ public void startMeUp() {
 		textModeOutput();
 		printHelp();
 		inputControl();
-		
-		
+			
  }
  
  
@@ -434,6 +448,7 @@ public void wipeGrid() {
 	for (int i = 0; i < cols; i++) {
 		for (int j = 0; j < rows; j++){
 			buttonGrid[i][j].setText(" ");	
+			buttonGrid[i][j].setOpacity(0.1);
 			rectGrid[i][j].setFill(Color.WHITE);
 		}
 	}
@@ -852,24 +867,25 @@ public void textModeOutput() {
 		if ( storeInput.equalsIgnoreCase("help") ) {
 			printHelp();  // print the help message with user input keywords	
 			
-			image = new Image("images/help.png");
-			drawImage(gcL,image);
+			// Help image is poor, better to output a message in the text area
+			//image = new Image("images/help.png");
+			//drawImage(gcL,image);
+			
 			messageLabel.setText("Input \"Return\" or r to return to the maze.");	
 			postCurrentRoom();
 	        }
-		
-		
+			
 		// if user input was "Return" display map unit until user types return
 		if ( storeInput.equalsIgnoreCase("return") ) {
 			
 				image = new Image("images/Logo.png");
 				drawImage(gcL,image);	
 				postCurrentRoom();
+				
+				bigText.setText(""); // clear the text Area box field
 		
 			}
 	
-		
-		
 		// if user input is "Down"	
 		if ( storeInput.equalsIgnoreCase("Down")){
 		// increment the move counter to change the room
@@ -976,7 +992,7 @@ public void textModeOutput() {
 		 
 		 image = new Image("images/win.png");
 		 drawImage(gcL,image);
-
+		 bigText.setText("Congratulations! You are free from THE MAZE!\nPress the Restart or Enter click buttons to terminate the program.");
 		 
 		 gameOn=false;
 		 
@@ -987,6 +1003,9 @@ public void textModeOutput() {
 		if ( moveCounter > 1000 || !gameBoard.getHero().isAlive() || storeInput.equalsIgnoreCase("quit") ){
 		 System.out.println("Thanks for playing THE MAZE.  Better Luck Next Time!");
 		 messageLabel.setText("Thanks for playing THE MAZE.  Better Luck Next Time!");
+		 
+		 bigText.setText("Thanks for playing THE MAZE.  Better Luck Next Time!\nPress the Restart or Enter click buttons to terminate the program.");
+			
 		 
 		 image = new Image("images/lose.png");
 		 drawImage(gcL,image);
@@ -1026,6 +1045,9 @@ public void textModeOutput() {
 	System.out.println("");
 	System.out.println("Type \"Return\" and press Enter to return to the Maze");
 	
+	// set the help info into the text area box 
+	bigText.setText("Welcome to the Maze\nHelp: prints useage\nQuit:Exits the game\nReturn:returns to the map\nControl Keys: a: left, s: down,d: right,w: up\nr: return, m: map, t: take , q: quit, \nh: help o: open, e: escape, f:fight");
+
 	return;
 	}
  	
@@ -1121,8 +1143,7 @@ public void textModeOutput() {
 	
 	return;
 	}
-	
-	
+		
 	public String getUserInput(){
 	String input;
 	Scanner keyboard = new Scanner(System.in);
@@ -1131,31 +1152,6 @@ public void textModeOutput() {
 	keyboard.close(); // close the input stream
 	return input;
 	}
-
-	
-	// Use this to clear the screen taken from source: 	
-	//  https://stackoverflow.com/questions/2979383/java-clear-the-console		
-	public final static void clearScreen()
-	{
-	    try
-	    {
-	        final String os = System.getProperty("os.name");
-
-	        if (os.contains("Windows"))
-	        {
-	            Runtime.getRuntime().exec("cls");
-	        }
-	        else
-	        {
-	            Runtime.getRuntime().exec("clear");
-	        }
-	    }
-	    catch (final Exception e)
-	    {
-	        //  Handle any exceptions.
-	    }
-	}
-	
 
 	public static void pressSPACE( String input){
 
@@ -1193,6 +1189,7 @@ public void textModeOutput() {
 			// obsolete remove this if statement
 			if (storeInput.equalsIgnoreCase("Run") ) {
 				textModeOutput();
+				postCurrentRoom();
 				return;
 				} 
 		
@@ -1204,20 +1201,23 @@ public void textModeOutput() {
 			postCurrentRoom();
 	
 			if ( gameBoard.getMonster().getHealth() >12 ) {
-				System.out.println("The MAZE WRAITH LAUGHS IN GLEE!!!"+"  Monster HEALTH: " + gameBoard.getMonster().getHealth()) ;
-				messageLabel.setText("The MAZE WRAITH LAUGHS IN GLEE!!!"+"  Monster HEALTH: " + gameBoard.getMonster().getHealth());
+				System.out.println("The MAZE WRAITH LAUGHS IN GLEE!!!"+"  Monster Health: " + gameBoard.getMonster().getHealth()) ;
+				messageLabel.setText("The MAZE WRAITH LAUGHS IN GLEE!!!"+"  Monster Health: " + gameBoard.getMonster().getHealth());
 			}else if ( gameBoard.getMonster().getHealth() < 12 && gameBoard.getMonster().getHealth()> 6 ){
-				System.out.println("The MAZE WRAITH SCREAMS IN ANGER!!!"+"  Monster HEALTH: " + gameBoard.getMonster().getHealth()) ;
-				messageLabel.setText("The MAZE WRAITH SCREAMS IN ANGER!!!"+"  Monster HEALTH: " + gameBoard.getMonster().getHealth());
+				System.out.println("The MAZE WRAITH SCREAMS IN ANGER!!!"+"  Monster Health: " + gameBoard.getMonster().getHealth()) ;
+				messageLabel.setText("The MAZE WRAITH SCREAMS IN ANGER!!!"+"  Monster Health: " + gameBoard.getMonster().getHealth());
 			}else if ( gameBoard.getMonster().getHealth() < 6 && gameBoard.getMonster().getHealth()> 0 ){
-				System.out.println("The MAZE WRAITH CRYS IN TERROR!!!"+"  Monster HEALTH: " + gameBoard.getMonster().getHealth()) ;
-				messageLabel.setText("The MAZE WRAITH CRYS IN TERROR!!!"+"  Monster HEALTH: " + gameBoard.getMonster().getHealth());
+				System.out.println("The MAZE WRAITH CRYS IN TERROR!!!"+"  Monster Health: " + gameBoard.getMonster().getHealth()) ;
+				messageLabel.setText("The MAZE WRAITH CRYS IN TERROR!!!"+"  Monster Health: " + gameBoard.getMonster().getHealth());
 			}else if ( gameBoard.getMonster().getHealth()<=0 ){
-				System.out.println("The MAZE WRAITH SHREAKS IN PAIN!!!"+"  Monster HEALTH: " + gameBoard.getMonster().getHealth()) ;
-				messageLabel.setText("The MAZE WRAITH SHREAKS IN PAIN!!!"+"  Monster HEALTH: " + gameBoard.getMonster().getHealth() );
+				System.out.println("The MAZE WRAITH SHREAKS IN PAIN!!!"+"  Monster Health: " + gameBoard.getMonster().getHealth()) ;
+				messageLabel.setText("The MAZE WRAITH SHREAKS IN PAIN!!!"+"  Monster Health: " + gameBoard.getMonster().getHealth() );
 			
 			}
 			
+			// Use the text Area to display info
+			bigText.setText("=======MONSTER STATS=======\nMonster Health: " + gameBoard.getMonster().getHealth() + "\nAttack Strength: " + gameBoard.getMonster().getAttackStrength());
+				
 			// if during the fight turn hero dies
 			if ( ! gameBoard.getHero().isAlive()){
 				gameBoard.deleteHero();
@@ -1227,16 +1227,22 @@ public void textModeOutput() {
 				messageLabel.setText("Thanks for playing THE MAZE.  Better Luck Next Time!");
 				image = new Image("images/lose.png");
 				drawImage(gcL,image);
-				//System.exit(0);
+				
+				bigText.setText("The Hero has been vanquished ...\nThanks for playing THE MAZE.  Better Luck Next Time!");
+				
+				
 			}			
 			
-			} // end of check if hero is alive and monster is alive
+		} // end of check if hero is alive and monster is alive
 		
-		if ( ! gameBoard.getMonster().isAlive() ) {
+		if ( !gameBoard.getMonster().isAlive() ) {
 		    gameBoard.deleteMonster();  // remove the icon 
 		    System.out.println("The Maze Wraith has been vanquished ...");
 		    messageLabel.setText("The Maze Wraith has been vanquished ...");
-
+		    
+		    bigText.setText("=======MONSTER STATS=======\nMonster Health: " + gameBoard.getMonster().getHealth() + "\nAttack Strength: " + gameBoard.getMonster().getAttackStrength()+"\nThe Maze Wraith has been vanquished ...");
+			
+		    
 			tempHero = gameBoard.getHero();
 			tempHero.displayStats();
 			tempMonster = gameBoard.getMonster();
@@ -1267,13 +1273,13 @@ public void textModeOutput() {
 	        gc.fill();
 	        gc.strokeRect(0,0,canvasWidth,canvasHeight);
 	        gc.setLineWidth(1);  
-	        gc.drawImage(photo, 0, 0, 200, 200);
+	        gc.drawImage(photo, 0, 0, canvasWidth, canvasHeight);
 	        
 	    }
 	     
 	public void shutDown() {
 		
-		//https://stackoverflow.com/questions/23283041/how-to-make-java-delay-for-a-few-seconds?rq=1
+		// https://stackoverflow.com/questions/23283041/how-to-make-java-delay-for-a-few-seconds?rq=1
 		try        
 		{
 		    Thread.sleep(1000);
@@ -1287,7 +1293,28 @@ public void textModeOutput() {
 		System.exit(0);
 	}
 	
-		
+	// Use this to clear the screen taken from source: 	
+	//  https://stackoverflow.com/questions/2979383/java-clear-the-console		
+	public final static void clearScreen()
+	{
+	    try
+	    {
+	        final String os = System.getProperty("os.name");
+
+	        if (os.contains("Windows"))
+	        {
+	            Runtime.getRuntime().exec("cls");
+	        }
+	        else
+	        {
+	            Runtime.getRuntime().exec("clear");
+	        }
+	    }
+	    catch (final Exception e)
+	    {
+	        //  Handle any exceptions.
+	    }
+	}
 /////////////////////////////////////////////////////////////////////////////////////////////////
 } // Class Ending Brace
 
