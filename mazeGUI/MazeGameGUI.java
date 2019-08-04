@@ -5,7 +5,7 @@ import javafx.application.Application;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.Group;
+//import javafx.scene.Group;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
@@ -15,6 +15,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Button;
 import javafx.event.*;
 import javafx.scene.input.*;
+import javafx.scene.image.Image;
 
 public class MazeGameGUI extends Application {
 
@@ -42,8 +43,7 @@ public class MazeGameGUI extends Application {
     private int rows = gameBoard.getCurrentRoom().getRoomRows();
     
     // make a button grid with the same number of columns and rows as a roomGrid
-	private Button[][] buttonGrid = new Button[cols][rows];  
-	
+	private Button[][] buttonGrid = new Button[cols][rows];  	
 	private Rectangle[][] rectGrid = new Rectangle[cols][rows];
 	
 	// make a messageLabel with a message for user interaction / Prompts
@@ -51,9 +51,11 @@ public class MazeGameGUI extends Application {
 	
 	private TextField textIn = new TextField(); // javafx.scene.control.TextField
 	
-	
 	private Label playerLabel1 = new Label("Hero Stats:" + gameBoard.getHero().getHealth()+" " +gameBoard.getHero().getPosition().toString());
 	private Label playerLabel2 = new Label("Hero Items: Map=" + gameBoard.getHero().getHasMap()+" Key= " +gameBoard.getHero().getHasKey());
+	
+	private Image image;
+	
 	
 ///////////////////////////// START METHOD //////////////////////////////////////////////////	
 	
@@ -130,13 +132,17 @@ public class MazeGameGUI extends Application {
 		root.setRight(verticalBox);  // add a vbox to the right pane
 		root.setBottom(messageLabel);  // place to put the messages to user output
 		root.setTop(canvas); // add a canvas to the left pane
+		
+		
 		Scene scene = new Scene(root, 500, 500);
 		
 		// key press action events
 		root.setOnKeyTyped( keyInput );
 		
 		startMeUp(); // setup the game
-			
+		
+		initDraw(gc);
+		
 		// setup and show the stage and scene 
 		primaryStage.setTitle("Maze Game");
 		primaryStage.setScene(scene);
@@ -1103,6 +1109,33 @@ public void textModeOutput() {
 	return;	
 
 	}
+	
+	//http://java-buddy.blogspot.com/2013/05/draw-scaled-image-on-javafx-canvas-with.html
+	 private void initDraw(GraphicsContext gc){
+		 
+	        double canvasWidth = gc.getCanvas().getWidth();
+	        double canvasHeight = gc.getCanvas().getHeight();
+	         
+	        gc.setFill(Color.LIGHTGRAY);
+	        gc.setStroke(Color.BLACK);
+	        gc.setLineWidth(5);
+	 
+	        gc.fill();
+	        gc.strokeRect(
+	                0,              //x of the upper left corner
+	                0,              //y of the upper left corner
+	                canvasWidth,    //width of the rectangle
+	                canvasHeight);  //height of the rectangle
+	 
+	        gc.setLineWidth(1);
+	      
+	        image = new Image("image1.png");
+	        
+	        
+	        gc.drawImage(image, 0, 0, 200, 200);
+	        
+	    }
+	     
 	
 	
 		

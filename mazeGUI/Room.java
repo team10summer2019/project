@@ -43,7 +43,7 @@ private char [][] roomGrid ; //  char 2D array for playing characters in a room
 
 private final int roomWidth=6;  // used in drawing routines
 private int roomCols=8;  //  width of a room
-private int roomRows=4;  // height of a room 
+private int roomRows=6;  // height of a room 
 
 //////////////////////////   CONSTRUCTORS ///////////////////////////////////////////////
 	public Room(){
