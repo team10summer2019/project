@@ -55,7 +55,9 @@ public class MazeGameGUI extends Application {
 	private Label playerLabel2 = new Label("Hero Items: Map=" + gameBoard.getHero().getHasMap()+" Key= " +gameBoard.getHero().getHasKey());
 	
 	private Image image;
-	
+	// make a canvas for images and drawings
+	private Canvas canvas = new Canvas(200,200);
+	private GraphicsContext gc = canvas.getGraphicsContext2D();
 	
 ///////////////////////////// START METHOD //////////////////////////////////////////////////	
 	
@@ -64,7 +66,6 @@ public class MazeGameGUI extends Application {
 		
 		// use the GridPane layout (instead of vBox, hBox or Group)
 		  GridPane grid = new GridPane();  
-
 		  GridPane grid2 = new GridPane();  // grid for rectangle objects 
 	
 		  // make a key input handler
@@ -93,15 +94,12 @@ public class MazeGameGUI extends Application {
 		
 	//	Button updateButton = new Button("Update");
 		
-		Canvas canvas = new Canvas(200,200);
-		GraphicsContext gc = canvas.getGraphicsContext2D();
-		
 		for (int i = 0; i < cols; i++) {
 			for (int j = 0; j < rows; j++){
 				Rectangle rect = new Rectangle();  // make a new rectangle 
-				rect.setWidth(50);
-				rect.setHeight(50);
-				rect.setFill(Color.BLACK);
+				rect.setWidth(20);
+				rect.setHeight(25);
+				rect.setFill(Color.GREY);
 				rect.setOnKeyPressed( new HandleKeyBoardInput());
 				rectGrid[i][j] = rect;       // add the new rectangle to the rectGrid
 				grid2.add(rectGrid[i][j], i, j);		
@@ -126,12 +124,21 @@ public class MazeGameGUI extends Application {
 ///////////////////////////// SCENE and STAGE SHOW ////////////////////////////////////////////
 		// build entire scene: grid and label
 		
+		GridPane sticky = new GridPane();
+		
+		sticky.add(canvas, 0, 0);
+		sticky.add(grid, 0, 1);
+		sticky.add(grid2, 1, 1);
+		sticky.add(verticalBox, 1, 2);
+		
 		BorderPane root = new BorderPane();
+		
+		root.setCenter(sticky);
 		//root.setCenter(grid);
-		root.setCenter(grid);  // add a grid to the center pane 
-		root.setRight(verticalBox);  // add a vbox to the right pane
+		// root.setCenter(grid);  // add a grid to the center pane 
+		//root.setRight(verticalBox);  // add a vbox to the right pane
 		root.setBottom(messageLabel);  // place to put the messages to user output
-		root.setTop(canvas); // add a canvas to the left pane
+		//root.setTop(canvas); // add a canvas to the left pane
 		
 		
 		Scene scene = new Scene(root, 500, 500);
@@ -340,10 +347,28 @@ public void postCurrentRoom() {
 			buttonGrid[i][j].setText(temp);
 			if (ch == ' ' ) {
 			buttonGrid[i][j].setOpacity(0.3);
-			rectGrid[i][j].setFill(Color.GREY);
-			} else {
+			rectGrid[i][j].setFill(Color.LIGHTGREY);
+			} else if (ch == '|' || ch == '_' ){
 			buttonGrid[i][j].setOpacity(1);
-			rectGrid[i][j].setFill(Color.RED);
+			rectGrid[i][j].setFill(Color.DARKGREY);
+			} else if (ch == 'W' ){
+				buttonGrid[i][j].setOpacity(1);
+				rectGrid[i][j].setFill(Color.RED);
+			} else if (ch == 'M' ){
+				buttonGrid[i][j].setOpacity(1);
+				rectGrid[i][j].setFill(Color.GREEN);
+			}else if (ch == 'K' ){
+				buttonGrid[i][j].setOpacity(1);
+				rectGrid[i][j].setFill(Color.YELLOW);
+			}else if (ch == 'D' ){
+				buttonGrid[i][j].setOpacity(1);
+				rectGrid[i][j].setFill(Color.BROWN);
+			}else if (ch == 'R' ){
+				buttonGrid[i][j].setOpacity(0.5);
+				rectGrid[i][j].setFill(Color.BLUEVIOLET);
+			}else if (ch == '*' ){
+				buttonGrid[i][j].setOpacity(1);
+				rectGrid[i][j].setFill(Color.BLUE);
 			}
 		}
 	}
