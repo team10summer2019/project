@@ -1,6 +1,6 @@
 import java.util.Random;
 import java.util.Scanner;
-import java.util.concurrent.TimeUnit; // for delay before exit
+//import java.util.concurrent.TimeUnit; // for delay before exit
 
 import javafx.application.Application;
 import javafx.scene.canvas.Canvas;
@@ -809,7 +809,7 @@ public void textModeOutput() {
 				printMap();  // print the map
 				drawImage(gcL,image);
 				messageLabel.setText("You unfold the map from your pocket and take a look...");
-				
+				bigText.setText("You unfold the map from your pocket and take a look...");
 			} else {
 			messageLabel.setText("You don't have a Map...");
 			System.out.println("You don't have a Map...");
@@ -830,10 +830,12 @@ public void textModeOutput() {
 			gameBoard.unlockDoor();
 			messageLabel.setText("The Door is now Open, you may now Escape...");
 			System.out.println("The Door is now Open, you may now Escape...");
+			bigText.setText("The Door is now Open, you may now Escape...");
 
 			} else {
 			messageLabel.setText("You don't have a Key, or You're not at the Door...");
 			System.out.println("You don't have a Key, or You're not at the Door...");
+			bigText.setText("You don't have a Key, or You're not at the Door...");
 			}
 	        }
 		
@@ -848,6 +850,7 @@ public void textModeOutput() {
 				level++; 
 				System.out.println("You have escaped, and are now on Level: " + level );
 				messageLabel.setText("You have escaped, and are now on Level: " + level );	
+				bigText.setText("You have escaped, and are now on Level: " + level );
 				resetGameBoard();  // get a new level
 				if (level == 4){
 					victory=true;  // switch victory flag	
@@ -952,6 +955,7 @@ public void textModeOutput() {
 			}else{
 			System.out.println("There is nothing in the room to take...");
 			messageLabel.setText("There is nothing in the room to take...");
+			bigText.setText("There is nothing in the room to take...");
 			}
 		// update the room 
 		tempRoom = gameBoard.getCurrentRoom();
@@ -976,7 +980,7 @@ public void textModeOutput() {
 			image = new Image("images/Logo.png");
 			drawImage(gcL,image);
 			messageLabel.setText("There is nobody in the room to fight...");
-
+			bigText.setText("There is nobody in the room to fight...");
 			}
 		// update the room 
 		tempRoom = gameBoard.getCurrentRoom();
@@ -991,15 +995,13 @@ public void textModeOutput() {
 		 System.out.println("Congratulations! You are free from THE MAZE!");
 		 messageLabel.setText("Congratulations! You are free from THE MAZE!");
 		 wipeGrid();
-		 
-		 
+	
 		 image = new Image("images/win.png");
 		 drawImage(gcL,image);
 		 bigText.setText("Congratulations! You are free from THE MAZE!\nPress the Restart or Enter click buttons to terminate the program.");
 		 
-		 gameOn=false;
+		 gameOn=false;  // game terminating flag to halt input
 		 
-	
 		}
 		
 		/// closing message to user if fail to win or quit
@@ -1009,11 +1011,10 @@ public void textModeOutput() {
 		 
 		 bigText.setText("Thanks for playing THE MAZE.  Better Luck Next Time!\nPress the Restart or Enter click buttons to terminate the program.");
 			
-		 
 		 image = new Image("images/lose.png");
 		 drawImage(gcL,image);
 		
-		 gameOn=false;
+		 gameOn=false; // game terminating flag to halt input
 		}
 	
 		

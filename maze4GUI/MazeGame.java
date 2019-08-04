@@ -41,7 +41,7 @@ public class MazeGame {
 	
 	public static void playGame() {
 		
-		int mazeSize=4;	 // initalize with 4x4 maze for level 1 
+		int mazeSize=4;	 // initialize with 4x4 maze for level 1 
 		int currentLevel=level;
 		Player tempHero;  // temporary value to look at Hero stats
 		Room tempRoom;    // temporary value to look at a room 
