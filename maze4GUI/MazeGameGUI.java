@@ -839,12 +839,11 @@ public void textModeOutput() {
 		
 		// if user input was "ESCAPE"  if you are at the door and the door is open exit the game winning.
 		if ( storeInput.equalsIgnoreCase("Escape") ) {
-		
 		// store the location of the door
 		Point doorLocation = gameBoard.getDoor().getLocation();
 		Point currentLocation = gameBoard.getCurrentRoom().getLocation();
 			// check that player has the key, and is in the location that the door is in and that the door is open
-			if (gameBoard.getHero().getHasKey()  && currentLocation.isEqual(doorLocation) && gameBoard.getCurrentRoom().getHasDoor()  && !gameBoard.getDoor().getIsLocked() ) {
+			if (gameBoard.getHero().getHasKey()  && currentLocation.isEqual(doorLocation) && gameBoard.getCurrentRoom().getHasDoor()  && !gameBoard.getDoor().getIsLocked() && !gameBoard.getMonster().isAlive() ) {
 				
 				level++; 
 				System.out.println("You have escaped, and are now on Level: " + level );
@@ -857,11 +856,11 @@ public void textModeOutput() {
 				// increment to the next level 	
 				
 			} else {
-			messageLabel.setText("Either the door isn't opened, or You're not at the Door...");
-			System.out.println("Either the door isn't opened, or You're not at the Door...");
-			
+			messageLabel.setText("Either the door isn't opened, or You Haven't Beat the Monster, or You're not at the Door...");
+			System.out.println("Either the door isn't opened, or You Haven't Beat the Monster, or You're not at the Door...");
+			bigText.setText("You must beat the Monster to Escape...");
 			}
-	        }	
+		}	
 		
 		// if user input was "HELP" display help unit until user types return
 		if ( storeInput.equalsIgnoreCase("help") ) {
@@ -936,15 +935,19 @@ public void textModeOutput() {
 			gameBoard.takeKey();
 			System.out.println("You took the key!");
 			messageLabel.setText("You took the key!");
+			bigText.setText("You took the Key!");
 			moveCounter++;
 			}else if (tempRoom.getHasMap()){
 			gameBoard.takeMap();
 			System.out.println("You took the Map!");
 			messageLabel.setText("You took the Map!");
+			bigText.setText("You took the Map!");
 			moveCounter++;
 			}else if (tempRoom.getHasFood()){
 				gameBoard.takeFood();
 				System.out.println("You took the Food!");
+				messageLabel.setText("You took the Food!");
+				bigText.setText("You took the Food!");
 				moveCounter++;
 			}else{
 			System.out.println("There is nothing in the room to take...");
