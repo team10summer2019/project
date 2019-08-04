@@ -32,10 +32,10 @@ private Random randGen = new Random(1000);  // make a pseudo random number gener
 	// default constructor
 	public Player(){
 	position = new Point(0,0);
-	health = 30;
+	health = 35;
 	hasKey = false;
 	hasMap = false;
-	attackStrength = 4;
+	attackStrength = 7;
 	}
 
 	// input constructor
@@ -46,11 +46,11 @@ private Random randGen = new Random(1000);  // make a pseudo random number gener
 		if (heal >5){
 		health = heal;
 		}
-		else { health = 30; }  
+		else { health = 35; }  
 	
 		if ( strength >=1){
 		attackStrength = strength;
-		}else { attackStrength = 4 ; }
+		}else { attackStrength = 7 ; }
 	}
 	
 	// copy constructor
@@ -66,7 +66,7 @@ private Random randGen = new Random(1000);  // make a pseudo random number gener
 	
 		if ( p.attackStrength >=1){
 		attackStrength = p.attackStrength;
-		}else { attackStrength = 4 ; }
+		}else { attackStrength = 7 ; }
 	}
 
 
@@ -112,6 +112,14 @@ private Random randGen = new Random(1000);  // make a pseudo random number gener
 	public void setHealth( int healthIn){
 		if (healthIn > 0) {
 		health= healthIn;
+		}
+	return;
+	}
+	
+	// use for eating Gruel
+	public void addHealth( int amount){
+		if (amount > 0) {
+		health+= amount;
 		}
 	return;
 	}

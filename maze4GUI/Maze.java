@@ -89,7 +89,7 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 	
 	public Room getRoom( Point p ){
 		
-	Room temp = new Room (currentRoom);  // if point is out of bounds just return the curent room  	
+	Room temp = new Room (currentRoom);  // if point is out of bounds just return the current room  	
 	
 		if ( p.getXCoordinate() <= mazeSize-1 && p.getYCoordinate() <= mazeSize-1 && p.getXCoordinate() >=0  && p.getYCoordinate() >=0)
 		{
@@ -235,10 +235,10 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 		}	
 	return;
 	}
-
+	
 
 	// reset the booleans in the array list room 
-	public void setRoomItems(int x , int y,  boolean key, boolean door ,boolean map, boolean monster, boolean riddle ){
+	public void setRoomItems(int x , int y,  boolean key, boolean door ,boolean map, boolean monster, boolean food ){
 		if ( x >= 0 && x <= mazeSize-1 && y >=0 && y <= mazeSize-1) {
 		Room temp = roomList[x][y];  // get the pointer to the room in list at index k
 		
@@ -246,7 +246,7 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 		temp.setHasDoor(door);
 		temp.setHasMap(map);
 		temp.setHasMonster(monster);
-		temp.setHasRiddle(riddle);
+		temp.setHasFood(food);
 		
 		}
 	
@@ -254,7 +254,7 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 	}	
 
 	// reset the booleans in the array list room 
-	public void setRoomItems(Point p , boolean key, boolean door ,boolean map, boolean monster, boolean riddle ){
+	public void setRoomItems(Point p , boolean key, boolean door ,boolean map, boolean monster, boolean food ){
 		if ( p.getXCoordinate() >= 0 && p.getXCoordinate() <= mazeSize-1 && p.getYCoordinate() >=0 && p.getYCoordinate() <= mazeSize-1) {
 		Room temp = roomList[p.getXCoordinate()][p.getYCoordinate()];  // get the pointer to the room in list at index k
 		
@@ -262,7 +262,7 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 		temp.setHasDoor(door);
 		temp.setHasMonster(monster);
 		temp.setHasMap(map);
-		temp.setHasRiddle(riddle);
+		temp.setHasFood(food);
 		
 		}
 	
@@ -369,8 +369,10 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 	// get the hero's position and use it to set the currentRoom
 		if ( !currentRoom.getLeftWall()){
 		// update the hero's position
+		setRoomPlayer(currentPosition,false);
 		hero.moveLeft();
 		currentPosition = hero.getPosition();   // get hero's position
+		setRoomPlayer(currentPosition,true);
 		setCurrentRoom(currentPosition);   // set the current room to be the hero's position
 		} else {
 		System.out.println("You can't go that way, there is a wall blocking your path");
@@ -386,8 +388,10 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 	// get the hero's position and use it to set the currentRoom
 		if ( !currentRoom.getRightWall() ){
 		// update the hero's position
+		setRoomPlayer(currentPosition,false);
 		hero.moveRight();
 		currentPosition = hero.getPosition();  
+		setRoomPlayer(currentPosition,true);
 		setCurrentRoom(currentPosition);   // set the current room to be the hero's position
 		} else {
 		System.out.println("You can't go that way, there is a wall blocking your path");
@@ -402,9 +406,11 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 	// if there isn't a wall to the top of the current room
 	// get the hero's position and use it to set the currentRoom
 		if ( !currentRoom.getTopWall() ){
+		setRoomPlayer(currentPosition,false);
 		// update the hero's position
 		hero.moveUp();
 		currentPosition = hero.getPosition();  
+		setRoomPlayer(currentPosition,true);
 		setCurrentRoom(currentPosition);   // set the current room to be the hero's position
 		} else {
 		System.out.println("You can't go that way, there is a wall blocking your path");
@@ -420,15 +426,18 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 	// get the hero's position and use it to set the currentRoom
 		if ( !currentRoom.getBottomWall() ){
 		// update the hero's position
+		setRoomPlayer(currentPosition,false);
 		hero.moveDown();
 		currentPosition = hero.getPosition();  
 		System.out.println(currentPosition.toString() );
+		setRoomPlayer(currentPosition,true);
 		setCurrentRoom(currentPosition);   // set the current room to be the hero's position
 		} else {
 		System.out.println("You can't go that way, there is a wall blocking your path");
 		}
 	return;	
 	}
+	
 	
 /////////////////////    Monster Motion Operations  //////////////////////////////////////////////
 	
@@ -548,6 +557,25 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 	currentRoom = getRoom( currentPosition );
 	return;
 	}
+	
+	public void takeFood(){
+	Point currentPosition = hero.getPosition();
+	currentRoom = getRoom( currentPosition );	
+		// if the room has a map but the player doesn't
+		if (currentRoom.getHasFood()){
+		// Eat the food
+		hero.addHealth(20); // add 20 health points
+		// reset the room to not have a food item
+		setCurrentRoom(currentPosition); // point current room to the room in roomList 
+		currentRoom.setHasFood(false); // remove the key from the room	
+		}
+	// restore the pointer away from the roomList;
+	currentRoom = getRoom( currentPosition );
+	return;
+	}
+	
+	
+	
 	
 	public void unlockDoor(){
 

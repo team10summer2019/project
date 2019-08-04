@@ -36,6 +36,7 @@ private boolean hasRiddle;
 private boolean hasBooks;
 private boolean hasComboLock;
 private boolean hasGoat;
+private boolean hasFood;
 
 private int doorPosition;
 
@@ -63,7 +64,8 @@ private int roomRows=6;  // height of a room
 	 hasBooks = false;
 	 hasComboLock =false;
 	 hasGoat = false;
-
+	 hasFood = false;
+	 
 	 hasDoor=false;
 	 doorPosition=0; // 0 for no door 1 for left 2 for right , 3 for top, 4 for bottom
  	
@@ -90,7 +92,8 @@ private int roomRows=6;  // height of a room
 	 hasBooks = false;
 	 hasComboLock =false;
 	 hasGoat = false;
-	 
+	 hasFood = false; 
+	
 	 hasDoor=false;
 	 doorPosition=0; // 0 for no door 1 for left 2 for right , 3 for top, 4 for bottom
 	 
@@ -118,6 +121,7 @@ private int roomRows=6;  // height of a room
 	 hasBooks = false;
 	 hasComboLock =false;
 	 hasGoat = false;
+	 hasFood = false;
 	 
 	 hasDoor=false;
 	 doorPosition=0; // 0 for no door 1 for left 2 for right , 3 for top, 4 for bottom
@@ -146,6 +150,7 @@ private int roomRows=6;  // height of a room
 	 hasBooks =toCopy.hasBooks;
 	 hasComboLock = toCopy.hasComboLock;
 	 hasGoat = toCopy.hasGoat;
+	 hasFood = toCopy.hasFood;
 	 doorPosition=toCopy.doorPosition; // 0 for no door 1 for left 2 for right , 3 for top, 4 for bottom
 	 
 	 roomCols = toCopy.roomCols;
@@ -186,6 +191,10 @@ private int roomRows=6;  // height of a room
 	
 	public boolean getHasMap(){
 	return hasMap;
+	}
+	
+	public boolean getHasFood(){
+	return hasFood;
 	}
 	
 	public boolean getHasDoor(){
@@ -324,6 +333,10 @@ private int roomRows=6;  // height of a room
 	return;
 	}
 
+	public void setHasFood(boolean value){
+	hasFood = value;
+	return;
+	}
 
 	/*
 
@@ -467,7 +480,6 @@ private int roomRows=6;  // height of a room
 			for ( int k =0 ; k < roomCols; k ++){
 			roomGrid[k][roomRows-1]='_'; 
 			}
-
 		}
 		
 		if (leftWall){
@@ -504,6 +516,8 @@ private int roomRows=6;  // height of a room
 		roomGrid[roomCols/2][roomRows/2]='L';
 		}else if (hasGoat){
 		roomGrid[roomCols/2][roomRows/2]='G';
+		}else if (hasFood){
+		roomGrid[roomCols/2][roomRows/2]='F';
 		}else {
 		roomGrid[roomCols/2][roomRows/2]=' ';
 		} 
@@ -579,6 +593,8 @@ private int roomRows=6;  // height of a room
 				System.out.print("L");
 				}else if (hasGoat == true  && k == roomWidth/2){
 				System.out.print("G");
+				}else if (hasFood == true  && k == roomWidth/2){
+				System.out.print("F");
 				}else if (hasPlayer == true  && k == roomWidth/2){
 				System.out.print("*");
 				}else{		

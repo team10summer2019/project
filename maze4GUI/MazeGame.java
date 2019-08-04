@@ -202,6 +202,10 @@ public class MazeGame {
 					gameBoard.takeMap();
 					System.out.println("You took the Map!");
 					moveCounter++;
+					}else if (tempRoom.getHasFood()){
+					gameBoard.takeFood();
+					System.out.println("You took the Food!");
+					moveCounter++;
 					}else{
 					System.out.println("There is nothing in the room to take...");
 					pressEnter();
@@ -340,19 +344,27 @@ public class MazeGame {
 		m.setRoomWalls(1,3,false,true,false,true);
 		// room (3,2)
 		m.setRoomWalls(2,3,true,false,false,true);
-		m.setRoomItems(2,3,false,false,false,false,true); //place the riddle in the room below the key
+		//m.setRoomItems(2,3,false,false,false,false,true); //place the riddle in the room below the key
 		// room (3,3)
 		m.setRoomWalls(3,3,false,true,false,true);
 		
 		
 		// get a random location within the map 
-		Point randLocation = new Point();
-		randLocation.setRandom(m.getMazeSize());
-		Room tempRoom = m.getRoom(randLocation);  // get a copy of the room at randLocation
+		Point randPoint = new Point();
+		randPoint.setRandom(m.getMazeSize());
+		Room tempRoom = m.getRoom(randPoint);  // get a copy of the room at randLocation
 		// set the monster to be at the location 
-		m.setMonsterLocation(randLocation);  
-		// randomize monster start location but don't overwrite previous conditions except moster variable 
-		m.setRoomItems(randLocation,tempRoom.getHasKey(),tempRoom.getHasDoor(),tempRoom.getHasMap(),true,tempRoom.getHasRiddle());  // Working
+		m.setMonsterLocation(randPoint);  
+		// randomize monster start location but don't overwrite previous conditions except monster variable 
+		m.setRoomItems(randPoint,tempRoom.getHasKey(),tempRoom.getHasDoor(),tempRoom.getHasMap(),true,tempRoom.getHasFood());  // Working
+		
+		//place the Food Randomly
+		randPoint.setRandom(m.getMazeSize());
+		tempRoom = m.getRoom(randPoint);  // get a copy of the room at randLocation
+		m.setRoomItems(randPoint,tempRoom.getHasKey(),tempRoom.getHasDoor(),tempRoom.getHasMap(),tempRoom.getHasMonster(),true);
+		
+		
+		
 		
 		}
 	
@@ -426,19 +438,27 @@ public class MazeGame {
 		m.setDoorLocation(0,5);  // change the door location 
 		// place the key in specific location
 		m.setRoomItems(5,0,true,false,false,false,false);
-		// place the riddle in a specific location infront of the key (opens wall to get key)
-		m.setRoomItems(4,0,false,false,false,false,true);
+		
+		// place the Food in a specific location in front of the key
+		//m.setRoomItems(4,0,false,false,false,false,true);
 		
 		
 		// get a random location within the map 
-		Point randLocation = new Point();
-		randLocation.setRandom(m.getMazeSize());
+		Point randPoint = new Point();
+		randPoint.setRandom(m.getMazeSize());
 		Room tempRoom = new Room();
-		tempRoom = m.getRoom(randLocation);  // get a copy of the room at randLocation
+		tempRoom = m.getRoom(randPoint);  // get a copy of the room at randLocation
 		// set the monster to be at the location 
-		m.setMonsterLocation(randLocation);  
-		// randomize monster start location but don't overwrite previous conditions except moster variable 
-		m.setRoomItems(randLocation,tempRoom.getHasKey(),tempRoom.getHasDoor(),tempRoom.getHasMap(),true,tempRoom.getHasRiddle());  // Working
+		m.setMonsterLocation(randPoint);  
+		// randomize monster start location but don't overwrite previous conditions except monster variable 
+		m.setRoomItems(randPoint,tempRoom.getHasKey(),tempRoom.getHasDoor(),tempRoom.getHasMap(),true,tempRoom.getHasFood());  // Working
+		
+		
+		//place the Food Randomly
+		randPoint.setRandom(m.getMazeSize());
+		tempRoom = m.getRoom(randPoint);  // get a copy of the room at randLocation
+		m.setRoomItems(randPoint,tempRoom.getHasKey(),tempRoom.getHasDoor(),tempRoom.getHasMap(),tempRoom.getHasMonster(),true);
+		
 		
 		}
 	
@@ -537,7 +557,7 @@ public class MazeGame {
 		// set the monster to be at the location 
 		m.setMonsterLocation(randPoint);  
 		// randomize monster start location but don't overwrite previous conditions except moster variable 
-		m.setRoomItems(randPoint,tempRoom.getHasKey(),tempRoom.getHasDoor(),tempRoom.getHasMap(),true,tempRoom.getHasRiddle());  // Working
+		m.setRoomItems(randPoint,tempRoom.getHasKey(),tempRoom.getHasDoor(),tempRoom.getHasMap(),true,tempRoom.getHasFood());  // Working
 		
 		
 		// get a new random location within the maze
@@ -545,21 +565,21 @@ public class MazeGame {
 		tempRoom = m.getRoom(randPoint);  // get a copy of the room at randLocation
 		
 		// set MAP location preserving prior booleans 
-		m.setRoomItems(randPoint,tempRoom.getHasKey(),tempRoom.getHasDoor(),true,tempRoom.getHasMonster(),tempRoom.getHasRiddle()); // Place the map 
+		m.setRoomItems(randPoint,tempRoom.getHasKey(),tempRoom.getHasDoor(),true,tempRoom.getHasMonster(),tempRoom.getHasFood()); // Place the map 
 
 		randPoint.setRandom(mazeSize);	
 		tempRoom = m.getRoom(randPoint);  // get a copy of the room at randLocation
 		// place door
 	
-		m.setRoomItems(randPoint,tempRoom.getHasKey(),true,tempRoom.getHasMap(),tempRoom.getHasMonster(),tempRoom.getHasRiddle());
+		m.setRoomItems(randPoint,tempRoom.getHasKey(),true,tempRoom.getHasMap(),tempRoom.getHasMonster(),tempRoom.getHasFood());
 		m.setDoorLocation(randPoint);  // change the door location 
 		
 		randPoint.setRandom(mazeSize); // get a new random point
 		tempRoom = m.getRoom(randPoint);  // get a copy of the room at randLocation
 		// place the key 
-		m.setRoomItems(randPoint,true,tempRoom.getHasDoor(),tempRoom.getHasMap(),tempRoom.getHasMonster(),tempRoom.getHasRiddle());
+		m.setRoomItems(randPoint,true,tempRoom.getHasDoor(),tempRoom.getHasMap(),tempRoom.getHasMonster(),tempRoom.getHasFood());
 		
-		//place the riddle 
+		//place the Food
 		randPoint.setRandom(mazeSize);
 		tempRoom = m.getRoom(randPoint);  // get a copy of the room at randLocation
 		m.setRoomItems(randPoint,tempRoom.getHasKey(),tempRoom.getHasDoor(),tempRoom.getHasMap(),tempRoom.getHasMonster(),true);	

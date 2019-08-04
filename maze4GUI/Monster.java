@@ -31,9 +31,9 @@ private Random randGen = new Random(1000);  // make a pseudo random number gener
 	// default constructor
 	public Monster(){
 	position = new Point(0,3);
-	health = 15;
+	health = 20;
 	hasKey = false;
-	attackStrength = 3;
+	attackStrength = 5;
 	}
 
 	// input constructor
@@ -135,7 +135,7 @@ private Random randGen = new Random(1000);  // make a pseudo random number gener
 	public void attacks(Player p){
 	
 	int damageAmount ;
-	damageAmount = attackStrength + randGen.nextInt(3);  // add a random component to the attack damage 
+	damageAmount = attackStrength + randGen.nextInt(8);  // add a random component to the attack damage 
 	p.takesDamage(damageAmount);   // maybe make this random from 0 - attackStrentgh*2
 	return;
 	}

@@ -23,7 +23,7 @@ public class MazeGameGUI extends Application {
 
 	private int level = 1 ;   // set the level to increase through 4 levels
 	private int mazeSize=4;	 // Initialize with 4x4 maze for level 1 
-	private int currentLevel=level;
+	//private int currentLevel=level;
 	
 
 	private Monster tempMonster; // temporary value to look at Monster stats
@@ -31,7 +31,7 @@ public class MazeGameGUI extends Application {
 	private int moveCounter = 0;  // count the number of moves
     private boolean victory=false;
 	private Random randGen = new Random(100);  // random number generator
-	private Button tempButton;  // temporary button pointer
+	//private Button tempButton;  // temporary button pointer
     
 	private  Maze gameBoard = new Maze(mazeSize);  // make a 4x4 room maze 
 	
@@ -51,13 +51,17 @@ public class MazeGameGUI extends Application {
 	
 	private TextField textIn = new TextField(); // javafx.scene.control.TextField
 	
-	private Label playerLabel1 = new Label("Hero Stats:" + gameBoard.getHero().getHealth()+" " +gameBoard.getHero().getPosition().toString());
+	private Label playerLabel1 = new Label("Hero HEALTH: " + gameBoard.getHero().getHealth()+"Position: " +gameBoard.getHero().getPosition().toString());
 	private Label playerLabel2 = new Label("Hero Items: Map=" + gameBoard.getHero().getHasMap()+" Key= " +gameBoard.getHero().getHasKey());
-	
+	private Label playerLabel3 = new Label("Level: " + level + " Moves: " + moveCounter);
+
 	private Image image;
 	// make a canvas for images and drawings
-	private Canvas canvas = new Canvas(200,200);
-	private GraphicsContext gc = canvas.getGraphicsContext2D();
+	private Canvas canvasLeft = new Canvas(200,200);
+	private GraphicsContext gcL = canvasLeft.getGraphicsContext2D();
+	
+	private Canvas canvasRight = new Canvas(200,200);
+	private GraphicsContext gcR = canvasRight.getGraphicsContext2D();
 	
 ///////////////////////////// START METHOD //////////////////////////////////////////////////	
 	
@@ -106,12 +110,12 @@ public class MazeGameGUI extends Application {
 			}
 		}
 		
-
 		// Add the items to the vertical box 
 		verticalBox.getChildren().add(textIn);
 		verticalBox.getChildren().add(sendButton);
 		verticalBox.getChildren().add(playerLabel1);
 		verticalBox.getChildren().add(playerLabel2);
+		verticalBox.getChildren().add(playerLabel3);
 		verticalBox.getChildren().add(startButton);	
 		// verticalBox.getChildren().add(updateButton);
 		
@@ -126,10 +130,11 @@ public class MazeGameGUI extends Application {
 		
 		GridPane sticky = new GridPane();
 		
-		sticky.add(canvas, 0, 0);
+		sticky.add(canvasLeft, 0, 0);
+		sticky.add(canvasRight, 1, 0);
 		sticky.add(grid, 0, 1);
 		sticky.add(grid2, 1, 1);
-		sticky.add(verticalBox, 1, 2);
+		sticky.add(verticalBox, 2, 1);
 		
 		BorderPane root = new BorderPane();
 		
@@ -148,7 +153,9 @@ public class MazeGameGUI extends Application {
 		
 		startMeUp(); // setup the game
 		
-		initDraw(gc);
+		image = new Image("images/Logo.png"); // load the logo
+		drawImage(gcR,image);  // draw the current logo image
+		drawImage(gcL,image);  // draw the current logo image
 		
 		// setup and show the stage and scene 
 		primaryStage.setTitle("Maze Game");
@@ -223,7 +230,7 @@ public class HandleKeyBoardInput implements EventHandler<KeyEvent> {
 		// Update Hero Statistics 
 		playerLabel1.setText("Hero HEALTH: " + gameBoard.getHero().getHealth()+" Position: " +gameBoard.getHero().getPosition().toString());
 		playerLabel2.setText("Hero Items: Map=" + gameBoard.getHero().getHasMap()+" Key= " +gameBoard.getHero().getHasKey());
-			
+		playerLabel3.setText("Level: " + level + " Moves: " + moveCounter);
 		/// Routines to update the boxes
 		postCurrentRoom();
 
@@ -253,7 +260,7 @@ public class HandleInputSendClick implements EventHandler<ActionEvent> {
 			// Update Hero Statistics
 			playerLabel1.setText("Hero HEALTH: " + gameBoard.getHero().getHealth()+" Position: " +gameBoard.getHero().getPosition().toString());
 			playerLabel2.setText("Hero Items: Map=" + gameBoard.getHero().getHasMap()+" Key= " +gameBoard.getHero().getHasKey());
-				
+			playerLabel3.setText("Level: " + level + " Moves: " + moveCounter);	
 			/// Routines to update the current room boxes
 			postCurrentRoom();
 
@@ -264,7 +271,7 @@ public class HandleInputSendClick implements EventHandler<ActionEvent> {
 public class HandleInputStartClick implements EventHandler<ActionEvent> {	
 	public void handle(ActionEvent event){
 		
-		resetGameBoard(); // reset the gameBoard
+		restartGameBoard(); // restart the gameBoard from level 1 
 		gameBoard.setCurrentRoom(0,0); // reset the current room after setting up the board
 		// get the current room
 		//gameBoard.setCurrentRoom(gameBoard.getHero().getPosition()); 
@@ -291,13 +298,14 @@ public void startMeUp() {
 	
 	resetGameBoard(); // reset the gameBoard
 	gameBoard.setCurrentRoom(0,0); // reset the current room after setting up the board
+	
 	// get the current room
 	//gameBoard.setCurrentRoom(gameBoard.getHero().getPosition()); 
 	
 	// THIS CALL IS CAUSING A BUG I DONT GET IT!!
 	tempRoom = gameBoard.getCurrentRoom();  // set the tempRoom to be the current room at (0,0)
 	tempRoom.populateRoomGrid(); // load the information and characters currently set for the room into the roomGrid
-
+	
 	tempHero = gameBoard.getHero();
 	
 	postCurrentRoom();   // display the current room 
@@ -309,7 +317,24 @@ public void startMeUp() {
 
 
  public void resetGameBoard() {
-		setLevel(level);   // set the level to 1 
+		setLevel(level);   // set the level
+		//moveCounter = 0;  //reset move counter		
+		resetMazeSize();  // reset the Maze Size  
+		gameBoard = new Maze(mazeSize); // make a new gameBoard of the proper size
+		setBoard(gameBoard);   // construct the maze for the current level
+		//gameBoard.copyHero(tempHero); // copy over the player from the previous level
+		gameBoard.setPlayerLocation(0,0); // reset to the top
+		gameBoard.resetPlayerItems(); // remove the key and the map from the player
+		// set the current room to current position 
+		gameBoard.setCurrentRoom(gameBoard.getHero().getPosition());
+		tempRoom = gameBoard.getCurrentRoom();  // get the tempRoom to be the current room.
+		tempRoom.populateRoomGrid(); // load the information and characters currently set for the room into the roomGrid
+ }
+
+ public void restartGameBoard() {
+	 	level = 1;
+		moveCounter = 0;  //reset move counter
+		setLevel(level);   // set the level
 		resetMazeSize();  // reset the Maze Size  
 		gameBoard = new Maze(mazeSize); // make a new gameBoard of the proper size
 		setBoard(gameBoard);   // construct the maze for the current level
@@ -317,14 +342,20 @@ public void startMeUp() {
 		gameBoard.setPlayerLocation(0,0); // reset to the top
 		gameBoard.resetPlayerItems(); // remove the key and the map from the player
 		// set the current room to current position 
-		gameBoard.setCurrentRoom(gameBoard.getHero().getPosition());
+		gameBoard.setCurrentRoom(0,0); // reset the current room after setting up the board	
 		tempRoom = gameBoard.getCurrentRoom();  // get the tempRoom to be the current room.
 		tempRoom.populateRoomGrid(); // load the information and characters currently set for the room into the roomGrid
-
-
+		tempHero = gameBoard.getHero();
+		
+		postCurrentRoom();   // display the current room 
+	    // show the text mode output
+		textModeOutput();
+		printHelp();
+		inputControl();
  }
-
-
+ 
+ 
+ 
 // attempt at graphics display
 public void postCurrentRoom() {
 	// get the current room
@@ -366,6 +397,9 @@ public void postCurrentRoom() {
 			}else if (ch == 'R' ){
 				buttonGrid[i][j].setOpacity(0.5);
 				rectGrid[i][j].setFill(Color.BLUEVIOLET);
+			}else if (ch == 'F' ){
+				buttonGrid[i][j].setOpacity(1);
+				rectGrid[i][j].setFill(Color.ORANGE);
 			}else if (ch == '*' ){
 				buttonGrid[i][j].setOpacity(1);
 				rectGrid[i][j].setFill(Color.BLUE);
@@ -479,20 +513,24 @@ public void textModeOutput() {
  		m.setRoomWalls(1,3,false,true,false,true);
  		// room (3,2)
  		m.setRoomWalls(2,3,true,false,false,true);
- 		m.setRoomItems(2,3,false,false,false,false,true); //place the riddle in the room below the key
+ 		//m.setRoomItems(2,3,false,false,false,false,true); //place the riddle in the room below the key
  		// room (3,3)
  		m.setRoomWalls(3,3,false,true,false,true);
  		
- 		
  		// get a random location within the map 
- 		Point randLocation = new Point();
- 		randLocation.setRandom(m.getMazeSize());
- 		tempRoom = m.getRoom(randLocation);  // get a copy of the room at randLocation
- 		// set the monster to be at the location 
- 		m.setMonsterLocation(randLocation);  
- 		// randomize monster start location but don't overwrite previous conditions except moster variable 
- 		m.setRoomItems(randLocation,tempRoom.getHasKey(),tempRoom.getHasDoor(),tempRoom.getHasMap(),true,tempRoom.getHasRiddle());  // Working
- 		
+		randPoint.setRandom(m.getMazeSize());
+		tempRoom = m.getRoom(randPoint);  // get a copy of the room at randLocation
+		// set the monster to be at the location 
+		m.setMonsterLocation(randPoint);  
+		// randomize monster start location but don't overwrite previous conditions except monster variable 
+		m.setRoomItems(randPoint,tempRoom.getHasKey(),tempRoom.getHasDoor(),tempRoom.getHasMap(),true,tempRoom.getHasFood());  // Working
+		
+		//place the Food Randomly
+		randPoint.setRandom(m.getMazeSize());
+		tempRoom = m.getRoom(randPoint);  // get a copy of the room at randLocation
+		m.setRoomItems(randPoint,tempRoom.getHasKey(),tempRoom.getHasDoor(),tempRoom.getHasMap(),tempRoom.getHasMonster(),true);
+		
+		
  		} // level 1 end if brace
  	
  	
@@ -555,15 +593,15 @@ public void textModeOutput() {
  		tempRoom = m.getRoom(randPoint);  // get a copy of the room at randLocation
  		// set the monster to be at the location 
  		m.setMonsterLocation(randPoint);  
- 		// randomize monster start location but don't overwrite previous conditions except moster variable 
- 		m.setRoomItems(randPoint,tempRoom.getHasKey(),tempRoom.getHasDoor(),tempRoom.getHasMap(),true,tempRoom.getHasRiddle());  // Working
+ 		// randomize monster start location but don't overwrite previous conditions except monster variable 
+ 		m.setRoomItems(randPoint,tempRoom.getHasKey(),tempRoom.getHasDoor(),tempRoom.getHasMap(),true,tempRoom.getHasFood());  // Working
  		
  		////// RANDOM PLACEMENT OF THE MAP ////////////////
  		// get a new random location within the maze
  		randPoint.setRandom(mazeSize);	// get a new random point
  		tempRoom = m.getRoom(randPoint);  // get a copy of the room at randLocation
  		// set MAP location preserving prior booleans 
- 		m.setRoomItems(randPoint,tempRoom.getHasKey(),tempRoom.getHasDoor(),true,tempRoom.getHasMonster(),tempRoom.getHasRiddle()); // Place the map 
+ 		m.setRoomItems(randPoint,tempRoom.getHasKey(),tempRoom.getHasDoor(),true,tempRoom.getHasMonster(),tempRoom.getHasFood()); // Place the map 
 
  		/////////////////// NON RANDOM ITEMS ////////////////////////////
  		// place door in specific location
@@ -571,9 +609,15 @@ public void textModeOutput() {
  		m.setDoorLocation(0,5);  // change the door location 
  		// place the key in specific location
  		m.setRoomItems(5,0,true,false,false,false,false);
- 		// place the riddle in a specific location in front of the key (opens wall to get key)
- 		m.setRoomItems(4,0,false,false,false,false,true);
  		
+ 		// place the riddle in a specific location in front of the key (opens wall to get key)
+ 		// m.setRoomItems(4,0,false,false,false,false,true);
+ 		
+ 		//place the Food Randomly
+		randPoint.setRandom(m.getMazeSize());
+		tempRoom = m.getRoom(randPoint);  // get a copy of the room at randLocation
+		m.setRoomItems(randPoint,tempRoom.getHasKey(),tempRoom.getHasDoor(),tempRoom.getHasMap(),tempRoom.getHasMonster(),true);
+		
  		} // level 2 end if brace
  		////////////////////////     LEVEL 3   ///////////////////////////////////////
  		if (level ==3){
@@ -671,7 +715,7 @@ public void textModeOutput() {
  		// set the monster to be at the location 
  		m.setMonsterLocation(randPoint);  
  		// randomize monster start location but don't overwrite previous conditions except moster variable 
- 		m.setRoomItems(randPoint,tempRoom.getHasKey(),tempRoom.getHasDoor(),tempRoom.getHasMap(),true,tempRoom.getHasRiddle());  // Working
+ 		m.setRoomItems(randPoint,tempRoom.getHasKey(),tempRoom.getHasDoor(),tempRoom.getHasMap(),true,tempRoom.getHasFood());  // Working
  		
  		
  		// get a new random location within the maze
@@ -679,21 +723,21 @@ public void textModeOutput() {
  		tempRoom = m.getRoom(randPoint);  // get a copy of the room at randLocation
  		
  		// set MAP location preserving prior booleans 
- 		m.setRoomItems(randPoint,tempRoom.getHasKey(),tempRoom.getHasDoor(),true,tempRoom.getHasMonster(),tempRoom.getHasRiddle()); // Place the map 
+ 		m.setRoomItems(randPoint,tempRoom.getHasKey(),tempRoom.getHasDoor(),true,tempRoom.getHasMonster(),tempRoom.getHasFood()); // Place the map 
 
  		randPoint.setRandom(mazeSize);	
  		tempRoom = m.getRoom(randPoint);  // get a copy of the room at randLocation
  		// place door
  	
- 		m.setRoomItems(randPoint,tempRoom.getHasKey(),true,tempRoom.getHasMap(),tempRoom.getHasMonster(),tempRoom.getHasRiddle());
+ 		m.setRoomItems(randPoint,tempRoom.getHasKey(),true,tempRoom.getHasMap(),tempRoom.getHasMonster(),tempRoom.getHasFood());
  		m.setDoorLocation(randPoint);  // change the door location 
  		
  		randPoint.setRandom(mazeSize); // get a new random point
  		tempRoom = m.getRoom(randPoint);  // get a copy of the room at randLocation
  		// place the key 
- 		m.setRoomItems(randPoint,true,tempRoom.getHasDoor(),tempRoom.getHasMap(),tempRoom.getHasMonster(),tempRoom.getHasRiddle());
+ 		m.setRoomItems(randPoint,true,tempRoom.getHasDoor(),tempRoom.getHasMap(),tempRoom.getHasMonster(),tempRoom.getHasFood());
  		
- 		//place the riddle 
+ 		//place the Food 
  		randPoint.setRandom(mazeSize);
  		tempRoom = m.getRoom(randPoint);  // get a copy of the room at randLocation
  		m.setRoomItems(randPoint,tempRoom.getHasKey(),tempRoom.getHasDoor(),tempRoom.getHasMap(),tempRoom.getHasMonster(),true);	
@@ -728,6 +772,8 @@ public void textModeOutput() {
 			if (gameBoard.getHero().getHasMap() ) {
 			
 				printMap();  // print the map
+				drawImage(gcL,image);
+				messageLabel.setText("You unfold the map from your pocket and take a look...");
 				
 			} else {
 			messageLabel.setText("You don't have a Map...");
@@ -770,7 +816,7 @@ public void textModeOutput() {
 				messageLabel.setText("You have escaped, and are now on Level: " + level );	
 				resetGameBoard();  // get a new level
 				if (level == 4){
-					victory=true;  // switch victory flag		
+					victory=true;  // switch victory flag	
 				}
 				gameBoard.lockDoor(); // lock the exit door for the next level 
 				// increment to the next level 	
@@ -785,7 +831,24 @@ public void textModeOutput() {
 		// if user input was "HELP" display help unit until user types return
 		if ( storeInput.equalsIgnoreCase("help") ) {
 			printHelp();  // print the help message with user input keywords	
+			
+			image = new Image("images/help.png");
+			drawImage(gcL,image);
+			messageLabel.setText("Input \"Return\" or r to return to the maze.");	
+			postCurrentRoom();
 	        }
+		
+		
+		// if user input was "Return" display map unit until user types return
+		if ( storeInput.equalsIgnoreCase("return") ) {
+			
+				image = new Image("images/Logo.png");
+				drawImage(gcL,image);	
+				postCurrentRoom();
+		
+			}
+	
+		
 		
 		// if user input is "Down"	
 		if ( storeInput.equalsIgnoreCase("Down")){
@@ -843,6 +906,10 @@ public void textModeOutput() {
 			System.out.println("You took the Map!");
 			messageLabel.setText("You took the Map!");
 			moveCounter++;
+			}else if (tempRoom.getHasFood()){
+				gameBoard.takeFood();
+				System.out.println("You took the Food!");
+				moveCounter++;
 			}else{
 			System.out.println("There is nothing in the room to take...");
 			messageLabel.setText("There is nothing in the room to take...");
@@ -864,7 +931,11 @@ public void textModeOutput() {
 		
 			if (tempRoom.getHasMonster() && tempMonster.isAlive() && tempMonster.getPosition().isEqual(tempHero.getPosition()) ){
 			fightMonster(gameBoard);
+			image = new Image("images/wraith.png");
+			drawImage(gcL,image);
 			} else {
+			image = new Image("images/Logo.png");
+			drawImage(gcL,image);
 			messageLabel.setText("There is nobody in the room to fight...");
 
 			}
@@ -880,14 +951,19 @@ public void textModeOutput() {
 		if ( level ==4 && victory ){
 		 System.out.println("Congratulations! You are free from THE MAZE!");
 		 messageLabel.setText("Congratulations! You are free from THE MAZE!");
-		 System.exit(0);
+		 wipeGrid();
+		 image = new Image("images/win.png");
+		 drawImage(gcL,image);
+		 //System.exit(0);
 		}
 		
 		/// closing message to user if fail to win or quit
-		if ( moveCounter > 400 || !gameBoard.getHero().isAlive() || storeInput.equalsIgnoreCase("quit") ){
+		if ( moveCounter > 1000 || !gameBoard.getHero().isAlive() || storeInput.equalsIgnoreCase("quit") ){
 		 System.out.println("Thanks for playing THE MAZE.  Better Luck Next Time!");
 		 messageLabel.setText("Thanks for playing THE MAZE.  Better Luck Next Time!");
-		 System.exit(0);
+		 image = new Image("images/lose.png");
+		 drawImage(gcL,image);
+		 //System.exit(0);
 		}
 			
 	return;
@@ -920,6 +996,7 @@ public void textModeOutput() {
 	System.out.println("__________________________________________________");
 	System.out.println("");
 	System.out.println("Type \"Return\" and press Enter to return to the Maze");
+	
 	return;
 	}
  	
@@ -944,6 +1021,9 @@ public void textModeOutput() {
 		System.out.println("|______|______|______|______|");
 		System.out.println("");
 		System.out.println("Type \"Return\" and press Enter to return to the Maze");
+		
+		image = new Image("images/map1.png"); // load the map
+		
 		}
 		
 		if (level ==2) {
@@ -971,6 +1051,8 @@ public void textModeOutput() {
 		System.out.println("|______|______|______|______|______|______|");
 		System.out.println("");
 		System.out.println("Type \"Return\" and press Enter to return to the Maze");
+		
+		image = new Image("images/map2.png");
 		}
 	
 		if (level ==3) {
@@ -1004,6 +1086,8 @@ public void textModeOutput() {
 		System.out.println("|______|______|______|______|______|______|______|______|");
 		System.out.println("");
 		System.out.println("Type \"Return\" and press Enter to return to the Maze");
+		
+		image = new Image("images/map3.png");
 		}
 	
 	return;
@@ -1102,6 +1186,7 @@ public void textModeOutput() {
 			}else if ( gameBoard.getMonster().getHealth()<=0 ){
 				System.out.println("The MAZE WRAITH SHREAKS IN PAIN!!!"+"  Monster HEALTH: " + gameBoard.getMonster().getHealth()) ;
 				messageLabel.setText("The MAZE WRAITH SHREAKS IN PAIN!!!"+"  Monster HEALTH: " + gameBoard.getMonster().getHealth() );
+			
 			}
 			
 			// if during the fight turn hero dies
@@ -1111,7 +1196,9 @@ public void textModeOutput() {
 				messageLabel.setText("The Hero has been vanquished ...");
 				System.out.println("Thanks for playing THE MAZE.  Better Luck Next Time!");
 				messageLabel.setText("Thanks for playing THE MAZE.  Better Luck Next Time!");
-				System.exit(0);
+				image = new Image("images/lose.png");
+				drawImage(gcL,image);
+				//System.exit(0);
 			}			
 			
 			} // end of check if hero is alive and monster is alive
@@ -1126,6 +1213,10 @@ public void textModeOutput() {
 			tempMonster = gameBoard.getMonster();
 			tempMonster.displayStats();
 			
+			// return to regular logo
+			image = new Image("images/Logo.png");
+			drawImage(gcL,image);
+			
 			// 2D graphics counterpart
 			postCurrentRoom();
 			
@@ -1136,28 +1227,18 @@ public void textModeOutput() {
 	}
 	
 	//http://java-buddy.blogspot.com/2013/05/draw-scaled-image-on-javafx-canvas-with.html
-	 private void initDraw(GraphicsContext gc){
+	 private void drawImage(GraphicsContext gc, Image photo){
 		 
 	        double canvasWidth = gc.getCanvas().getWidth();
 	        double canvasHeight = gc.getCanvas().getHeight();
-	         
+	        
 	        gc.setFill(Color.LIGHTGRAY);
 	        gc.setStroke(Color.BLACK);
 	        gc.setLineWidth(5);
-	 
 	        gc.fill();
-	        gc.strokeRect(
-	                0,              //x of the upper left corner
-	                0,              //y of the upper left corner
-	                canvasWidth,    //width of the rectangle
-	                canvasHeight);  //height of the rectangle
-	 
-	        gc.setLineWidth(1);
-	      
-	        image = new Image("image1.png");
-	        
-	        
-	        gc.drawImage(image, 0, 0, 200, 200);
+	        gc.strokeRect(0,0,canvasWidth,canvasHeight);
+	        gc.setLineWidth(1);  
+	        gc.drawImage(photo, 0, 0, 200, 200);
 	        
 	    }
 	     
