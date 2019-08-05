@@ -17,7 +17,7 @@
 
 
 
-import java.util.Random;
+//import java.util.Random;
 
 /**
 Class Monster creates a monster object with a Point position, integer health, and booleans for having a key.
@@ -33,7 +33,7 @@ wraith is a Monster object in the game MazeGame and MazeGameGUI. <P>
 public class Monster extends Entity {
 
 ////////////////////// MEMBER VARIABLES /////////////////////////////////////
-private Random randGen = new Random(1000);  // make a pseudo random number generator 
+//private Random randGen = new Random(1000);  // make a pseudo random number generator 
 
 //////////////////////  CONSTRUCTORS     //////////////////////////////////////////
 
@@ -68,25 +68,19 @@ private Random randGen = new Random(1000);  // make a pseudo random number gener
 	
 //////////////////////   ACCESSORS     ////////////////////////////////////////////
 
- // Defined in Entity
+ // Defined in and Inherited from Entity
 
 //////////////////////   MUTATORS      /////////////////////////////////////////////
 	
- // Defined in Entity
+ // Defined in and Inherited from Entity
 
 ///////////////////////   OTHER METHODS /////////////////////////////////////////////
 
- // Defined in Entity
+ // Defined in and Inherited from Entity
 
 ///////////////////////////  FIGHTING METHODS  ///////////////////////////////////////
 
-	// overload  // remove when player is extended from entity
-	public void attacks(Player p){
-	int damageAmount ;
-	damageAmount = getAttackStrength()/2 + randGen.nextInt(getAttackStrength());  // add a random component to the attack damage 
-	p.takesDamage(damageAmount);   // maybe make this random from 0 - attackStrentgh*2
-	return;
-	}
+ // Defined in and Inherited from Entity 
 
 //////////////////////   Motion Methods /////////////////////////////////////////////
 

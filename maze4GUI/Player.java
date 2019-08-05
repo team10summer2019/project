@@ -15,7 +15,7 @@
 //          Methods- moveLeft(), moveRight(), moveUp(), moveDown(),
 //	           searchRoom(), attack(), openDoor() , die() , isAlive()
 
-import java.util.Random;
+//import java.util.Random;
 
 /**
 Class Player creates a player with a Point position, integer health, and booleans for having a map and a key.
@@ -31,7 +31,7 @@ public class Player extends Entity {
 ////////////////////// MEMBER VARIABLES /////////////////////////////////////
 
 private boolean hasMap;    // extra to Entity
-private Random randGen = new Random(1000);  // make a pseudo random number generator 
+//private Random randGen = new Random(1000);  // make a pseudo random number generator 
 //////////////////////  CONSTRUCTORS     //////////////////////////////////////////
 
 	// default constructor
@@ -81,6 +81,7 @@ private Random randGen = new Random(1000);  // make a pseudo random number gener
 
 //////////////////////   MUTATORS      /////////////////////////////////////////////
 	
+	// Other methods inherited from entity 
 	
 	////////////////// SPECIFIC TO PLAYER /////////////////////////
 	// use for eating Gruel in game 
@@ -108,22 +109,26 @@ private Random randGen = new Random(1000);  // make a pseudo random number gener
 
 ////////////  FIGHTING METHODS ///////////////////////////////////////////////////
 
+	//inherited from entity  
+	
 	/**
 	Mutator to inflict damage upon a monster object.  
 	@param m a Monster object to attack. 
 	*/
+	/*
 	public void attacks(Monster m){
 	int damageAmount ;
 	damageAmount = getAttackStrength()/2 + randGen.nextInt(getAttackStrength());  // add a random component to the attack damage 
 	m.takesDamage(damageAmount);   // maybe make this random from 0 - attackStrentgh*2
 	return;
 	}
-
+	*/
+	
 //////////////////////   Motion Methods /////////////////////////////////////////////
 
 	// Override method in parrent class 
 	/**
-	Mutator sets Player health to zero, removes items Key and Map, and outputs a death message.
+	Mutator sets Player health to zero, removes items Key and Map, and outputs a death message. 
 	*/
 	public void die() {
 	super.die();
@@ -135,7 +140,7 @@ private Random randGen = new Random(1000);  // make a pseudo random number gener
 
 	//// OVER-RIDDEN and POLYMORPHIC METHODS extended from entity
 	/**
-	Accessor displays Player Statistics in a decorative manner.
+	Accessor displays Player Statistics in a decorative manner. (Polymorphic Call)
 	*/
 	public void displayStats(){
 	System.out.println("=======PLAYER STATS=======");
@@ -146,6 +151,9 @@ private Random randGen = new Random(1000);  // make a pseudo random number gener
 	System.out.println("Position = " + getPosition().toString() );  
 	}
 
+	/**
+	Displays custom Player death message (Polymorphic call).
+	*/
 	public void deathMessage(){
 	System.out.println("Our Hero Gasps and Screams:");
 	System.out.println("My quest is finished! Arrrgghhhh!");

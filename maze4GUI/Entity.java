@@ -34,6 +34,7 @@ private Point position;
 private int health;
 private boolean hasKey;
 private int attackStrength;
+private Random randGen = new Random(1000);  // make a pseudo random number generator 
 //////////////////////  CONSTRUCTORS     //////////////////////////////////////////
 
 	// default constructor
@@ -195,18 +196,15 @@ private int attackStrength;
 	Mutator to inflict damage upon another Entity object.  
 	@param e an Entity object to attack. 
 	*/
-	//public void attacks(Entity e); 
+	// public abstract void attacks(Entity e); 
 	
-	/*
 	public void attacks(Entity e){
 	int damageAmount ;
 	damageAmount = getAttackStrength()/2 + randGen.nextInt(getAttackStrength());  // add a random component to the attack damage 
 	e.takesDamage(damageAmount);   // maybe make this random from 0 - attackStrentgh*2
 	return;
 	}
-	*/
 	
-
 //////////////////////   Motion Methods /////////////////////////////////////////////
 
 	/**
@@ -274,6 +272,9 @@ private int attackStrength;
 	*/
 	public abstract void displayStats();
 
+	/**  
+	Accessor displays Entity Death Message.
+	*/
 	public abstract void deathMessage();
  
 } // class definition brace
