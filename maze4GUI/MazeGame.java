@@ -86,7 +86,7 @@ public class MazeGame {
 		
 		// Main loop to run the Maze Game 
 			
-			while ( moveCounter < 300 && !storeInput.equalsIgnoreCase("quit")  && gameBoard.getHero().isAlive()  ){
+			while ( moveCounter < 1000 && !storeInput.equalsIgnoreCase("quit")  && gameBoard.getHero().isAlive()  ){
 			
 				// if user input was "MAP" display map unit until user types return
 				if ( storeInput.equalsIgnoreCase("map") ) {
@@ -133,7 +133,7 @@ public class MazeGame {
 				Point doorLocation = gameBoard.getDoor().getLocation();
 				Point currentLocation = gameBoard.getCurrentRoom().getLocation();
 					// check that player has the key, and is in the location that the door is in and that the door is open
-					if (gameBoard.getHero().getHasKey()  && currentLocation.isEqual(doorLocation) && gameBoard.getCurrentRoom().getHasDoor()  && !gameBoard.getDoor().getIsLocked() ) {
+					if (gameBoard.getHero().getHasKey()  && currentLocation.isEqual(doorLocation) && gameBoard.getCurrentRoom().getHasDoor()  && !gameBoard.getDoor().getIsLocked() && !gameBoard.getMonster().isAlive()  ) {
 						
 						level++; 
 						if (level == 4){
@@ -144,7 +144,7 @@ public class MazeGame {
 						// increment to the next level 	
 						
 					} else {
-					System.out.println("Either the door isn't opened, or You're not at the Door...");
+					System.out.println("Either the door isn't opened, or You're not at the Door, or the Monster Lives...");
 					pressEnter();
 					}
 			        }	
@@ -780,18 +780,19 @@ public class MazeGame {
 				break;
 				} 
 		
-		
 			clearScreen(); // clear the screen 		
 			displayMazeWraith(); // show the ASCII Art 
 			
-			if ( gameBoard.getMonster().getHealth() >12 ) {
+			if ( gameBoard.getMonster().getHealth() >15 ) {
 			System.out.println("The MAZE WRAITH LAUGHS IN GLEE!!!") ;
-			}else if ( gameBoard.getMonster().getHealth() < 12 && gameBoard.getMonster().getHealth()> 6 ){
+			}else if ( gameBoard.getMonster().getHealth() < 15 && gameBoard.getMonster().getHealth()> 10 ){
 			System.out.println("The MAZE WRAITH SCREAMS IN ANGER!!!") ;
-			}else if ( gameBoard.getMonster().getHealth() < 6 && gameBoard.getMonster().getHealth()> 0 ){
+			}else if ( gameBoard.getMonster().getHealth() <= 10 && gameBoard.getMonster().getHealth()> 5 ){
 			System.out.println("The MAZE WRAITH CRYS IN TERROR!!!") ;
-			}else if ( gameBoard.getMonster().getHealth()<=0 ){
+			}else if ( gameBoard.getMonster().getHealth()<= 5 && gameBoard.getMonster().getHealth()> 0 ){
 			System.out.println("The MAZE WRAITH SHREAKS IN PAIN!!!" ) ;
+			}else if (gameBoard.getMonster().getHealth()<= 0) {
+			System.out.println("The MAZE WRAITH GASPS IN ANGUISH!!!" ) ;
 			gameBoard.getHero().displayStats();  // display player stats
 			gameBoard.getMonster().displayStats(); // display monster stats
 			break;
@@ -804,14 +805,9 @@ public class MazeGame {
 			System.out.println("The Hero has been vanquished ...");
 			pressEnter();
 			break;
-			}			
-			
-			userCommand  = getUserInput();  // get user input 
-			
-	
-	
-			
-			}
+			}				
+			userCommand  = getUserInput();  // get user input 	
+		}// closing brace for while loop	
 		
 		if ( ! gameBoard.getMonster().isAlive() ) {
 		    gameBoard.deleteMonster();  // remove the icon 
@@ -843,7 +839,9 @@ public class MazeGame {
 	        }
 	        else
 	        {
-	            Runtime.getRuntime().exec("clear");
+			System.out.print("\033[H\033[2J");  
+			System.out.flush(); 
+			//Runtime.getRuntime().exec("clear");
 	        }
 	    }
 	    catch (final Exception e)

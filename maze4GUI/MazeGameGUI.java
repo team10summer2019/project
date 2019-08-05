@@ -859,8 +859,8 @@ public void textModeOutput() {
 				// increment to the next level 	
 				
 			} else {
-			messageLabel.setText("Either the door isn't opened, or You Haven't Beat the Monster, or You're not at the Door...");
-			System.out.println("Either the door isn't opened, or You Haven't Beat the Monster, or You're not at the Door...");
+			messageLabel.setText("Either the door isn't opened, or You Haven't Beaten the Monster, or You're not at the Door...");
+			System.out.println("Either the door isn't opened, or You Haven't Beaten the Monster, or You're not at the Door...");
 			bigText.setText("You must beat the Monster to Escape...");
 			}
 		}	
@@ -1311,7 +1311,9 @@ public void textModeOutput() {
 	        }
 	        else
 	        {
-	            Runtime.getRuntime().exec("clear");
+	            //Runtime.getRuntime().exec("clear");
+		    System.out.print("\033[H\033[2J");  
+		    System.out.flush(); 
 	        }
 	    }
 	    catch (final Exception e)
