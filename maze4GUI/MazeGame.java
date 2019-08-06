@@ -6,14 +6,24 @@
 // Author: (Ron) Zorondras Rodriguez
 // Course:  CPSC 233 Summer 2019
 // Creation Date: July 21, 2019
-// Version: 0.05
-// Revision Date: July 28, 2019
+// Version: 0.06
+// Revision Date: August 05, 2019
 //
 ///////////////////////////////////////////////
 
 import java.util.Scanner;
 import java.util.Random;
 
+
+/**
+Class MazeGame is the Main class that runs the Maze Game. Creates a Maze object gameBoard which is used to run the game.
+Various public helper functions are called in the playGame() method to assist with running the game and interacting with the objects.
+
+
+@author (Ron) Zorondras Rodriguez
+@version 0.06
+@since July 20, 2019
+*/
 public class MazeGame {
 
 ////////////////////////// INSTANCE VARIABLES ///////////////////////////////////
