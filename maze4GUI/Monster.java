@@ -6,7 +6,7 @@
 // Author: (Ron) Zorondras Rodriguez
 // Course:  CPSC 233 Summer 2019
 // Creation Date: July 20, 2019
-// Version: 0.02
+// Version: 0.03
 // Revision Date: August 05, 2019
 //
 ///////////////////////////////////////////////
@@ -25,7 +25,7 @@ A monster object also has integer attackStrength for fighting the player in the 
 wraith is a Monster object in the game MazeGame and MazeGameGUI. <P>
  
 @author (Ron) Zorondras Rodriguez
-@version 0.02
+@version 0.03
 @since July 20, 2019
 */
 
