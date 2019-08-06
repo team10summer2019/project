@@ -22,10 +22,18 @@ public class MazeGame {
 
 ////////////////////////  METHODS //////////////////////////////////////////////
 
+	/**
+	Method to get the level currently on on game
+	@return Returns and integer representing the current level 
+	*/
 	public static int getLevel(){
 	return level;
 	}
 	
+	/**
+	Method to set the level currently on on game.  Used for debugging, and testing different levels. 
+	@param input the integer level between 1 and 4 inclusive to set the level to. 
+	*/
 	public static void setLevel(int input) {
 		if (input >=1 && input < 5){
 		level = input;
@@ -34,11 +42,20 @@ public class MazeGame {
 	
 ///////////////////////////////////////////////////////////////////////////////////////
 
+	/**
+	Main method to run the game. 
+	@param args the String array of command line arguments. 
+	*/
 	public static void main(String[] args){
 	playGame();
 	return; 
 	}// end of main function	
 	
+	
+	
+	/**
+	Play Game is the method that keeps track of the game input and sets key variables. Used to run the game. 
+	*/
 	public static void playGame() {
 		
 		int mazeSize=4;	 // initialize with 4x4 maze for level 1 
@@ -303,6 +320,10 @@ public class MazeGame {
 	
 	
 	// sets up the walls and items, doors and monsters
+	/**
+	Sets up all the walls and items in the game depending on which level is selected.
+	@param m A Maze object on which to operate. 
+	*/
 	public static void setBoard( Maze m){
 	
 		if (level ==1){
@@ -362,9 +383,6 @@ public class MazeGame {
 		randPoint.setRandom(m.getMazeSize());
 		tempRoom = m.getRoom(randPoint);  // get a copy of the room at randLocation
 		m.setRoomItems(randPoint,tempRoom.getHasKey(),tempRoom.getHasDoor(),tempRoom.getHasMap(),tempRoom.getHasMonster(),true);
-		
-		
-		
 		
 		}
 	
@@ -590,6 +608,10 @@ public class MazeGame {
 	return;
 	}
 	
+	// Prints out the map if the hero / Player has the map boolean
+	/**
+	Prints out a static map depicting the maze rooms depending on which level is selected. 
+	*/
 	public static void printMap(){
 	
 		if (level ==1){
@@ -676,6 +698,11 @@ public class MazeGame {
 	return;
 	}
 	
+	
+	// Prints out the help menu
+	/**
+	Prints out a help menu to the console. 
+	*/
 	public static void printHelp(){
 	System.out.println("Welcome to THE MAZE, Commands are case insensitive. Here are the current Commands:");
 	System.out.println("__________________________________________________");	
@@ -700,7 +727,11 @@ public class MazeGame {
 	}
 		
 
-	
+	// Gets user input as a string
+	/**
+	Gets user input and stores it in a string to return.
+	@return Returns as String object with the user input characters typed in at the keyboard on user prompt for input. 
+	*/
 	public static String getUserInput(){
 	String input;
 	Scanner keyboard = new Scanner(System.in);
@@ -709,6 +740,10 @@ public class MazeGame {
 	return input;
 	}
 	
+	
+	/**
+	Stalls the program and waits for a user to Press Enter before continuing the program. 
+	*/
 	public static void pressEnter(){
 	String input;
 	Scanner keyboard = new Scanner(System.in);
@@ -718,6 +753,11 @@ public class MazeGame {
 	}
 	
 	
+	/**
+	Randomly moves the monster either left,right,up or down.
+	@param randGen A Random number generator.
+	@param gameBoard a Maze object that the game is running on.  
+	*/
 	public static void monsterWalk(Random randGen, Maze gameBoard){
 	
 	int randNum = randGen.nextInt(4);  // 4 options for motion: left,right,up,down,  
@@ -734,7 +774,10 @@ public class MazeGame {
 	
 	}
 		
-		
+	// Prints out a ASCII picture representation of the Maze Wraith
+	/**
+	Prints out an ASCII representation display of the Maze Wraith Monster. 
+	*/
 	public static void displayMazeWraith(){
 	System.out.println("............................................................");
 	System.out.println(".........................       ............................");
@@ -760,7 +803,11 @@ public class MazeGame {
 	System.out.println(" ");
 	}
 		
-
+	// Fight Dialog
+	/**
+	Controls the Fight Dialog and Output Durring a Fight Sequence.
+	@param gameBoard A Maze object that the game is running on. 
+	*/
 	public static void fightMonster(Maze gameBoard){	
 	
 	clearScreen(); // clear the screen 
@@ -820,13 +867,12 @@ public class MazeGame {
 	}
 
 
-	public static void handleInput(Maze gameBoard){
-	
-	return;	
-	}
-	
+
 	// Use this to clear the screen taken from source: 	
 	//  https://stackoverflow.com/questions/2979383/java-clear-the-console		
+	/**
+	Clears the console screen. 
+	*/
 	public final static void clearScreen()
 	{
 	    try
@@ -856,10 +902,6 @@ public class MazeGame {
 	// System.out.print("\033[H\033[2J");  
 	// System.out.flush();  
 	//}  
-			
-			
-			
-			
 			
 	
 } // class ending brace
