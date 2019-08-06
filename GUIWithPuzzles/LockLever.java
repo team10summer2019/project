@@ -21,7 +21,7 @@ public class LockLever {
 	public LockLever() {
 		
 	}
-	//SETTERS
+	//SETTERS 
 	//changes status of lever piece
 	public void setLeverPiece1(boolean status) {//changes status of lever piece 1 when present
 		this.obj_LeverPiece1 = status;

@@ -26,7 +26,7 @@ public class GenericComboLock {
 	
 	//OTHER CLASSES CAN ACCESS
 	private int comboNum1_Key;
-	private int comboNum2_Key;
+	private int comboNum2_Key; 
 	private int comboNum3_Key;
 	
 	//USER CAN ACCESS

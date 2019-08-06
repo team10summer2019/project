@@ -22,7 +22,7 @@ public class Inventory {
 	}
 
 	//METHODS
-	//view objects(auto pick up if important)
+	//view objects(auto pick up if important) 
 	//adds item to inventory(AS WELL REMOVE FROM ROOM)
 	public void viewInventory() {
 		if (this.inventory.isEmpty() == false) {

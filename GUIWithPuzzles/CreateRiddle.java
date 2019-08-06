@@ -16,7 +16,7 @@ public class CreateRiddle extends PlayRiddle{
 	public CreateRiddle() {}
 	
 	public CreateRiddle(CreateRiddle toCopy) {
-		this.answer = toCopy.answer;
+		this.answer = toCopy.answer; 
 		this.riddle = toCopy.riddle;
 	}
 	

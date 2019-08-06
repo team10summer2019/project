@@ -30,7 +30,7 @@ public class StaticObjects extends Inventory {
 	
 	public void aCard() {
 		System.out.println("\nA black seven of spades playing card.\n");
-	}
+	} 
 	
 	public void aNote() {
 		System.out.println("You find a folded sticky note inside. You unfold the note. It is a torn page from a nursery book. The note reads:");

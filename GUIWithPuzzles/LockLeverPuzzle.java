@@ -22,7 +22,7 @@ public class LockLeverPuzzle extends GenericComboLock {
 	public LockLeverPuzzle(int comboNum1_Key, int comboNum2_Key, int comboNum3_Key) {
 		super(comboNum1_Key,comboNum2_Key,comboNum3_Key);
 	}
-	
+	 
 	//METHODS
 	public void information() {
 		//if user had click on it, this initializes first thing

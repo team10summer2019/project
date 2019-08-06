@@ -26,7 +26,7 @@ A monster object also has integer attackStrength for fighting the player in the 
 wraith is a Monster object in the game MazeGame and MazeGameGUI. <P>
  
 @author (Ron) Zorondras Rodriguez
-@version 0.02
+@version 0.02 
 @since July 20, 2019
 */
 

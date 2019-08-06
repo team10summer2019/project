@@ -35,7 +35,7 @@ public class MazeGame {
 	
 ///////////////////////////////////////////////////////////////////////////////////////
 
-	public static void main(String[] args){
+	public static void main(String[] args){ 
 	playGame();
 	return; 
 	}// end of main function	

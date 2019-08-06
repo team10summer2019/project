@@ -37,7 +37,7 @@ public class MazeGameGUI extends Application {
 	private boolean gameOn = true;
 
 	private Monster tempMonster; // temporary value to look at Monster stats
-	private String storeInput="";  // storage for user input
+	private String storeInput="";  // storage for user input 
 	private int moveCounter = 0;  // count the number of moves
     private boolean victory=false;
 	private Random randGen = new Random(100);  // random number generator

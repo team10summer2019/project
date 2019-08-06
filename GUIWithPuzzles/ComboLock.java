@@ -14,7 +14,7 @@ public class ComboLock {
 		correctCombo.add(two);
 		correctCombo.add(three);
 	}
-	 
+	  
 	public void tryUnlock() {
 		System.out.println("\nThere is a hole in one wall. It feels like some sort of mechanism was once in there..");
 		System.out.println("In the middle of the room, there is a combination lock- similar to a padlock. From left to right, you can put in three numbers between 0 and 9.\n"

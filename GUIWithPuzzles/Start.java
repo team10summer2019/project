@@ -33,7 +33,7 @@ public class Start {
 			} 
 		return this.gotBearLever1;		
 	}
-
+ 
 	public boolean gameMenuTwo() {
 		gameRunning = true;
 		inRoom1 = true;

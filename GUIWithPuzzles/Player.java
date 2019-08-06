@@ -28,7 +28,7 @@ hero is the Player object in the game MazeGame and MazeGameGUI. <P>
 @since July 20, 2019
 */
 public class Player extends Entity {
-
+ 
 ////////////////////// MEMBER VARIABLES /////////////////////////////////////
 private boolean hasRiddle;
 private boolean hasHint;

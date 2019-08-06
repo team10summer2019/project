@@ -25,7 +25,7 @@ public class TestHaineRiddle {
 		boolean solved = runner.checkAnswer();
 		return solved;
 		
-	}
+	} 
 	
 	public boolean riddleTwo(){
 		///MAKE A LOT OF RIDDLES

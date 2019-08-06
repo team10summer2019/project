@@ -42,7 +42,7 @@ private int yCoordinate;
 		yCoordinate = 0;
 		}
 	}
-
+ 
 	// copy constructor 
 
 	public Point( Point p){

@@ -17,7 +17,7 @@ public class DynamicObjects extends StaticObjects{
 	private LockLever changeStatus = new LockLever();
 	final String leverP1 = "leverPiece1";
 	final String leverP2 = "leverPiece2";
-	
+	 
 	public DynamicObjects() {
 		
 	}

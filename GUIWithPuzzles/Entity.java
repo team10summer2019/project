@@ -28,7 +28,7 @@ wraith is a Monster object in the game MazeGame and MazeGameGUI. <P>
 @since July 20, 2019
 */
 public abstract class Entity {
-
+ 
 ////////////////////// MEMBER VARIABLES /////////////////////////////////////
 
 private Point position;

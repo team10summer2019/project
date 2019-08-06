@@ -39,7 +39,7 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 ////////////////////////  CONSTRUCTORS   ////////////////////////////////////////////////
 	
 	// default constructor 
-	public Maze(){
+	public Maze(){ 
 	hero = new Player();
 	wraith = new Monster();
 	door = new Door(1,0); // place a locked door at Location point (1,0) 

@@ -33,7 +33,7 @@ private boolean hasKey;
 private boolean hasDoor;
 private boolean hasPlayer;
 private boolean hasMap;
-private boolean hasRiddle;
+private boolean hasRiddle; 
 private boolean hasBooks;
 private boolean hasComboLock;
 private boolean hasGoat;

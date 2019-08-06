@@ -23,7 +23,7 @@ public class FloorInventory {
 	public void remove_flrInv(String item) {
 		floorInventory.remove(item);
 		//For Dev: System.out.println("item removed from floor.");
-	}
+	} 
 	
 	public void add_unique_flrInv(String item) {
 		floorInventory.add(item);
