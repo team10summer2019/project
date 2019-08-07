@@ -101,6 +101,8 @@ public class MazeGameGUI extends Application {
 	Image monster = new Image("images/monster.jpg");
 	Image map = new Image("images/map.jpg");
 	Image door = new Image("images/door.jpg");
+	Image doorOpen = new Image("images/dooropen.jpg");
+	Image doorClosed = new Image("images/doorclosed.jpg");
 	Image key = new Image("images/key.jpg");
 	Image hint = new Image("images/hint.jpg");
 	Image food = new Image("images/food.jpg");
@@ -551,7 +553,11 @@ public class MazeGameGUI extends Application {
 				}else if (ch == 'D' ){
 					buttonGrid[i][j].setOpacity(1);
 					//rectGrid[i][j].setFill(Color.BROWN);
-					rectGrid[i][j].setFill(new ImagePattern(door));
+					if (gameBoard.getDoor().getIsLocked()) {
+						rectGrid[i][j].setFill(new ImagePattern(doorClosed));
+					} else {
+						rectGrid[i][j].setFill(new ImagePattern(doorOpen));
+					}
 				}else if (ch == 'R' ){
 					buttonGrid[i][j].setOpacity(0.5);
 					//rectGrid[i][j].setFill(Color.BLUEVIOLET);
