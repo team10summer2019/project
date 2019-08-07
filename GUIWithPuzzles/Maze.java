@@ -566,7 +566,7 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 	currentRoom = getRoom( currentPosition );
 	return;
 	}
-	
+	/*
 	public void playRiddle(){													//HAINE KIM
 	Point currentPosition = hero.getPosition();
 	currentRoom = getRoom( currentPosition );	
@@ -610,7 +610,7 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 	currentRoom = getRoom( currentPosition );
 	return;
 	}
-	
+	*/
 	public void searchRoom() {
 		Point currentPosition = hero.getPosition();
 		currentRoom = getRoom( currentPosition );

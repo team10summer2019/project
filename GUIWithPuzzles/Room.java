@@ -79,6 +79,16 @@ private int roomRows=6;  // height of a room
 	}
 	
 	// shape input constructor // change other variables with setters 
+		/**
+		Point and wall input constructor sets the location to Point local, and with input arguments for each wall.
+		Additionally a new empty room grid is populated with characters representing the wall and item status.
+		All other itmes are defaulted to false, and door position to 0. RoomGrid is populated.
+		@param locale a Point location for the room
+		@param left a boolean for the left wall, true if left wall is in place,
+		@param right a boolean for the right wall,
+		@param top a boolean for the top wall
+		@param bottom a boolean for the bottom wall
+		*/
 	public Room (Point locale, boolean left, boolean right, boolean top, boolean bottom){
 	 location = new Point (locale);
 	
@@ -109,6 +119,18 @@ private int roomRows=6;  // height of a room
 	}
 	
 	//input constructor // change other variables with setters 
+		/**
+		coordinate x, and y location and wall input constructor sets the location to Point local, and with input arguments for each wall.
+		Additionally a new empty room grid is populated with characters representing the wall and item status.
+		All other itmes are defaulted to false, and door position to 0. RoomGrid is populated.
+		@param x an integer x-coordinate for the Room
+		@param y an integer y-coordinate for the Room 
+		@param left a boolean for the left wall, true if left wall is in place,
+		@param right a boolean for the right wall,
+		@param top a boolean for the top wall
+		@param bottom a boolean for the bottom wall
+		*/
+	
 	public Room (int x, int y, boolean left, boolean right, boolean top, boolean bottom){
 	 location = new Point (x,y);
 	 	
@@ -251,6 +273,8 @@ private int roomRows=6;  // height of a room
 
 	public char[][] getRoomGrid(){
 	/// make a copy holder
+	populateRoomGrid();
+	
 	char[][] temp = new char[roomCols][roomRows];
 		// copy the current room grid into 
 		for (int i = 0 ; i < roomCols ; i++){
@@ -370,6 +394,10 @@ private int roomRows=6;  // height of a room
 //////////////////////////  OTHER METHODS /////////////////////////////////////////////////
 	
 	// LEGACY METHOD , now using drawRoomGrid() 
+		/**
+		Deprecated Room Drawing Method, manually draws out a fixed width room. superseded by roomGrid 2D char array method.
+		@deprecated Replaced by drawRoomGrid()
+		*/
 	public void drawRoom(){
 	
 	// prints out one room for display purposes 
@@ -508,7 +536,9 @@ private int roomRows=6;  // height of a room
 			roomGrid[roomCols-1][k]='|';
 			}
 		}
-		// fix glitches in wall presentation
+		
+
+		// fix glitches in presentation
 		if (rightWall && !topWall) {
 			roomGrid[roomCols-1][0]='|';	
 		}
@@ -521,10 +551,6 @@ private int roomRows=6;  // height of a room
 		if (rightWall && !bottomWall) {
 			roomGrid[roomCols-1][roomRows-1]='|';	
 		}
-		
-		
-		
-		
 		
 		// player placement (might not be necessary)
 		if (hasPlayer){

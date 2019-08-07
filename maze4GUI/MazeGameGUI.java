@@ -23,6 +23,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.layout.*;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -71,6 +72,10 @@ public class MazeGameGUI extends Application {
 	private Button[][] buttonGrid = new Button[cols][rows];  	
 	private Rectangle[][] rectGrid = new Rectangle[cols][rows];
 	
+	private Rectangle[][] itemGrid = new Rectangle[5][1]; // 5x1 matrix of rectangles
+	
+	private Rectangle[][] healthGrid= new Rectangle[4][1]; // 2x1 matrix of rectangles
+	
 	// make a messageLabel with a message for user interaction / Prompts
 	private Label messageLabel = new Label("Welcome to the Maze");
 	
@@ -85,11 +90,25 @@ public class MazeGameGUI extends Application {
 
 	private Image image;
 	// make a canvas for images and drawings
-	private Canvas canvasLeft = new Canvas(200,200);
+	private Canvas canvasLeft = new Canvas(300,300);
 	private GraphicsContext gcL = canvasLeft.getGraphicsContext2D();
 	
-	private Canvas canvasRight = new Canvas(200,200);
+	private Canvas canvasRight = new Canvas(300,300);
 	private GraphicsContext gcR = canvasRight.getGraphicsContext2D();
+	
+///////////////////////////// TEXTURE IMAGES ///////////////////////////////////////
+	Image floor = new Image("images/floor.jpg");
+	Image wall = new Image("images/walltexture.jpg");
+	Image monster = new Image("images/monster.jpg");
+	Image map = new Image("images/map.jpg");
+	Image door = new Image("images/door.jpg");
+	Image key = new Image("images/key.jpg");
+	Image hint = new Image("images/hint.jpg");
+	Image food = new Image("images/food.jpg");
+	Image player = new Image("images/player.jpg");
+	
+////////////////////////////////////////////////////////////////////////////////	
+	
 	
 ///////////////////////////// START METHOD //////////////////////////////////////////////////	
 	
@@ -104,7 +123,9 @@ public class MazeGameGUI extends Application {
 		// use the GridPane layout (instead of vBox, hBox or Group)
 		  GridPane grid = new GridPane();  
 		  GridPane grid2 = new GridPane();  // grid for rectangle objects 
-	
+		  GridPane grid3 = new GridPane();  // grid for rectangle item objects 
+		  GridPane grid4 = new GridPane();  // grid for rectangle item objects 
+		  
 		  // make a key input handler
 		  HandleKeyBoardInput keyInput =  new HandleKeyBoardInput(); 
 		  HandleInputSendClick sendClick = new HandleInputSendClick();
@@ -124,6 +145,8 @@ public class MazeGameGUI extends Application {
 		// make a VBox object 
 		VBox verticalBox = new VBox();  // Vbox layout manager , stacks downward
 		
+		HBox heroBox = new HBox(); // HBox to put hero stats and healthGrid
+		
 		// send the text field to the storeInput string
 		Button sendButton = new Button("Enter");
 		// attempt a cold boot setup of the room 
@@ -131,6 +154,7 @@ public class MazeGameGUI extends Application {
 		
 	//	Button updateButton = new Button("Update");
 		
+		// Room grid for game
 		for (int i = 0; i < cols; i++) {
 			for (int j = 0; j < rows; j++){
 				Rectangle rect = new Rectangle();  // make a new rectangle 
@@ -143,12 +167,44 @@ public class MazeGameGUI extends Application {
 			}
 		}
 		
+		// item grid for items
+		for( int i = 0 ; i < 5 ; i++) {
+			Rectangle rect = new Rectangle();  // make a new rectangle 
+			rect.setWidth(20);
+			rect.setHeight(25);
+			rect.setFill(Color.GREY);
+			rect.setStroke(Color.BLACK);
+			rect.setStrokeWidth(2);
+			rect.setOnKeyPressed( new HandleKeyBoardInput());
+			itemGrid[i][0] = rect;       // add the new rectangle to the rectGrid
+			grid3.add(itemGrid[i][0], i, 0);	
+		}
+		
+		// item grid for items
+		for( int i = 0 ; i < 4 ; i++) {
+			Rectangle rect = new Rectangle();  // make a new rectangle 
+			rect.setWidth(20);
+			rect.setHeight(25);
+			rect.setFill(Color.GREEN);
+			rect.setStroke(Color.BLACK);
+			rect.setStrokeWidth(2);
+			rect.setOnKeyPressed( new HandleKeyBoardInput());
+			healthGrid[i][0] = rect;       // add the new rectangle to the rectGrid
+			grid4.add(healthGrid[i][0], i, 0);	
+		}
+		
+		
+		//heroBox.getChildren().add(playerLabel1);
+		heroBox.getChildren().add(grid4);
+		
 		// Add the items to the vertical box 
 		verticalBox.getChildren().add(textIn);
 		verticalBox.getChildren().add(sendButton);
 		verticalBox.getChildren().add(playerLabel1);
-		verticalBox.getChildren().add(playerLabel2);
+		verticalBox.getChildren().add(heroBox);
+		// verticalBox.getChildren().add(playerLabel2);
 		verticalBox.getChildren().add(playerLabel3);
+		verticalBox.getChildren().add(grid3);
 		verticalBox.getChildren().add(startButton);	
 		// verticalBox.getChildren().add(updateButton);
 		
@@ -279,6 +335,7 @@ public class MazeGameGUI extends Application {
 				playerLabel3.setText("Level: " + level + " Moves: " + moveCounter);
 				/// Routines to update the boxes
 				postCurrentRoom();
+				
 			} else {
 				wipeGrid();
 			}
@@ -317,7 +374,7 @@ public class MazeGameGUI extends Application {
 			playerLabel3.setText("Level: " + level + " Moves: " + moveCounter);	
 			/// Routines to update the current room boxes
 			postCurrentRoom();
-			
+
 			if (!gameOn ) {
 			wipeGrid();
 			shutDown();
@@ -339,6 +396,7 @@ public class MazeGameGUI extends Application {
 			
 			restartGameBoard(); // restart the gameBoard from level 1 
 			gameBoard.setCurrentRoom(0,0); // reset the current room after setting up the board
+			
 			// get the current room
 			//gameBoard.setCurrentRoom(gameBoard.getHero().getPosition()); 
 			
@@ -384,6 +442,7 @@ public class MazeGameGUI extends Application {
 		tempHero = gameBoard.getHero();
 		
 		postCurrentRoom();   // display the current room 
+		postItems(); // graphical display of items and health status
 		// show the text mode output
 		textModeOutput();
 		printHelp();
@@ -406,6 +465,9 @@ public class MazeGameGUI extends Application {
 			gameBoard.setCurrentRoom(gameBoard.getHero().getPosition());
 			tempRoom = gameBoard.getCurrentRoom();  // get the tempRoom to be the current room.
 			tempRoom.populateRoomGrid(); // load the information and characters currently set for the room into the roomGrid
+	
+			postCurrentRoom();
+			wipeItemGrid();
 	}
 
 	// Graphics display
@@ -419,7 +481,6 @@ public class MazeGameGUI extends Application {
 			resetMazeSize();  // reset the Maze Size  
 			gameBoard = new Maze(mazeSize); // make a new gameBoard of the proper size
 			setBoard(gameBoard);   // construct the maze for the current level
-			//gameBoard.copyHero(tempHero); // copy over the player from the previous level
 			gameBoard.setPlayerLocation(0,0); // reset to the top
 			gameBoard.resetPlayerItems(); // remove the key and the map from the player
 			// set the current room to current position 
@@ -433,6 +494,9 @@ public class MazeGameGUI extends Application {
 			drawImage(gcL,image);
 						
 			postCurrentRoom();   // display the current room 
+			wipeItemGrid();
+			wipeHealthGrid();
+			postHealth();
 		    // show the text mode output
 			textModeOutput();
 			printHelp();
@@ -466,31 +530,40 @@ public class MazeGameGUI extends Application {
 				buttonGrid[i][j].setText(temp);
 				if (ch == ' ' ) {
 				buttonGrid[i][j].setOpacity(0.3);
-				rectGrid[i][j].setFill(Color.LIGHTGREY);
+				//rectGrid[i][j].setFill(Color.LIGHTGREY);
+				rectGrid[i][j].setFill(new ImagePattern(floor));
 				} else if (ch == '|' || ch == '_' ){
 				buttonGrid[i][j].setOpacity(1);
-				rectGrid[i][j].setFill(Color.DARKGREY);
+				//rectGrid[i][j].setFill(Color.DARKGREY);
+				rectGrid[i][j].setFill(new ImagePattern(wall));
 				} else if (ch == 'W' ){
 					buttonGrid[i][j].setOpacity(1);
-					rectGrid[i][j].setFill(Color.RED);
+					//rectGrid[i][j].setFill(Color.RED);
+					rectGrid[i][j].setFill(new ImagePattern(monster));
 				} else if (ch == 'M' ){
 					buttonGrid[i][j].setOpacity(1);
 					rectGrid[i][j].setFill(Color.GREEN);
+					rectGrid[i][j].setFill(new ImagePattern(map));
 				}else if (ch == 'K' ){
 					buttonGrid[i][j].setOpacity(1);
-					rectGrid[i][j].setFill(Color.YELLOW);
+					//rectGrid[i][j].setFill(Color.YELLOW);
+					rectGrid[i][j].setFill(new ImagePattern(key));
 				}else if (ch == 'D' ){
 					buttonGrid[i][j].setOpacity(1);
-					rectGrid[i][j].setFill(Color.BROWN);
+					//rectGrid[i][j].setFill(Color.BROWN);
+					rectGrid[i][j].setFill(new ImagePattern(door));
 				}else if (ch == 'R' ){
 					buttonGrid[i][j].setOpacity(0.5);
-					rectGrid[i][j].setFill(Color.BLUEVIOLET);
+					//rectGrid[i][j].setFill(Color.BLUEVIOLET);
+					rectGrid[i][j].setFill(new ImagePattern(hint));
 				}else if (ch == 'F' ){
 					buttonGrid[i][j].setOpacity(1);
-					rectGrid[i][j].setFill(Color.ORANGE);
+					//rectGrid[i][j].setFill(Color.ORANGE);
+					rectGrid[i][j].setFill(new ImagePattern(food));
 				}else if (ch == '*' ){
 					buttonGrid[i][j].setOpacity(1);
-					rectGrid[i][j].setFill(Color.BLUE);
+					//rectGrid[i][j].setFill(Color.BLUE);
+					rectGrid[i][j].setFill(new ImagePattern(player));
 				}
 			}
 		}	
@@ -512,6 +585,80 @@ public class MazeGameGUI extends Application {
 	}
 
 
+	
+	public void postItems() {
+		
+		if (gameBoard.getHero().getHasMap()) {
+			itemGrid[0][0].setFill(new ImagePattern(map));
+			}
+		
+		if (gameBoard.getHero().getHasKey()) {
+			itemGrid[1][0].setFill(new ImagePattern(key));
+			}
+		
+	return;
+	}
+	
+	
+	public void postHealth() {
+			if  (gameBoard.getHero().getHealth() >40 ) {
+				healthGrid[3][0].setFill(Color.GREEN);
+				healthGrid[2][0].setFill(Color.GREEN);
+				healthGrid[1][0].setFill(Color.GREEN);
+				healthGrid[0][0].setFill(Color.GREEN);
+			}else if  (gameBoard.getHero().getHealth() >30 && gameBoard.getHero().getHealth() <=40) {
+				healthGrid[3][0].setFill(Color.LIGHTGREEN);	
+				healthGrid[2][0].setFill(Color.GREEN);	
+				healthGrid[1][0].setFill(Color.GREEN);	
+				healthGrid[0][0].setFill(Color.GREEN);	
+			}else if  (gameBoard.getHero().getHealth() >20 && gameBoard.getHero().getHealth() <=30) {
+				healthGrid[3][0].setFill(Color.GREY);	
+				healthGrid[2][0].setFill(Color.YELLOW);	
+				healthGrid[1][0].setFill(Color.GREEN);	
+				healthGrid[0][0].setFill(Color.GREEN);	
+			}else if  (gameBoard.getHero().getHealth() >15 && gameBoard.getHero().getHealth() <=20) {
+				healthGrid[3][0].setFill(Color.GREY);	
+				healthGrid[2][0].setFill(Color.ORANGE);	
+				healthGrid[1][0].setFill(Color.GREEN);	
+				healthGrid[0][0].setFill(Color.GREEN);	
+			}else if  (gameBoard.getHero().getHealth() >10 && gameBoard.getHero().getHealth() <=15) {
+				healthGrid[3][0].setFill(Color.GREY);
+				healthGrid[2][0].setFill(Color.GREY);
+				healthGrid[1][0].setFill(Color.ORANGE);	
+				healthGrid[0][0].setFill(Color.GREEN);	
+			}else if  (gameBoard.getHero().getHealth() >5 && gameBoard.getHero().getHealth() <=10) {
+				healthGrid[3][0].setFill(Color.GREY);
+				healthGrid[2][0].setFill(Color.GREY);
+				healthGrid[1][0].setFill(Color.GREY);	
+				healthGrid[0][0].setFill(Color.RED);	
+			}else if  (gameBoard.getHero().getHealth() >0 && gameBoard.getHero().getHealth() <=5){ 
+				healthGrid[3][0].setFill(Color.GREY);
+				healthGrid[2][0].setFill(Color.GREY);
+				healthGrid[1][0].setFill(Color.GREY);	
+				healthGrid[0][0].setFill(Color.DARKRED);	
+			}else{ 
+				healthGrid[3][0].setFill(Color.GREY);
+				healthGrid[2][0].setFill(Color.GREY);
+				healthGrid[1][0].setFill(Color.GREY);	
+				healthGrid[0][0].setFill(Color.GREY);
+			}
+		return;
+	}
+	
+	public void wipeItemGrid() {	
+		for (int k = 0; k<5;k++) {
+		itemGrid[k][0].setFill(Color.GREY);
+		}
+	return;
+	}
+	
+	public void wipeHealthGrid() {	
+		for (int k = 0; k<4;k++) {
+		healthGrid[k][0].setFill(Color.GREY);
+		}
+	return;
+	}
+	
 	/**
 	Method to output information to the Console 
 	*/
@@ -1029,18 +1176,21 @@ public class MazeGameGUI extends Application {
 			System.out.println("You took the key!");
 			messageLabel.setText("You took the key!");
 			bigText.setText("You took the Key!");
+			postItems();
 			moveCounter++;
 			}else if (tempRoom.getHasMap()){
 			gameBoard.takeMap();
 			System.out.println("You took the Map!");
 			messageLabel.setText("You took the Map!");
 			bigText.setText("You took the Map!");
+			postItems();
 			moveCounter++;
 			}else if (tempRoom.getHasFood()){
 				gameBoard.takeFood();
 				System.out.println("You took the Food!");
 				messageLabel.setText("You took the Food!");
 				bigText.setText("You took the Food!");
+				postHealth();
 				moveCounter++;
 			}else{
 			System.out.println("There is nothing in the room to take...");
@@ -1085,7 +1235,8 @@ public class MazeGameGUI extends Application {
 		 System.out.println("Congratulations! You are free from THE MAZE!");
 		 messageLabel.setText("Congratulations! You are free from THE MAZE!");
 		 wipeGrid();
-	
+		 wipeItemGrid();
+		 wipeHealthGrid();
 		 image = new Image("images/win.png");
 		 drawImage(gcL,image);
 		 bigText.setText("Congratulations! You are free from THE MAZE!\nPress the Restart or Enter click buttons to terminate the program.");
@@ -1100,7 +1251,10 @@ public class MazeGameGUI extends Application {
 		 messageLabel.setText("Thanks for playing THE MAZE.  Better Luck Next Time!");
 		 
 		 bigText.setText("Thanks for playing THE MAZE.  Better Luck Next Time!\nPress the Restart or Enter click buttons to terminate the program.");
-			
+		
+		 wipeGrid();
+		 wipeItemGrid();
+		 wipeHealthGrid(); 
 		 image = new Image("images/lose.png");
 		 drawImage(gcL,image);
 		
@@ -1300,6 +1454,7 @@ public class MazeGameGUI extends Application {
 		
 			if (storeInput.equalsIgnoreCase("Attack") || storeInput.equalsIgnoreCase("Fight") ) {
 				gameBoard.fightTurn();
+				postHealth(); // update the visual health of the hero.
 				} 
 			
 			
@@ -1371,6 +1526,7 @@ public class MazeGameGUI extends Application {
 			
 			// 2D graphics counterpart
 			postCurrentRoom();
+			postHealth();
 			
 		}
 		
