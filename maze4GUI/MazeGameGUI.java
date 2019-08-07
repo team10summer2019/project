@@ -107,7 +107,7 @@ public class MazeGameGUI extends Application {
 	Image hint = new Image("images/hint.jpg");
 	Image food = new Image("images/food.jpg");
 	Image player = new Image("images/player.jpg");
-	
+	Image riddle = new Image("images/riddle.jpg");
 ////////////////////////////////////////////////////////////////////////////////	
 	
 	
@@ -561,7 +561,7 @@ public class MazeGameGUI extends Application {
 				}else if (ch == 'R' ){
 					buttonGrid[i][j].setOpacity(0.5);
 					//rectGrid[i][j].setFill(Color.BLUEVIOLET);
-					rectGrid[i][j].setFill(new ImagePattern(hint));
+					rectGrid[i][j].setFill(new ImagePattern(riddle));
 				}else if (ch == 'F' ){
 					buttonGrid[i][j].setOpacity(1);
 					//rectGrid[i][j].setFill(Color.ORANGE);
@@ -1243,7 +1243,7 @@ public class MazeGameGUI extends Application {
 		 wipeGrid();
 		 wipeItemGrid();
 		 wipeHealthGrid();
-		 image = new Image("images/win.png");
+		 image = new Image("images/win.jpg");
 		 drawImage(gcL,image);
 		 bigText.setText("Congratulations! You are free from THE MAZE!\nPress the Restart or Enter click buttons to terminate the program.");
 		 
@@ -1261,7 +1261,7 @@ public class MazeGameGUI extends Application {
 		 wipeGrid();
 		 wipeItemGrid();
 		 wipeHealthGrid(); 
-		 image = new Image("images/lose.png");
+		 image = new Image("images/lose.jpg");
 		 drawImage(gcL,image);
 		
 		 gameOn=false; // game terminating flag to halt input
