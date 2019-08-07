@@ -112,7 +112,7 @@ public class Start {
 			}
 			////////VIEW YELLOW BOX
 			if (userInput.equalsIgnoreCase("yellowbox")) {
-				gameMethods.viewYellowBox();
+				gameMethods.viewPurpleBox();
 			}
 			////////VIEW GREEN BOX
 			if (userInput.equalsIgnoreCase("greenbox")) {
@@ -178,7 +178,7 @@ public class Start {
 			stat_item.redBox();
 			userInput = keyboard.next();
 			if (userInput.equalsIgnoreCase("y")) {
-				stat_item.aCard();
+				stat_item.aCardH();
 				this.gotBearLever1 = true;
 				awaitInput = false;
 			} else if (userInput.equalsIgnoreCase("n")) {
@@ -189,12 +189,12 @@ public class Start {
 	} 
 	
 	//////////YELLOWBOX////////////
-	public void viewYellowBox() { 
-		System.out.println("<><>YELLOW BOX<><>");
+	public void viewPurpleBox() { 
+		System.out.println("<><>PURPLE BOX<><>");
 		boolean awaitInput = true;
 		
 		while (awaitInput == true) {
-			stat_item.yellowBox();
+			stat_item.purpleBox();
 			userInput = keyboard.next();
 			if (userInput.equalsIgnoreCase("y")) {
 				stat_item.aNote();
