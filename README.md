@@ -77,7 +77,8 @@ GenericRoom class will be called directly through the class Maze in the Maze2 pa
 The classes interact with each other properly and independently for the most part. 
 
 ===Permissions=== 
-Classes: 
+Classes:
+
 StaticObjects,DynamicObjects,and GenericRoom, Room1Haine, Room2Haine, Room3, Room4
 are permitted to be used as long as permission is granted and updates are verified for fair use of personal work.
 
