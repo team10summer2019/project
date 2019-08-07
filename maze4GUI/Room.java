@@ -570,7 +570,7 @@ private int roomRows=6;  // height of a room
 	
 	// LEGACY METHOD , now using drawRoomGrid() 
 	/**
-	Deprecated Room Drawing Method, manually draws out a fixed width room. superceded by roomGrid 2D char array method.
+	Deprecated Room Drawing Method, manually draws out a fixed width room. superseded by roomGrid 2D char array method.
 	@deprecated Replaced by drawRoomGrid()
 	*/
 	public void drawRoom(){
@@ -715,6 +715,21 @@ private int roomRows=6;  // height of a room
 			roomGrid[roomCols-1][k]='|';
 			}
 		}
+		
+		// fix glitches in presentation
+		if (rightWall && !topWall) {
+			roomGrid[roomCols-1][0]='|';	
+		}
+		if (leftWall && !topWall) {
+			roomGrid[0][0]='|';	
+		}
+		if (leftWall && !bottomWall) {
+			roomGrid[0][roomRows-1]='|';	
+		}
+		if (rightWall && !bottomWall) {
+			roomGrid[roomCols-1][roomRows-1]='|';	
+		}
+		
 		
 		// player placement (might not be necessary)
 		if (hasPlayer){
