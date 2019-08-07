@@ -79,7 +79,6 @@ The classes interact with each other properly and independently for the most par
 ===Permissions=== 
 
 Classes:
-
 StaticObjects,DynamicObjects,and GenericRoom, Room1Haine, Room2Haine, Room3, Room4
 are permitted to be used as long as permission is granted and updates are verified for fair use of personal work.
 
