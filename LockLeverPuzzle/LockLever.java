@@ -28,6 +28,13 @@ public class LockLever {
 		this.obj_LeverPiece2 = status;
 		System.out.println("ITEM leverpiece2 IS PICKED UP");
 	}
+	//GETTERS
+	public boolean getLeverPiece1() {
+		return this.obj_LeverPiece1;
+	}
+	public boolean getLeverPiece2() {
+		return this.obj_LeverPiece2;
+	}
 	
 	//METHODS
 	//get leverPiece1 and leverPiece2 info from player inventory

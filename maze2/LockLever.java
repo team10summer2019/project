@@ -1,10 +1,9 @@
 package maze2;
 
-
 /**
  * @author Fiona
  *
- */ 
+ */
 public class LockLever {
 	/*
 	 * CLASS
@@ -24,11 +23,18 @@ public class LockLever {
 	//changes status of lever piece
 	public void setLeverPiece1(boolean status) {//changes status of lever piece 1 when present
 		this.obj_LeverPiece1 = status;
-		System.out.println("ITEM leverpiece1 IS PICKED UP\n");
+		System.out.println("ITEM leverpiece1 IS PICKED UP");
 	}
 	public void setLeverPiece2(boolean status) {//changes status of lever piece 2 when present
 		this.obj_LeverPiece2 = status;
-		System.out.println("ITEM leverpiece2 IS PICKED UP\n");
+		System.out.println("ITEM leverpiece2 IS PICKED UP");
+	}
+	//GETTERS
+	public boolean getLeverPiece1() {
+		return this.obj_LeverPiece1;
+	}
+	public boolean getLeverPiece2() {
+		return this.obj_LeverPiece2;
 	}
 	
 	//METHODS
