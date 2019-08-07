@@ -110,6 +110,11 @@ public class MazeGameGUI extends Application {
 	Image riddle = new Image("images/riddle.jpg");
 ////////////////////////////////////////////////////////////////////////////////	
 	
+///////////////////////////// MAIN METHOD ////////////////////////////////////
+	
+	public static void main(String[] args) {
+		launch(args);
+	}
 	
 ///////////////////////////// START METHOD //////////////////////////////////////////////////	
 	
@@ -470,6 +475,9 @@ public class MazeGameGUI extends Application {
 	
 			postCurrentRoom();
 			wipeItemGrid();
+			wipeHealthGrid();
+			postHealth();
+			postItems();
 	}
 
 	// Graphics display
