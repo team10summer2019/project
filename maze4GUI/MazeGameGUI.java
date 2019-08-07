@@ -616,6 +616,11 @@ public class MazeGameGUI extends Application {
 				healthGrid[2][0].setFill(Color.YELLOW);	
 				healthGrid[1][0].setFill(Color.GREEN);	
 				healthGrid[0][0].setFill(Color.GREEN);	
+			}else if  (gameBoard.getHero().getHealth() >15 && gameBoard.getHero().getHealth() <=20) {
+				healthGrid[3][0].setFill(Color.GREY);	
+				healthGrid[2][0].setFill(Color.ORANGE);	
+				healthGrid[1][0].setFill(Color.GREEN);	
+				healthGrid[0][0].setFill(Color.GREEN);	
 			}else if  (gameBoard.getHero().getHealth() >10 && gameBoard.getHero().getHealth() <=15) {
 				healthGrid[3][0].setFill(Color.GREY);
 				healthGrid[2][0].setFill(Color.GREY);
