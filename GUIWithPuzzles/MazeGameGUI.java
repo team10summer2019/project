@@ -63,12 +63,12 @@ public class MazeGameGUI extends Application {
 	
 	private TextArea bigText = new TextArea(); // javafx.scene.control.TextArea
 	
+	private boolean hitPlay = false;
 	
 	private Label playerLabel1 = new Label("Hero HEALTH: " + gameBoard.getHero().getHealth()+" Position: " +gameBoard.getHero().getPosition().toString());
 	private Label playerLabel2 = new Label("Hero Items: Map=" + gameBoard.getHero().getHasMap()+" Key= " +gameBoard.getHero().getHasKey());
 	private Label playerLabel3 = new Label("Level: " + level + " Moves: " + moveCounter);
 	
-	private Image floorImage;
 	private Image image;
 	// make a canvas for images and drawings
 	private Canvas canvasLeft = new Canvas(450,450);
@@ -443,14 +443,22 @@ public void postCurrentRoom() {
 				rectGrid[i][j].setFill(new ImagePattern(key));
 			}else if (ch == 'D' ){
 				buttonGrid[i][j].setOpacity(1);
-				Image door = new Image("images/door.jpg");
+				if (gameBoard.getDoor().getIsLocked()) {
+				Image door = new Image("images/doorclosed.jpg");
 				rectGrid[i][j].setFill(new ImagePattern(door));
+				}
+				else {
+				Image door = new Image("images/dooropen.jpg");
+				rectGrid[i][j].setFill(new ImagePattern(door));
+				}
 			}else if (ch == 'R' ){
 				buttonGrid[i][j].setOpacity(0.5);
-				rectGrid[i][j].setFill(Color.BLUEVIOLET);
+				Image riddle = new Image("images/riddle.jpg");
+				rectGrid[i][j].setFill(new ImagePattern(riddle));
 			}else if (ch == 'L' ){
 				buttonGrid[i][j].setOpacity(0.5);
-				rectGrid[i][j].setFill(Color.YELLOW);
+				Image comboLock = new Image("images/combolock.jpg");
+				rectGrid[i][j].setFill(new ImagePattern(comboLock));
 			}else if (ch == 'H' ){
 				buttonGrid[i][j].setOpacity(0.5);
 				Image hint = new Image("images/hint.jpg");
@@ -506,6 +514,10 @@ public void textModeOutput() {
 
 	public int getLevel(){
 	return level;
+	}
+	
+	public String getStoreInput() {
+		return storeInput;
 	}
 	
 	public void setLevel(int input) {
@@ -829,7 +841,16 @@ public void textModeOutput() {
 	
 	}
 	
+	
+	
 	public void inputControl()  {
+		
+		
+		Point currentPosition = tempHero.getPosition();	
+		Point firstRiddle = new Point(0,2);
+		Point secondRiddle = new Point(2,3);
+		boolean solved = false;
+
 		
 		// if user input was "MAP" display map unit until user types return
 		if ( storeInput.equalsIgnoreCase("map") ) {
@@ -909,7 +930,7 @@ public void textModeOutput() {
 			
 		// if user input was "Return" display map unit until user types return
 		if ( storeInput.equalsIgnoreCase("return") ) {
-			
+				
 				image = new Image("images/Logo.png");
 				drawImage(gcL,image);	
 				postCurrentRoom();
@@ -996,13 +1017,31 @@ public void textModeOutput() {
 		// if user input was "PLAY"
 		if ( storeInput.equalsIgnoreCase("play") ) {
 		
+			hitPlay = true;
+			
 			tempRoom.populateRoomGrid(); // load the information and characters currently set for the room into the roomGrid
 			
-			if (tempRoom.getHasRiddle()) {
-			gameBoard.playRiddle();
-			messageLabel.setText("You picked up a piece of paper to read and it reads...");
-			bigText.setText("You picked up a piece of paper to read and it reads...");
-			}	
+			if (tempRoom.getHasRiddle() && currentPosition.isEqual(firstRiddle)) {
+				// give the player a riddle
+				TestHaineRiddle rid = new TestHaineRiddle();
+				CreateRiddle theRiddle = rid.riddleOne();
+				bigText.setText(theRiddle.getRiddle()+theRiddle.instructions());
+				theRiddle.addAnswer(theRiddle);
+				theRiddle.sayRiddle(theRiddle);
+		
+			}
+			
+			else if (tempRoom.getHasRiddle() && currentPosition.isEqual(secondRiddle)) {
+					// give the player a riddle
+				TestHaineRiddle rid = new TestHaineRiddle();
+				CreateRiddle theRiddle = rid.riddleTwo();
+				bigText.setText(theRiddle.getRiddle()+theRiddle.instructions());
+
+				theRiddle.addAnswer(theRiddle);
+				theRiddle.sayRiddle(theRiddle);
+		
+				} 
+				
 			else if (tempRoom.getHasHint()) {
 			gameBoard.searchRoom();
 			messageLabel.setText("You take a look around the room and you see many items lying around.");
@@ -1018,7 +1057,24 @@ public void textModeOutput() {
 			System.out.println("There is nothing to play or to look at...");
 			bigText.setText("There is nothing to play or to look at...");
 			}
-	        }
+		}
+		
+		System.out.println(hitPlay + " testingage");
+		if ( hitPlay == true && currentPosition.isEqual(firstRiddle) && (storeInput.equalsIgnoreCase("penny") || storeInput.equalsIgnoreCase("ice") || storeInput.equalsIgnoreCase("blackboard") || storeInput.equalsIgnoreCase("human"))) {
+			solved = true;			//If the riddle has been solved
+				gameBoard.setRoomItems(0,2,false,false,false,false,false,false,false,false); // has riddle
+				bigText.setText("The right wall disappeared to reveal a path..\n");
+				gameBoard.setRoomWalls(0,2,true,!solved,false,true);
+				hitPlay = false;
+		}
+	
+		if( hitPlay == true && currentPosition.isEqual(secondRiddle) && (storeInput.equalsIgnoreCase("owl") || storeInput.equalsIgnoreCase("egg") || storeInput.equalsIgnoreCase("breath")) ) {
+			solved = true;
+				gameBoard.setRoomItems(2,3,false,false,false,false,false,false,false,false); // has riddle
+				bigText.setText("The wall in front of you disappeared. You see a key in the distance...\n");
+				gameBoard.setRoomWalls(2,3,true,false,!solved,true);
+				hitPlay = false;
+		}
 		
 		
 		// if user input is "Fight"	
