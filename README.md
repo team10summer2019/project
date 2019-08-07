@@ -32,7 +32,7 @@ To run these files, create a folder in eclipse, and copy all the .java files int
 Add the jar file jfxrt.jar to the build path as a library. Then run the class MazeGameGUI.java as a java application.<BR>
 
 Create a folder in eclipse and copy all of the files from /project/maze4GUI/*.java into the eclipse source folder.
-also copy the director /project/maze4GUI/images/ into a package images in eclipse. <BR> 
+also copy the directory /project/maze4GUI/images/ into a package images in eclipse. <BR> 
 
 Then link jfxrt.jar into the library path.  Finally Run MazeGameGUI.java. as a java application in eclipse. <BR>
 
