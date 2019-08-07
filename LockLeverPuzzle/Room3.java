@@ -1,14 +1,16 @@
 import java.util.Scanner;
-
 /**
- * @author Fiona
- * Version Updated: July 29, 2019
+ * @author Fiona 
+
+ * Version Updated: August 5, 2019
  */
 
-public class Room2 {
-	private static boolean gameRunning = true;
-	private static boolean inRoom2 = true;//*
-	private static Room2 gameMethods = new Room2();//*
+public class Room3 extends GenericRoom {
+	
+	//Room specific variables
+	private static boolean inRoom3 = true;
+	private static Room3 gameMethods = new Room3();
+	//Other variables
 	private static Scanner keyboard = new Scanner(System.in);
 	private String userInput;
 	
@@ -18,34 +20,28 @@ public class Room2 {
 	private Inventory playerInventory = new Inventory();
 	private FloorInventory roomInventory = new FloorInventory();
 	
-	public static void gameMenu() {
-		while (gameRunning == true) {
-			//////////GAME MENU
-			System.out.println("Welcome to Room 2, time to visit the room.");
-			System.out.println("Type 'Start' to begin and 'Exit'");
-			String userInput = keyboard.next();
-			if (userInput.equalsIgnoreCase("start")) {
-				System.out.println("Initializing..");
-				gameMethods.room2();
-			} 
-			gameMethods.exitView(userInput);
-				
-		}
-	}
+//////////EXIT VIEW////////////
+/*
+* Leaves room
+*/
 	private void exitView(String userInput) {
 		if (userInput.equalsIgnoreCase("exit")) { //don't need to prompt for each item(aka. make a new method to call it) because it'll be combined later on
 			System.out.println("Exiting..");
-			gameMethods.inRoom2 = false;
-			gameRunning = false;
-			keyboard.close(); //for isolated game from MazeGame only (DEVELOPERS USE)
+			Room3.inRoom3 = false;
+			//keyboard.close(); //for isolated game from MazeGame only (DEVELOPERS USE)
 		}
 	}
 	
-	public void room2() {
-		while (inRoom2 == true) {
-			System.out.println("//////////Room 2://///////////\nThis room has a cabinet.");
+//////////ROOM 2////////////
+/*
+* Lets you play through room
+*/
+	public void room3() {
+		while (inRoom3 == true) {
+			System.out.println("//////////Room 3://///////////\nThis room has a cabinet.");
 			System.out.println("To view your Inventory:\n'i'");
 			System.out.println("To view certain items, type:\n'Cabinet'-to look inside the cabinet\n'Under'-to look underneath the cabinet");
+			System.out.println("To stop looking around the room, type:\n'Exit'");
 			userInput = keyboard.next();
 			if (userInput.equalsIgnoreCase("i")) {
 				gameMethods.viewInventory();
@@ -61,6 +57,11 @@ public class Room2 {
 			gameMethods.exitView(userInput);
 		}
 	}
+//////////SET INROOM3////////////
+public void setInRoom3(boolean inRoom_Bool) {
+	Room3.inRoom3 = inRoom_Bool;
+}
+
 ////////////////////////ITEM METHODS////////////////////////////////
 	public void viewInventory() {
 		playerInventory.viewInventory();

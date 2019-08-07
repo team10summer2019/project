@@ -1,7 +1,7 @@
 
 /**
  * @author Fiona
- * Version Updated: July 29, 2019
+ *
  */
 public class DynamicObjects extends StaticObjects{
 	/*
@@ -15,6 +15,7 @@ public class DynamicObjects extends StaticObjects{
 	final String leverP1 = "leverPiece1";
 	final String leverP2 = "leverPiece2";
 	final String cabinetKey = "cabinetKey";
+	final String topHat = "topHat";
 	
 	public DynamicObjects() {
 		
@@ -29,6 +30,9 @@ public class DynamicObjects extends StaticObjects{
 		}
 		if (item == "cabinetKey") {
 			string_cabinetKey();
+		}
+		if (item == "topHat") {
+			string_topHat();
 		}
 		
 	}
@@ -63,9 +67,14 @@ public class DynamicObjects extends StaticObjects{
 	private void changeStatus_leverP2() {
 		changeStatus.setLeverPiece2(true);
 	}
-	/////////KEY///////////////////
-	public String string_cabinetKey() {
+	/////////cabinetKey///////////////////
+	private String string_cabinetKey() {
 		System.out.println("It is a key for the cabinet.");
 		return "cabinetKey";
+	}
+	//////////////topHat///////////////////
+	private String string_topHat() {
+		System.out.println("It is a fancy black felt tophat with a black satin ribbon around it.");
+		return "topHat";
 	}
 }

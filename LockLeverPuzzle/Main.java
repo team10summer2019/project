@@ -1,14 +1,18 @@
 
 /**
  * @author Fiona
- * Version Updated: July 29, 2019
+ *
  */
 public class Main {
 	
 	public static void main(String[] args) {
-		Room1.gameMenu();
-		//want to move objects from room 1 inventory to room 2
-		Room2.gameMenu();
+		GenericRoom gameRooms = new GenericRoom();
+		gameRooms.playerInventory.viewInventory();
+		gameRooms.configuration(1);
+		gameRooms.configuration(2);
+		gameRooms.configuration(3);
+		gameRooms.configuration(4);
+		gameRooms.playerInventory.viewInventory();
 		
 	}
 }

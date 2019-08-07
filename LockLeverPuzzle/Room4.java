@@ -1,51 +1,64 @@
-
-/**
- * @author Fiona
- * Version Updated: July 29, 2019
- */
 import java.util.Scanner;
+/**
+ * @author Fiona 
 
-public class Room1 {
-	private static boolean gameRunning = true;
-	private static boolean inRoom1 = true;
-	private static Room1 gameMethods = new Room1();
+ * Version Updated: August 5, 2019
+ */
+
+public class Room4 extends GenericRoom {
+	
+	//Room specific variables
+	private static boolean inRoom4 = true;
+	private static Room4 gameMethods = new Room4();
+	//Other variables
 	private static Scanner keyboard = new Scanner(System.in);
 	private String userInput;
 	
 	private Player p1 = new Player();//transfer player input into player
 	private StaticObjects stat_item = new StaticObjects();
 	private DynamicObjects dyn_item = new DynamicObjects();
-	private Inventory playerInventory = new Inventory();
-	private FloorInventory roomInventory = new FloorInventory();
-	
-	public static void gameMenu() {
-		while (gameRunning == true) {
-			//////////GAME MENU
-			System.out.println("Welcome to Room 1, time to visit the room.");
-			System.out.println("Type 'Start' to begin and 'Exit'");
-			String userInput = keyboard.next();
-			if (userInput.equalsIgnoreCase("start")) {
-				System.out.println("Initializing..");
-				gameMethods.room1();
-			} 
-			gameMethods.exitView(userInput);
-				
-		}
+	private Inventory playerInventory;
+	private FloorInventory roomInventory;
+/////////////////////////////////////
+	public Room4() {
+		super();
+		setPlayerInventory(super.playerInventory);
+		setRoomInventory(super.roomInventory);
 	}
+	public Inventory getPlayerInventory() {
+		return this.playerInventory;
+	}
+	public void setPlayerInventory(Inventory playerInventory) {
+		this.playerInventory = playerInventory;
+	}
+	public FloorInventory getRoomInventory() {
+		return this.roomInventory;
+	}
+	public void setRoomInventory(FloorInventory roomInventory) {
+		this.roomInventory = roomInventory;
+	}
+	
+//////////EXIT VIEW////////////
+/*
+* Leaves room
+*/
 	private void exitView(String userInput) {
 		if (userInput.equalsIgnoreCase("exit")) { //don't need to prompt for each item(aka. make a new method to call it) because it'll be combined later on
-			System.out.println("Exiting Room 1..");
-			gameMethods.inRoom1 = false;
-			gameRunning = false;
+			System.out.println("Exiting..");
+			Room4.inRoom4 = false;
 			//keyboard.close(); //for isolated game from MazeGame only (DEVELOPERS USE)
 		}
 	}
-	
-	public void room1() {
-		while (inRoom1 == true) {
-			System.out.println("//////////Room 1://///////////\nThis room has a bear with a red box beside it. There is a shelf with three birds sitting on it: a red bird, yellow bird, and green bird.");
+//////////ROOM 1////////////
+/*
+ * Lets you play through room
+ */
+	public void room4() {
+		while (inRoom4 == true) {
+			System.out.println("//////////Room 4://///////////\nThis room has a bear with a red box beside it. There is a shelf with three birds sitting on it: a red bird, yellow bird, and green bird.");
 			System.out.println("To view your Inventory:\n'i'");
-			System.out.println("To view certain items, type:\n'Bear'\n'RedBox'\n'Shelf'\n'Mirror'");
+			System.out.println("To view certain items, type:\n'Bear'\n'RedBox'\n'Shelf'");
+			System.out.println("To stop looking around the room, type:\n'Exit'");
 			userInput = keyboard.next();
 			///////VIEW INVENTORY
 			if (userInput.equalsIgnoreCase("i")) {
@@ -64,14 +77,18 @@ public class Room1 {
 			if (userInput.equalsIgnoreCase("shelf")) {
 				gameMethods.viewShelf();
 			}
-			////////////VIEW MIRROR
-			if (userInput.equalsIgnoreCase("mirror")) {
-				gameMethods.viewMirror();
-			}
 			gameMethods.exitView(userInput);
 		}
 	}
+//////////SET INROOM1////////////
+	public void setInRoom4(boolean inRoom_Bool) {
+		Room4.inRoom4 = inRoom_Bool;
+	}
+	
 ////////////////////////ITEM METHODS////////////////////////////////
+/*
+ * Unique methods that are used in the class
+ */
 	public void viewInventory() {
 		playerInventory.viewInventory();
 	}
@@ -86,7 +103,7 @@ public class Room1 {
 		//roomInventory.viewFloorInventory();
 	}
 	//////////BEAR////////////
-	public void viewBear() {
+	private void viewBear() {
 		System.out.println("<><>BEAR<><>");
 		boolean awaitInput = true;
 		boolean awaitInput1 = true;
@@ -113,7 +130,7 @@ public class Room1 {
 		}	
 	}
 	//////////REDBOX////////////
-	public void viewRedBox() { 
+	private void viewRedBox() { 
 		System.out.println("<><>REDBOX<><>");
 		boolean awaitInput = true;
 		
@@ -130,7 +147,7 @@ public class Room1 {
 		}
 	}
 	//////////SHELF////////////
-	public void viewShelf() {
+	private void viewShelf() {
 		boolean awaitInput = true;
 		
 		while (awaitInput == true) {
@@ -152,11 +169,4 @@ public class Room1 {
 			}
 		}
 	}
-	//////////MIRROR////////////
-	//viewMirror by Haine
-	public void viewMirror() {
-		System.out.println("<><>MIRROR<><>");
-		stat_item.aMirror();
-	}
-	
 }
