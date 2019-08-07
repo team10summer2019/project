@@ -1454,6 +1454,7 @@ public class MazeGameGUI extends Application {
 		
 			if (storeInput.equalsIgnoreCase("Attack") || storeInput.equalsIgnoreCase("Fight") ) {
 				gameBoard.fightTurn();
+				postHealth(); // update the visual health of the hero.
 				} 
 			
 			
