@@ -1,7 +1,7 @@
 
 /**
  * @author Fiona
- * Version Updated: July 29, 2019
+ *
  */
 public class StaticObjects extends Inventory {
 	/*
@@ -17,6 +17,7 @@ public class StaticObjects extends Inventory {
 	//METHODS
 
 	//UNIQUE METHODS
+	/////ROOM1/////
 	public void aBear() {
 		System.out.println("This is a bear.");
 		
@@ -55,11 +56,8 @@ public class StaticObjects extends Inventory {
 		System.out.println("There is a red Bird, a yellow Bird, and a green Bird.\nTo view type:\n'r'-red Bird\n'y'-yellow Bird\n'g'-greenbird");
 		System.out.println("To stop viewing the shelf, type 'Stop'.");
 	}
-	//aMirror by Haine
-	public void aMirror() {
-		System.out.println("It's a mirror. All you see is a reflection of you. Your human self.");
-	}
-	/////FLOOR2?////
+	
+	/////ROOM2////
 	public void aCabinet() {
 		System.out.println("It is a cabinet.");
 	}
@@ -83,5 +81,60 @@ public class StaticObjects extends Inventory {
 	
 	public void inYellowBox() {
 		System.out.println("You opened the yellow box.\nThere is a bracelet in the box.");
+	}
+	/////ROOM1HAINE/////
+	public void aLeftPhoto() {  //Added by Haine
+		System.out.println("\nA baby smiles at the camera. It looks like it's having the time of it's life on all fours.");
+	}
+	
+	public void aMiddlePhoto() {  //Added by Haine
+		System.out.println("\nThere is a young man in a graduation gown. He stands victoriously on stage.");
+	}
+	
+	public void aRightPhoto() {  //Added by Haine
+		System.out.println("\nIt's a picture perfect family photo. The elderly man in the middle leans heavily on his cane, as if it were a third leg helping him stand.");
+	}
+	
+	public void aPuddle() { //Added by Haine
+		System.out.println("Upon closer inspection, it's not much of a puddle. It just looks like someone dropped\nice cubes where you're standing, and it melted.\n");
+	}
+	
+	public void aBlackboard() {
+		System.out.println("It is a regular blackboard, about as big as the ones in classrooms.\nIt's covered in chalk profanities. Write on it? 'y'/'n'");
+	}
+	
+	/////ROOM2HAINE/////
+	public void aCardH() { //Added by Haine
+		System.out.println("\nIt has Happy Birthday written on it.\n");
+	}
+	public void orangeBox() { //Addedd by Haine
+		System.out.println("It is an orange box. Someone painted a white 1 on the lid.\nOpen? 'y'/'n'");
+	}
+	
+	public void purpleBox() { //Added by Haine
+		System.out.println("A very bright, purple box.\nOpen? 'y'/'n'");
+	}
+	
+	public void toyBox() { //Added by Haine
+		System.out.println("Someone wrote a sloppy 3 on the lid with sharpie.\nOpen? 'y'/'n'\"");
+	}
+	
+	public void aShelfH() { //Modified and added by Haine
+		System.out.println("You are viewing the shelf.");
+		System.out.println("There are three framed photos, neatly lined up next to each other.");
+		System.out.println("For a closer look at the photo on the left, type: 'Left'.");
+		System.out.println("For a closer look at the photo in the middle, type: 'Middle'.");
+		System.out.println("For a closer look at the photo on the right, type: 'Right'.");
+		System.out.println("To stop viewing the shelf, type 'Stop'.");
+		System.out.println("..and then press ENTER.");
+	}
+	
+	public void aNoteH() { //Modified and added by Haine
+		System.out.println("You find a folded sticky note inside. You unfold the note. The note reads:");
+		System.out.println("__________________");
+		System.out.println("|'Wishlist'       |");
+		System.out.println("|-Doll            |");
+		System.out.println("|-Racecar      	  |");
+		System.out.println("|_________________|");
 	}
 }
