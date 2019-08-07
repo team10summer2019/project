@@ -1,7 +1,7 @@
 /**
  * @author Fiona
  *
- * Version updated: August 5, 2019
+ *Version updated: August 7, 2019
  */
 import java.util.ArrayList;
 
@@ -18,10 +18,7 @@ public class FloorInventory {
 		add_unique_flrInv("leverPiece1");
 		add_unique_flrInv("leverPiece2");
 		add_unique_flrInv("cabinetKey");
-	}
-	
-	public FloorInventory(FloorInventory toCopy) {
-		this.floorInventory = toCopy.floorInventory;
+		//add_unique_flrInv("topHat");
 	}
 	public void remove_flrInv(String item) {
 		floorInventory.remove(item);
@@ -33,9 +30,10 @@ public class FloorInventory {
 		//For Dev: System.out.println("item added to floor.");
 	}
 	/////////for developer
-	public void viewFloorInventory() {
+	public String viewFloorInventory() {
 		System.out.println("Floor Inventory:");
 		System.out.println(floorInventory);
+		return ""+this.floorInventory;
 	}
 
 }
