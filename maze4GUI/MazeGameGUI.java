@@ -83,14 +83,13 @@ public class MazeGameGUI extends Application {
 	
 	private TextArea bigText = new TextArea(); // javafx.scene.control.TextArea
 	
-	
 	private Label playerLabel1 = new Label("Hero HEALTH: " + gameBoard.getHero().getHealth()+" Position: " +gameBoard.getHero().getPosition().toString());
 	private Label playerLabel2 = new Label("Hero Items: Map=" + gameBoard.getHero().getHasMap()+" Key= " +gameBoard.getHero().getHasKey());
 	private Label playerLabel3 = new Label("Level: " + level + " Moves: " + moveCounter);
 
 	private Image image;
 	// make a canvas for images and drawings
-	private Canvas canvasLeft = new Canvas(300,300);
+	private Canvas canvasLeft = new Canvas(400,400);
 	private GraphicsContext gcL = canvasLeft.getGraphicsContext2D();
 	
 	private Canvas canvasRight = new Canvas(300,300);
@@ -136,6 +135,7 @@ public class MazeGameGUI extends Application {
 		for (int i = 0; i < cols; i++) {
 			for (int j = 0; j < rows; j++){
 				Button b = new Button(" ");  // make a new button with blank space as text
+				b.setMaxSize(50, 50);
 			//	b.setOnKeyTyped( keyInput);  // set on a key press
 				buttonGrid[i][j] = b;       // add the new button to the buttonGrid
 				grid.add(buttonGrid[i][j], i, j);		
@@ -158,8 +158,8 @@ public class MazeGameGUI extends Application {
 		for (int i = 0; i < cols; i++) {
 			for (int j = 0; j < rows; j++){
 				Rectangle rect = new Rectangle();  // make a new rectangle 
-				rect.setWidth(20);
-				rect.setHeight(25);
+				rect.setWidth(60);
+				rect.setHeight(65);
 				rect.setFill(Color.GREY);
 				rect.setOnKeyPressed( new HandleKeyBoardInput());
 				rectGrid[i][j] = rect;       // add the new rectangle to the rectGrid
@@ -167,11 +167,11 @@ public class MazeGameGUI extends Application {
 			}
 		}
 		
-		// item grid for items
+		// Item grid for items
 		for( int i = 0 ; i < 5 ; i++) {
 			Rectangle rect = new Rectangle();  // make a new rectangle 
-			rect.setWidth(20);
-			rect.setHeight(25);
+			rect.setWidth(35);
+			rect.setHeight(35);
 			rect.setFill(Color.GREY);
 			rect.setStroke(Color.BLACK);
 			rect.setStrokeWidth(2);
@@ -180,10 +180,10 @@ public class MazeGameGUI extends Application {
 			grid3.add(itemGrid[i][0], i, 0);	
 		}
 		
-		// item grid for items
+		// Health grid for player
 		for( int i = 0 ; i < 4 ; i++) {
 			Rectangle rect = new Rectangle();  // make a new rectangle 
-			rect.setWidth(20);
+			rect.setWidth(25);
 			rect.setHeight(25);
 			rect.setFill(Color.GREEN);
 			rect.setStroke(Color.BLACK);
@@ -216,18 +216,18 @@ public class MazeGameGUI extends Application {
 		
 		bigText.setWrapText(true);  // wrap text
 		bigText.setEditable(false); // no editing
-		
 ///////////////////////////// SCENE and STAGE SHOW ////////////////////////////////////////////
 		// build entire scene: grid and label
 		
 		GridPane sticky = new GridPane();
 		
-		sticky.add(canvasLeft, 0, 0);
-		sticky.add(canvasRight, 1, 0);
-		sticky.add(grid, 0, 1);
-		sticky.add(grid2, 1, 1);
-		sticky.add(verticalBox, 1, 2);
-		sticky.add(bigText, 0, 2);
+		sticky.add(canvasLeft, 1, 0);
+		//sticky.add(canvasRight, 1, 0);
+		sticky.add(grid2, 0, 0);
+		sticky.add(grid,2, 0);
+		//sticky.add(grid2, 1, 1);
+		sticky.add(verticalBox, 1, 1);
+		sticky.add(bigText, 0, 1);
 		
 		BorderPane root = new BorderPane();
 		
@@ -324,8 +324,8 @@ public class MazeGameGUI extends Application {
 					textModeOutput();  // output the text-mode response
 				}
 			
-				// move the monster if alive
-				if(gameBoard.getMonster().isAlive()) {
+				// move the monster if alive and you're not fighting
+				if(gameBoard.getMonster().isAlive() && !storeInput.equalsIgnoreCase("Fight")) {
 					monsterWalk(randGen,gameBoard);// move the monster
 				}
 			
@@ -363,8 +363,8 @@ public class MazeGameGUI extends Application {
 						
 			textModeOutput();	// show the updated display
 			inputControl();
-			// move the monster if alive
-			if(gameBoard.getMonster().isAlive()) {
+			// move the monster if alive and you're not fighting
+			if(gameBoard.getMonster().isAlive() && !storeInput.equalsIgnoreCase("Fight")) {
 			monsterWalk(randGen,gameBoard);// move the monster
 			}
 			
