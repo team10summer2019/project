@@ -25,13 +25,15 @@ public class Inventory {
 	//METHODS
 	//view objects(auto pick up if important)
 	//adds item to inventory(AS WELL REMOVE FROM ROOM)
-	public void viewInventory() {
+	public String viewInventory() {
 		if (this.inventory.isEmpty() == false) {
 			System.out.println("Here is your inventory.");
 			System.out.println(this.inventory);
+			return ""+this.inventory;
 		} else {
 			System.out.println("You have nothing in your inventory.");
 			System.out.println(this.inventory);
+			return ""+this.inventory;
 		}
 	}
 	
