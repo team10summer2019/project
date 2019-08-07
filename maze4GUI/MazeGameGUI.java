@@ -635,12 +635,12 @@ public class MazeGameGUI extends Application {
 				healthGrid[3][0].setFill(Color.GREY);
 				healthGrid[2][0].setFill(Color.GREY);
 				healthGrid[1][0].setFill(Color.GREY);	
-				healthGrid[3][0].setFill(Color.DARKRED);	
+				healthGrid[0][0].setFill(Color.DARKRED);	
 			}else{ 
 				healthGrid[3][0].setFill(Color.GREY);
 				healthGrid[2][0].setFill(Color.GREY);
 				healthGrid[1][0].setFill(Color.GREY);	
-				healthGrid[3][0].setFill(Color.GREY);
+				healthGrid[0][0].setFill(Color.GREY);
 			}
 		return;
 	}
