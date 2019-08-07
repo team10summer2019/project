@@ -3,6 +3,7 @@ package maze2;
 /**
  * @author Fiona
  *
+ * Version Updated: Aug 5, 2019
  */
 public class StaticObjects extends Inventory {
 	/*
