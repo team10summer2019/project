@@ -1,4 +1,17 @@
-package GUIWithPuzzles;
+package finalMaze;
+//////////////////////////////////////////////
+//
+// File: MazeGameGUI.java
+// Description: MazeGame class with main() function
+//
+// Author: (Ron) Zorondras Rodriguez
+// Course:  CPSC 233 Summer 2019
+// Creation Date: July 21, 2019
+// Version: 0.06
+// Revision Date: August 05, 2019
+//
+///////////////////////////////////////////////
+
 import java.util.Random;
 import java.util.Scanner;
 //import java.util.concurrent.TimeUnit; // for delay before exit
@@ -20,13 +33,17 @@ import javafx.scene.control.Button;
 import javafx.event.*;
 import javafx.scene.input.*;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
+/**
+Class MazeGameGUI is the Main GUI class that runs the Maze Game in GUI mode. Creates a Maze object gameBoard which is used to run the game.
+Various public helper functions are called to assist with running the game and interacting with the objects. Handles mouse click and keyboard events.
+Must be played from within eclipse Java IDE and requires javafx jfxrt.jar linked in the build path as a library.
+
+@author (Ron) Zorondras Rodriguez
+@version 0.06
+@since July 20, 2019
+*/
 public class MazeGameGUI extends Application {
-	
-	public static void main(String[] args) {
-		launch(args);
-	}
 
 //////////////////////////INSTANCE VARIABLES ///////////////////////////////////
 
@@ -56,6 +73,10 @@ public class MazeGameGUI extends Application {
 	private Button[][] buttonGrid = new Button[cols][rows];  	
 	private Rectangle[][] rectGrid = new Rectangle[cols][rows];
 	
+	private Rectangle[][] itemGrid = new Rectangle[5][1]; // 5x1 matrix of rectangles
+	
+	private Rectangle[][] healthGrid= new Rectangle[4][1]; // 2x1 matrix of rectangles
+	
 	// make a messageLabel with a message for user interaction / Prompts
 	private Label messageLabel = new Label("Welcome to the Maze");
 	
@@ -63,29 +84,55 @@ public class MazeGameGUI extends Application {
 	
 	private TextArea bigText = new TextArea(); // javafx.scene.control.TextArea
 	
-	private boolean hitPlay = false;
-	
 	private Label playerLabel1 = new Label("Hero HEALTH: " + gameBoard.getHero().getHealth()+" Position: " +gameBoard.getHero().getPosition().toString());
 	private Label playerLabel2 = new Label("Hero Items: Map=" + gameBoard.getHero().getHasMap()+" Key= " +gameBoard.getHero().getHasKey());
 	private Label playerLabel3 = new Label("Level: " + level + " Moves: " + moveCounter);
-	
+
 	private Image image;
 	// make a canvas for images and drawings
-	private Canvas canvasLeft = new Canvas(450,450);
+	private Canvas canvasLeft = new Canvas(400,400);
 	private GraphicsContext gcL = canvasLeft.getGraphicsContext2D();
 	
-	private Canvas canvasRight = new Canvas(200,200);
+	private Canvas canvasRight = new Canvas(300,300);
 	private GraphicsContext gcR = canvasRight.getGraphicsContext2D();
+	
+///////////////////////////// TEXTURE IMAGES ///////////////////////////////////////
+	Image floor = new Image("images/floor.jpg");
+	Image wall = new Image("images/walltexture.jpg");
+	Image monster = new Image("images/monster.jpg");
+	Image map = new Image("images/map.jpg");
+	Image door = new Image("images/door.jpg");
+	Image doorOpen = new Image("images/dooropen.jpg");
+	Image doorClosed = new Image("images/doorclosed.jpg");
+	Image key = new Image("images/key.jpg");
+	Image hint = new Image("images/hint.jpg");
+	Image food = new Image("images/food.jpg");
+	Image player = new Image("images/player.jpg");
+	Image riddle = new Image("images/riddle.jpg");
+////////////////////////////////////////////////////////////////////////////////	
+	
+///////////////////////////// MAIN METHOD ////////////////////////////////////
+	
+	public static void main(String[] args) {
+		launch(args);
+	}
 	
 ///////////////////////////// START METHOD //////////////////////////////////////////////////	
 	
+	
+	/**
+	Method set up the graphics windows and populate their panes with buttons and text boxes and graphics Context areas 
+	@param primaryStage A Stage to show  
+	*/
 	@Override
 	public void start(Stage primaryStage) { // this is like the main method 
 		
 		// use the GridPane layout (instead of vBox, hBox or Group)
 		  GridPane grid = new GridPane();  
 		  GridPane grid2 = new GridPane();  // grid for rectangle objects 
-	
+		  GridPane grid3 = new GridPane();  // grid for rectangle item objects 
+		  GridPane grid4 = new GridPane();  // grid for rectangle item objects 
+		  
 		  // make a key input handler
 		  HandleKeyBoardInput keyInput =  new HandleKeyBoardInput(); 
 		  HandleInputSendClick sendClick = new HandleInputSendClick();
@@ -93,10 +140,10 @@ public class MazeGameGUI extends Application {
 		  
 		// build grid of buttons for the board (visual component)
 		//// initialize the button grid representing a virtual room 
-		
 		for (int i = 0; i < cols; i++) {
 			for (int j = 0; j < rows; j++){
 				Button b = new Button(" ");  // make a new button with blank space as text
+				b.setMaxSize(50, 50);
 			//	b.setOnKeyTyped( keyInput);  // set on a key press
 				buttonGrid[i][j] = b;       // add the new button to the buttonGrid
 				grid.add(buttonGrid[i][j], i, j);		
@@ -106,6 +153,8 @@ public class MazeGameGUI extends Application {
 		// make a VBox object 
 		VBox verticalBox = new VBox();  // Vbox layout manager , stacks downward
 		
+		HBox heroBox = new HBox(); // HBox to put hero stats and healthGrid
+		
 		// send the text field to the storeInput string
 		Button sendButton = new Button("Enter");
 		// attempt a cold boot setup of the room 
@@ -113,11 +162,12 @@ public class MazeGameGUI extends Application {
 		
 	//	Button updateButton = new Button("Update");
 		
+		// Room grid for game
 		for (int i = 0; i < cols; i++) {
 			for (int j = 0; j < rows; j++){
 				Rectangle rect = new Rectangle();  // make a new rectangle 
-				rect.setWidth(64);
-				rect.setHeight(64);
+				rect.setWidth(60);
+				rect.setHeight(65);
 				rect.setFill(Color.GREY);
 				rect.setOnKeyPressed( new HandleKeyBoardInput());
 				rectGrid[i][j] = rect;       // add the new rectangle to the rectGrid
@@ -125,12 +175,44 @@ public class MazeGameGUI extends Application {
 			}
 		}
 		
+		// Item grid for items
+		for( int i = 0 ; i < 5 ; i++) {
+			Rectangle rect = new Rectangle();  // make a new rectangle 
+			rect.setWidth(35);
+			rect.setHeight(35);
+			rect.setFill(Color.GREY);
+			rect.setStroke(Color.BLACK);
+			rect.setStrokeWidth(2);
+			rect.setOnKeyPressed( new HandleKeyBoardInput());
+			itemGrid[i][0] = rect;       // add the new rectangle to the rectGrid
+			grid3.add(itemGrid[i][0], i, 0);	
+		}
+		
+		// Health grid for player
+		for( int i = 0 ; i < 4 ; i++) {
+			Rectangle rect = new Rectangle();  // make a new rectangle 
+			rect.setWidth(25);
+			rect.setHeight(25);
+			rect.setFill(Color.GREEN);
+			rect.setStroke(Color.BLACK);
+			rect.setStrokeWidth(2);
+			rect.setOnKeyPressed( new HandleKeyBoardInput());
+			healthGrid[i][0] = rect;       // add the new rectangle to the rectGrid
+			grid4.add(healthGrid[i][0], i, 0);	
+		}
+		
+		
+		//heroBox.getChildren().add(playerLabel1);
+		heroBox.getChildren().add(grid4);
+		
 		// Add the items to the vertical box 
 		verticalBox.getChildren().add(textIn);
 		verticalBox.getChildren().add(sendButton);
 		verticalBox.getChildren().add(playerLabel1);
-		verticalBox.getChildren().add(playerLabel2);
+		verticalBox.getChildren().add(heroBox);
+		// verticalBox.getChildren().add(playerLabel2);
 		verticalBox.getChildren().add(playerLabel3);
+		verticalBox.getChildren().add(grid3);
 		verticalBox.getChildren().add(startButton);	
 		// verticalBox.getChildren().add(updateButton);
 		
@@ -142,18 +224,18 @@ public class MazeGameGUI extends Application {
 		
 		bigText.setWrapText(true);  // wrap text
 		bigText.setEditable(false); // no editing
-		
 ///////////////////////////// SCENE and STAGE SHOW ////////////////////////////////////////////
 		// build entire scene: grid and label
 		
 		GridPane sticky = new GridPane();
 		
-		sticky.add(canvasLeft, 0, 1);
-	//	sticky.add(canvasRight, 1, 0);
-	//	sticky.add(grid, 0, 1);
-		sticky.add(grid2, 1, 1);
-		sticky.add(verticalBox, 1, 2);
-		sticky.add(bigText, 0, 2);
+		sticky.add(canvasLeft, 1, 0);
+		//sticky.add(canvasRight, 1, 0);
+		sticky.add(grid2, 0, 0);
+		sticky.add(grid,2, 0);
+		//sticky.add(grid2, 1, 1);
+		sticky.add(verticalBox, 1, 1);
+		sticky.add(bigText, 0, 1);
 		
 		BorderPane root = new BorderPane();
 		
@@ -165,15 +247,15 @@ public class MazeGameGUI extends Application {
 		//root.setTop(canvas); // add a canvas to the left pane
 		
 		
-		Scene scene = new Scene(root, 1000, 600);
+		Scene scene = new Scene(root, 875, 600);
 		
 		// key press action events
 		root.setOnKeyTyped( keyInput );
 		
 		startMeUp(); // setup the game
 		
-		image = new Image("images/Logo.png"); // load the logo
-	//	drawImage(gcR,image);  // draw the current logo image
+		image = new Image("images/logo.jpg"); // load the logo
+		drawImage(gcR,image);  // draw the current logo image
 		drawImage(gcL,image);  // draw the current logo image
 		
 		// setup and show the stage and scene 
@@ -185,93 +267,102 @@ public class MazeGameGUI extends Application {
 	
 //////////////////////////  EMBEDED HANDLER CLASSES ///////////////////////////////////////
 
-////////////KEY BOARD INPUT CONTROLS	
-public class HandleKeyBoardInput implements EventHandler<KeyEvent> {
-	public void handle(KeyEvent event){
-		if (event.getCharacter().charAt(0) == 'q') {
-			storeInput="quit";
-			messageLabel.setText(storeInput);
-		//https://stackoverflow.com/questions/22014950/javafx-moving-image-with-arrow-keys-and-spacebar
-		} else if (event.getCharacter().charAt(0) == 'a' || event.getCode() == KeyCode.LEFT ) {
-			storeInput="left";
-			messageLabel.setText("Move Left");
-		} else if (event.getCharacter().charAt(0) == 's' || event.getCode() == KeyCode.DOWN ) {
-			storeInput="down";
-			messageLabel.setText("Move Down");
-		} else if (event.getCharacter().charAt(0) == 'd' || event.getCode() == KeyCode.RIGHT ) {
-			storeInput="right";
-			messageLabel.setText("Move Right");
-		} else if (event.getCharacter().charAt(0) == 'w' || event.getCode() == KeyCode.UP ) {
-			storeInput="up";
-			messageLabel.setText("Move Up");
-		} else if (event.getCode() == KeyCode.SPACE ) {
-			storeInput="SpaceBar";	
-		} else if (event.getCode() == KeyCode.ENTER) {
-			storeInput="Enter";	
-		} else if (event.getCharacter().charAt(0) == 'r') {
-			storeInput="Return";
-			messageLabel.setText("Return");
-		} else if (event.getCharacter().charAt(0) == 't') {
-			storeInput="take";
-			messageLabel.setText("Take");
-		} else if (event.getCharacter().charAt(0) == 'o') {
-			storeInput="open";
-			messageLabel.setText("Open");
-		} else if (event.getCharacter().charAt(0) == 'e') {
-			storeInput="escape";
-			messageLabel.setText("Escape");
-		} else if (event.getCharacter().charAt(0) == 'h') {
-			storeInput="help";
-			messageLabel.setText(storeInput);
-		} else if (event.getCharacter().charAt(0) == 'f') {
-			storeInput="fight";
-			messageLabel.setText(storeInput);
-		} else if (event.getCharacter().charAt(0) == 'm') {
-			storeInput="map";
-			messageLabel.setText(storeInput);
-		} else if (event.getCharacter().charAt(0) == 'l') {
-			messageLabel.setText(storeInput);
-		} else if (event.getCharacter().charAt(0) == 'p') {
-			storeInput="play";
-			messageLabel.setText(storeInput);
-	}
+	////////////KEY BOARD INPUT CONTROLS	
+ 	/**
+	Inner Class to Keyboard Key press events. 
+	*/
+	public class HandleKeyBoardInput implements EventHandler<KeyEvent> {
+		/**
+		Method to handle a button click on the send button 
+		@param event A KeyEvent in this case pressing keys on the keyboard  
+		*/
+		public void handle(KeyEvent event){
+			if (event.getCharacter().charAt(0) == 'q') {
+				storeInput="quit";
+				messageLabel.setText(storeInput);
+			//https://stackoverflow.com/questions/22014950/javafx-moving-image-with-arrow-keys-and-spacebar
+			} else if (event.getCharacter().charAt(0) == 'a' || event.getCode() == KeyCode.LEFT ) {
+				storeInput="left";
+				messageLabel.setText("Move Left");
+			} else if (event.getCharacter().charAt(0) == 's' || event.getCode() == KeyCode.DOWN ) {
+				storeInput="down";
+				messageLabel.setText("Move Down");
+			} else if (event.getCharacter().charAt(0) == 'd' || event.getCode() == KeyCode.RIGHT ) {
+				storeInput="right";
+				messageLabel.setText("Move Right");
+			} else if (event.getCharacter().charAt(0) == 'w' || event.getCode() == KeyCode.UP ) {
+				storeInput="up";
+				messageLabel.setText("Move Up");
+			} else if (event.getCode() == KeyCode.SPACE ) {
+				storeInput="SpaceBar";	
+			} else if (event.getCode() == KeyCode.ENTER) {
+				storeInput="Enter";	
+			} else if (event.getCharacter().charAt(0) == 'r') {
+				storeInput="Return";
+				messageLabel.setText("Return");
+			} else if (event.getCharacter().charAt(0) == 't') {
+				storeInput="take";
+				messageLabel.setText("Take");
+			} else if (event.getCharacter().charAt(0) == 'o') {
+				storeInput="open";
+				messageLabel.setText("Open");
+			} else if (event.getCharacter().charAt(0) == 'e') {
+				storeInput="escape";
+				messageLabel.setText("Escape");
+			} else if (event.getCharacter().charAt(0) == 'h') {
+				storeInput="help";
+				messageLabel.setText(storeInput);
+			} else if (event.getCharacter().charAt(0) == 'f') {
+				storeInput="fight";
+				messageLabel.setText(storeInput);
+			} else if (event.getCharacter().charAt(0) == 'm') {
+				storeInput="map";
+				messageLabel.setText(storeInput);
+			} else if (event.getCharacter().charAt(0) == 'l') {
+				messageLabel.setText(storeInput);
+		}
 
 		
-		if( gameOn) { // disable post game motion
-		// display the textMode output 
-			if (storeInput.equalsIgnoreCase("map") || storeInput.equalsIgnoreCase("help") || storeInput.equalsIgnoreCase("fight") ) {
-				inputControl(); // parse the input
-			} else {
-				inputControl(); // parse the input
-				textModeOutput();  // output the text-mode response
-			}
-		
-			// move the monster if alive
-			if(gameBoard.getMonster().isAlive()) {
-				monsterWalk(randGen,gameBoard);// move the monster
-			}
-		
-			// Update Hero Statistics 
-			playerLabel1.setText("Hero HEALTH: " + gameBoard.getHero().getHealth()+" Position: " +gameBoard.getHero().getPosition().toString());
-			playerLabel2.setText("Hero Items: Map=" + gameBoard.getHero().getHasMap()+" Key= " +gameBoard.getHero().getHasKey());
-			playerLabel3.setText("Level: " + level + " Moves: " + moveCounter);
-			/// Routines to update the boxes
-			postCurrentRoom();
-		
-		} else {
+			if( gameOn) { // disable post game motion
+			// display the textMode output 
+				if (storeInput.equalsIgnoreCase("map") || storeInput.equalsIgnoreCase("help") || storeInput.equalsIgnoreCase("fight") ) {
+					inputControl(); // parse the input
+				} else {
+					inputControl(); // parse the input
+					textModeOutput();  // output the text-mode response
+				}
 			
-			wipeGrid();
+				// move the monster if alive and you're not fighting
+				if(gameBoard.getMonster().isAlive() && !storeInput.equalsIgnoreCase("Fight")) {
+					monsterWalk(randGen,gameBoard);// move the monster
+				}
+			
+				// Update Hero Statistics 
+				playerLabel1.setText("Hero HEALTH: " + gameBoard.getHero().getHealth()+" Position: " +gameBoard.getHero().getPosition().toString());
+				playerLabel2.setText("Hero Items: Map=" + gameBoard.getHero().getHasMap()+" Key= " +gameBoard.getHero().getHasKey());
+				playerLabel3.setText("Level: " + level + " Moves: " + moveCounter);
+				/// Routines to update the boxes
+				postCurrentRoom();
+				
+			} else {
+				wipeGrid();
+			}
 		}
 	}
-}
 
-// input text box with send button handler 
-public class HandleInputSendClick implements EventHandler<ActionEvent> {	
-	public void handle(ActionEvent event){
+	// input text box with send button handler 
+	/**
+	Inner Class to Handle Send Click Button 
+	*/
+	public class HandleInputSendClick implements EventHandler<ActionEvent> {	
+		/**
+		Method to handle a button click on the send button 
+		@param event An ActionEvent in this case clicking the send button 
+		*/
+		public void handle(ActionEvent event){
 			gameBoard.setCurrentRoom(gameBoard.getHero().getPosition()); 
 			tempRoom = gameBoard.getCurrentRoom();  // set the tempRoom to be the current room at (0,0)
 			tempRoom.populateRoomGrid(); // load the information and characters currently set for the room into the roomGrid
-
 			tempHero = gameBoard.getHero();
 			// grab the input text from the text box
 			storeInput=textIn.getText();
@@ -280,8 +371,8 @@ public class HandleInputSendClick implements EventHandler<ActionEvent> {
 						
 			textModeOutput();	// show the updated display
 			inputControl();
-			// move the monster if alive
-			if(gameBoard.getMonster().isAlive()) {
+			// move the monster if alive and you're not fighting
+			if(gameBoard.getMonster().isAlive() && !storeInput.equalsIgnoreCase("Fight")) {
 			monsterWalk(randGen,gameBoard);// move the monster
 			}
 			
@@ -291,204 +382,302 @@ public class HandleInputSendClick implements EventHandler<ActionEvent> {
 			playerLabel3.setText("Level: " + level + " Moves: " + moveCounter);	
 			/// Routines to update the current room boxes
 			postCurrentRoom();
+
+			if (!gameOn ) {
+			wipeGrid();
+			shutDown();
+			}
+					
+		}
+	}
+
+	//input text box with send button handler 
+	/**
+	Inner Class to Handle Start Click Button 
+	*/
+	public class HandleInputStartClick implements EventHandler<ActionEvent> {	
+		/**
+		Method to handle a button click on the restart button 
+		@param event An ActionEvent in this case clicking the start/restart button 
+		*/
+		public void handle(ActionEvent event){
 			
+			restartGameBoard(); // restart the gameBoard from level 1 
+			gameBoard.setCurrentRoom(0,0); // reset the current room after setting up the board
+			
+			// get the current room
+			//gameBoard.setCurrentRoom(gameBoard.getHero().getPosition()); 
+			
+			// THIS CALL IS CAUSING A BUG I DONT GET IT!!
+			tempRoom = gameBoard.getCurrentRoom();  // set the tempRoom to be the current room at (0,0)
+			tempRoom.populateRoomGrid(); // load the information and characters currently set for the room into the roomGrid
+	
+			tempHero = gameBoard.getHero();
+			
+			postCurrentRoom();   // display the current room 
+		 // show the text mode output
+			textModeOutput();
+			printHelp();
+			inputControl();
 			
 			if (!gameOn ) {
 				wipeGrid();
 				shutDown();
 			}
 			
-			
-		}
-	}
-
-//input text box with send button handler 
-public class HandleInputStartClick implements EventHandler<ActionEvent> {	
-	public void handle(ActionEvent event){
-		
-		restartGameBoard(); // restart the gameBoard from level 1 
-		gameBoard.setCurrentRoom(0,0); // reset the current room after setting up the board
-		// get the current room
-		//gameBoard.setCurrentRoom(gameBoard.getHero().getPosition()); 
-		
-		// THIS CALL IS CAUSING A BUG I DONT GET IT!!
-		tempRoom = gameBoard.getCurrentRoom();  // set the tempRoom to be the current room at (0,0)
-		tempRoom.populateRoomGrid(); // load the information and characters currently set for the room into the roomGrid
-
-		tempHero = gameBoard.getHero();
-		
-		postCurrentRoom();   // display the current room 
-        // show the text mode output
-		textModeOutput();
-		printHelp();
-		inputControl();
-		
-		if (!gameOn ) {
-			wipeGrid();
-			shutDown();
-		}
-		
-		}
+			}
 	}
 
 	
 
 ///////////////////////////     OTHER METHODS      ////////////////////////////////////////
 
-public void startMeUp() {
-	
-	resetGameBoard(); // reset the gameBoard
-	gameBoard.setCurrentRoom(0,0); // reset the current room after setting up the board
-	
-	// get the current room
-	//gameBoard.setCurrentRoom(gameBoard.getHero().getPosition()); 
-	
-	// THIS CALL IS CAUSING A BUG I DONT GET IT!!
-	tempRoom = gameBoard.getCurrentRoom();  // set the tempRoom to be the current room at (0,0)
-	tempRoom.populateRoomGrid(); // load the information and characters currently set for the room into the roomGrid
-	
-	tempHero = gameBoard.getHero();
-	
-	postCurrentRoom();   // display the current room 
-    // show the text mode output
-	textModeOutput();
-	printHelp();
-	inputControl();
-}
-
-
- public void resetGameBoard() {
-		setLevel(level);   // set the level
-		//moveCounter = 0;  //reset move counter		
-		resetMazeSize();  // reset the Maze Size  
-		gameBoard = new Maze(mazeSize); // make a new gameBoard of the proper size
-		setBoard(gameBoard);   // construct the maze for the current level
-		gameBoard.copyHero(tempHero); // copy over the player from the previous level
-		gameBoard.setPlayerLocation(0,0); // reset to the top
-		gameBoard.resetPlayerItems(); // remove the key and the map from the player
-		// set the current room to current position 
-		gameBoard.setCurrentRoom(gameBoard.getHero().getPosition());
-		tempRoom = gameBoard.getCurrentRoom();  // get the tempRoom to be the current room.
+	/**
+	Method to set up the game on initiation. Called in the start method.  
+	*/
+	public void startMeUp() {
+		
+		resetGameBoard(); // reset the gameBoard
+		gameBoard.setCurrentRoom(0,0); // reset the current room after setting up the board
+		
+		// get the current room
+		//gameBoard.setCurrentRoom(gameBoard.getHero().getPosition()); 
+		
+		// THIS CALL IS CAUSING A BUG I DONT GET IT!!
+		tempRoom = gameBoard.getCurrentRoom();  // set the tempRoom to be the current room at (0,0)
 		tempRoom.populateRoomGrid(); // load the information and characters currently set for the room into the roomGrid
- }
-
- public void restartGameBoard() {
-	 	level = 1;
-		moveCounter = 0;  //reset move counter
-		setLevel(level);   // set the level
-		resetMazeSize();  // reset the Maze Size  
-		gameBoard = new Maze(mazeSize); // make a new gameBoard of the proper size
-		setBoard(gameBoard);   // construct the maze for the current level
-		//gameBoard.copyHero(tempHero); // copy over the player from the previous level
-		gameBoard.setPlayerLocation(0,0); // reset to the top
-		gameBoard.resetPlayerItems(); // remove the key and the map from the player
-		// set the current room to current position 
-		gameBoard.setCurrentRoom(0,0); // reset the current room after setting up the board	
-		tempRoom = gameBoard.getCurrentRoom();  // get the tempRoom to be the current room.
-		tempRoom.populateRoomGrid(); // load the information and characters currently set for the room into the roomGrid
+		
 		tempHero = gameBoard.getHero();
 		
-		// return to regular logo
-		image = new Image("images/Logo.png");
-		drawImage(gcL,image);
-					
 		postCurrentRoom();   // display the current room 
-	    // show the text mode output
+		postItems(); // graphical display of items and health status
+		// show the text mode output
 		textModeOutput();
 		printHelp();
 		inputControl();
-			
- }
- 
- 
- 
-// attempt at graphics display
-public void postCurrentRoom() {
-	// get the current room
-	gameBoard.setCurrentRoom(gameBoard.getHero().getPosition()); 
-	
-	// THE FOLLOWING LINE CAUSES A BUG TO NOT DISPLAY THE CURRENT ROOM...????
-	tempRoom = gameBoard.getCurrentRoom();  // get the tempRoom to be the current room.
-	tempRoom.populateRoomGrid(); // load the information and characters currently set for the room into the roomGrid
+	}
 
-	char ch='A';
-	String temp="";
-	wipeGrid();  // clear previous text
+	/**
+	Method to reset the Game board.  Called on each new level.  
+	*/
+	public void resetGameBoard() {
+			setLevel(level);   // set the level
+			//moveCounter = 0;  //reset move counter		
+			resetMazeSize();  // reset the Maze Size  
+			gameBoard = new Maze(mazeSize); // make a new gameBoard of the proper size
+			setBoard(gameBoard);   // construct the maze for the current level
+			gameBoard.copyHero(tempHero); // copy over the player from the previous level
+			gameBoard.setPlayerLocation(0,0); // reset to the top
+			gameBoard.resetPlayerItems(); // remove the key and the map from the player
+			// set the current room to current position 
+			gameBoard.setCurrentRoom(gameBoard.getHero().getPosition());
+			tempRoom = gameBoard.getCurrentRoom();  // get the tempRoom to be the current room.
+			tempRoom.populateRoomGrid(); // load the information and characters currently set for the room into the roomGrid
+	
+			postCurrentRoom();
+			wipeItemGrid();
+			wipeHealthGrid();
+			postHealth();
+			postItems();
+	}
+
+	// Graphics display
+	/**
+	Method to restart the Game From level 1. Called when you click restart button. 
+	*/
+	public void restartGameBoard() {
+		 	level = 1;
+			moveCounter = 0;  //reset move counter
+			setLevel(level);   // set the level
+			resetMazeSize();  // reset the Maze Size  
+			gameBoard = new Maze(mazeSize); // make a new gameBoard of the proper size
+			setBoard(gameBoard);   // construct the maze for the current level
+			gameBoard.setPlayerLocation(0,0); // reset to the top
+			gameBoard.resetPlayerItems(); // remove the key and the map from the player
+			// set the current room to current position 
+			gameBoard.setCurrentRoom(0,0); // reset the current room after setting up the board	
+			tempRoom = gameBoard.getCurrentRoom();  // get the tempRoom to be the current room.
+			tempRoom.populateRoomGrid(); // load the information and characters currently set for the room into the roomGrid
+			tempHero = gameBoard.getHero();
+		
+			// return to regular logo
+			image = new Image("images/logo.jpg");
+			drawImage(gcL,image);
+						
+			postCurrentRoom();   // display the current room 
+			wipeItemGrid();
+			wipeHealthGrid();
+			postHealth();
+		    // show the text mode output
+			textModeOutput();
+			printHelp();
+			inputControl();	
+	}
+ 
+ 
+ 
+	// Graphics display
+	/**
+	Method to output the current Room items and walls to the graphics display grid 
+	*/
+	public void postCurrentRoom() {
+		// get the current room
+		gameBoard.setCurrentRoom(gameBoard.getHero().getPosition()); 
+		
+		// THE FOLLOWING LINE CAUSES A BUG TO NOT DISPLAY THE CURRENT ROOM...????
+		tempRoom = gameBoard.getCurrentRoom();  // get the tempRoom to be the current room.
+		tempRoom.populateRoomGrid(); // load the information and characters currently set for the room into the roomGrid
+
+		char ch='A';
+		String temp="";
+		wipeGrid();  // clear previous text
+		// copy it into the button grid for display
+		for (int i = 0; i < cols; i++) {
+			for (int j = 0; j < rows; j++){
+				temp="";
+				//tempButton = buttonGrid[i][j]; // point to the button in the button grid
+				ch=tempRoom.getRoomGrid()[i][j] ;  // store the character in the room grid
+				temp=temp+ch;
+				buttonGrid[i][j].setText(temp);
+				if (ch == ' ' ) {
+				buttonGrid[i][j].setOpacity(0.3);
+				//rectGrid[i][j].setFill(Color.LIGHTGREY);
+				rectGrid[i][j].setFill(new ImagePattern(floor));
+				} else if (ch == '|' || ch == '_' ){
+				buttonGrid[i][j].setOpacity(1);
+				//rectGrid[i][j].setFill(Color.DARKGREY);
+				rectGrid[i][j].setFill(new ImagePattern(wall));
+				} else if (ch == 'W' ){
+					buttonGrid[i][j].setOpacity(1);
+					//rectGrid[i][j].setFill(Color.RED);
+					rectGrid[i][j].setFill(new ImagePattern(monster));
+				} else if (ch == 'M' ){
+					buttonGrid[i][j].setOpacity(1);
+					rectGrid[i][j].setFill(Color.GREEN);
+					rectGrid[i][j].setFill(new ImagePattern(map));
+				}else if (ch == 'K' ){
+					buttonGrid[i][j].setOpacity(1);
+					//rectGrid[i][j].setFill(Color.YELLOW);
+					rectGrid[i][j].setFill(new ImagePattern(key));
+				}else if (ch == 'D' ){
+					buttonGrid[i][j].setOpacity(1);
+					//rectGrid[i][j].setFill(Color.BROWN);
+					if (gameBoard.getDoor().getIsLocked()) {
+						rectGrid[i][j].setFill(new ImagePattern(doorClosed));
+					} else {
+						rectGrid[i][j].setFill(new ImagePattern(doorOpen));
+					}
+				}else if (ch == 'R' ){
+					buttonGrid[i][j].setOpacity(0.5);
+					//rectGrid[i][j].setFill(Color.BLUEVIOLET);
+					rectGrid[i][j].setFill(new ImagePattern(riddle));
+				}else if (ch == 'F' ){
+					buttonGrid[i][j].setOpacity(1);
+					//rectGrid[i][j].setFill(Color.ORANGE);
+					rectGrid[i][j].setFill(new ImagePattern(food));
+				}else if (ch == '*' ){
+					buttonGrid[i][j].setOpacity(1);
+					//rectGrid[i][j].setFill(Color.BLUE);
+					rectGrid[i][j].setFill(new ImagePattern(player));
+				}
+			}
+		}	
+	}
+
+	// Wipe graphics display
+	/**
+	Method wipe the room grid in the graphics displays 
+	*/
+	public void wipeGrid() {   	
 	// copy it into the button grid for display
-	for (int i = 0; i < cols; i++) {
-		for (int j = 0; j < rows; j++){
-			temp="";
-			//tempButton = buttonGrid[i][j]; // point to the button in the button grid
-			ch=tempRoom.getRoomGrid()[i][j] ;  // store the character in the room grid
-			temp=temp+ch;
-			buttonGrid[i][j].setText(temp);
-			if (ch == ' ' ) {
-			buttonGrid[i][j].setOpacity(0.3);
-			Image floor = new Image("images/floor.jpg");
-			rectGrid[i][j].setFill(new ImagePattern(floor));
-			} else if (ch == '|' || ch == '_' ){
-			buttonGrid[i][j].setOpacity(1);
-			Image wall = new Image("images/walltexture.jpg");
-			rectGrid[i][j].setFill(new ImagePattern(wall));
-			} else if (ch == 'W' ){
-				buttonGrid[i][j].setOpacity(1);
-				Image monster = new Image("images/monster.jpg");
-				rectGrid[i][j].setFill(new ImagePattern(monster));
-			} else if (ch == 'M' ){
-				Image map = new Image("images/map.jpg");
-				rectGrid[i][j].setFill(new ImagePattern(map));
-			}else if (ch == 'K' ){
-				buttonGrid[i][j].setOpacity(1);
-				Image key = new Image("images/key.jpg");
-				rectGrid[i][j].setFill(new ImagePattern(key));
-			}else if (ch == 'D' ){
-				buttonGrid[i][j].setOpacity(1);
-				if (gameBoard.getDoor().getIsLocked()) {
-				Image door = new Image("images/doorclosed.jpg");
-				rectGrid[i][j].setFill(new ImagePattern(door));
-				}
-				else {
-				Image door = new Image("images/dooropen.jpg");
-				rectGrid[i][j].setFill(new ImagePattern(door));
-				}
-			}else if (ch == 'R' ){
-				buttonGrid[i][j].setOpacity(0.5);
-				Image riddle = new Image("images/riddle.jpg");
-				rectGrid[i][j].setFill(new ImagePattern(riddle));
-			}else if (ch == 'L' ){
-				buttonGrid[i][j].setOpacity(0.5);
-				Image comboLock = new Image("images/combolock.jpg");
-				rectGrid[i][j].setFill(new ImagePattern(comboLock));
-			}else if (ch == 'H' ){
-				buttonGrid[i][j].setOpacity(0.5);
-				Image hint = new Image("images/hint.jpg");
-				rectGrid[i][j].setFill(new ImagePattern(hint));
-			}else if (ch == 'F' ){
-				buttonGrid[i][j].setOpacity(1);
-				Image food = new Image("images/food.jpg");
-				rectGrid[i][j].setFill(new ImagePattern(food));
-			}else if (ch == '*' ){
-				buttonGrid[i][j].setOpacity(1);
-				Image player = new Image("images/player.jpg");
-				rectGrid[i][j].setFill(new ImagePattern(player));
+		for (int i = 0; i < cols; i++) {
+			for (int j = 0; j < rows; j++){
+				buttonGrid[i][j].setText(" ");	
+				buttonGrid[i][j].setOpacity(0.1);
+				rectGrid[i][j].setFill(Color.WHITE);
 			}
 		}
 	}
-}
 
-// attempt to wipe graphics display
-public void wipeGrid() {   	
-	// copy it into the button grid for display
-	for (int i = 0; i < cols; i++) {
-		for (int j = 0; j < rows; j++){
-			buttonGrid[i][j].setText(" ");	
-			buttonGrid[i][j].setOpacity(0.1);
-			rectGrid[i][j].setFill(Color.WHITE);
-		}
+
+	
+	public void postItems() {
+		
+		if (gameBoard.getHero().getHasMap()) {
+			itemGrid[0][0].setFill(new ImagePattern(map));
+			}
+		
+		if (gameBoard.getHero().getHasKey()) {
+			itemGrid[1][0].setFill(new ImagePattern(key));
+			}
+		
+	return;
 	}
-}
-
-public void textModeOutput() {
+	
+	
+	public void postHealth() {
+			if  (gameBoard.getHero().getHealth() >40 ) {
+				healthGrid[3][0].setFill(Color.GREEN);
+				healthGrid[2][0].setFill(Color.GREEN);
+				healthGrid[1][0].setFill(Color.GREEN);
+				healthGrid[0][0].setFill(Color.GREEN);
+			}else if  (gameBoard.getHero().getHealth() >30 && gameBoard.getHero().getHealth() <=40) {
+				healthGrid[3][0].setFill(Color.LIGHTGREEN);	
+				healthGrid[2][0].setFill(Color.GREEN);	
+				healthGrid[1][0].setFill(Color.GREEN);	
+				healthGrid[0][0].setFill(Color.GREEN);	
+			}else if  (gameBoard.getHero().getHealth() >20 && gameBoard.getHero().getHealth() <=30) {
+				healthGrid[3][0].setFill(Color.GREY);	
+				healthGrid[2][0].setFill(Color.YELLOW);	
+				healthGrid[1][0].setFill(Color.GREEN);	
+				healthGrid[0][0].setFill(Color.GREEN);	
+			}else if  (gameBoard.getHero().getHealth() >15 && gameBoard.getHero().getHealth() <=20) {
+				healthGrid[3][0].setFill(Color.GREY);	
+				healthGrid[2][0].setFill(Color.ORANGE);	
+				healthGrid[1][0].setFill(Color.GREEN);	
+				healthGrid[0][0].setFill(Color.GREEN);	
+			}else if  (gameBoard.getHero().getHealth() >10 && gameBoard.getHero().getHealth() <=15) {
+				healthGrid[3][0].setFill(Color.GREY);
+				healthGrid[2][0].setFill(Color.GREY);
+				healthGrid[1][0].setFill(Color.ORANGE);	
+				healthGrid[0][0].setFill(Color.GREEN);	
+			}else if  (gameBoard.getHero().getHealth() >5 && gameBoard.getHero().getHealth() <=10) {
+				healthGrid[3][0].setFill(Color.GREY);
+				healthGrid[2][0].setFill(Color.GREY);
+				healthGrid[1][0].setFill(Color.GREY);	
+				healthGrid[0][0].setFill(Color.RED);	
+			}else if  (gameBoard.getHero().getHealth() >0 && gameBoard.getHero().getHealth() <=5){ 
+				healthGrid[3][0].setFill(Color.GREY);
+				healthGrid[2][0].setFill(Color.GREY);
+				healthGrid[1][0].setFill(Color.GREY);	
+				healthGrid[0][0].setFill(Color.DARKRED);	
+			}else{ 
+				healthGrid[3][0].setFill(Color.GREY);
+				healthGrid[2][0].setFill(Color.GREY);
+				healthGrid[1][0].setFill(Color.GREY);	
+				healthGrid[0][0].setFill(Color.GREY);
+			}
+		return;
+	}
+	
+	public void wipeItemGrid() {	
+		for (int k = 0; k<5;k++) {
+		itemGrid[k][0].setFill(Color.GREY);
+		}
+	return;
+	}
+	
+	public void wipeHealthGrid() {	
+		for (int k = 0; k<4;k++) {
+		healthGrid[k][0].setFill(Color.GREY);
+		}
+	return;
+	}
+	
+	/**
+	Method to output information to the Console 
+	*/
+	public void textModeOutput() {
 	//draw the current room and display the room stats 
 	tempRoom = gameBoard.getCurrentRoom();
 	tempRoom.populateRoomGrid(); // load the information and characters currently set for the room into the roomGrid
@@ -499,7 +688,6 @@ public void textModeOutput() {
 
 	tempRoom.drawRoomGrid();  
     
-	
 	tempRoom.displayRoomStats();
 	// update the hero current condition and display Hero stats
 	tempHero = gameBoard.getHero();
@@ -509,17 +697,22 @@ public void textModeOutput() {
 	tempMonster.displayStats();
 	
 	System.out.println("You are currently on level: "+level);
-	
-}
+	}
 
+
+	/**
+	Method to get the level currently on on game
+	@return Returns and integer representing the current level 
+	*/
 	public int getLevel(){
 	return level;
 	}
 	
-	public String getStoreInput() {
-		return storeInput;
-	}
 	
+	/**
+	Method to set the level currently on on game.  Used for debugging, and testing different levels. 
+	@param input the integer level between 1 and 4 inclusive to set the level to. 
+	*/
 	public void setLevel(int input) {
 		if (input >=1 && input < 5){
 			level = input;
@@ -527,18 +720,29 @@ public void textModeOutput() {
 		return;
 	}		
 	
-    public void resetMazeSize(){
-    	if ( level == 1 ){
+	
+	// Reset the maze Size
+	/**
+	Resets the maze size depending on the level 
+	*/
+	 public void resetMazeSize(){
+		if ( level == 1 ){
     		mazeSize=4;
-    	}else if ( level ==2){
+		}else if ( level ==2){
     		mazeSize=6;
-    	}else if (level==3){
+		}else if (level==3){
     		mazeSize=8;
-    	}
-    	return;
-    }
+		}
+		return;
+	 }
    
  // sets up the walls and items, doors and monsters
+ 
+ 	// sets up the walls and items, doors and monsters
+	/**
+	Sets up all the walls and items in the game depending on which level is selected.
+	@param m A Maze object on which to operate. 
+	*/
  	public void setBoard( Maze m){
  	
  		// local variables 
@@ -551,46 +755,42 @@ public void textModeOutput() {
  		//////////////////// MAZE IS HAND DESIGNED //////////////////////////////
  		// setRoom(x,y,left,right,up,down,key,door,map,monster)
  		// setRoomWalls(int x,int y, boolean left, boolean right, boolean up, boolean down){
- 		//setRoomItems(int x, int y ,boolean key, boolean door ,boolean map, boolean monster, boolean food, boolean riddle, boolean comboLlock, boolean hint){ 
+ 		//setRoomItems(int x, int y ,boolean key, boolean door ,boolean map, boolean monster, boolean riddle ){ 
  		//ROW 0
  		m.setRoomWalls(0,0,true,true,true,false); // setup the first room 
  		m.setRoomPlayer(0,0,true);  // place the player in the first room
  		// room (1.0)   
  		m.setRoomWalls(1,0,true,false,true,true);
- 		m.setRoomItems(1,0,false,true,false,false,false,false,false,false); // has door
+ 		m.setRoomItems(1,0,false,true,false,false,false); // has door
  		// room (2,0)
  		m.setRoomWalls(2,0,false,false,true,true);
  		// room (0,3)
- 		m.setRoomWalls(3,0,true,true,true,false);
- 		m.setRoomItems(3,0,false,false,false,false,false,false,true,false); // has lock combo
+ 		m.setRoomWalls(3,0,false,true,true,false);
  		// room (1,0)
  		m.setRoomWalls(0,1,true,true,false,false);
- 		m.setRoomItems(0,1,false,false,false,false,false,false,false,true); // has hints
  		// room (1,1)
  		m.setRoomWalls(1,1,true,false,true,false); 
  		// room (2,1)
  		m.setRoomWalls(2,1,false,false,true,true);
- 		m.setRoomItems(2,1,false,false,false,false,false,false,false,true); // has hints
  		// room (3,1)
  		m.setRoomWalls(3,1,false,true,false,false);
  		// room (0,2)
- 		m.setRoomWalls(0,2,true,true,false,true);
- 		m.setRoomItems(0,2,false,false,false,false,false,true,false,false); // has riddle
+ 		m.setRoomWalls(0,2,true,false,false,true);
  		// room (1,2)
  		m.setRoomWalls(1,2,false,true,false,false);
  		// room (2,2)
  		m.setRoomWalls(2,2,true,true,true,false);
- 		m.setRoomItems(2,2,true,false,false,false,false,false,false,false); // has key
+ 		m.setRoomItems(2,2,true,false,false,false,false); // has key
  		// room (3,2)
  		m.setRoomWalls(3,2,true,true,false, false);
  		// room (0,3)
  		m.setRoomWalls(0,3,true,false,true,true);
- 		m.setRoomItems(0,3,false,false,true,false,false,false,false,false); // has map
+ 		m.setRoomItems(0,3,false,false,true,false,false); // has map
  		// room (1,3)
  		m.setRoomWalls(1,3,false,true,false,true);
  		// room (3,2)
- 		m.setRoomWalls(2,3,true,false,true,true);
- 		m.setRoomItems(2,3,false,false,false,false,false,true,false,false); //place the riddle in the room below the key
+ 		m.setRoomWalls(2,3,true,false,false,true);
+ 		//m.setRoomItems(2,3,false,false,false,false,true); //place the riddle in the room below the key
  		// room (3,3)
  		m.setRoomWalls(3,3,false,true,false,true);
  		
@@ -682,10 +882,10 @@ public void textModeOutput() {
 
  		/////////////////// NON RANDOM ITEMS ////////////////////////////
  		// place door in specific location
- 		m.setRoomItems(0,5,false,true,false,false,false,false,false,false);
+ 		m.setRoomItems(0,5,false,true,false,false,false);
  		m.setDoorLocation(0,5);  // change the door location 
  		// place the key in specific location
- 		m.setRoomItems(5,0,true,false,false,false,false,false,false,false);
+ 		m.setRoomItems(5,0,true,false,false,false,false);
  		
  		// place the riddle in a specific location in front of the key (opens wall to get key)
  		// m.setRoomItems(4,0,false,false,false,false,true);
@@ -825,6 +1025,11 @@ public void textModeOutput() {
  	}
     
  	
+	/**
+	Randomly moves the monster either left,right,up or down.
+	@param randGen A Random number generator.
+	@param gameBoard a Maze object that the game is running on.  
+	*/
 	public void monsterWalk(Random randGen, Maze gameBoard){
 		
 	int randNum = randGen.nextInt(4);  // 4 options for motion: left,right,up,down,  
@@ -842,15 +1047,11 @@ public void textModeOutput() {
 	}
 	
 	
-	
-	public void inputControl()  {
-		
-		
-		Point currentPosition = tempHero.getPosition();	
-		Point firstRiddle = new Point(0,2);
-		Point secondRiddle = new Point(2,3);
-		boolean solved = false;
 
+	/**
+	Parses the user input string storeInput and decides what actions to take with the game. 
+	*/
+	public void inputControl()  {
 		
 		// if user input was "MAP" display map unit until user types return
 		if ( storeInput.equalsIgnoreCase("map") ) {
@@ -910,8 +1111,8 @@ public void textModeOutput() {
 				// increment to the next level 	
 				
 			} else {
-			messageLabel.setText("Either the door isn't opened, or You Haven't Beat the Monster, or You're not at the Door...");
-			System.out.println("Either the door isn't opened, or You Haven't Beat the Monster, or You're not at the Door...");
+			messageLabel.setText("Either the door isn't opened, or You Haven't Beaten the Monster, or You're not at the Door...");
+			System.out.println("Either the door isn't opened, or You Haven't Beaten the Monster, or You're not at the Door...");
 			bigText.setText("You must beat the Monster to Escape...");
 			}
 		}	
@@ -930,8 +1131,8 @@ public void textModeOutput() {
 			
 		// if user input was "Return" display map unit until user types return
 		if ( storeInput.equalsIgnoreCase("return") ) {
-				
-				image = new Image("images/Logo.png");
+			
+				image = new Image("images/logo.jpg");
 				drawImage(gcL,image);	
 				postCurrentRoom();
 				
@@ -990,18 +1191,21 @@ public void textModeOutput() {
 			System.out.println("You took the key!");
 			messageLabel.setText("You took the key!");
 			bigText.setText("You took the Key!");
+			postItems();
 			moveCounter++;
 			}else if (tempRoom.getHasMap()){
 			gameBoard.takeMap();
 			System.out.println("You took the Map!");
 			messageLabel.setText("You took the Map!");
 			bigText.setText("You took the Map!");
+			postItems();
 			moveCounter++;
 			}else if (tempRoom.getHasFood()){
 				gameBoard.takeFood();
 				System.out.println("You took the Food!");
 				messageLabel.setText("You took the Food!");
 				bigText.setText("You took the Food!");
+				postHealth();
 				moveCounter++;
 			}else{
 			System.out.println("There is nothing in the room to take...");
@@ -1013,69 +1217,6 @@ public void textModeOutput() {
 		tempRoom.populateRoomGrid(); // load the information and characters currently set for the room into the roomGrid
 
 		}
-		
-		// if user input was "PLAY"
-		if ( storeInput.equalsIgnoreCase("play") ) {
-		
-			hitPlay = true;
-			
-			tempRoom.populateRoomGrid(); // load the information and characters currently set for the room into the roomGrid
-			
-			if (tempRoom.getHasRiddle() && currentPosition.isEqual(firstRiddle)) {
-				// give the player a riddle
-				TestHaineRiddle rid = new TestHaineRiddle();
-				CreateRiddle theRiddle = rid.riddleOne();
-				bigText.setText(theRiddle.getRiddle()+theRiddle.instructions());
-				theRiddle.addAnswer(theRiddle);
-				theRiddle.sayRiddle(theRiddle);
-		
-			}
-			
-			else if (tempRoom.getHasRiddle() && currentPosition.isEqual(secondRiddle)) {
-					// give the player a riddle
-				TestHaineRiddle rid = new TestHaineRiddle();
-				CreateRiddle theRiddle = rid.riddleTwo();
-				bigText.setText(theRiddle.getRiddle()+theRiddle.instructions());
-
-				theRiddle.addAnswer(theRiddle);
-				theRiddle.sayRiddle(theRiddle);
-		
-				} 
-				
-			else if (tempRoom.getHasHint()) {
-			messageLabel.setText("You take a look around the room and you see many items lying around.");
-			bigText.setText("You take a look around the room and you see many items lying around.");
-			gameBoard.searchRoom();
-			}
-			else if (tempRoom.getHasComboLock()) {
-			gameBoard.tryCombo();
-			messageLabel.setText("You unfold the map from your pocket and take a look...");
-			bigText.setText("You unfold the map from your pocket and take a look...");
-			}
-			else {
-			messageLabel.setText("There is nothing to play or to look at...");
-			System.out.println("There is nothing to play or to look at...");
-			bigText.setText("There is nothing to play or to look at...");
-			}
-		}
-		
-		System.out.println(hitPlay + " testingage");
-		if ( hitPlay == true && currentPosition.isEqual(firstRiddle) && (storeInput.equalsIgnoreCase("penny") || storeInput.equalsIgnoreCase("ice") || storeInput.equalsIgnoreCase("blackboard") || storeInput.equalsIgnoreCase("human"))) {
-			solved = true;			//If the riddle has been solved
-				gameBoard.setRoomItems(0,2,false,false,false,false,false,false,false,false); // has riddle
-				bigText.setText("The right wall disappeared to reveal a path..\n");
-				gameBoard.setRoomWalls(0,2,true,!solved,false,true);
-				hitPlay = false;
-		}
-	
-		if( hitPlay == true && currentPosition.isEqual(secondRiddle) && (storeInput.equalsIgnoreCase("owl") || storeInput.equalsIgnoreCase("egg") || storeInput.equalsIgnoreCase("breath")) ) {
-			solved = true;
-				gameBoard.setRoomItems(2,3,false,false,false,false,false,false,false,false); // has riddle
-				bigText.setText("The wall in front of you disappeared. You see a key in the distance...\n");
-				gameBoard.setRoomWalls(2,3,true,false,!solved,true);
-				hitPlay = false;
-		}
-		
 		
 		// if user input is "Fight"	
 		if ( storeInput.equalsIgnoreCase("Fight")){
@@ -1091,7 +1232,7 @@ public void textModeOutput() {
 			image = new Image("images/monster.jpg");
 			drawImage(gcL,image);
 			} else {
-			image = new Image("images/Logo.png");
+			image = new Image("images/logo.jpg");
 			drawImage(gcL,image);
 			messageLabel.setText("There is nobody in the room to fight...");
 			bigText.setText("There is nobody in the room to fight...");
@@ -1109,7 +1250,8 @@ public void textModeOutput() {
 		 System.out.println("Congratulations! You are free from THE MAZE!");
 		 messageLabel.setText("Congratulations! You are free from THE MAZE!");
 		 wipeGrid();
-	
+		 wipeItemGrid();
+		 wipeHealthGrid();
 		 image = new Image("images/win.jpg");
 		 drawImage(gcL,image);
 		 bigText.setText("Congratulations! You are free from THE MAZE!\nPress the Restart or Enter click buttons to terminate the program.");
@@ -1124,7 +1266,10 @@ public void textModeOutput() {
 		 messageLabel.setText("Thanks for playing THE MAZE.  Better Luck Next Time!");
 		 
 		 bigText.setText("Thanks for playing THE MAZE.  Better Luck Next Time!\nPress the Restart or Enter click buttons to terminate the program.");
-			
+		
+		 wipeGrid();
+		 wipeItemGrid();
+		 wipeHealthGrid(); 
 		 image = new Image("images/lose.jpg");
 		 drawImage(gcL,image);
 		
@@ -1140,6 +1285,12 @@ public void textModeOutput() {
  /////////////////////////////   THESE METHODS OUTPUT TO THE CONSOLE REPLACE THEM  /////////////////////////////	
  //////////////////////////////// METHODS THE REQUIRE REPLACEMENT/TRANSLATION //////////////////////////////////	
  	/// replace with a textBox substitute method 
+	
+	
+	// Prints out the help menu
+	/**
+	Prints out a help menu to the console. 
+	*/
 	public void printHelp(){
 	System.out.println("Welcome to THE MAZE, Commands are case insensitive. Here are the current Commands:");
 	System.out.println("__________________________________________________");	
@@ -1169,6 +1320,10 @@ public void textModeOutput() {
 	return;
 	}
  	
+	// Prints out the map if the hero / Player has the map boolean
+	/**
+	Prints out a static map depicting the maze rooms depending on which level is selected. 
+	*/
 	public void printMap(){
 		
 		if (level ==1){
@@ -1177,16 +1332,16 @@ public void textModeOutput() {
 		System.out.println("    -------LEVEL 1--------   ");
 		System.out.println("_____________________________");
 		System.out.println("|      |      |      |      |");
-		System.out.println("|  *   |  D      W       L  |");
+		System.out.println("|  *   |  D      W          |");
 		System.out.println("|_    _|______|______|_    _|");
 		System.out.println("|      |      |      |      |");
-		System.out.println("|   H  |         H          |");
+		System.out.println("|      |                    |");
 		System.out.println("|_    _|_    _|______|_    _|");
 		System.out.println("|      |      |      |      |");
-		System.out.println("|   R         |   K  |      |");
+		System.out.println("|             |   K  |      |");
 		System.out.println("|______|_    _|__   _|_    _|");
 		System.out.println("|      |      |      |      |");
-		System.out.println("|  M          |  R          |");
+		System.out.println("|  M          |             |");
 		System.out.println("|______|______|______|______|");
 		System.out.println("");
 		System.out.println("Type \"Return\" and press Enter to return to the Maze");
@@ -1262,6 +1417,11 @@ public void textModeOutput() {
 	return;
 	}
 		
+	// Gets user input as a string
+	/**
+	Gets user input and stores it in a string to return.
+	@return Returns as String object with the user input characters typed in at the keyboard on user prompt for input. 
+	*/
 	public String getUserInput(){
 	String input;
 	Scanner keyboard = new Scanner(System.in);
@@ -1271,13 +1431,17 @@ public void textModeOutput() {
 	return input;
 	}
 
+	/**
+	Stalls the program and waits for a user to Press Enter before continuing the program. 
+	*/
 	public static void pressSPACE( String input){
-
-	System.out.println("<<<<Press SPACEBAR>>>>");	
-		
+	System.out.println("<<<<Press SPACEBAR>>>>");		
 	return;
 	}
 	
+	/**
+	Prints out an ASCII representation display of the Maze Wraith Monster. 
+	*/
 	public static void displayMazeWraith(){
 	System.out.println("............................................................");
 	System.out.println(".........................       ............................");
@@ -1293,7 +1457,11 @@ public void textModeOutput() {
 	System.out.println("........................            ........................");
 	}
 		
-
+	// Fight Dialog
+	/**
+	Controls the Fight Dialog and Output Durring a Fight Sequence.
+	@param gameBoard A Maze object that the game is running on. 
+	*/
 	public void fightMonster(Maze gameBoard){	
 	
 
@@ -1301,6 +1469,7 @@ public void textModeOutput() {
 		
 			if (storeInput.equalsIgnoreCase("Attack") || storeInput.equalsIgnoreCase("Fight") ) {
 				gameBoard.fightTurn();
+				postHealth(); // update the visual health of the hero.
 				} 
 			
 			
@@ -1367,11 +1536,12 @@ public void textModeOutput() {
 			tempMonster.displayStats();
 			
 			// return to regular logo
-			image = new Image("images/Logo.png");
+			image = new Image("images/logo.jpg");
 			drawImage(gcL,image);
 			
 			// 2D graphics counterpart
 			postCurrentRoom();
+			postHealth();
 			
 		}
 		
@@ -1379,6 +1549,12 @@ public void textModeOutput() {
 
 	}
 	
+	
+	/**
+	Draw an image file into the graphics context screen.
+	@param gc A GraphicsContext object
+	@param photo and Image object 
+	*/
 	//http://java-buddy.blogspot.com/2013/05/draw-scaled-image-on-javafx-canvas-with.html
 	 private void drawImage(GraphicsContext gc, Image photo){
 		 
@@ -1394,7 +1570,9 @@ public void textModeOutput() {
 	        gc.drawImage(photo, 0, 0, canvasWidth, canvasHeight);
 	        
 	    }
-	     
+	/**
+	Shut down and exit with a 1 second delay. 
+	*/     
 	public void shutDown() {
 		
 		// https://stackoverflow.com/questions/23283041/how-to-make-java-delay-for-a-few-seconds?rq=1
@@ -1412,7 +1590,10 @@ public void textModeOutput() {
 	}
 	
 	// Use this to clear the screen taken from source: 	
-	//  https://stackoverflow.com/questions/2979383/java-clear-the-console		
+	//  https://stackoverflow.com/questions/2979383/java-clear-the-console	
+	/**
+	Clears the console screen. 
+	*/	
 	public final static void clearScreen()
 	{
 	    try
@@ -1425,7 +1606,9 @@ public void textModeOutput() {
 	        }
 	        else
 	        {
-	            Runtime.getRuntime().exec("clear");
+	            //Runtime.getRuntime().exec("clear");
+		    System.out.print("\033[H\033[2J");  
+		    System.out.flush(); 
 	        }
 	    }
 	    catch (final Exception e)
