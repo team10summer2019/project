@@ -95,7 +95,7 @@ public class MazeGameGUI extends Application {
 
 	private Image image;
 	// make a canvas for images and drawings
-	private Canvas canvasLeft = new Canvas(400,400);
+	private Canvas canvasLeft = new Canvas(390,390);
 	private GraphicsContext gcL = canvasLeft.getGraphicsContext2D();
 	
 	private Canvas canvasRight = new Canvas(300,300);
