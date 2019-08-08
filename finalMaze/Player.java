@@ -32,6 +32,7 @@ public class Player extends Entity {
 ////////////////////// MEMBER VARIABLES /////////////////////////////////////
 
 private boolean hasMap;    // extra to Entity
+private boolean hasRiddle;
 //private Random randGen = new Random(1000);  // make a pseudo random number generator 
 //////////////////////  CONSTRUCTORS     //////////////////////////////////////////
 
@@ -42,6 +43,7 @@ private boolean hasMap;    // extra to Entity
 	public Player(){
 	super(new Point(0,0),30,7);  // start at (0,0) health 30, attack strength 7
 	hasMap = false;
+	hasRiddle = false;
 	}
 
 	// input constructor
@@ -54,6 +56,7 @@ private boolean hasMap;    // extra to Entity
 	public Player(Point p, int heal, int strength ){
 	super(p,heal,strength);
 	hasMap = false;
+	hasRiddle = false;
 	}
 	
 	// copy constructor
@@ -64,6 +67,7 @@ private boolean hasMap;    // extra to Entity
 	public Player( Player p){
 	super(p);
 	hasMap = p.hasMap;
+	hasRiddle = p.hasRiddle;
 	}
 
 
@@ -78,6 +82,10 @@ private boolean hasMap;    // extra to Entity
 	*/
 	public boolean getHasMap(){
 	return hasMap;
+	}
+	
+	public boolean getHasRiddle(){
+	return hasRiddle;
 	}
 
 //////////////////////   MUTATORS      /////////////////////////////////////////////
@@ -103,6 +111,11 @@ private boolean hasMap;    // extra to Entity
 	*/
 	public void setHasMap( boolean val){
 	hasMap= val;
+	return;
+	}
+	
+	public void setHasRiddle( boolean val){
+	hasRiddle= val;
 	return;
 	}
 

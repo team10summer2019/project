@@ -45,11 +45,15 @@ Must be played from within eclipse Java IDE and requires javafx jfxrt.jar linked
 */
 public class MazeGameGUI extends Application {
 
+	public static void main(String[] args) {
+		launch(args);
+	} 
+	
 //////////////////////////INSTANCE VARIABLES ///////////////////////////////////
 
 	private int level = 1 ;   // set the level to increase through 4 levels
-	private int mazeSize=4;	 // Initialize with 4x4 maze for level 1 
-	//private int currentLevel=level;
+	private int mazeSize=4;	 // Initialize with 4x4 maze for level 1  
+	//private int currentLevel=level; 
 	
 	private boolean gameOn = true;
 
@@ -59,12 +63,13 @@ public class MazeGameGUI extends Application {
     private boolean victory=false;
 	private Random randGen = new Random(100);  // random number generator
 	//private Button tempButton;  // temporary button pointer
-    
+	//global variables for puzzles
+	private boolean hitPlay = false;
+	
 	private  Maze gameBoard = new Maze(mazeSize);  // make a 4x4 room maze 
 	
 	private Room tempRoom = gameBoard.getCurrentRoom();    // temporary value to look at a room 
 	private Player tempHero = gameBoard.getHero();  // temporary value to look at Hero stats
-	
     /// get the number of columns and rows in a roomGrid in a Room object in gameBoard
     private int cols = gameBoard.getCurrentRoom().getRoomCols();
     private int rows = gameBoard.getCurrentRoom().getRoomRows();
@@ -111,11 +116,6 @@ public class MazeGameGUI extends Application {
 	Image riddle = new Image("images/riddle.jpg");
 ////////////////////////////////////////////////////////////////////////////////	
 	
-///////////////////////////// MAIN METHOD ////////////////////////////////////
-	
-	public static void main(String[] args) {
-		launch(args);
-	}
 	
 ///////////////////////////// START METHOD //////////////////////////////////////////////////	
 	
@@ -320,7 +320,10 @@ public class MazeGameGUI extends Application {
 				messageLabel.setText(storeInput);
 			} else if (event.getCharacter().charAt(0) == 'l') {
 				messageLabel.setText(storeInput);
-		}
+			} else if (event.getCharacter().charAt(0) == 'p') {
+				storeInput="play";
+				messageLabel.setText(storeInput);
+			}
 
 		
 			if( gameOn) { // disable post game motion
@@ -476,9 +479,6 @@ public class MazeGameGUI extends Application {
 	
 			postCurrentRoom();
 			wipeItemGrid();
-			wipeHealthGrid();
-			postHealth();
-			postItems();
 	}
 
 	// Graphics display
@@ -755,13 +755,13 @@ public class MazeGameGUI extends Application {
  		//////////////////// MAZE IS HAND DESIGNED //////////////////////////////
  		// setRoom(x,y,left,right,up,down,key,door,map,monster)
  		// setRoomWalls(int x,int y, boolean left, boolean right, boolean up, boolean down){
- 		//setRoomItems(int x, int y ,boolean key, boolean door ,boolean map, boolean monster, boolean riddle ){ 
+ 		//setRoomItems(int x, int y ,boolean key, boolean door ,boolean map, boolean monster, boolean food, boolean riddle ){ 
  		//ROW 0
  		m.setRoomWalls(0,0,true,true,true,false); // setup the first room 
  		m.setRoomPlayer(0,0,true);  // place the player in the first room
  		// room (1.0)   
  		m.setRoomWalls(1,0,true,false,true,true);
- 		m.setRoomItems(1,0,false,true,false,false,false); // has door
+ 		m.setRoomItems(1,0,false,true,false,false,false,false); // has door
  		// room (2,0)
  		m.setRoomWalls(2,0,false,false,true,true);
  		// room (0,3)
@@ -775,22 +775,23 @@ public class MazeGameGUI extends Application {
  		// room (3,1)
  		m.setRoomWalls(3,1,false,true,false,false);
  		// room (0,2)
- 		m.setRoomWalls(0,2,true,false,false,true);
+ 		m.setRoomWalls(0,2,true,true,false,true);
+ 		m.setRoomItems(0,2,false,false,false,false,false,true); // has riddle
  		// room (1,2)
  		m.setRoomWalls(1,2,false,true,false,false);
  		// room (2,2)
  		m.setRoomWalls(2,2,true,true,true,false);
- 		m.setRoomItems(2,2,true,false,false,false,false); // has key
+ 		m.setRoomItems(2,2,true,false,false,false,false,false); // has key
  		// room (3,2)
  		m.setRoomWalls(3,2,true,true,false, false);
  		// room (0,3)
  		m.setRoomWalls(0,3,true,false,true,true);
- 		m.setRoomItems(0,3,false,false,true,false,false); // has map
+ 		m.setRoomItems(0,3,false,false,true,false,false,false); // has map
  		// room (1,3)
  		m.setRoomWalls(1,3,false,true,false,true);
  		// room (3,2)
- 		m.setRoomWalls(2,3,true,false,false,true);
- 		//m.setRoomItems(2,3,false,false,false,false,true); //place the riddle in the room below the key
+ 		m.setRoomWalls(2,3,true,false,true,true);
+ 		m.setRoomItems(2,3,false,false,false,false,true,true); //place the riddle in the room below the key
  		// room (3,3)
  		m.setRoomWalls(3,3,false,true,false,true);
  		
@@ -882,10 +883,10 @@ public class MazeGameGUI extends Application {
 
  		/////////////////// NON RANDOM ITEMS ////////////////////////////
  		// place door in specific location
- 		m.setRoomItems(0,5,false,true,false,false,false);
+ 		m.setRoomItems(0,5,false,true,false,false,false,false);
  		m.setDoorLocation(0,5);  // change the door location 
  		// place the key in specific location
- 		m.setRoomItems(5,0,true,false,false,false,false);
+ 		m.setRoomItems(5,0,true,false,false,false,false,false);
  		
  		// place the riddle in a specific location in front of the key (opens wall to get key)
  		// m.setRoomItems(4,0,false,false,false,false,true);
@@ -1229,7 +1230,7 @@ public class MazeGameGUI extends Application {
 		
 			if (tempRoom.getHasMonster() && tempMonster.isAlive() && tempMonster.getPosition().isEqual(tempHero.getPosition()) ){
 			fightMonster(gameBoard);
-			image = new Image("images/monster.jpg");
+			image = new Image("images/wraith.png");
 			drawImage(gcL,image);
 			} else {
 			image = new Image("images/logo.jpg");
@@ -1243,7 +1244,62 @@ public class MazeGameGUI extends Application {
 
 		
 		postCurrentRoom();
-		}	
+		}
+		
+		//puzzle isntances
+		Point currentPosition = tempHero.getPosition();	
+		Point firstRiddle = new Point(0,2);
+		Point secondRiddle = new Point(2,3);
+		boolean solved = false;
+		
+		// if user input was "PLAY"
+			if ( storeInput.equalsIgnoreCase("play") ) {
+
+				hitPlay = true;
+					
+				tempRoom.populateRoomGrid(); // load the information and characters currently set for the room into the roomGrid
+				
+				if (tempRoom.getHasRiddle() && currentPosition.isEqual(firstRiddle)) {
+						// give the player a riddle
+					TestHaineRiddle rid = new TestHaineRiddle();
+					CreateRiddle theRiddle = rid.riddleOne();
+					bigText.setText(theRiddle.getRiddle()+theRiddle.instructions());
+					theRiddle.addAnswer(theRiddle);
+					theRiddle.sayRiddle(theRiddle);
+				}
+				else if (tempRoom.getHasRiddle() && currentPosition.isEqual(secondRiddle)) {
+					// give the player a riddle
+					TestHaineRiddle rid = new TestHaineRiddle();
+					CreateRiddle theRiddle = rid.riddleTwo();
+					bigText.setText(theRiddle.getRiddle()+theRiddle.instructions());
+
+					theRiddle.addAnswer(theRiddle);
+					theRiddle.sayRiddle(theRiddle);
+				
+					} 
+				else {
+				messageLabel.setText("There is nothing to play...");
+				System.out.println("There is nothing to play...");
+				bigText.setText("There is nothing to play...");
+				}
+			}
+			
+			if ( hitPlay == true && currentPosition.isEqual(firstRiddle) && (storeInput.equalsIgnoreCase("penny") || storeInput.equalsIgnoreCase("ice") || storeInput.equalsIgnoreCase("blackboard") || storeInput.equalsIgnoreCase("human"))) {
+				solved = true;			//If the riddle has been solved
+					gameBoard.setRoomItems(0,2,false,false,false,false,false,false); // has riddle
+					bigText.setText("The right wall disappeared to reveal a path..\n");
+					gameBoard.setRoomWalls(0,2,true,false,false,true);
+					hitPlay = false;
+			}
+			
+			if( hitPlay == true && currentPosition.isEqual(secondRiddle) && (storeInput.equalsIgnoreCase("owl") || storeInput.equalsIgnoreCase("egg") || storeInput.equalsIgnoreCase("breath")) ) {
+				solved = true;
+				gameBoard.setRoomItems(2,3,false,false,false,false,false,false); // has riddle
+				bigText.setText("The wall in front of you disappeared. You see a key in the distance...\n");
+				gameBoard.setRoomWalls(2,3,true,false,false,true);
+				hitPlay = false;
+				}
+				
 		
 		/// closing message to user if Win
 		if ( level ==4 && victory ){
@@ -1439,6 +1495,10 @@ public class MazeGameGUI extends Application {
 	return;
 	}
 	
+	public String getStoreInput() {
+		return storeInput;
+	}
+	
 	/**
 	Prints out an ASCII representation display of the Maze Wraith Monster. 
 	*/
@@ -1512,7 +1572,7 @@ public class MazeGameGUI extends Application {
 				messageLabel.setText("The Hero has been vanquished ...");
 				System.out.println("Thanks for playing THE MAZE.  Better Luck Next Time!");
 				messageLabel.setText("Thanks for playing THE MAZE.  Better Luck Next Time!");
-				image = new Image("images/lose.jpg");
+				image = new Image("images/lose.png");
 				drawImage(gcL,image);
 				
 				bigText.setText("The Hero has been vanquished ...\nThanks for playing THE MAZE.  Better Luck Next Time!");

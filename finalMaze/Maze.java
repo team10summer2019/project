@@ -378,7 +378,7 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 	@param monster A boolean representing the state of the hasMonster Room boolean for the room at location (x,y)
 	@param food A boolean representing the state of the hasFood Room boolean for the room at location (x,y)
 	*/
-	public void setRoomItems(int x , int y,  boolean key, boolean door ,boolean map, boolean monster, boolean food ){
+	public void setRoomItems(int x , int y,  boolean key, boolean door ,boolean map, boolean monster, boolean food, boolean riddle ){
 		if ( x >= 0 && x <= mazeSize-1 && y >=0 && y <= mazeSize-1) {
 		Room temp = roomList[x][y];  // get the pointer to the room in list at index k
 		
@@ -387,6 +387,7 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 		temp.setHasMap(map);
 		temp.setHasMonster(monster);
 		temp.setHasFood(food);
+		temp.setHasRiddle(riddle);
 		
 		}
 	
