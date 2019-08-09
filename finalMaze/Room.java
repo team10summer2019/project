@@ -1,5 +1,6 @@
 package finalMaze;
 
+
 //////////////////////////////////////////////
 //
 // File: Room.java
@@ -48,6 +49,7 @@ private boolean hasMap;
 private boolean hasRiddle;
 private boolean hasBooks;
 private boolean hasComboLock;
+private boolean hasHint;
 private boolean hasGoat;
 private boolean hasFood;
 
@@ -84,6 +86,7 @@ private int roomRows=6;  // height of a room
 	 hasRiddle = false;
 	 hasBooks = false;
 	 hasComboLock =false;
+	 hasHint = false;
 	 hasGoat = false;
 	 hasFood = false;
 	 
@@ -122,6 +125,7 @@ private int roomRows=6;  // height of a room
 	 hasRiddle = false;
 	 hasBooks = false;
 	 hasComboLock =false;
+	 hasHint = false;
 	 hasGoat = false;
 	 hasFood = false; 
 	
@@ -161,6 +165,7 @@ private int roomRows=6;  // height of a room
 	 hasRiddle = false;
 	 hasBooks = false;
 	 hasComboLock =false;
+	 hasHint = false;
 	 hasGoat = false;
 	 hasFood = false;
 	 
@@ -195,6 +200,7 @@ private int roomRows=6;  // height of a room
 	 hasRiddle=toCopy.hasRiddle;
 	 hasBooks =toCopy.hasBooks;
 	 hasComboLock = toCopy.hasComboLock;
+	 hasHint = toCopy.hasHint;
 	 hasGoat = toCopy.hasGoat;
 	 hasFood = toCopy.hasFood;
 	 doorPosition=toCopy.doorPosition; // 0 for no door 1 for left 2 for right , 3 for top, 4 for bottom
@@ -332,6 +338,15 @@ private int roomRows=6;  // height of a room
 	*/
 	public boolean getHasComboLock(){
 	return hasComboLock;
+	}	
+	
+	/**
+	Accessor to get the status of the hasHint boolean indicating the presence of a hint object in the Room. 
+	Returns true if the room has the hint object in it and false otherwise.
+	@return a boolean representing the state of whether the hint object is in the room or not. 
+	*/
+	public boolean getHasHint(){
+	return hasHint;
 	}	
 	
 	/**
@@ -532,6 +547,15 @@ private int roomRows=6;  // height of a room
 	*/
 	public void setHasComboLock(boolean value){
 	hasComboLock = value;
+	return;
+	}
+	
+	/**
+	Mutator to set the state of the hasHint boolean.  
+	@param value a boolean setting the state of the hasHint, true if the room has a hint item and Object, false if not.
+	*/
+	public void setHasHint(boolean value){
+	hasHint= value;
 	return;
 	}
 
@@ -752,6 +776,8 @@ private int roomRows=6;  // height of a room
 		roomGrid[roomCols/2][roomRows/2]='B';
 		}else if (hasComboLock){
 		roomGrid[roomCols/2][roomRows/2]='L';
+		}else if (hasHint){
+		roomGrid[roomCols/2][roomRows/2]='H';
 		}else if (hasGoat){
 		roomGrid[roomCols/2][roomRows/2]='G';
 		}else if (hasFood){

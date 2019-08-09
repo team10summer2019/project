@@ -1,16 +1,5 @@
 package finalMaze;
-//////////////////////////////////////////////
-//
-// File: Maze.java
-// Description: Maze Class for maze game
-//
-// Author: (Ron) Zorondras Rodriguez
-// Course:  CPSC 233 Summer 2019
-// Creation Date: July 20, 2019
-// Version: 0.05
-// Revision Date: August 05, 2019
-//
-///////////////////////////////////////////////
+
 
 import java.util.Random;
 import java.util.ArrayList;
@@ -378,7 +367,7 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 	@param monster A boolean representing the state of the hasMonster Room boolean for the room at location (x,y)
 	@param food A boolean representing the state of the hasFood Room boolean for the room at location (x,y)
 	*/
-	public void setRoomItems(int x , int y,  boolean key, boolean door ,boolean map, boolean monster, boolean food, boolean riddle ){
+	public void setRoomItems(int x , int y,  boolean key, boolean door ,boolean map, boolean monster, boolean food, boolean riddle, boolean hint ){
 		if ( x >= 0 && x <= mazeSize-1 && y >=0 && y <= mazeSize-1) {
 		Room temp = roomList[x][y];  // get the pointer to the room in list at index k
 		
@@ -388,6 +377,7 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 		temp.setHasMonster(monster);
 		temp.setHasFood(food);
 		temp.setHasRiddle(riddle);
+		temp.setHasHint(hint);
 		
 		}
 	
@@ -781,6 +771,22 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 	return;
 	}
 	
+	/**
+	Mutator to place the Key from a room with the hero and remove the Key from the current room.	
+	*/
+	public void takeLeverOne(){
+	Point currentPosition = hero.getPosition();
+	currentRoom = getRoom( currentPosition );	
+		// if the room has a key but the player doesn't
+		if (!hero.getHasLeverOne()){
+		// give the player a key
+		hero.setHasLeverOne(true);
+		// reset the room to not have a key
+		}
+	// restore the pointer away from the roomList;
+	currentRoom = getRoom( currentPosition );
+	return;
+	}
 	
 	/**
 	Mutator to place the Map from a room with the hero and remove the Map from the current room.	

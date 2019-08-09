@@ -1,16 +1,5 @@
 package finalMaze;
-//////////////////////////////////////////////
-//
-// File: Player.java
-// Description: Player class
-//
-// Author: (Ron) Zorondras Rodriguez
-// Course:  CPSC 233 Summer 2019
-// Creation Date: July 20, 2019
-// Version: 0.04
-// Revision Date: August 5, 2019
-//
-///////////////////////////////////////////////
+
 
 // Player:  Attributes - (x,y) Point location, Health, hasKey, attackStrength
 //          Methods- moveLeft(), moveRight(), moveUp(), moveDown(),
@@ -32,7 +21,9 @@ public class Player extends Entity {
 ////////////////////// MEMBER VARIABLES /////////////////////////////////////
 
 private boolean hasMap;    // extra to Entity
-private boolean hasRiddle;
+private boolean hasLeverOne;
+private boolean hasLeverTwo;
+
 //private Random randGen = new Random(1000);  // make a pseudo random number generator 
 //////////////////////  CONSTRUCTORS     //////////////////////////////////////////
 
@@ -43,7 +34,8 @@ private boolean hasRiddle;
 	public Player(){
 	super(new Point(0,0),30,7);  // start at (0,0) health 30, attack strength 7
 	hasMap = false;
-	hasRiddle = false;
+	hasLeverOne = false;
+	hasLeverTwo = false;
 	}
 
 	// input constructor
@@ -56,7 +48,8 @@ private boolean hasRiddle;
 	public Player(Point p, int heal, int strength ){
 	super(p,heal,strength);
 	hasMap = false;
-	hasRiddle = false;
+	hasLeverOne = false;
+	hasLeverTwo = false;
 	}
 	
 	// copy constructor
@@ -67,7 +60,8 @@ private boolean hasRiddle;
 	public Player( Player p){
 	super(p);
 	hasMap = p.hasMap;
-	hasRiddle = p.hasRiddle;
+	hasLeverOne = p.hasLeverOne;
+	hasLeverTwo = p.hasLeverTwo;
 	}
 
 
@@ -84,8 +78,12 @@ private boolean hasRiddle;
 	return hasMap;
 	}
 	
-	public boolean getHasRiddle(){
-	return hasRiddle;
+	public boolean getHasLeverOne(){
+	return hasLeverOne;
+	}
+	
+	public boolean getHasLeverTwo(){
+	return hasLeverOne;
 	}
 
 //////////////////////   MUTATORS      /////////////////////////////////////////////
@@ -114,8 +112,13 @@ private boolean hasRiddle;
 	return;
 	}
 	
-	public void setHasRiddle( boolean val){
-	hasRiddle= val;
+	public void setHasLeverOne( boolean val){
+	hasLeverOne= val;
+	return;
+	}
+	
+	public void setHasLeverTwo( boolean val){
+	hasLeverOne= val;
 	return;
 	}
 
@@ -140,7 +143,7 @@ private boolean hasRiddle;
 	
 //////////////////////   Motion Methods /////////////////////////////////////////////
 
-	// Override method in parrent class 
+	// Override method in parent class 
 	/**
 	Mutator sets Player health to zero, removes items Key and Map, and outputs a death message. 
 	*/
@@ -163,6 +166,7 @@ private boolean hasRiddle;
 	System.out.print("Has Key = " + getHasKey() +", ");
 	System.out.println("Has Map = " + getHasMap() + " ");
 	System.out.println("Position = " + getPosition().toString() );  
+	System.out.print("Has LeverOne = " + getHasLeverOne() +"\n");
 	}
 
 	/**
