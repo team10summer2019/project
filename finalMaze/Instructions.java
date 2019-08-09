@@ -80,4 +80,17 @@ public class Instructions {
 		+("|_________________|")
 		+("The 'Two' has been circled in crayon. There is a picture of a green shoe right below the nursery rhyme.");
 	}
+	
+	public String comboInstructions() {
+		return ("There is a hole in one wall. It feels like some sort of mechanism was once in there...\n")
+				+ ("In the middle of the room, there is  a combination lock- similar to a padlock. From left to right, you can put in three numbers between 0 and 9. ")
+				+ ("Input all three numbers into the combination.");		
+	}
+	
+	public String unlockWithLevers() {
+		return ("Something in the wall clicks...\n")
+				+("You put together the two metal rods. It combines into a trusty lever.\n")
+				+("You stick the lever into the hole in the wall, and it fits perfectly.\n")
+				+("The wall vanishes once you pull the lever. You see a door far in the distance...");
+	}
 }

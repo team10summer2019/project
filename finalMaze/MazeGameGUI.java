@@ -57,6 +57,7 @@ public class MazeGameGUI extends Application {
 	//global variables for puzzles
 	private boolean hitPlay = false;
 	private boolean hitLook = false;
+	private boolean playCombo = false;
 	private String sayThis;
 	private Instructions instructions = new Instructions();
 	
@@ -792,7 +793,7 @@ public class MazeGameGUI extends Application {
  		// room (2,0)
  		m.setRoomWalls(2,0,false,false,true,true);
  		// room (3,0)
- 		m.setRoomWalls(3,0,false,true,true,false);
+ 		m.setRoomWalls(3,0,true,true,true,false);
  		m.setRoomItems(3,0,false,false,false,false,false,false,false,true); // has comboLock
  		// room (1,0)
  		m.setRoomWalls(0,1,true,true,false,false);
@@ -1280,6 +1281,7 @@ public class MazeGameGUI extends Application {
 		Point currentPosition = tempHero.getPosition();	
 		Point firstRiddle = new Point(0,2);
 		Point secondRiddle = new Point(2,3);
+		Point comboLocation = new Point(3,0);
 		boolean solved = false;
 		
 		// if user input was "PLAY"
@@ -1307,6 +1309,11 @@ public class MazeGameGUI extends Application {
 					theRiddle.sayRiddle(theRiddle);
 				
 					} 
+				else if (tempRoom.getHasComboLock() && currentPosition.isEqual(comboLocation)) {
+					sayThis = instructions.comboInstructions();
+					bigText.setText(sayThis);
+					playCombo = true;
+				}
 				else {
 				messageLabel.setText("There is nothing to play...");
 				System.out.println("There is nothing to play...");
@@ -1329,6 +1336,17 @@ public class MazeGameGUI extends Application {
 			gameBoard.setRoomWalls(2,3,true,false,false,true);
 			hitPlay = false;
 			}
+		
+		if (playCombo == true && currentPosition.isEqual(comboLocation) && storeInput.contentEquals("728")) {
+			if (tempHero.getHasLeverOne() == true && tempHero.getHasLeverTwo() == true) {
+				sayThis = instructions.unlockWithLevers();
+				bigText.setText(sayThis);
+				gameBoard.setRoomWalls(3,0,false,true,true,false);
+				
+			}else {
+				bigText.setText("Something in the wall clicks...");
+			}
+		}
 				
 		//look/hint instances
 		Point firstHint = new Point(0,1);
