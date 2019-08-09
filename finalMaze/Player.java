@@ -1,6 +1,7 @@
 package finalMaze;
 
 
+
 // Player:  Attributes - (x,y) Point location, Health, hasKey, attackStrength
 //          Methods- moveLeft(), moveRight(), moveUp(), moveDown(),
 //	           searchRoom(), attack(), openDoor() , die() , isAlive()
@@ -83,7 +84,7 @@ private boolean hasLeverTwo;
 	}
 	
 	public boolean getHasLeverTwo(){
-	return hasLeverOne;
+	return hasLeverTwo;
 	}
 
 //////////////////////   MUTATORS      /////////////////////////////////////////////
@@ -118,7 +119,7 @@ private boolean hasLeverTwo;
 	}
 	
 	public void setHasLeverTwo( boolean val){
-	hasLeverOne= val;
+	hasLeverTwo= val;
 	return;
 	}
 

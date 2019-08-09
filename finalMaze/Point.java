@@ -1,16 +1,5 @@
 package finalMaze;
-//////////////////////////////////////////////
-//
-// File: Point.java
-// Description: Point class
-//
-// Author: (Ron) Zorondras Rodriguez
-// Course:  CPSC 233 Summer 2019
-// Creation Date: July 20, 2019
-// Version: 0.02
-// Revision Date: August 04, 2019
-//
-///////////////////////////////////////////////
+
 
 import java.util.Random;
 

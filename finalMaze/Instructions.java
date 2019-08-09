@@ -1,5 +1,6 @@
 package finalMaze;
 
+
 public class Instructions {
 
 	public String hintInstructions() {
@@ -47,4 +48,36 @@ public class Instructions {
 		+("\nTo look at the other items, type 'look' or press the L key.");
 	}
 	
+	public String room2Instructions() {
+		return ("For whatever reason, you hold your breath when you approach this room. You let go of your breath and choose to look around anyways.")
+				+("This room looks tidier than the other room. Mostly because this room only has three boxes.")
+				+("A red box, a yellow box, and a green box all placed nicely side by side.")
+				+("You feel content seeing a room so colourful and organized.\n")
+				+("To view certain things, type:\n'Redbox'\n'YellowBox'\n'Greenbox'\n")
+				+("To stop looking around the room, type 'return' or press the R key.");
+	}
+	
+	public String greenBoxInstructionsNoLever() {
+		return ("Is this someone's toy chest? It's full of children's knick knacks. One of them, a stuffed owl with comically large eyes looks back at you.\n")
+		+("You pick up the silly owl. There's a rubber egg underneath. You put the owl back down. Looking up, you see a poorly scribbled 8 under the lid.\n")
+		+("You find another metal rod, but this one is hollow on one end and has a red round knob on the other side.")
+		+("It almost looks like a toy lollipop. There are grooves inside the hollow end of the rod that looks like if fits with the first rod.");
+	}
+	
+	public String greenBoxInstructionsYesLever() {
+		return ("There is a silly owl on top of a rubber egg in the greenbox.");
+	}
+	
+	public String redBoxInstructions() {
+		return ("A black of seven of spades playing card.");
+	}
+	
+	public String yellowBoxInstructions() {
+		return ("You unfold the note. It is a torn page from a nursery book. The note reads:")
+		+("__________________")
+		+("|'One,Two'        |")
+		+("|'Tie your Shoe.' |")
+		+("|_________________|")
+		+("The 'Two' has been circled in crayon. There is a picture of a green shoe right below the nursery rhyme.");
+	}
 }

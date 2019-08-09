@@ -116,7 +116,7 @@ public class StaticObjects extends Inventory {
 	}
 	
 	public void toyBox() { //Added by Haine
-		System.out.println("Someone wrote a sloppy 3 on the lid with sharpie.\nOpen? 'y'/'n'\"");
+		System.out.println("Someone wrote a sloppy 8 on the lid with sharpie.\nOpen? 'y'/'n'\"");
 	}
 	
 	public void aShelfH() { //Modified and added by Haine

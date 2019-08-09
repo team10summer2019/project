@@ -1,6 +1,7 @@
 package finalMaze;
 
 
+
 import java.util.Scanner;
 import java.util.Random;
 

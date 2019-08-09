@@ -1,16 +1,5 @@
 package finalMaze;
-//////////////////////////////////////////////
-//
-// File: Door.java
-// Description: Door Class
-//
-// Author: (Ron) Zorondras Rodriguez
-// Course:  CPSC 233 Summer 2019
-// Creation Date: July 21, 2019
-// Version: 0.02
-// Revision Date: August 5, 2019
-//
-///////////////////////////////////////////////
+
 
 /**
 Class Door creates a Door that has a Point location and a boolean isLocked

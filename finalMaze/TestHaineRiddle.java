@@ -1,6 +1,7 @@
 package finalMaze;
 
 
+
 public class TestHaineRiddle { 
 	 
 	public CreateRiddle riddleOne(){

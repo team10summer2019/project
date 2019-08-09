@@ -1,6 +1,7 @@
 package finalMaze;
 
 
+
 import java.util.Random;
 import java.util.Scanner;
 //import java.util.concurrent.TimeUnit; // for delay before exit
@@ -22,6 +23,7 @@ import javafx.scene.control.Button;
 import javafx.event.*;
 import javafx.scene.input.*;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 /**
 Class MazeGameGUI is the Main GUI class that runs the Maze Game in GUI mode. Creates a Maze object gameBoard which is used to run the game.
@@ -94,11 +96,13 @@ public class MazeGameGUI extends Application {
 	private GraphicsContext gcR = canvasRight.getGraphicsContext2D();
 	
 ///////////////////////////// TEXTURE IMAGES ///////////////////////////////////////
+	Image startLogo = new Image("images/startlogo.jpg");
+	Image logo = new Image("images/logo.jpg");
 	Image floor = new Image("images/floor.jpg");
 	Image wall = new Image("images/walltexture.jpg");
 	Image monster = new Image("images/monster.jpg");
 	Image map = new Image("images/map.jpg");
-	Image door = new Image("images/door.jpg");
+	Image door = new Image("images/doorclosed.jpg");
 	Image doorOpen = new Image("images/dooropen.jpg");
 	Image doorClosed = new Image("images/doorclosed.jpg");
 	Image key = new Image("images/key.jpg");
@@ -106,6 +110,7 @@ public class MazeGameGUI extends Application {
 	Image food = new Image("images/food.jpg");
 	Image player = new Image("images/player.jpg");
 	Image riddle = new Image("images/riddle.jpg");
+	Image comboLock = new Image("images/combolock.jpg");
 	Image leverOne = new Image("images/leverOne.jpg");
 ////////////////////////////////////////////////////////////////////////////////	
 	
@@ -125,6 +130,7 @@ public class MazeGameGUI extends Application {
 		  GridPane grid2 = new GridPane();  // grid for rectangle objects 
 		  GridPane grid3 = new GridPane();  // grid for rectangle item objects 
 		  GridPane grid4 = new GridPane();  // grid for rectangle item objects 
+		  Pane startMenu = new Pane();  // start screen for the play button at start
 		  
 		  // make a key input handler
 		  HandleKeyBoardInput keyInput =  new HandleKeyBoardInput(); 
@@ -242,6 +248,19 @@ public class MazeGameGUI extends Application {
 		
 		Scene scene = new Scene(root, 870, 600);
 		
+		//Start screen for the maze
+		StackPane stackImages = new StackPane(); 
+		ImageView Logo = new ImageView(startLogo);
+		Button playButton = new Button("Play!");
+		playButton.setMinHeight(50);
+		playButton.setMinWidth(100);
+		playButton.setOnAction(e -> primaryStage.setScene(scene));
+		playButton.setLayoutX(375);
+		playButton.setLayoutY(500);
+		startMenu.getChildren().add(playButton);
+		stackImages.getChildren().addAll(Logo, startMenu);
+		Scene startScreen = new Scene(stackImages, 815, 600);
+		
 		// key press action events
 		root.setOnKeyTyped( keyInput );
 		
@@ -253,7 +272,8 @@ public class MazeGameGUI extends Application {
 		
 		// setup and show the stage and scene 
 		primaryStage.setTitle("Maze Game");
-		primaryStage.setScene(scene);
+		primaryStage.setScene(startScreen);
+		//primaryStage.setScene(scene);
 		primaryStage.show();
 	}
 ////////////////////////// END OF START METHOD ////////////////////////////////////////
@@ -569,6 +589,10 @@ public class MazeGameGUI extends Application {
 					buttonGrid[i][j].setOpacity(0.5);
 					//rectGrid[i][j].setFill(Color.BLUEVIOLET);
 					rectGrid[i][j].setFill(new ImagePattern(hint));
+				}else if (ch == 'L' ){
+					buttonGrid[i][j].setOpacity(0.5);
+					//rectGrid[i][j].setFill(Color.BLUEVIOLET);
+					rectGrid[i][j].setFill(new ImagePattern(comboLock));
 				}else if (ch == 'F' ){
 					buttonGrid[i][j].setOpacity(1);
 					//rectGrid[i][j].setFill(Color.ORANGE);
@@ -611,7 +635,9 @@ public class MazeGameGUI extends Application {
 		if (gameBoard.getHero().getHasLeverOne()) {
 			itemGrid[2][0].setFill(new ImagePattern(leverOne));
 		}
-		
+		if (gameBoard.getHero().getHasLeverTwo()) {
+			itemGrid[3][0].setFill(new ImagePattern(leverOne));
+		}
 	return;
 	}
 	
@@ -756,45 +782,46 @@ public class MazeGameGUI extends Application {
  		//////////////////// MAZE IS HAND DESIGNED //////////////////////////////
  		// setRoom(x,y,left,right,up,down,key,door,map,monster)
  		// setRoomWalls(int x,int y, boolean left, boolean right, boolean up, boolean down){
- 		//setRoomItems(int x, int y ,boolean key, boolean door ,boolean map, boolean monster, boolean food, boolean riddle, boolean hint ){ 
+ 		//setRoomItems(int x, int y ,boolean key, boolean door ,boolean map, boolean monster, boolean food, boolean riddle, boolean hint, boolean comboLock ){ 
  		//ROW 0
  		m.setRoomWalls(0,0,true,true,true,false); // setup the first room 
  		m.setRoomPlayer(0,0,true);  // place the player in the first room
  		// room (1.0)   
  		m.setRoomWalls(1,0,true,false,true,true);
- 		m.setRoomItems(1,0,false,true,false,false,false,false,false); // has door
+ 		m.setRoomItems(1,0,false,true,false,false,false,false,false,false); // has door
  		// room (2,0)
  		m.setRoomWalls(2,0,false,false,true,true);
- 		// room (0,3)
+ 		// room (3,0)
  		m.setRoomWalls(3,0,false,true,true,false);
+ 		m.setRoomItems(3,0,false,false,false,false,false,false,false,true); // has comboLock
  		// room (1,0)
  		m.setRoomWalls(0,1,true,true,false,false);
- 		m.setRoomItems(0,1,false,false,false,false,false,false,true); // has hint at (0,1)
+ 		m.setRoomItems(0,1,false,false,false,false,false,false,true,false); // has hint at (0,1)
  		// room (1,1)
  		m.setRoomWalls(1,1,true,false,true,false); 
  		// room (2,1)
  		m.setRoomWalls(2,1,false,false,true,true);
- 		m.setRoomItems(2,1,false,false,false,false,false,false,true); // has hint at (2,1)
+ 		m.setRoomItems(2,1,false,false,false,false,false,false,true,false); // has hint at (2,1)
  		// room (3,1)
  		m.setRoomWalls(3,1,false,true,false,false);
  		// room (0,2)
  		m.setRoomWalls(0,2,true,true,false,true);
- 		m.setRoomItems(0,2,false,false,false,false,false,true,false); // has riddle
+ 		m.setRoomItems(0,2,false,false,false,false,false,true,false,false); // has riddle
  		// room (1,2)
  		m.setRoomWalls(1,2,false,true,false,false);
  		// room (2,2)
  		m.setRoomWalls(2,2,true,true,true,false);
- 		m.setRoomItems(2,2,true,false,false,false,false,false,false); // has key
+ 		m.setRoomItems(2,2,true,false,false,false,false,false,false,false); // has key
  		// room (3,2)
  		m.setRoomWalls(3,2,true,true,false, false);
  		// room (0,3)
  		m.setRoomWalls(0,3,true,false,true,true);
- 		m.setRoomItems(0,3,false,false,true,false,false,false,false); // has map
+ 		m.setRoomItems(0,3,false,false,true,false,false,false,false,false); // has map
  		// room (1,3)
  		m.setRoomWalls(1,3,false,true,false,true);
  		// room (3,2)
  		m.setRoomWalls(2,3,true,false,true,true);
- 		m.setRoomItems(2,3,false,false,false,false,true,true,false); //place the riddle in the room below the key
+ 		m.setRoomItems(2,3,false,false,false,false,true,true,false,false); //place the riddle in the room below the key
  		// room (3,3)
  		m.setRoomWalls(3,3,false,true,false,true);
  		
@@ -886,10 +913,10 @@ public class MazeGameGUI extends Application {
 
  		/////////////////// NON RANDOM ITEMS ////////////////////////////
  		// place door in specific location
- 		m.setRoomItems(0,5,false,true,false,false,false,false,false);
+ 		m.setRoomItems(0,5,false,true,false,false,false,false,false,false);
  		m.setDoorLocation(0,5);  // change the door location 
  		// place the key in specific location
- 		m.setRoomItems(5,0,true,false,false,false,false,false,false);
+ 		m.setRoomItems(5,0,true,false,false,false,false,false,false,false);
  		
  		// place the riddle in a specific location in front of the key (opens wall to get key)
  		// m.setRoomItems(4,0,false,false,false,false,true);
@@ -1289,7 +1316,7 @@ public class MazeGameGUI extends Application {
 			
 		if ( hitPlay == true && currentPosition.isEqual(firstRiddle) && (storeInput.equalsIgnoreCase("penny") || storeInput.equalsIgnoreCase("ice") || storeInput.equalsIgnoreCase("blackboard") || storeInput.equalsIgnoreCase("human"))) {
 			solved = true;			//If the riddle has been solved
-				gameBoard.setRoomItems(0,2,false,false,false,false,false,false,false); // has riddle
+				gameBoard.setRoomItems(0,2,false,false,false,false,false,false,false,false); // has riddle
 				bigText.setText("The right wall disappeared to reveal a path..\n");
 				gameBoard.setRoomWalls(0,2,true,false,false,true);
 				hitPlay = false;
@@ -1297,7 +1324,7 @@ public class MazeGameGUI extends Application {
 		
 		if( hitPlay == true && currentPosition.isEqual(secondRiddle) && (storeInput.equalsIgnoreCase("owl") || storeInput.equalsIgnoreCase("egg") || storeInput.equalsIgnoreCase("breath")) ) {
 			solved = true;
-			gameBoard.setRoomItems(2,3,false,false,false,false,false,false,false); // has riddle
+			gameBoard.setRoomItems(2,3,false,false,false,false,false,false,false,false); // has riddle
 			bigText.setText("The wall in front of you disappeared. You see a key in the distance...\n");
 			gameBoard.setRoomWalls(2,3,true,false,false,true);
 			hitPlay = false;
@@ -1347,7 +1374,40 @@ public class MazeGameGUI extends Application {
 			bigText.setText(sayThis);
 			hitLook = false;
 		}
-			
+		
+		if ( storeInput.equalsIgnoreCase("look") && currentPosition.isEqual(secondHint)){
+			//start looking at hints
+				tempRoom.populateRoomGrid(); 
+				sayThis = instructions.room2Instructions();
+				bigText.setText(sayThis);
+				hitLook = true;
+			}	
+		
+		if (hitLook == true && (storeInput.equalsIgnoreCase("greenbox")) && currentPosition.isEqual(secondHint)) {
+			if (tempHero.getHasLeverTwo() == false) {
+				sayThis = instructions.greenBoxInstructionsNoLever();
+				bigText.setText(sayThis);
+				gameBoard.takeLeverTwo();
+				postItems();
+			}
+			else if (tempHero.getHasLeverTwo() == true){
+				sayThis = instructions.greenBoxInstructionsYesLever();
+				bigText.setText(sayThis);
+			}
+			hitLook = false;
+		}
+		
+		if (hitLook == true && (storeInput.equalsIgnoreCase("redbox")) && currentPosition.isEqual(secondHint)) {
+			sayThis = instructions.redBoxInstructions();
+			bigText.setText(sayThis);
+			hitLook = false;
+		}
+		
+		if (hitLook == true && (storeInput.equalsIgnoreCase("yellowbox")) && currentPosition.isEqual(secondHint)) {
+			sayThis = instructions.yellowBoxInstructions();
+			bigText.setText(sayThis);
+			hitLook = false;
+		}
 		
 		/// closing message to user if Win
 		if ( level ==4 && victory ){

@@ -1,16 +1,5 @@
 package finalMaze;
-//////////////////////////////////////////////
-//
-// File: Player.java
-// Description: Monster class
-//
-// Author: (Ron) Zorondras Rodriguez
-// Course:  CPSC 233 Summer 2019
-// Creation Date: July 20, 2019
-// Version: 0.03
-// Revision Date: August 05, 2019
-//
-///////////////////////////////////////////////
+
 
 // Player:  Attributes - (x,y) Point location, Health, hasKey, attackStrength
 //          Methods- moveLeft(), moveRight(), moveUp(), moveDown(),

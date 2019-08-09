@@ -1,6 +1,7 @@
 package finalMaze;
 
 
+
 import java.util.Random;
 import java.util.ArrayList;
 
@@ -367,7 +368,7 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 	@param monster A boolean representing the state of the hasMonster Room boolean for the room at location (x,y)
 	@param food A boolean representing the state of the hasFood Room boolean for the room at location (x,y)
 	*/
-	public void setRoomItems(int x , int y,  boolean key, boolean door ,boolean map, boolean monster, boolean food, boolean riddle, boolean hint ){
+	public void setRoomItems(int x , int y,  boolean key, boolean door ,boolean map, boolean monster, boolean food, boolean riddle, boolean hint, boolean comboLock ){
 		if ( x >= 0 && x <= mazeSize-1 && y >=0 && y <= mazeSize-1) {
 		Room temp = roomList[x][y];  // get the pointer to the room in list at index k
 		
@@ -378,6 +379,7 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 		temp.setHasFood(food);
 		temp.setHasRiddle(riddle);
 		temp.setHasHint(hint);
+		temp.setHasComboLock(comboLock);
 		
 		}
 	
@@ -787,6 +789,20 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 	currentRoom = getRoom( currentPosition );
 	return;
 	}
+	
+	public void takeLeverTwo(){
+		Point currentPosition = hero.getPosition();
+		currentRoom = getRoom( currentPosition );	
+			// if the room has a key but the player doesn't
+			if (!hero.getHasLeverTwo()){
+			// give the player a key
+			hero.setHasLeverTwo(true);
+			// reset the room to not have a key
+			}
+		// restore the pointer away from the roomList;
+		currentRoom = getRoom( currentPosition );
+		return;
+		}
 	
 	/**
 	Mutator to place the Map from a room with the hero and remove the Map from the current room.	
