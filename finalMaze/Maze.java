@@ -367,6 +367,9 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 	@param map A boolean representing the state of the hasMap Room boolean for the room at location (x,y)
 	@param monster A boolean representing the state of the hasMonster Room boolean for the room at location (x,y)
 	@param food A boolean representing the state of the hasFood Room boolean for the room at location (x,y)
+	@param riddle A boolean representing the state of the hasRiddle Room boolean for the room at location (x,y)
+	@param hint A boolean representing the state of the hasHint Room boolean for the room at location (x,y)
+	@param comboLock A boolean representing the state of the hasComboLock Room boolean for the room at location (x,y)
 	*/
 	public void setRoomItems(int x , int y,  boolean key, boolean door ,boolean map, boolean monster, boolean food, boolean riddle, boolean hint, boolean comboLock ){
 		if ( x >= 0 && x <= mazeSize-1 && y >=0 && y <= mazeSize-1) {
