@@ -1,4 +1,4 @@
-package LockLeverPuzzle;
+
 /**
  * @author Fiona
  *

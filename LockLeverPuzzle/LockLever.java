@@ -1,4 +1,4 @@
-package LockLeverPuzzle;
+
 /**
  * @author Fiona
  *
@@ -11,12 +11,17 @@ public class LockLever {
 	 * LockLever works with dynamicObjects as well as LockLeverPuzzle 
 	 */
 	private boolean obj_Lever_Key = false; //the full piece turns into a "key" object
-	
 	private boolean obj_LeverPiece1 = false;
 	private boolean obj_LeverPiece2 = false;
+	private Inventory grInv;
+	
 	//CONSTRUCTORS
 	public LockLever() {
 		
+	}
+	
+	public LockLever(GenericRoom gr) {
+		grInv = gr.playerInventory;
 	}
 	//SETTERS
 	//changes status of lever piece
@@ -39,11 +44,30 @@ public class LockLever {
 	//METHODS
 	//get leverPiece1 and leverPiece2 info from player inventory
 	//if both pieces exist in the inventory, put together lever
-	public boolean combinedLever() {
+	public boolean combinedLeverStatus() {
 		if (obj_LeverPiece1 == true && obj_LeverPiece2 == true) {//CHANGE THIS INFO SO THAT IT CHECKS THE PLAYERS INVENTORY
 			obj_Lever_Key = true;
 			System.out.println("LEVER MADE");
 		}
 		return obj_Lever_Key;
+	}
+	//check and add if both objects exists
+	//"makes" and adds lockLever to inventory
+	public void addCombinedLever(Inventory i) {
+		if (combinedLeverStatus() == true) {
+			grInv.removeItemFromInventory("leverPiece1");
+			grInv.removeItemFromInventory("leverPiece2");
+			grInv.addItemToInventory("lockLever");
+			System.out.println("Having both items,'leverPiece1' and 'leverPiece2' was attached together to create item 'lockLever'. Now you have a fully functioning lever piece.");
+		}
+	}
+	//returns status of obj_Lever_Key
+	public boolean getObjLeverKey() { //*
+		return this.getObjLeverKey();
+	}
+	public void combinedLever_String() { //*
+		if (obj_LeverPiece1 == true && obj_LeverPiece2 == true) {
+			System.out.println("*Combine LeverPieces? 'Combine'*");
+		}
 	}
 }

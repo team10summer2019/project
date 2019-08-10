@@ -1,4 +1,3 @@
-package LockLeverPuzzle;
 /**
  * @author Fiona
  *
@@ -11,6 +10,34 @@ import org.junit.Test;
 import java.util.ArrayList;
 
 public class LockLeverTest_JUnit {
+	//copy constructor
+	@Test
+	public void test_LockLever_defaultSettings() {
+		//setup
+		GenericRoom gr = new GenericRoom();
+		boolean expected = gr.lockLeverCheck.combinedLeverStatus();
+	
+		//test
+		LockLever ll = new LockLever(gr);
+		boolean output = ll.combinedLeverStatus();
+		
+		assertEquals(expected,output);
+	}
+	
+	public void test_LockLever_allTrueSettings() {
+		//setup
+		GenericRoom gr = new GenericRoom();
+		gr.uniqueObject_toInventory("leverPiece1");
+		gr.uniqueObject_toInventory("leverPiece2");
+		gr.lockLeverCheck.combinedLeverStatus();
+		boolean expected = gr.lockLeverCheck.getObjLeverKey();
+		//test
+		LockLever ll = new LockLever(gr);
+		ll.combinedLeverStatus();
+		boolean output = ll.getObjLeverKey();
+		
+		assertEquals(expected,output);
+	}
 	//setLeverPiece1
 	@Test
 	public void test_setLeverPiece1_hasPiece() {
@@ -39,7 +66,7 @@ public class LockLeverTest_JUnit {
 		boolean test = false;
 		
 		LockLever ll = new LockLever();
-		boolean has = ll.combinedLever();
+		boolean has = ll.combinedLeverStatus();
 		
 		assertEquals(test,has);
 	}
@@ -50,7 +77,7 @@ public class LockLeverTest_JUnit {
 		
 		LockLever ll = new LockLever();
 		ll.setLeverPiece1(true);
-		boolean has = ll.combinedLever();
+		boolean has = ll.combinedLeverStatus();
 		
 		assertEquals(test,has);
 	}
@@ -61,7 +88,7 @@ public class LockLeverTest_JUnit {
 		
 		LockLever ll = new LockLever();
 		ll.setLeverPiece2(true);
-		boolean has = ll.combinedLever();
+		boolean has = ll.combinedLeverStatus();
 		
 		assertEquals(test,has);
 	}
@@ -72,7 +99,7 @@ public class LockLeverTest_JUnit {
 		LockLever ll = new LockLever();
 		ll.setLeverPiece1(true);
 		ll.setLeverPiece2(true);
-		boolean has = ll.combinedLever();
+		boolean has = ll.combinedLeverStatus();
 		
 		assertEquals(test,has);
 	}

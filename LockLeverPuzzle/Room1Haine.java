@@ -1,8 +1,4 @@
-package LockLeverPuzzle;
-
 import java.util.Scanner;
-import finalMaze.Player;
-
 /**
  * @author Fiona
  * @author Haine
@@ -12,18 +8,25 @@ import finalMaze.Player;
 
 public class Room1Haine extends GenericRoom {
 	private static boolean inRoom1H = true;
-	private static Room1Haine gameMethods = new Room1Haine();
+	//removed gameMethods
 	private static Scanner keyboard = new Scanner(System.in); 
 	private String userInput;
 	
 	private Player p1 = new Player();//transfer player input into player
 	private StaticObjects stat_item = new StaticObjects();
 	private DynamicObjects dyn_item = new DynamicObjects();
-	private Inventory playerInventory = new Inventory();
-	private FloorInventory roomInventory = new FloorInventory();
+	public Inventory playerInventory; //*
+	public FloorInventory roomInventory; //*
+	public LockLever lockLeverCheck; //*
 	//private boolean gotBearLever1 = false;
 	//private boolean gotBearLever2 = false;
-	
+//////////CONSTRUCTORS////////////
+	public Room1Haine(GenericRoom gr) { //*
+		super();
+		this.playerInventory = new Inventory(gr.playerInventory);
+		this.roomInventory = new FloorInventory(gr.roomInventory);
+		this.lockLeverCheck = new LockLever(gr);
+	}
 //////////EXIT VIEW////////////
 /*
 * Leaves room
@@ -43,7 +46,9 @@ public void room1H() {
 		System.out.println("//////////Room 1H://///////////");
 		System.out.println("In the centre of the room, you can see a teddy bear on the floor, holding something. There is a blackboard on one wall. Next to that wall, there is a shelf with three photos displayed.");
 		System.out.println("Looking down at the ground, you realize you have stepped into a shallow puddle.\n");
-		
+		if (lockLeverCheck.combinedLeverStatus() == true) {
+			
+		}
 		System.out.println("To view your Inventory, type:\n'i'");
 		System.out.println("To view certain things, type:\n'Bear'\n'Blackboard'\n'Shelf'\n'Puddle'");
 		System.out.println("To stop looking around the room, type:\n'Exit'");
@@ -51,42 +56,42 @@ public void room1H() {
 		userInput = keyboard.next();
 		///////VIEW INVENTORY
 		if (userInput.equalsIgnoreCase("i")) {
-			gameMethods.viewInventory();
+			viewInventory();
 		}
 		///////VIEW BEAR
 		//gameMethods.viewBear();
 		if (userInput.equalsIgnoreCase("bear")) {
-			gameMethods.viewBear();
+			viewBear();
 		}
 		////////VIEW REDBOX
 		if (userInput.equalsIgnoreCase("blackboard")) {
-			gameMethods.viewBlackboard();
+			viewBlackboard();
 		}
 		////////VIEW SHELF
 		if (userInput.equalsIgnoreCase("shelf")) {
-			gameMethods.viewShelfH();
+			viewShelfH();
 		}
 		////////////VIEW MIRROR
 		if (userInput.equalsIgnoreCase("puddle")) {
-			gameMethods.viewPuddle();
+			viewPuddle();
 		}
-		gameMethods.exitView(userInput);
+		exitView(userInput);
 		
 	}//End of while loop
 	//return gotBearLever1;
 }
 //////////SET INROOM1H////////////
 	public void setInRoom1H(boolean inRoom_Bool) {
-	Room1Haine.inRoom1H = inRoom_Bool;
+		Room1Haine.inRoom1H = inRoom_Bool;
 	}
 ////////////////////////ITEM METHODS////////////////////////////////
 	public void viewInventory() {
 		playerInventory.viewInventory();
 		}
-		//////////Add Unique Object to Inventory////////////
-		//change status of dynamic object(ANY!)
-		//Adds unique item to Inventory and removes unique item from FloorInventory
-		public void uniqueObject_toInventory(String item) { 
+	//////////Add Unique Object to Inventory////////////
+	//change status of dynamic object(ANY!)
+	//Adds unique item to Inventory and removes unique item from FloorInventory
+	public void uniqueObject_toInventory(String item) { 
 		System.out.println("You added '" + item + "' to your inventory.");
 		dyn_item.changeStatus_dynObj(item);
 		this.playerInventory.addUniqueItemToInventory(item); //adds item to Inventory

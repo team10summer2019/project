@@ -1,4 +1,4 @@
-package LockLeverPuzzle;
+
 /**
  * @author Fiona
  *
@@ -18,12 +18,6 @@ public class StaticObjects extends Inventory {
 
 	//UNIQUE METHODS
 	/////ROOM1/////
-	
-	public void aMirror() {
-		System.out.println("This is a mirror.");
-		
-	}
-	
 	public void aBear() {
 		System.out.println("This is a bear.");
 		
@@ -122,7 +116,7 @@ public class StaticObjects extends Inventory {
 	}
 	
 	public void toyBox() { //Added by Haine
-		System.out.println("Someone wrote a sloppy 8 on the lid with sharpie.\nOpen? 'y'/'n'\"");
+		System.out.println("Someone wrote a sloppy 3 on the lid with sharpie.\nOpen? 'y'/'n'\"");
 	}
 	
 	public void aShelfH() { //Modified and added by Haine

@@ -1,10 +1,8 @@
-package LockLeverPuzzle;
-
 
 /**
  * @author Fiona
  *
- * Version updated: August 7, 2019
+ * Version updated: August 8, 2019
  */
 import static org.junit.Assert.*;
 

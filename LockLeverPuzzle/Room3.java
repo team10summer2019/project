@@ -1,5 +1,3 @@
-package LockLeverPuzzle;
-import finalMaze.Player;
 import java.util.Scanner;
 /**
  * @author Fiona 
@@ -11,7 +9,8 @@ public class Room3 extends GenericRoom {
 	
 	//Room specific variables
 	private static boolean inRoom3 = true;
-	private static Room3 gameMethods = new Room3();
+	
+	//private static Room3 gameMethods = new Room3();
 	//Other variables
 	private static Scanner keyboard = new Scanner(System.in);
 	private String userInput;
@@ -19,9 +18,15 @@ public class Room3 extends GenericRoom {
 	private Player p1 = new Player();//transfer player input into player
 	private StaticObjects stat_item = new StaticObjects();
 	private DynamicObjects dyn_item = new DynamicObjects();
-	private Inventory playerInventory = new Inventory();
-	private FloorInventory roomInventory = new FloorInventory();
-	
+	private Inventory playerInventory;//*
+	private FloorInventory roomInventory;//*
+
+//////////CONSTRUCTORS////////////
+	public Room3(GenericRoom gr) { //*
+		super();
+		this.playerInventory = new Inventory(gr.playerInventory);
+		this.roomInventory = new FloorInventory(gr.roomInventory);
+	}	
 //////////EXIT VIEW////////////
 /*
 * Leaves room
@@ -46,17 +51,17 @@ public class Room3 extends GenericRoom {
 			System.out.println("To stop looking around the room, type:\n'Exit'");
 			userInput = keyboard.next();
 			if (userInput.equalsIgnoreCase("i")) {
-				gameMethods.viewInventory();
+				viewInventory();
 			}
 			///////VIEW CABINET
 			if (userInput.equalsIgnoreCase("cabinet")) {
-				gameMethods.viewCabinet();
+				viewCabinet();
 			}
 			///////VIEW UNDER CABINET
 			if (userInput.equalsIgnoreCase("under")) {
-				gameMethods.viewUnderCabinet();
+				viewUnderCabinet();
 			}
-			gameMethods.exitView(userInput);
+			exitView(userInput);
 		}
 	}
 //////////SET INROOM3////////////

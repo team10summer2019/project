@@ -1,6 +1,3 @@
-package LockLeverPuzzle;
-import finalMaze.Player;
-
 import java.util.Scanner;
 /**
  * @author Fiona 
@@ -12,7 +9,7 @@ public class Room4 extends GenericRoom {
 	
 	//Room specific variables
 	private static boolean inRoom4 = true;
-	private static Room4 gameMethods = new Room4();
+	//private static Room4 gameMethods = new Room4();
 	//Other variables
 	private static Scanner keyboard = new Scanner(System.in);
 	private String userInput;
@@ -20,27 +17,14 @@ public class Room4 extends GenericRoom {
 	private Player p1 = new Player();//transfer player input into player
 	private StaticObjects stat_item = new StaticObjects();
 	private DynamicObjects dyn_item = new DynamicObjects();
-	private Inventory playerInventory;
-	private FloorInventory roomInventory;
-/////////////////////////////////////
-	public Room4() {
+	private Inventory playerInventory; //*
+	private FloorInventory roomInventory; //*
+//////////CONSTRUCTORS////////////
+	public Room4(GenericRoom gr) { //*
 		super();
-		setPlayerInventory(super.playerInventory);
-		setRoomInventory(super.roomInventory);
-	}
-	public Inventory getPlayerInventory() {
-		return this.playerInventory;
-	}
-	public void setPlayerInventory(Inventory playerInventory) {
-		this.playerInventory = playerInventory;
-	}
-	public FloorInventory getRoomInventory() {
-		return this.roomInventory;
-	}
-	public void setRoomInventory(FloorInventory roomInventory) {
-		this.roomInventory = roomInventory;
-	}
-	
+		this.playerInventory = new Inventory(gr.playerInventory);
+		this.roomInventory = new FloorInventory(gr.roomInventory);
+	}	
 //////////EXIT VIEW////////////
 /*
 * Leaves room
@@ -65,22 +49,22 @@ public class Room4 extends GenericRoom {
 			userInput = keyboard.next();
 			///////VIEW INVENTORY
 			if (userInput.equalsIgnoreCase("i")) {
-				gameMethods.viewInventory();
+				viewInventory();
 			}
 			///////VIEW BEAR
-			//gameMethods.viewBear();
+			//viewBear();
 			if (userInput.equalsIgnoreCase("bear")) {
-				gameMethods.viewBear();
+				viewBear();
 			}
 			////////VIEW REDBOX
 			if (userInput.equalsIgnoreCase("redbox")) {
-				gameMethods.viewRedBox();
+				viewRedBox();
 			}
 			////////VIEW SHELF
 			if (userInput.equalsIgnoreCase("shelf")) {
-				gameMethods.viewShelf();
+				viewShelf();
 			}
-			gameMethods.exitView(userInput);
+			exitView(userInput);
 		}
 	}
 //////////SET INROOM1////////////

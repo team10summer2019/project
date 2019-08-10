@@ -1,7 +1,4 @@
-package LockLeverPuzzle;
 import java.util.Scanner;
-import finalMaze.Player;
-
 /**
  * @author Fiona
  * @author Haine
@@ -11,15 +8,15 @@ import finalMaze.Player;
 
 public class Room2Haine extends GenericRoom {
 	private static boolean inRoom2H = true;
-	private static Room2Haine gameMethods = new Room2Haine();
+	//private static Room2Haine gameMethods = new Room2Haine();
 	private static Scanner keyboard = new Scanner(System.in); 
 	private String userInput;
 	
 	private Player p1 = new Player();//transfer player input into player
 	private StaticObjects stat_item = new StaticObjects();
 	private DynamicObjects dyn_item = new DynamicObjects();
-	private Inventory playerInventory = new Inventory();
-	private FloorInventory roomInventory = new FloorInventory();
+	private Inventory playerInventory; //*
+	private FloorInventory roomInventory; //*
 	//private boolean gotBearLever1 = false;
 	//private boolean gotBearLever2 = false;
 	/*
@@ -29,7 +26,7 @@ public class Room2Haine extends GenericRoom {
 		while (gameRunning == true) {
 			//////////GAME MENU
 			System.out.println("\nYou decide to take a look around the room. Some things stand out to you.");
-			this.gotBearLever1 = gameMethods.room1();
+			this.gotBearLever1 = room1();
 			} 
 		return this.gotBearLever1;		
 	}
@@ -40,11 +37,17 @@ public class Room2Haine extends GenericRoom {
 		while (gameRunning == true) {
 			//////////GAME MENU
 			System.out.println("\nFor whatever reason, you hold your breath when you approach this room. You let go of your breath and choose to look around anyways.");
-			this.gotBearLever2 = gameMethods.room2();
+			this.gotBearLever2 = room2();
 			} 
 		return this.gotBearLever2;		
 	}
 	*/
+//////////CONSTRUCTORS////////////
+	public Room2Haine(GenericRoom gr) { //*
+		super();
+		this.playerInventory = new Inventory(gr.playerInventory);
+		this.roomInventory = new FloorInventory(gr.roomInventory);
+	}
 //////////EXIT VIEW////////////
 /*
 * Leaves room
@@ -73,22 +76,22 @@ public class Room2Haine extends GenericRoom {
 			userInput = keyboard.next();
 			///////VIEW INVENTORY
 			if (userInput.equalsIgnoreCase("i")) {
-				gameMethods.viewInventory();
+				viewInventory();
 			}
 			///////VIEW ORANGEBOX
-			//gameMethods.viewBear();
+			//viewBear();
 			if (userInput.equalsIgnoreCase("orangebox")) {
-				gameMethods.viewOrangeBox();
+				viewOrangeBox();
 			}
 			////////VIEW YELLOW BOX
 			if (userInput.equalsIgnoreCase("purplebox")) {
-				gameMethods.viewPurpleBox();
+				viewPurpleBox();
 			}
 			////////VIEW GREEN BOX
 			if (userInput.equalsIgnoreCase("toybox")) {
-				gameMethods.viewToyBox();
+				viewToyBox();
 			}
-			gameMethods.exitView(userInput);
+			exitView(userInput);
 			
 		}//End of while loop
 		//return gotBearLever2;

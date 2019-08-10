@@ -1,5 +1,4 @@
-//test update
-package LockLeverPuzzle;
+
 /**
  * @author Fiona
  *
@@ -77,5 +76,10 @@ public class DynamicObjects extends StaticObjects{
 	private String string_topHat() {
 		System.out.println("It is a fancy black felt tophat with a black satin ribbon around it.");
 		return "topHat";
+	}
+	public void combinedLever_String(LockLever lockLeverCheck) {
+		if (lockLeverCheck.combinedLeverStatus() == true) {
+			System.out.println("*Combine LeverPieces? 'Combine'*");
+		}
 	}
 }

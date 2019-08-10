@@ -1,7 +1,4 @@
-package LockLeverPuzzle;
-
 import java.util.Scanner;
-import finalMaze.Player;
 
 /**
  * @author Fiona
@@ -22,15 +19,19 @@ public class GenericRoom {
 	private DynamicObjects dyn_item = new DynamicObjects();
 	protected Inventory playerInventory;
 	protected FloorInventory roomInventory;
+	protected LockLever lockLeverCheck;
 	
-	//Room specific variables
-	private static Room1Haine room1HGM = new Room1Haine();
-	private static Room2Haine room2HGM = new Room2Haine();
-	private static Room3 room3GM = new Room3();
-	private static Room4 room4GM = new Room4();
-	public GenericRoom() {
+	//Room specific variables:gameMenus(GM)
+	private static GenericRoom gr = new GenericRoom();
+	private static Room1Haine room1HGM; //*
+	private static Room2Haine room2HGM; //*
+	private static Room3 room3GM; //*
+	private static Room4 room4GM; //*
+	
+	public GenericRoom() { //*
 		playerInventory = new Inventory();
 		roomInventory = new FloorInventory();
+		lockLeverCheck = new LockLever();
 	}
 	//Other variables
 	private String roomName;  
@@ -60,15 +61,16 @@ public class GenericRoom {
 		}
 		setGameRunning(false);
 	}
-	/////////////////
-	/////////////////////////////////////////////////
+	
 	/////////ROOMS////////////////
 
 	//ROOM 1 HAINE
 	private void gameMenu_Room1Haine() {
 		setGameRunning(true);
+		room1HGM = new Room1Haine(gr); //*
 		while (gameRunning == true) {
 			//////////SET roomName
+			
 			setRoomName("Room2");
 			//////////GAME MENU
 			System.out.println("\nThere is a room(1H) with a bunch of objects, time to visit the room.");
@@ -78,8 +80,7 @@ public class GenericRoom {
 				System.out.println("\nYou decide to take a look around the room. Some things stand out to you.");
 				System.out.println("Initializing..");
 				room1HGM.room1H();
-				setGameRunning(false);
-				
+				setGameRunning(false);				
 			} 
 			exitView(userInput, this.roomName);
 		}
@@ -88,9 +89,11 @@ public class GenericRoom {
 	//ROOM 2 HAINE
 	private void gameMenu_Room2Haine() {
 		setGameRunning(true);
+		room2HGM = new Room2Haine(gr); //*
 		while (gameRunning == true) {
 			//////////SET roomName
 			setRoomName("Room2H");
+			
 			//////////GAME MENU
 			System.out.println("\nThere is a room(2H) with a bunch of objects, time to visit the room.");
 			System.out.println("Type 'Explore' to begin and 'Exit'");
@@ -100,7 +103,6 @@ public class GenericRoom {
 				System.out.println("Initializing..");
 				room2HGM.room2H();
 				setGameRunning(false);
-				exitView(userInput, this.roomName);
 			} 
 			exitView(userInput, this.roomName);
 		}
@@ -109,6 +111,7 @@ public class GenericRoom {
 	//ROOM 3
 	private void gameMenu_Room3() {
 		setGameRunning(true);
+		room3GM = new Room3(gr); //*
 		while (gameRunning == true) {
 			//////////SET roomName
 			setRoomName("Room3");
@@ -120,7 +123,6 @@ public class GenericRoom {
 				System.out.println("Initializing..");
 				room3GM.room3();
 				setGameRunning(false);
-				exitView(userInput, this.roomName);
 			} 
 			exitView(userInput, this.roomName);
 		}
@@ -129,6 +131,7 @@ public class GenericRoom {
 	//ROOM 4
 	private void gameMenu_Room4() {
 		setGameRunning(true);
+		room4GM = new Room4(gr); //*
 		while (gameRunning == true) {
 			//
 			//////////SET roomName
@@ -170,16 +173,23 @@ public class GenericRoom {
 		}
 	}
 //////////SET GAMERUNNING////////////
-	public void setGameRunning(boolean status) {
-		this.gameRunning = status;
+	private void setGameRunning(boolean status) {
+		GenericRoom.gameRunning = status;
 	}
 //////////SET ROOMNAME////////////
 	/*
 	 * sets specific room that will be running
 	 */
-	public void setRoomName(String roomName) {
+	private void setRoomName(String roomName) {
 		this.roomName = roomName;
 	}
-	
-	
+//////////Add Unique Object to Inventory////////////
+	//change status of dynamic object(ANY!)
+	//Adds unique item to Inventory and removes unique item from FloorInventory
+	protected void uniqueObject_toInventory(String item) { 
+		System.out.println("You added '" + item + "' to your inventory.");
+		dyn_item.changeStatus_dynObj(item);
+		this.playerInventory.addUniqueItemToInventory(item); //adds item to Inventory
+		roomInventory.remove_flrInv(item); //removes item from FloorInventory
+	}
 }

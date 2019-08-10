@@ -1,4 +1,3 @@
-package LockLeverPuzzle;
 /**
  * @author Fiona
  *
@@ -19,7 +18,10 @@ public class FloorInventory {
 		add_unique_flrInv("leverPiece1");
 		add_unique_flrInv("leverPiece2");
 		add_unique_flrInv("cabinetKey");
-		//add_unique_flrInv("topHat");
+		add_unique_flrInv("topHat");
+	}
+	public FloorInventory(FloorInventory toCopy) {
+		this.floorInventory = toCopy.floorInventory;
 	}
 	public void remove_flrInv(String item) {
 		floorInventory.remove(item);
@@ -35,6 +37,10 @@ public class FloorInventory {
 		System.out.println("Floor Inventory:");
 		System.out.println(floorInventory);
 		return ""+this.floorInventory;
+	}
+	//GET FLOOR INVENTORY
+	public ArrayList<String> getFloorInventory(){
+		return this.floorInventory;
 	}
 
 }
