@@ -337,7 +337,7 @@ public class MazeGame {
 		m.setRoomPlayer(0,0,true);  // place the player in the first room
 		// room (1.0)   
 		m.setRoomWalls(1,0,true,false,true,true);
-		m.setRoomItems(1,0,false,true,false,false,false,false,false); // has door
+		m.setRoomItems(1,0,false,true,false,false,false,false,false,false); // has door
 		// room (2,0)
 		m.setRoomWalls(2,0,false,false,true,true);
 		// room (0,3)
@@ -356,17 +356,17 @@ public class MazeGame {
 		m.setRoomWalls(1,2,false,true,false,false);
 		// room (2,2)
 		m.setRoomWalls(2,2,true,true,true,false);
-		m.setRoomItems(2,2,true,false,false,false,false,false,false); // has key
+		m.setRoomItems(2,2,true,false,false,false,false,false,false,false); // has key
 		// room (3,2)
 		m.setRoomWalls(3,2,true,true,false, false);
 		// room (0,3)
 		m.setRoomWalls(0,3,true,false,true,true);
-		m.setRoomItems(0,3,false,false,true,false,false,false,false); // has map
+		m.setRoomItems(0,3,false,false,true,false,false,false,false,false); // has map
 		// room (1,3)
 		m.setRoomWalls(1,3,false,true,false,true);
 		// room (3,2)
 		m.setRoomWalls(2,3,true,false,false,true);
-		m.setRoomItems(2,3,false,false,false,false,true,true,false); //place the riddle in the room below the key
+		m.setRoomItems(2,3,false,false,false,false,true,true,false,false); //place the riddle in the room below the key
 		// room (3,3)
 		m.setRoomWalls(3,3,false,true,false,true);
 		
@@ -445,18 +445,18 @@ public class MazeGame {
 		int rand; // integer to hold random number
 		rand = randGen.nextInt(); // get a random number  
 		if (rand % 3 ==0){
-		m.setRoomItems(3,4,false,false,true,false,false); // Place the map in (3,5)
+		m.setRoomItems(3,4,false,false,true,false,false,false,false,false); // Place the map in (3,5)
 		} else if (rand% 3 ==1){
-		m.setRoomItems(2,0,false,false,true,false,false); // Place the map in (2,0)
+		m.setRoomItems(2,0,false,false,true,false,false,false,false,false); // Place the map in (2,0)
 		} else { 
-		m.setRoomItems(5,5,false,false,true,false,false); // Place the map in (2,0)
+		m.setRoomItems(5,5,false,false,true,false,false,false,false,false); // Place the map in (2,0)
 		}
 		
 		// place door in specific location
-		m.setRoomItems(0,5,false,true,false,false,false);
+		m.setRoomItems(0,5,false,true,false,false,false,false,false,false);
 		m.setDoorLocation(0,5);  // change the door location 
 		// place the key in specific location
-		m.setRoomItems(5,0,true,false,false,false,false);
+		m.setRoomItems(5,0,true,false,false,false,false,false,false,false);
 		
 		// place the Food in a specific location in front of the key
 		//m.setRoomItems(4,0,false,false,false,false,true);
@@ -806,7 +806,7 @@ public class MazeGame {
 		
 	// Fight Dialog
 	/**
-	Controls the Fight Dialog and Output Durring a Fight Sequence.
+	Controls the Fight Dialog and Output During a Fight Sequence.
 	@param gameBoard A Maze object that the game is running on. 
 	*/
 	public static void fightMonster(Maze gameBoard){	
