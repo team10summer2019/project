@@ -233,8 +233,8 @@ public class MazeGameGUI extends Application {
 StackPane mapStack = new StackPane();	
 //ImageView mapProjection = new ImageView("images/map1.png");
 
-//dot.setFill(null);  // use null to make it disappear off of the pane
-dot.setFill(Color.GREEN);
+dot.setFill(null);  // use null to make it disappear off of the pane
+//dot.setFill(Color.RED);
 //dot.setLayoutX(375);     
 //dot.setLayoutY(500);
 dot.setTranslateX(-130);  // how to position the circle??
@@ -355,6 +355,7 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 			} else if (event.getCharacter().charAt(0) == 'r') {
 				storeInput="Return";
 				messageLabel.setText("Return");
+				dot.setFill(null);
 			} else if (event.getCharacter().charAt(0) == 't') {
 				storeInput="take";
 				messageLabel.setText("Take");
@@ -372,6 +373,7 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 				messageLabel.setText(storeInput);
 			} else if (event.getCharacter().charAt(0) == 'm') {
 				storeInput="map";
+				dot.setFill(Color.RED);
 				messageLabel.setText(storeInput);
 			} else if (event.getCharacter().charAt(0) == 'l') {
 				storeInput="look";
