@@ -1,4 +1,6 @@
 package JUnitTests;
+import LockLeverPuzzle.*;
+
 /**
  * @author Fiona
  *
@@ -8,7 +10,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import maze2.LockLever;
+//import maze2.LockLever;
 
 import java.util.ArrayList;
 

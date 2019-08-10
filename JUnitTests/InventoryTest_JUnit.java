@@ -1,13 +1,15 @@
 package JUnitTests;
 
+
 /**
  * @author Fiona
  *
  * Version updated: August 7, 2019
  */
 
-import maze2.Inventory; //imports Inventory for testing
+//import maze2.Inventory; //imports Inventory for testing
 
+import LockLeverPuzzle.*;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
