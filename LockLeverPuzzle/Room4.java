@@ -1,3 +1,6 @@
+package LockLeverPuzzle;
+import finalMaze.Player;
+
 import java.util.Scanner;
 /**
  * @author Fiona 

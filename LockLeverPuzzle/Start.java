@@ -1,9 +1,10 @@
-
+package LockLeverPuzzle;
 /**
  * @author Fiona
  * Version Updated: July 27, 2019
  */
 import java.util.Scanner;
+import finalMaze.Player;
 
 public class Start {
 	private static boolean gameRunning = true;
