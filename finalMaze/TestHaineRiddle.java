@@ -25,8 +25,8 @@ public class TestHaineRiddle {
 	public CreateRiddle riddleTwo(){
 		///MAKE A LOT OF RIDDLES
 		CreateRiddle theRiddle = new CreateRiddle();
-		CreateRiddle riddle5 = new CreateRiddle("OWL" ,"I always ask but never answer. What do you think I am?\n");
-		CreateRiddle riddle6 = new CreateRiddle("EGG", "You can only use me after you break me. What am I?\n");
+		CreateRiddle riddle5 = new CreateRiddle("OWL" ,"I always ask but never answer. Who am I?\n");
+		CreateRiddle riddle6 = new CreateRiddle("EGG", "You can only eat me after you break me. What am I?\n");
 		CreateRiddle riddle7 = new CreateRiddle("BREATH","What can you hold without using your hands or arms?\n");
 		theRiddle.addRiddles(riddle5);
 		theRiddle.addRiddles(riddle6);

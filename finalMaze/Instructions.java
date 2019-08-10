@@ -75,7 +75,7 @@ public class Instructions {
 	public String yellowBoxInstructions() {
 		return ("You unfold the note. It is a torn page from a nursery book. The note reads:\n")
 		+("__________________\n")
-		+("|'One,Two'        |\n")
+		+("|'One,Two'         |\n")
 		+("|'Tie your Shoe.' |\n")
 		+("|_________________|\n")
 		+("The 'Two' has been circled in crayon. There is a picture of a green shoe right below the nursery rhyme.");
