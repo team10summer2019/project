@@ -1,7 +1,6 @@
 package finalMaze;
 
 
-
 import java.util.Random;
 import java.util.Scanner;
 //import java.util.concurrent.TimeUnit; // for delay before exit
@@ -9,6 +8,7 @@ import java.util.Scanner;
 import javafx.application.Application;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 //import javafx.scene.Group;
 import javafx.stage.Stage;
@@ -24,6 +24,8 @@ import javafx.event.*;
 import javafx.scene.input.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+
+import javafx.geometry.Insets;
 
 /**
 Class MazeGameGUI is the Main GUI class that runs the Maze Game in GUI mode. Creates a Maze object gameBoard which is used to run the game.
@@ -95,6 +97,9 @@ public class MazeGameGUI extends Application {
 	
 	private Canvas canvasRight = new Canvas(300,300);
 	private GraphicsContext gcR = canvasRight.getGraphicsContext2D();
+	
+	Circle dot = new Circle (20,20,5);  // circle to track player location in the map
+	
 	
 ///////////////////////////// TEXTURE IMAGES ///////////////////////////////////////
 	Image startLogo = new Image("images/startlogo.jpg");
@@ -224,18 +229,45 @@ public class MazeGameGUI extends Application {
 		
 		bigText.setWrapText(true);  // wrap text
 		bigText.setEditable(false); // no editing
+//////////////////Map Grid ///////////////////////////////////////////		
+StackPane mapStack = new StackPane();	
+//ImageView mapProjection = new ImageView("images/map1.png");
+
+//dot.setFill(null);  // use null to make it disappear off of the pane
+dot.setFill(Color.GREEN);
+//dot.setLayoutX(375);     
+//dot.setLayoutY(500);
+dot.setTranslateX(-130);  // how to position the circle??
+dot.setTranslateY(-100);
+
+mapStack.getChildren().addAll(canvasLeft, dot);
+		
+		
+		
 ///////////////////////////// SCENE and STAGE SHOW ////////////////////////////////////////////
 		// build entire scene: grid and label
 		
-		GridPane sticky = new GridPane();
-		
-		sticky.add(canvasLeft, 1, 0);
+		GridPane sticky = new GridPane();	
+		sticky.add(mapStack, 1, 0);
 		//sticky.add(canvasRight, 1, 0);
 		sticky.add(grid2, 0, 0);
 		sticky.add(grid,2, 0);
 		//sticky.add(grid2, 1, 1);
 		sticky.add(verticalBox, 1, 1);
 		sticky.add(bigText, 0, 1);
+
+  ////////////////////// AESTHETIC WINDOW TILING  ///////////////////
+		sticky.setTranslateX(35);
+		sticky.setTranslateY(30);
+		
+		mapStack.setTranslateX(20);
+		grid.setTranslateX(70);
+		verticalBox.setTranslateX(20);
+		verticalBox.setTranslateY(20);
+		
+		bigText.setTranslateY(20);		
+		
+//////////////////////////////////////////////////////////////////////////////
 		
 		BorderPane root = new BorderPane();
 		
@@ -246,10 +278,17 @@ public class MazeGameGUI extends Application {
 		root.setBottom(messageLabel);  // place to put the messages to user output
 		//root.setTop(canvas); // add a canvas to the left pane
 		
+		messageLabel.setTranslateY(-20);
+		messageLabel.setTranslateX(50);
+		/////////////////////  BACKGROUND COLOURING //////////////////////////////////
 		
-		Scene scene = new Scene(root, 870, 600);
+		Background bg = new Background(new BackgroundFill(Color.LIGHTBLUE,new CornerRadii(20.0),new Insets(5.0) ) );
+		root.setBackground(bg); 
 		
-		//Start screen for the maze
+		Scene scene = new Scene(root, 960, 660);
+	
+	/////////////////// SPLASH SCREEN /////////////////////////////////
+		//  Start screen for the maze
 		StackPane stackImages = new StackPane(); 
 		ImageView Logo = new ImageView(startLogo);
 		Button playButton = new Button("Play!");
@@ -261,7 +300,7 @@ public class MazeGameGUI extends Application {
 		startMenu.getChildren().add(playButton);
 		stackImages.getChildren().addAll(Logo, startMenu);
 		Scene startScreen = new Scene(stackImages, 815, 600);
-		
+////////////////////////////////////////////////////////////////////////////		
 		// key press action events
 		root.setOnKeyTyped( keyInput );
 		
@@ -295,22 +334,24 @@ public class MazeGameGUI extends Application {
 				storeInput="quit";
 				messageLabel.setText(storeInput);
 			//https://stackoverflow.com/questions/22014950/javafx-moving-image-with-arrow-keys-and-spacebar
-			} else if (event.getCharacter().charAt(0) == 'a' || event.getCode() == KeyCode.LEFT ) {
+			} else if (event.getCharacter().charAt(0) == 'a' || event.getCode().equals(KeyCode.LEFT) ) {
 				storeInput="left";
 				messageLabel.setText("Move Left");
-			} else if (event.getCharacter().charAt(0) == 's' || event.getCode() == KeyCode.DOWN ) {
+			} else if (event.getCharacter().charAt(0) == 's' || event.getCode().equals(KeyCode.DOWN) ) {
 				storeInput="down";
 				messageLabel.setText("Move Down");
-			} else if (event.getCharacter().charAt(0) == 'd' || event.getCode() == KeyCode.RIGHT ) {
+			} else if (event.getCharacter().charAt(0) == 'd' || event.getCode().equals(KeyCode.RIGHT) ) {
 				storeInput="right";
 				messageLabel.setText("Move Right");
-			} else if (event.getCharacter().charAt(0) == 'w' || event.getCode() == KeyCode.UP ) {
+			} else if (event.getCharacter().charAt(0) == 'w' || event.getCode().equals(KeyCode.UP) ) {
 				storeInput="up";
 				messageLabel.setText("Move Up");
-			} else if (event.getCode() == KeyCode.SPACE ) {
+			} else if (event.getCode().equals(KeyCode.SPACE) ) {
 				storeInput="SpaceBar";	
-			} else if (event.getCode() == KeyCode.ENTER) {
-				storeInput="Enter";	
+			} else if (event.getCode().equals(KeyCode.ENTER) ) {
+				storeInput=textIn.getText();
+				textIn.setText(""); // clear the input
+				messageLabel.setText("ENTER");
 			} else if (event.getCharacter().charAt(0) == 'r') {
 				storeInput="Return";
 				messageLabel.setText("Return");
@@ -386,7 +427,8 @@ public class MazeGameGUI extends Application {
 			storeInput=textIn.getText();
 			// output to the message label
 			messageLabel.setText("Command: " + storeInput);
-						
+			textIn.setText(""); // clear the input text box
+			
 			textModeOutput();	// show the updated display
 			inputControl();
 			// move the monster if alive and you're not fighting
@@ -494,6 +536,9 @@ public class MazeGameGUI extends Application {
 	
 			postCurrentRoom();
 			wipeItemGrid();
+			wipeHealthGrid();
+			postHealth();
+			postItems();
 	}
 
 	// Graphics display
@@ -1489,6 +1534,8 @@ public class MazeGameGUI extends Application {
 	System.out.println("Attack: Fight the maze Wraith in the fighting dialogue");
 	System.out.println("Run: Run away from the maze Wraith in the fighting dialogue");
 	System.out.println("Open: Opens the Door if you Have a Key");
+	System.out.println("Play: Play a Riddle");
+	System.out.println("Look: Search the room for clues");
 	System.out.println("Escape: Escape the Maze if the Door is Open");
 	System.out.println("Control Keys: a: left, s: down,d: right,w: up");
 	System.out.println("Control Keys: r: return, m: map, t: take , q: quit, h: help o: open, e: escape, f:fight");
@@ -1497,7 +1544,7 @@ public class MazeGameGUI extends Application {
 	System.out.println("Type \"Return\" and press Enter to return to the Maze");
 	
 	// set the help info into the text area box 
-	bigText.setText("Welcome to the Maze\nHelp: prints useage\nQuit:Exits the game\nReturn:returns to the map\nControl Keys: a: left, s: down,d: right,w: up\nr: return, m: map, t: take , q: quit, \nh: help o: open, e: escape, f:fight");
+	bigText.setText("Welcome to the Maze\nHelp: prints useage\nQuit:Exits the game\nReturn:returns to the map\nControl Keys: a: left, s: down,d: right,w: up\nr: return, m: map, t: take , q: quit, \nh: help o: open, e: escape, f:fight, p: play riddle, l: look");
 
 	return;
 	}
