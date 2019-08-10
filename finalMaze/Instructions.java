@@ -69,15 +69,15 @@ public class Instructions {
 	}
 	
 	public String redBoxInstructions() {
-		return ("A black of seven of spades playing card.");
+		return ("A black seven of spades playing card.");
 	}
 	
 	public String yellowBoxInstructions() {
-		return ("You unfold the note. It is a torn page from a nursery book. The note reads:")
-		+("__________________")
-		+("|'One,Two'        |")
-		+("|'Tie your Shoe.' |")
-		+("|_________________|")
+		return ("You unfold the note. It is a torn page from a nursery book. The note reads:\n")
+		+("__________________\n")
+		+("|'One,Two'        |\n")
+		+("|'Tie your Shoe.' |\n")
+		+("|_________________|\n")
 		+("The 'Two' has been circled in crayon. There is a picture of a green shoe right below the nursery rhyme.");
 	}
 	
