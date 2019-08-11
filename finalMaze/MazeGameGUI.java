@@ -544,6 +544,7 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 			tempRoom.populateRoomGrid(); // load the information and characters currently set for the room into the roomGrid
 	
 			postCurrentRoom();
+			dot.setFill(null);
 			wipeItemGrid();
 			wipeHealthGrid();
 			postHealth();
@@ -574,6 +575,7 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 			drawImage(gcL,image);
 						
 			postCurrentRoom();   // display the current room 
+			dot.setFill(null);
 			wipeItemGrid();
 			wipeHealthGrid();
 			postHealth();
