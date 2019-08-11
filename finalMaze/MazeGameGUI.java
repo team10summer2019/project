@@ -1129,7 +1129,7 @@ mapStack.getChildren().addAll(canvasLeft, dot);
  		tempRoom = m.getRoom(randPoint);  // get a copy of the room at randLocation
  		// set the monster to be at the location 
  		m.setMonsterLocation(randPoint);  
- 		// randomize monster start location but don't overwrite previous conditions except moster variable 
+ 		// randomize monster start location but don't overwrite previous conditions except monster variable 
  		m.setRoomItems(randPoint,tempRoom.getHasKey(),tempRoom.getHasDoor(),tempRoom.getHasMap(),true,tempRoom.getHasFood());  // Working
  		
  		
@@ -1463,7 +1463,11 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 			
 		if ( hitPlay == true && currentPosition.isEqual(firstRiddle) && (storeInput.equalsIgnoreCase("penny") || storeInput.equalsIgnoreCase("ice") || storeInput.equalsIgnoreCase("blackboard") || storeInput.equalsIgnoreCase("human"))) {
 			solved = true;			//If the riddle has been solved
-				gameBoard.setRoomItems(0,2,false,false,false,false,false,false,false,false,false,false,false); // has riddle
+			
+				/// This line wipes out other items that might be in the room as well like random placed maps or keys
+			 	//gameBoard.setRoomItems(0,2,false,false,false,false,false,false,false,false,false,false,false); // has riddle
+				tempRoom=gameBoard.getRoom(0,2);
+				gameBoard.setRoomItems(0,2,tempRoom.getHasKey(),tempRoom.getHasDoor(),tempRoom.getHasMap(),tempRoom.getHasMonster(),tempRoom.getHasFood(),false,tempRoom.getHasHint(),tempRoom.getHasComboLock(),tempRoom.getHasGoat(),tempRoom.getHasWolf(),tempRoom.getHasCabbage()); // has riddle
 				bigText.setText("The right wall disappeared to reveal a path..\n");
 				gameBoard.setRoomWalls(0,2,true,false,false,true);
 				hitPlay = false;
@@ -1471,7 +1475,11 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 		
 		if( hitPlay == true && currentPosition.isEqual(secondRiddle) && (storeInput.equalsIgnoreCase("owl") || storeInput.equalsIgnoreCase("egg") || storeInput.equalsIgnoreCase("breath")) ) {
 			solved = true;
-			gameBoard.setRoomItems(2,3,false,false,false,false,false,false,false,false,false,false,false); // has riddle
+			tempRoom=gameBoard.getRoom(2,3);
+			gameBoard.setRoomItems(2,3,tempRoom.getHasKey(),tempRoom.getHasDoor(),tempRoom.getHasMap(),tempRoom.getHasMonster(),tempRoom.getHasFood(),false,tempRoom.getHasHint(),tempRoom.getHasComboLock(),tempRoom.getHasGoat(),tempRoom.getHasWolf(),tempRoom.getHasCabbage()); // has riddle
+			// don't overwrite pre-existing items in a room by setting everything to false, first get all the previous values with a getter
+			//setRoomItems(int x , int y,  boolean key, boolean door ,boolean map, boolean monster, boolean food, boolean riddle, boolean hint, boolean comboLock, boolean goat, boolean wolf, boolean cabbage )
+					
 			bigText.setText("The wall in front of you disappeared. You see a key in the distance...\n");
 			gameBoard.setRoomWalls(2,3,true,false,false,true);
 			hitPlay = false;
