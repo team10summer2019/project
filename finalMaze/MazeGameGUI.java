@@ -309,8 +309,8 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 		Button playButton = new Button("Play!");
 		Text author = new Text();
 		String text = "THE MAZE a game by:\n" + 
-				"Ron Rodriguez, Haine Kim, Steven On , Fiona Yong, and Kate Hsu \n" + 
-				"Copyright (c) 2019.  Licensed under the GNU Public License GPL version 3.0./\n";
+				      "Ron Rodriguez, Haine Kim, Steven On , Fiona Yong, and Kate Hsu \n" + 
+				      "Copyright (c) 2019.  Licensed under the GNU Public License GPL version 3.0./\n";
 		author.setText(text);
 		author.setFill(Color.WHITE);
 		playButton.setMinHeight(50);
@@ -318,8 +318,8 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 		playButton.setOnAction(e -> primaryStage.setScene(scene));
 		playButton.setLayoutX(375);
 		playButton.setLayoutY(500);
-		author.setLayoutX(0);
-		author.setLayoutY(560);
+		author.setLayoutX(230);
+		author.setLayoutY(460);
 		
 		startMenu.getChildren().add(playButton);
 		startMenu.getChildren().add(author);
