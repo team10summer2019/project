@@ -1,0 +1,81 @@
+Room.java:127: error: cannot find symbol
+	 roomHeight= 6 ;
+	 ^
+  symbol:   variable roomHeight
+  location: class Room
+Room.java:154: error: cannot find symbol
+	 roomGrid = new char[roomWidth][roomHeight];  // construct a room grid  
+	                                ^
+  symbol:   variable roomHeight
+  location: class Room
+Room.java:497: error: cannot find symbol
+		roomGrid[roomWidth/2-1][roomHeight/2]='*';
+		                        ^
+  symbol:   variable roomHeight
+  location: class Room
+Room.java:499: error: cannot find symbol
+		roomGrid[roomWidth/2-1][roomHeight/2]=' ';
+		                        ^
+  symbol:   variable roomHeight
+  location: class Room
+Room.java:504: error: cannot find symbol
+		roomGrid[roomWidth/2][roomHeight/2]='M';
+		                      ^
+  symbol:   variable roomHeight
+  location: class Room
+Room.java:506: error: cannot find symbol
+		roomGrid[roomWidth/2][roomHeight/2]='K';
+		                      ^
+  symbol:   variable roomHeight
+  location: class Room
+Room.java:508: error: cannot find symbol
+		roomGrid[roomWidth/2][roomHeight/2]='W';
+		                      ^
+  symbol:   variable roomHeight
+  location: class Room
+Room.java:510: error: cannot find symbol
+		roomGrid[roomWidth/2][roomHeight/2]='R';
+		                      ^
+  symbol:   variable roomHeight
+  location: class Room
+Room.java:512: error: cannot find symbol
+		roomGrid[roomWidth/2][roomHeight/2]='B';
+		                      ^
+  symbol:   variable roomHeight
+  location: class Room
+Room.java:514: error: cannot find symbol
+		roomGrid[roomWidth/2][roomHeight/2]='L';
+		                      ^
+  symbol:   variable roomHeight
+  location: class Room
+Room.java:516: error: cannot find symbol
+		roomGrid[roomWidth/2][roomHeight/2]='G';
+		                      ^
+  symbol:   variable roomHeight
+  location: class Room
+Room.java:518: error: cannot find symbol
+		roomGrid[roomWidth/2][roomHeight/2]=' ';
+		                      ^
+  symbol:   variable roomHeight
+  location: class Room
+Room.java:524: error: cannot find symbol
+			roomGrid[roomWidth/2][roomHeight/2]='D';
+			                      ^
+  symbol:   variable roomHeight
+  location: class Room
+Room.java:528: error: cannot find symbol
+			roomGrid[roomWidth-2][roomHeight/2] = 'D';
+			                      ^
+  symbol:   variable roomHeight
+  location: class Room
+Room.java:530: error: cannot find symbol
+			roomGrid[roomWidth/2][roomHeight-2] = 'D';
+			                      ^
+  symbol:   variable roomHeight
+  location: class Room
+Room.java:532: error: cannot find symbol
+			roomGrid[1][roomHeight/2] = 'D';
+			            ^
+  symbol:   variable roomHeight
+  location: class Room
+16 errors

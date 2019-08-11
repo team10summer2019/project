@@ -1,0 +1,37 @@
+
+/**
+ * @author Fiona
+ *
+ */
+/////////////////////////////
+Last Updated: AUG 6,2019
+
+# LockLeverPuzzle(plus Escape Room Implementations)
+
+===Overview:===
+
+Folder LockLeverPuzzle has multiple demos of the pieces that would fit together for a specialized puzzle by a class called LockLeverPuzzle. 
+This program runs a text-based escape room styled interaction with the user.
+
+The program is run on java through the Main class in LockLeverPuzzle.
+Most classes are prompted and work with GenericRoom class.
+GenericRoom class will be called directly through the class Maze in the Maze2 package itself.
+
+The classes interact with each other properly and independently for the most part. 
+
+===Permissions=== 
+Classes: 
+StaticObjects,DynamicObjects,and GenericRoom, Room1Haine, Room2Haine, Room3, Room4
+are permitted to be used as long as permission is granted and updates are verified for fair use of personal work.
+
+===Bugs and Future Updates:===
+
+More work will be needed to adjust inventory to carry it through GenericRoom(parent class/superclass) and its subclasses(Room1Haine,Room2Haine,Room3,Room4) and any other rooms in the MazeGame.
+LockLeverPuzzle requires review and editing to have it interacting with the user/player.
+
+===File Information=========
+
+To run the game(Main.java file),
+$cd LockLeverPuzzle 
+$javac *.java 
+$java Main

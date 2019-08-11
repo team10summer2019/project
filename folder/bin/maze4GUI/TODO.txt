@@ -1,0 +1,32 @@
+TODO.txt
+Description: Active list of action items for maze code
+################ RON #################################
+ 
+///////////// CURRENTLY WORKING ON: ////////////////////////////////
+
+-- Generalized class diagram  1 hr
+-- specific classes   2 hr 
+ 
+
+
+//////////////////     BACKEND LOGIC UPGRADES     ////////////////////////////////
+  
+- Incorporate Riddle into game                      3 hrs    // Haine and Steven Responsable 
+- Incorporate the book game and the riverGame       5 hrs    // Steven and Kate Reponsible 
+- Placement of ComboLock, Book and Goat items       2 hr     // Haine and Steven, Ron and Fiona Responsible
+
+/////////////////  NEW FEATURES   
+
+- JUnit Test for Point.java    2 hrs
+- JUnit Test for Player.java   2 hrs
+- JUnit Test for Room.java     3 hrs
+- JUnit Test for Maze.java     4 hrs
+
+////////////////// POSSIBLE FUTURE FEATURES 
+
+- Give players an array list for inventory          1 hr
+- Make different keys ( Key objects ?)                2 hrs
+
+
+######################################################
+
