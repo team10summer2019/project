@@ -543,6 +543,8 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 			tempRoom = gameBoard.getCurrentRoom();  // get the tempRoom to be the current room.
 			tempRoom.populateRoomGrid(); // load the information and characters currently set for the room into the roomGrid
 	
+			// return to regular logo
+			drawImage(gcL,logo);
 			postCurrentRoom();
 			dot.setFill(null);
 			wipeItemGrid();
@@ -571,8 +573,7 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 			tempHero = gameBoard.getHero();
 		
 			// return to regular logo
-			image = new Image("images/logo.jpg");
-			drawImage(gcL,image);
+			drawImage(gcL,logo);
 						
 			postCurrentRoom();   // display the current room 
 			dot.setFill(null);
@@ -1204,12 +1205,12 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 			if (gameBoard.getHero().getHasMap() ) {
 			
 				printMap();  // print the map
-				drawImage(gcL,image);
+				drawImage(gcL,image); // set to the map depending on level
 				messageLabel.setText("You unfold the map from your pocket and take a look...");
 				bigText.setText("You unfold the map from your pocket and take a look...");
 				
-				updateMapPosition();
-				dot.setFill(Color.RED);
+				updateMapPosition(); // move the dot to the room location
+				dot.setFill(Color.RED);  // turn on the icon for position tracking 
 				
 			} else {
 			messageLabel.setText("You don't have a Map...");
@@ -1397,14 +1398,11 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 
 		tempHero = gameBoard.getHero();
 		tempMonster = gameBoard.getMonster();
-		
+
 			if (tempRoom.getHasMonster() && tempMonster.isAlive() && tempMonster.getPosition().isEqual(tempHero.getPosition()) ){
 			fightMonster(gameBoard);
-			image = new Image("images/monster.jpg");
-			drawImage(gcL,image);
 			} else {
-			image = new Image("images/logo.jpg");
-			drawImage(gcL,image);
+			drawImage(gcL,logo);
 			messageLabel.setText("There is nobody in the room to fight...");
 			bigText.setText("There is nobody in the room to fight...");
 			}
@@ -1804,6 +1802,8 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 
 		if (  gameBoard.getMonster().isAlive() && gameBoard.getHero().isAlive() ){
 		
+			drawImage(gcL,monster);  // bring up the picture of the monster
+			
 			if (storeInput.equalsIgnoreCase("Attack") || storeInput.equalsIgnoreCase("Fight") ) {
 				gameBoard.fightTurn();
 				postHealth(); // update the visual health of the hero.
@@ -1814,9 +1814,12 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 			if (storeInput.equalsIgnoreCase("Run") ) {
 				textModeOutput();
 				postCurrentRoom();
+				drawImage(gcL,logo);
 				return;
 				} 
 		
+			
+			// text output 
 			System.out.println("You Attacked the MAZE WRAITH ") ;
 			clearScreen(); // clear the screen 		
 			displayMazeWraith(); // show the ASCII Art 
@@ -1865,17 +1868,12 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 		    messageLabel.setText("The Maze Wraith has been vanquished ...");
 		    
 		    bigText.setText("=======MONSTER STATS=======\nMonster Health: " + gameBoard.getMonster().getHealth() + "\nAttack Strength: " + gameBoard.getMonster().getAttackStrength()+"\nThe Maze Wraith has been vanquished ...");
-			
-		    
+
+		    drawImage(gcL,logo);
 			tempHero = gameBoard.getHero();
 			tempHero.displayStats();
 			tempMonster = gameBoard.getMonster();
 			tempMonster.displayStats();
-			
-			// return to regular logo
-			image = new Image("images/logo.jpg");
-			drawImage(gcL,image);
-			
 			// 2D graphics counterpart
 			postCurrentRoom();
 			postHealth();
