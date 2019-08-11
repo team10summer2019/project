@@ -12,6 +12,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
 //import javafx.scene.Group;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
@@ -28,6 +29,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 
 /**
 Class MazeGameGUI is the Main GUI class that runs the Maze Game in GUI mode. Creates a Maze object gameBoard which is used to run the game.
@@ -305,12 +307,22 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 		StackPane stackImages = new StackPane(); 
 		ImageView Logo = new ImageView(startLogo);
 		Button playButton = new Button("Play!");
+		Text author = new Text();
+		String text = "THE MAZE a game by:\n" + 
+				"Ron Rodriguez, Haine Kim, Steven On , Fiona Yong, and Kate Hsu \n" + 
+				"Copyright (c) 2019.  Licensed under the GNU Public License GPL version 3.0./\n";
+		author.setText(text);
+		author.setFill(Color.WHITE);
 		playButton.setMinHeight(50);
 		playButton.setMinWidth(100);
 		playButton.setOnAction(e -> primaryStage.setScene(scene));
 		playButton.setLayoutX(375);
 		playButton.setLayoutY(500);
+		author.setLayoutX(0);
+		author.setLayoutY(560);
+		
 		startMenu.getChildren().add(playButton);
+		startMenu.getChildren().add(author);
 		stackImages.getChildren().addAll(Logo, startMenu);
 		Scene startScreen = new Scene(stackImages, 815, 600);
 ////////////////////////////////////////////////////////////////////////////		
