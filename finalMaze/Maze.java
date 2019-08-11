@@ -1,8 +1,5 @@
 package finalMaze;
 
-
-
-
 import java.util.Random;
 import java.util.ArrayList;
 
@@ -393,6 +390,43 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 	return;
 	}	
 
+	// reset the booleans in the array list room 
+		/**
+		Mutator to set the room items Key,Door,Map,Monster,Food at a a Point p representing a room location in roomList.  
+		@param p A Point coordinater location of the Room in roomList to set.
+		@param key A boolean representing the state of the hasKey Room boolean for the room at location (x,y)
+		@param door A boolean representing the state of the hasDoor Room boolean for the room at location (x,y)
+		@param map A boolean representing the state of the hasMap Room boolean for the room at location (x,y)
+		@param monster A boolean representing the state of the hasMonster Room boolean for the room at location (x,y)
+		@param food A boolean representing the state of the hasFood Room boolean for the room at location (x,y)
+		@param food A boolean representing the state of the hasFood Room boolean for the room at location (x,y)
+		@param riddle A boolean representing the state of the hasRiddle Room boolean for the room at location (x,y)
+		@param hint A boolean representing the state of the hasHint Room boolean for the room at location (x,y)
+		@param comboLock A boolean representing the state of the hasComboLock Room boolean for the room at location (x,y)
+		*/
+		public void setRoomItems(Point p , boolean key, boolean door ,boolean map, boolean monster, boolean food, boolean riddle, boolean hint, boolean comboLock, boolean goat, boolean wolf, boolean cabbage ){
+			if ( p.getXCoordinate() >= 0 && p.getXCoordinate() <= mazeSize-1 && p.getYCoordinate() >=0 && p.getYCoordinate() <= mazeSize-1) {
+			Room temp = roomList[p.getXCoordinate()][p.getYCoordinate()];  // get the pointer to the room in list at index k
+			
+			temp.setHasKey(key);
+			temp.setHasDoor(door);
+			temp.setHasMonster(monster);
+			temp.setHasMap(map);
+			temp.setHasFood(food);
+			temp.setHasHint(hint);
+			temp.setHasRiddle(riddle);
+			temp.setHasComboLock(comboLock);
+			temp.setHasGoat(goat);
+			temp.setHasWolf(wolf);
+			temp.setHasCabbage(cabbage);
+			}
+		
+		return;
+		}	
+	
+	
+	
+	
 	// reset the booleans in the array list room 
 	/**
 	Mutator to set the room items Key,Door,Map,Monster,Food at a a Point p representing a room location in roomList.  

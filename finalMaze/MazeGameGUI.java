@@ -106,6 +106,14 @@ public class MazeGameGUI extends Application {
 	private int dot_x;  // x translation amount per room
 	private int dot_y;  // y translation amount per room (depends on level)
 	
+	CreateRiddle theRiddle;  // riddle pointer/reference
+	Point firstRiddle;
+	Point secondRiddle;
+	Point comboLocation;
+	
+	//look/hint instances
+	Point firstHint;
+	Point secondHint; 
 	
 ///////////////////////////// TEXTURE IMAGES ///////////////////////////////////////
 	Image startLogo = new Image("images/startlogo.jpg");
@@ -935,6 +943,16 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 		dot.setTranslateX(dotX0);  // initial X position for the circle
 		dot.setTranslateY(dotY0);  // initial Y position for the circle 		
 
+		////////////////////// RIDDLE Locations /////////////////////////////
+		firstRiddle = new Point(0,2);         // level 1 locations
+		secondRiddle = new Point(2,3);
+		comboLocation = new Point(3,0);
+		
+		/////////////////////// HINT LOCATIONS //////////////////////////////
+		//look/hint instances             // level 1 locations
+		firstHint = new Point(0,1);
+		secondHint = new Point(2,1);
+		
  		} // level 1 end if brace
  	
  	
@@ -1033,6 +1051,16 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 		dot.setTranslateX(dotX0);  // initial X position for the circle
 		dot.setTranslateY(dotY0);  // initial Y position for the circle 
 	
+		////////////////////// RIDDLE Locations /////////////////////////////
+		firstRiddle = new Point(0,2);   // modify these for level 2 
+		secondRiddle = new Point(2,3);
+		comboLocation = new Point(3,0);
+		
+		/////////////////////// HINT LOCATIONS //////////////////////////////
+		//look/hint instances
+		firstHint = new Point(0,1);// modify these for level 2
+		secondHint = new Point(2,1);
+		
  		} // level 2 end if brace
  		////////////////////////     LEVEL 3   ///////////////////////////////////////
  		if (level ==3){
@@ -1165,6 +1193,16 @@ mapStack.getChildren().addAll(canvasLeft, dot);
  		dot.setTranslateX(dotX0);  // initial X position for the circle
  		dot.setTranslateY(dotY0);  // initial Y position for the circle 
 	
+		////////////////////// RIDDLE Locations /////////////////////////////
+		firstRiddle = new Point(0,2);   // modify these for level 3
+		secondRiddle = new Point(2,3);
+		comboLocation = new Point(3,0);
+ 		
+		/////////////////////// HINT LOCATIONS //////////////////////////////
+		//look/hint instances
+		firstHint = new Point(0,1); // modify these for level 3
+		secondHint = new Point(2,1);
+ 		
  		} // level 3 end if brace
  		
  		return;
@@ -1192,6 +1230,22 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 	
 	}
 	
+	
+	public void openWalls(Point p) {
+		
+		// you can add more wall opening in level 2 and 3 place them here and call openWalls(point)
+		if (p.isEqual(firstRiddle) && level ==1) {	
+		gameBoard.setRoomWalls(firstRiddle,true,false,false,true);
+		}
+		if (p.isEqual(secondRiddle) && level ==1) {	
+		gameBoard.setRoomWalls(secondRiddle,true,false,false,true);
+		}
+		if (p.isEqual(comboLocation) && level ==1) {	
+		gameBoard.setRoomWalls(comboLocation,false,true,true,false);
+		}
+		
+	return;
+	}
 	
 
 	/**
@@ -1415,31 +1469,29 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 		}
 		
 		//puzzle instances
+		// please move these into the maze creation function setBoard() in the appropriate 
+		// if statement based on level 1,2,3 etc not here
 		Point currentPosition = tempHero.getPosition();	
-		Point firstRiddle = new Point(0,2);
-		Point secondRiddle = new Point(2,3);
-		Point comboLocation = new Point(3,0);
-		boolean solved = false;
+
+		boolean solved = false;   // this is generating a warning
 		
 		// if user input was "PLAY"
 			if ( storeInput.equalsIgnoreCase("play") ) {
-
+				TestHaineRiddle rid = new TestHaineRiddle();
 				hitPlay = true;
 					
 				tempRoom.populateRoomGrid(); // load the information and characters currently set for the room into the roomGrid
 				
 				if (tempRoom.getHasRiddle() && currentPosition.isEqual(firstRiddle)) {
-						// give the player a riddle
-					TestHaineRiddle rid = new TestHaineRiddle();
-					CreateRiddle theRiddle = rid.riddleOne();
+					// give the player a riddle
+					theRiddle = rid.riddleOne();
 					bigText.setText(theRiddle.getRiddle()+theRiddle.instructions());
 					theRiddle.addAnswer(theRiddle);
 					theRiddle.sayRiddle(theRiddle);
 				}
 				else if (tempRoom.getHasRiddle() && currentPosition.isEqual(secondRiddle)) {
 					// give the player a riddle
-					TestHaineRiddle rid = new TestHaineRiddle();
-					CreateRiddle theRiddle = rid.riddleTwo();
+					theRiddle = rid.riddleTwo();
 					bigText.setText(theRiddle.getRiddle()+theRiddle.instructions());
 
 					theRiddle.addAnswer(theRiddle);
@@ -1458,27 +1510,28 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 				}
 			}
 			
-		if ( hitPlay == true && currentPosition.isEqual(firstRiddle) && (storeInput.equalsIgnoreCase("penny") || storeInput.equalsIgnoreCase("ice") || storeInput.equalsIgnoreCase("blackboard") || storeInput.equalsIgnoreCase("human"))) {
+		if ( hitPlay == true && currentPosition.isEqual(firstRiddle) && storeInput.equalsIgnoreCase(theRiddle.getAnswer()) ) {
 			solved = true;			//If the riddle has been solved
 			
 				/// This line wipes out other items that might be in the room as well like random placed maps or keys
 			 	//gameBoard.setRoomItems(0,2,false,false,false,false,false,false,false,false,false,false,false); // has riddle
-				tempRoom=gameBoard.getRoom(0,2);
-				gameBoard.setRoomItems(0,2,tempRoom.getHasKey(),tempRoom.getHasDoor(),tempRoom.getHasMap(),tempRoom.getHasMonster(),tempRoom.getHasFood(),false,tempRoom.getHasHint(),tempRoom.getHasComboLock(),tempRoom.getHasGoat(),tempRoom.getHasWolf(),tempRoom.getHasCabbage()); // has riddle
-				bigText.setText("The right wall disappeared to reveal a path..\n");
-				gameBoard.setRoomWalls(0,2,true,false,false,true);
+				tempRoom=gameBoard.getRoom(firstRiddle);
+				gameBoard.setRoomItems(firstRiddle.getXCoordinate(),firstRiddle.getYCoordinate(),tempRoom.getHasKey(),tempRoom.getHasDoor(),tempRoom.getHasMap(),tempRoom.getHasMonster(),tempRoom.getHasFood(),false,tempRoom.getHasHint(),tempRoom.getHasComboLock(),tempRoom.getHasGoat(),tempRoom.getHasWolf(),tempRoom.getHasCabbage()); // has riddle
+				bigText.setText("The right wall disappeared to reveal a path..\n");	
+				openWalls(firstRiddle);
 				hitPlay = false;
 		}
 		
-		if( hitPlay == true && currentPosition.isEqual(secondRiddle) && (storeInput.equalsIgnoreCase("owl") || storeInput.equalsIgnoreCase("egg") || storeInput.equalsIgnoreCase("breath")) ) {
+		if( hitPlay == true && currentPosition.isEqual(secondRiddle) && storeInput.equalsIgnoreCase(theRiddle.getAnswer()) ) {
 			solved = true;
-			tempRoom=gameBoard.getRoom(2,3);
-			gameBoard.setRoomItems(2,3,tempRoom.getHasKey(),tempRoom.getHasDoor(),tempRoom.getHasMap(),tempRoom.getHasMonster(),tempRoom.getHasFood(),false,tempRoom.getHasHint(),tempRoom.getHasComboLock(),tempRoom.getHasGoat(),tempRoom.getHasWolf(),tempRoom.getHasCabbage()); // has riddle
+			tempRoom=gameBoard.getRoom(secondRiddle);
+			gameBoard.setRoomItems(secondRiddle.getXCoordinate(),secondRiddle.getYCoordinate(),tempRoom.getHasKey(),tempRoom.getHasDoor(),tempRoom.getHasMap(),tempRoom.getHasMonster(),tempRoom.getHasFood(),false,tempRoom.getHasHint(),tempRoom.getHasComboLock(),tempRoom.getHasGoat(),tempRoom.getHasWolf(),tempRoom.getHasCabbage()); // has riddle
 			// don't overwrite pre-existing items in a room by setting everything to false, first get all the previous values with a getter
 			//setRoomItems(int x , int y,  boolean key, boolean door ,boolean map, boolean monster, boolean food, boolean riddle, boolean hint, boolean comboLock, boolean goat, boolean wolf, boolean cabbage )
 					
 			bigText.setText("The wall in front of you disappeared. You see a key in the distance...\n");
-			gameBoard.setRoomWalls(2,3,true,false,false,true);
+			openWalls(secondRiddle);
+			
 			hitPlay = false;
 			}
 		
@@ -1486,16 +1539,13 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 			if (tempHero.getHasLeverOne() == true && tempHero.getHasLeverTwo() == true) {
 				sayThis = instructions.unlockWithLevers();
 				bigText.setText(sayThis);
-				gameBoard.setRoomWalls(3,0,false,true,true,false);
-				
+				openWalls(comboLocation);		
 			}else {
 				bigText.setText("Something in the wall clicks...");
 			}
 		}
 				
-		//look/hint instances
-		Point firstHint = new Point(0,1);
-		Point secondHint = new Point(2,1);
+
 		
 		// if user input was "Look"
 		if ( storeInput.equalsIgnoreCase("look") && currentPosition.isEqual(firstHint)){
