@@ -353,7 +353,7 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 				messageLabel.setText("Move Up");
 			} else if (event.getCode().equals(KeyCode.SPACE) ) {
 				storeInput="SpaceBar";	
-			} else if (event.getCode().equals(KeyCode.ENTER) ) {
+			} else if (event.getCode().equals(KeyCode.ENTER) || event.getCharacter().charAt(0) == 'z' ) {
 				storeInput=textIn.getText();
 				textIn.setText(""); // clear the input
 				messageLabel.setText("ENTER");
@@ -386,7 +386,6 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 				storeInput="play";
 				messageLabel.setText(storeInput);
 			}
-
 		
 			if( gameOn) { // disable post game motion
 			// display the textMode output 
@@ -1648,7 +1647,7 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 	System.out.println("Type \"Return\" and press Enter to return to the Maze");
 	
 	// set the help info into the text area box 
-	bigText.setText("Welcome to the Maze\nHelp: prints useage\nQuit:Exits the game\nReturn:returns to the map\nControl Keys: a: left, s: down,d: right,w: up\nr: return, m: map, t: take , q: quit, \nh: help o: open, e: escape, f:fight, p: play riddle, l: look");
+	bigText.setText("Welcome to the Maze\nHelp: prints useage\nQuit:Exits the game\nReturn:returns to the map\nControl Keys: a: left, s: down,d: right,w: up\nr: return, m: map, t: take , q: quit, \nh: help o: open, e: escape, f:fight, p: play riddle, l: look, z: send text from textbox");
 
 	return;
 	}
