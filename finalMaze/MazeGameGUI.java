@@ -98,8 +98,11 @@ public class MazeGameGUI extends Application {
 	private Canvas canvasRight = new Canvas(300,300);
 	private GraphicsContext gcR = canvasRight.getGraphicsContext2D();
 	
-	Circle dot = new Circle (20,20,5);  // circle to track player location in the map
-	
+	private Circle dot = new Circle (20,20,5);  // circle to track player location in the map
+	private int dotX0; // initial x location
+	private int dotY0; // initial y location
+	private int dot_x;  // x translation amount per room
+	private int dot_y;  // y translation amount per room (depends on level)
 	
 ///////////////////////////// TEXTURE IMAGES ///////////////////////////////////////
 	Image startLogo = new Image("images/startlogo.jpg");
@@ -231,18 +234,10 @@ public class MazeGameGUI extends Application {
 		bigText.setEditable(false); // no editing
 //////////////////Map Grid ///////////////////////////////////////////		
 StackPane mapStack = new StackPane();	
-//ImageView mapProjection = new ImageView("images/map1.png");
-
 dot.setFill(null);  // use null to make it disappear off of the pane
 //dot.setFill(Color.RED);
-//dot.setLayoutX(375);     
-//dot.setLayoutY(500);
-dot.setTranslateX(-130);  // how to position the circle??
-dot.setTranslateY(-100);
-
+// add the map and Logo canvas to and the dot to the stack pane mapStack
 mapStack.getChildren().addAll(canvasLeft, dot);
-		
-		
 		
 ///////////////////////////// SCENE and STAGE SHOW ////////////////////////////////////////////
 		// build entire scene: grid and label
@@ -373,7 +368,6 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 				messageLabel.setText(storeInput);
 			} else if (event.getCharacter().charAt(0) == 'm') {
 				storeInput="map";
-				dot.setFill(Color.RED);
 				messageLabel.setText(storeInput);
 			} else if (event.getCharacter().charAt(0) == 'l') {
 				storeInput="look";
@@ -404,6 +398,7 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 				playerLabel3.setText("Level: " + level + " Moves: " + moveCounter);
 				/// Routines to update the boxes
 				postCurrentRoom();
+				updateMapPosition();
 				
 			} else {
 				wipeGrid();
@@ -444,6 +439,7 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 			playerLabel3.setText("Level: " + level + " Moves: " + moveCounter);	
 			/// Routines to update the current room boxes
 			postCurrentRoom();
+			updateMapPosition();
 
 			if (!gameOn ) {
 			wipeGrid();
@@ -477,6 +473,7 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 			tempHero = gameBoard.getHero();
 			
 			postCurrentRoom();   // display the current room 
+			updateMapPosition();
 		 // show the text mode output
 			textModeOutput();
 			printHelp();
@@ -512,6 +509,7 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 		tempHero = gameBoard.getHero();
 		
 		postCurrentRoom();   // display the current room 
+		updateMapPosition();
 		postItems(); // graphical display of items and health status
 		// show the text mode output
 		textModeOutput();
@@ -537,6 +535,7 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 			tempRoom.populateRoomGrid(); // load the information and characters currently set for the room into the roomGrid
 	
 			postCurrentRoom();
+			updateMapPosition();
 			wipeItemGrid();
 			wipeHealthGrid();
 			postHealth();
@@ -589,7 +588,7 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 		// THE FOLLOWING LINE CAUSES A BUG TO NOT DISPLAY THE CURRENT ROOM...????
 		tempRoom = gameBoard.getCurrentRoom();  // get the tempRoom to be the current room.
 		tempRoom.populateRoomGrid(); // load the information and characters currently set for the room into the roomGrid
-
+		
 		char ch='A';
 		String temp="";
 		wipeGrid();  // clear previous text
@@ -755,14 +754,12 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 	public void textModeOutput() {
 	//draw the current room and display the room stats 
 	tempRoom = gameBoard.getCurrentRoom();
-	tempRoom.populateRoomGrid(); // load the information and characters currently set for the room into the roomGrid
-
+	tempRoom.populateRoomGrid(); // load the information and characters currently set for the room into the roomGrid	
 	
 	/// THIS IS THE CRITICAL ITEM THAT IS REQUIRED (LOAD THE GRID INFO)
 	//tempRoom.populateRoomGrid(); // load the information and characters currently set for the room into the roomGrid
 
 	tempRoom.drawRoomGrid();  
-    
 	tempRoom.displayRoomStats();
 	// update the hero current condition and display Hero stats
 	tempHero = gameBoard.getHero();
@@ -811,6 +808,15 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 		return;
 	 }
    
+	 // Moves the cursor dot in the map to track the player location
+	 public void updateMapPosition() {
+		 Point tempPoint = gameBoard.getHero().getPosition(); // get the position of the hero
+		 dot.setTranslateX(dotX0+tempPoint.getXCoordinate()*dot_x);  // initial X position for the circle
+		 dot.setTranslateY(dotY0+tempPoint.getYCoordinate()*dot_y);  // initial Y position for the circle 
+		 return;
+	 }
+	 
+	 
  // sets up the walls and items, doors and monsters
  
  	// sets up the walls and items, doors and monsters
@@ -886,7 +892,13 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 		tempRoom = m.getRoom(randPoint);  // get a copy of the room at randLocation
 		m.setRoomItems(randPoint,tempRoom.getHasKey(),tempRoom.getHasDoor(),tempRoom.getHasMap(),tempRoom.getHasMonster(),true);
 		
-		
+		//////////////////// MAP POSITIONING ////////////////////////////////
+		dotX0=-130;  // set to initial room x position on map 1
+		dotY0=-100;  // set to initial room y position on map 1 
+		dot_x=80;   // set to match the map spacing in x between rooms
+		dot_y=75;   // set to match the map spacing in y between rooms
+		dot.setTranslateX(dotX0);  // initial X position for the circle
+		dot.setTranslateY(dotY0);  // initial Y position for the circle 		
  		} // level 1 end if brace
  	
  	
@@ -973,6 +985,15 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 		randPoint.setRandom(m.getMazeSize());
 		tempRoom = m.getRoom(randPoint);  // get a copy of the room at randLocation
 		m.setRoomItems(randPoint,tempRoom.getHasKey(),tempRoom.getHasDoor(),tempRoom.getHasMap(),tempRoom.getHasMonster(),true);
+		
+		/////////////// MAP POSITIONING //////////////////////////////
+		dotX0=-150;
+		dotY0=-125;
+		dot_x=60;
+		dot_y=55;
+		dot.setTranslateX(dotX0);  // initial X position for the circle
+		dot.setTranslateY(dotY0);  // initial Y position for the circle 
+		
 		
  		} // level 2 end if brace
  		////////////////////////     LEVEL 3   ///////////////////////////////////////
@@ -1098,6 +1119,14 @@ mapStack.getChildren().addAll(canvasLeft, dot);
  		tempRoom = m.getRoom(randPoint);  // get a copy of the room at randLocation
  		m.setRoomItems(randPoint,tempRoom.getHasKey(),tempRoom.getHasDoor(),tempRoom.getHasMap(),tempRoom.getHasMonster(),true);	
  					
+ 		/////////////// MAP POSITIONING //////////////////////////////
+ 		dotX0=-160;
+		dotY0=-150;
+		dot_x=46;
+		dot_y=45;
+		dot.setTranslateX(dotX0);  // initial X position for the circle
+		dot.setTranslateY(dotY0);  // initial Y position for the circle 
+ 		
  		} // level 3 end if brace
  		
  		return;
@@ -1141,6 +1170,10 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 				drawImage(gcL,image);
 				messageLabel.setText("You unfold the map from your pocket and take a look...");
 				bigText.setText("You unfold the map from your pocket and take a look...");
+				
+				updateMapPosition();
+				dot.setFill(Color.RED);
+				
 			} else {
 			messageLabel.setText("You don't have a Map...");
 			System.out.println("You don't have a Map...");
@@ -1182,12 +1215,15 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 				System.out.println("You have escaped, and are now on Level: " + level );
 				messageLabel.setText("You have escaped, and are now on Level: " + level );	
 				bigText.setText("You have escaped, and are now on Level: " + level );
+				drawImage(gcL,logo);
 				resetGameBoard();  // get a new level
 				if (level == 4){
 					victory=true;  // switch victory flag	
 				}
 				gameBoard.lockDoor(); // lock the exit door for the next level 
 				// increment to the next level 	
+				
+				dot.setFill(null);
 				
 			} else {
 			messageLabel.setText("Either the door isn't opened, or You Haven't Beaten the Monster, or You're not at the Door...");
@@ -1211,12 +1247,12 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 		// if user input was "Return" display map unit until user types return
 		if ( storeInput.equalsIgnoreCase("return") ) {
 			
-				image = new Image("images/logo.jpg");
-				drawImage(gcL,image);	
+				drawImage(gcL,logo);	
 				postCurrentRoom();
 				
 				bigText.setText(""); // clear the text Area box field
 		
+				dot.setFill(null);
 			}
 	
 		// if user input is "Down"	
@@ -1320,7 +1356,7 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 		tempRoom = gameBoard.getCurrentRoom();
 		tempRoom.populateRoomGrid(); // load the information and characters currently set for the room into the roomGrid
 
-		
+		dot.setFill(null); // take the dot off the map during fight sequence
 		postCurrentRoom();
 		}
 		
@@ -1484,7 +1520,7 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 		 image = new Image("images/win.jpg");
 		 drawImage(gcL,image);
 		 bigText.setText("Congratulations! You are free from THE MAZE!\nPress the Restart or Enter click buttons to terminate the program.");
-		 
+		 dot.setFill(null);// null the map cursor color
 		 gameOn=false;  // game terminating flag to halt input
 		 
 		}
@@ -1502,6 +1538,7 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 		 image = new Image("images/lose.jpg");
 		 drawImage(gcL,image);
 		
+		 dot.setFill(null); // null the map position cursor color
 		 gameOn=false; // game terminating flag to halt input
 		}
 	
