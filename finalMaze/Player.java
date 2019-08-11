@@ -2,6 +2,7 @@ package finalMaze;
 
 
 
+
 // Player:  Attributes - (x,y) Point location, Health, hasKey, attackStrength
 //          Methods- moveLeft(), moveRight(), moveUp(), moveDown(),
 //	           searchRoom(), attack(), openDoor() , die() , isAlive()
@@ -24,6 +25,9 @@ public class Player extends Entity {
 private boolean hasMap;    // extra to Entity
 private boolean hasLeverOne;
 private boolean hasLeverTwo;
+private boolean hasGoat;
+private boolean hasWolf;
+private boolean hasCabbage;
 
 //private Random randGen = new Random(1000);  // make a pseudo random number generator 
 //////////////////////  CONSTRUCTORS     //////////////////////////////////////////
@@ -37,6 +41,9 @@ private boolean hasLeverTwo;
 	hasMap = false;
 	hasLeverOne = false;
 	hasLeverTwo = false;
+	hasGoat = false;
+	hasWolf = false;
+	hasCabbage = false;
 	}
 
 	// input constructor
@@ -51,6 +58,9 @@ private boolean hasLeverTwo;
 	hasMap = false;
 	hasLeverOne = false;
 	hasLeverTwo = false;
+	hasGoat = false;
+	hasWolf = false;
+	hasCabbage = false;
 	}
 	
 	// copy constructor
@@ -63,6 +73,9 @@ private boolean hasLeverTwo;
 	hasMap = p.hasMap;
 	hasLeverOne = p.hasLeverOne;
 	hasLeverTwo = p.hasLeverTwo;
+	hasGoat = p.hasGoat;
+	hasWolf = p.hasWolf;
+	hasCabbage = p.hasCabbage;
 	}
 
 
@@ -85,6 +98,18 @@ private boolean hasLeverTwo;
 	
 	public boolean getHasLeverTwo(){
 	return hasLeverTwo;
+	}
+	
+	public boolean getHasGoat(){
+	return hasGoat;
+	}
+	
+	public boolean getHasWolf(){
+	return hasWolf;
+	}
+	
+	public boolean getHasCabbage(){
+	return hasCabbage;
 	}
 
 //////////////////////   MUTATORS      /////////////////////////////////////////////
@@ -120,6 +145,21 @@ private boolean hasLeverTwo;
 	
 	public void setHasLeverTwo( boolean val){
 	hasLeverTwo= val;
+	return;
+	}
+	
+	public void setHasGoat( boolean val){
+	hasGoat= val;
+	return;
+	}
+	
+	public void setHasWolf( boolean val){
+	hasWolf= val;
+	return;
+	}
+	
+	public void setHasCabbage( boolean val){
+	hasCabbage= val;
 	return;
 	}
 
@@ -168,6 +208,9 @@ private boolean hasLeverTwo;
 	System.out.println("Has Map = " + getHasMap() + " ");
 	System.out.println("Position = " + getPosition().toString() );  
 	System.out.print("Has LeverOne = " + getHasLeverOne() +"\n");
+	System.out.print("Has Goat = " + getHasGoat() +"\n");
+	System.out.print("Has Wolf = " + getHasWolf() +"\n");
+	System.out.print("Has Cabbage = " + getHasCabbage() +"\n");
 	}
 
 	/**

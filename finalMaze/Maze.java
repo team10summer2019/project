@@ -2,6 +2,7 @@ package finalMaze;
 
 
 
+
 import java.util.Random;
 import java.util.ArrayList;
 
@@ -371,7 +372,7 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 	@param hint A boolean representing the state of the hasHint Room boolean for the room at location (x,y)
 	@param comboLock A boolean representing the state of the hasComboLock Room boolean for the room at location (x,y)
 	*/
-	public void setRoomItems(int x , int y,  boolean key, boolean door ,boolean map, boolean monster, boolean food, boolean riddle, boolean hint, boolean comboLock ){
+	public void setRoomItems(int x , int y,  boolean key, boolean door ,boolean map, boolean monster, boolean food, boolean riddle, boolean hint, boolean comboLock, boolean goat, boolean wolf, boolean cabbage ){
 		if ( x >= 0 && x <= mazeSize-1 && y >=0 && y <= mazeSize-1) {
 		Room temp = roomList[x][y];  // get the pointer to the room in list at index k
 		
@@ -383,6 +384,9 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 		temp.setHasRiddle(riddle);
 		temp.setHasHint(hint);
 		temp.setHasComboLock(comboLock);
+		temp.setHasGoat(goat);
+		temp.setHasWolf(wolf);
+		temp.setHasCabbage(cabbage);
 		
 		}
 	
@@ -531,6 +535,11 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 	
 	hero.setHasMap(false);
 	hero.setHasKey(false);
+	hero.setHasLeverOne(false);
+	hero.setHasLeverTwo(false);
+	hero.setHasGoat(false);
+	hero.setHasWolf(false);
+	hero.setHasCabbage(false);
 	
 	}
 	
@@ -806,6 +815,63 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 		currentRoom = getRoom( currentPosition );
 		return;
 		}
+	
+	/**
+	Mutator to place the Goat from a room with the hero and remove the Goat from the current room.	
+	*/
+	public void takeGoat(){
+	Point currentPosition = hero.getPosition();
+	currentRoom = getRoom( currentPosition );	
+		// if the room has a Goat but the player doesn't
+		if (!hero.getHasGoat()){
+		// give the player a Goat
+		hero.setHasGoat(true);
+		// reset the room to not have a Goat 
+		setCurrentRoom(currentPosition); // point current room to the room in roomList 
+		currentRoom.setHasGoat(false); // remove the Goat from the room	
+		}
+	// restore the pointer away from the roomList;
+	currentRoom = getRoom( currentPosition );
+	return;
+	}
+	
+	/**
+	Mutator to place the Wolf from a room with the hero and remove the Wolf from the current room.	
+	*/
+	public void takeWolf(){
+	Point currentPosition = hero.getPosition();
+	currentRoom = getRoom( currentPosition );	
+		// if the room has a Wolf but the player doesn't
+		if (!hero.getHasWolf()){
+		// give the player a Wolf
+		hero.setHasWolf(true);
+		// reset the room to not have a Wolf 
+		setCurrentRoom(currentPosition); // point current room to the room in roomList 
+		currentRoom.setHasWolf(false); // remove the Wolf from the room	
+		}
+	// restore the pointer away from the roomList;
+	currentRoom = getRoom( currentPosition );
+	return;
+	}
+	
+	/**
+	Mutator to place the Cabbage from a room with the hero and remove the Cabbage from the current room.	
+	*/
+	public void takeCabbage(){
+	Point currentPosition = hero.getPosition();
+	currentRoom = getRoom( currentPosition );	
+		// if the room has a Cabbage but the player doesn't
+		if (!hero.getHasCabbage()){
+		// give the player a Cabbage
+		hero.setHasCabbage(true);
+		// reset the room to not have a Cabbage 
+		setCurrentRoom(currentPosition); // point current room to the room in roomList 
+		currentRoom.setHasCabbage(false); // remove the Cabbage from the room	
+		}
+	// restore the pointer away from the roomList;
+	currentRoom = getRoom( currentPosition );
+	return;
+	}
 	
 	/**
 	Mutator to place the Map from a room with the hero and remove the Map from the current room.	

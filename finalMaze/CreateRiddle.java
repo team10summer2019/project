@@ -1,6 +1,7 @@
 package finalMaze;
 
 
+
  
 import java.util.ArrayList;
 import java.util.Random;

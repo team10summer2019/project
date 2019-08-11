@@ -2,6 +2,7 @@ package finalMaze;
 
 
 
+
 //////////////////////////////////////////////
 //
 // File: Room.java
@@ -52,6 +53,8 @@ private boolean hasBooks;
 private boolean hasComboLock;
 private boolean hasHint;
 private boolean hasGoat;
+private boolean hasWolf;
+private boolean hasCabbage;
 private boolean hasFood;
 
 private int doorPosition;
@@ -89,6 +92,8 @@ private int roomRows=6;  // height of a room
 	 hasComboLock =false;
 	 hasHint = false;
 	 hasGoat = false;
+	 hasWolf = false;
+	 hasCabbage = false;
 	 hasFood = false;
 	 
 	 hasDoor=false;
@@ -128,6 +133,8 @@ private int roomRows=6;  // height of a room
 	 hasComboLock =false;
 	 hasHint = false;
 	 hasGoat = false;
+	 hasWolf = false;
+	 hasCabbage = false;
 	 hasFood = false; 
 	
 	 hasDoor=false;
@@ -168,6 +175,8 @@ private int roomRows=6;  // height of a room
 	 hasComboLock =false;
 	 hasHint = false;
 	 hasGoat = false;
+	 hasWolf = false;
+	 hasCabbage = false;
 	 hasFood = false;
 	 
 	 hasDoor=false;
@@ -203,6 +212,8 @@ private int roomRows=6;  // height of a room
 	 hasComboLock = toCopy.hasComboLock;
 	 hasHint = toCopy.hasHint;
 	 hasGoat = toCopy.hasGoat;
+	 hasWolf = toCopy.hasWolf;
+	 hasCabbage = toCopy.hasCabbage;
 	 hasFood = toCopy.hasFood;
 	 doorPosition=toCopy.doorPosition; // 0 for no door 1 for left 2 for right , 3 for top, 4 for bottom
 	 
@@ -356,7 +367,25 @@ private int roomRows=6;  // height of a room
 	@return a boolean representing the state of whether the Goat object is in the room or not. 
 	*/
 	public boolean getHasGoat(){
-	return hasBooks;
+	return hasGoat;
+	}
+	
+	/**
+	Accessor to get the status of the hasGoat boolean indicating the presence of a Wolf object (RiverPuzzle) in the Room. 
+	Returns true if the Room has the Wolf object in it and false otherwise.
+	@return a boolean representing the state of whether the Wolf object is in the room or not. 
+	*/
+	public boolean getHasWolf(){
+	return hasWolf;
+	}
+	
+	/**
+	Accessor to get the status of the hasGoat boolean indicating the presence of a Cabbage object (RiverPuzzle) in the Room. 
+	Returns true if the Room has the Cabbage object in it and false otherwise.
+	@return a boolean representing the state of whether the Cabbage object is in the room or not. 
+	*/
+	public boolean getHasCabbage(){
+	return hasCabbage;
 	}
 	
 	
@@ -566,6 +595,24 @@ private int roomRows=6;  // height of a room
 	*/
 	public void setHasGoat(boolean value){
 	hasGoat = value;
+	return;
+	}
+	
+	/**
+	Mutator to set the state of the hasWolf boolean.  
+	@param value a boolean setting the state of the hasWolf, true if the room has a Wolf item and Object, false if not.
+	*/
+	public void setHasWolf(boolean value){
+	hasWolf = value;
+	return;
+	}
+	
+	/**
+	Mutator to set the state of the hasCabbage boolean.  
+	@param value a boolean setting the state of the hasCabbage, true if the room has a Cabbage item and Object, false if not.
+	*/
+	public void setHasCabbage(boolean value){
+	hasCabbage = value;
 	return;
 	}
 
@@ -781,6 +828,10 @@ private int roomRows=6;  // height of a room
 		roomGrid[roomCols/2][roomRows/2]='H';
 		}else if (hasGoat){
 		roomGrid[roomCols/2][roomRows/2]='G';
+		}else if (hasWolf){
+		roomGrid[roomCols/2][roomRows/2]='Z';
+		}else if (hasCabbage){
+		roomGrid[roomCols/2][roomRows/2]='C';
 		}else if (hasFood){
 		roomGrid[roomCols/2][roomRows/2]='F';
 		}else {
@@ -860,6 +911,10 @@ private int roomRows=6;  // height of a room
 				System.out.print("L");
 				}else if (hasGoat == true  && k == roomWidth/2){
 				System.out.print("G");
+				}else if (hasWolf  == true  && k == roomWidth/2){
+				System.out.print("Z");
+				}else if (hasCabbage == true  && k == roomWidth/2){
+				System.out.print("C");
 				}else if (hasFood == true  && k == roomWidth/2){
 				System.out.print("F");
 				}else if (hasPlayer == true  && k == roomWidth/2){
@@ -913,6 +968,8 @@ private int roomRows=6;  // height of a room
 	System.out.print("Books = " + hasBooks+ " ");
 	System.out.print("ComboLock = " + hasComboLock+ " ");
 	System.out.println("Goat = " + hasGoat+ " ");
+	System.out.println("Wolf = " + hasWolf+ " ");
+	System.out.println("Cabbage = " + hasCabbage+ " ");
 	}
 
 } // class closing brace
