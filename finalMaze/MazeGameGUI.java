@@ -2,6 +2,7 @@ package finalMaze;
 
 
 
+
 import java.util.Random;
 import java.util.Scanner;
 //import java.util.concurrent.TimeUnit; // for delay before exit
