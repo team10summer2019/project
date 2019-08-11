@@ -122,11 +122,14 @@ public class MazeGameGUI extends Application {
 	Image player = new Image("images/player.jpg");
 	Image riddle = new Image("images/riddle.jpg");
 	Image comboLock = new Image("images/combolock.jpg");
-	Image leverOne = new Image("images/leverOne.jpg");
+	Image leverOne = new Image("images/leverOne.png");
 	Image leverTwo = new Image("images/leverTwo.png");
-	Image goat = new Image("images/goat.png");
-	Image wolf = new Image("images/wolf.png");
-	Image cabbage = new Image("images/cabbage.png");
+	Image goat = new Image("images/goat.jpg");
+	Image goatItem = new Image("images/goatItem.png");
+	Image wolf = new Image("images/wolf.jpg");
+	Image wolfItem = new Image("images/wolfItem.png");
+	Image cabbage = new Image("images/cabbage.jpg");
+	Image cabbageItem = new Image("images/cabbageItem.png");
 ////////////////////////////////////////////////////////////////////////////////	
 	
 	
@@ -703,13 +706,13 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 			itemGrid[3][0].setFill(new ImagePattern(leverTwo));
 		}
 		if (gameBoard.getHero().getHasGoat()) {
-			itemGrid[2][0].setFill(new ImagePattern(goat));
+			itemGrid[2][0].setFill(new ImagePattern(goatItem));
 		}
 		if (gameBoard.getHero().getHasWolf()) {
-			itemGrid[3][0].setFill(new ImagePattern(wolf));
+			itemGrid[3][0].setFill(new ImagePattern(wolfItem));
 		}
 		if (gameBoard.getHero().getHasCabbage()) {
-			itemGrid[4][0].setFill(new ImagePattern(cabbage));
+			itemGrid[4][0].setFill(new ImagePattern(cabbageItem));
 		}
 	return;
 	}
