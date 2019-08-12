@@ -1250,7 +1250,7 @@ Image cabbageItem = new Image("images/cabbageItem.png");
 			
 		// if user input was "Return" display map unit until user types return
 		if ( storeInput.equalsIgnoreCase("return") ) {
-			
+				dot.setFill(null);
 				//image = new Image("images/Logo.png");
 				drawImage(gcL,logo);	
 				postCurrentRoom();
@@ -1583,7 +1583,7 @@ Image cabbageItem = new Image("images/cabbageItem.png");
 	
 
 		if (  gameBoard.getMonster().isAlive() && gameBoard.getHero().isAlive() ){
-		
+			dot.setFill(null);
 			image = new Image("images/wraith.png");
 			drawImage(gcL,image);
 			
