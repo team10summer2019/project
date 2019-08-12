@@ -136,6 +136,10 @@ Image cabbageItem = new Image("images/cabbageItem.png");
 	
 ///////////////////////////// MAIN METHOD ////////////////////////////////////
 	
+	/**
+	Main method can be used to launch terminal arguments
+	@param args Input arguments stored in an array of type String 
+	*/
 	public static void main(String[] args) {
 		launch(args);
 	}
@@ -679,7 +683,9 @@ Image cabbageItem = new Image("images/cabbageItem.png");
 	}
 
 
-	
+	/**
+	Method to post items into an item grid when the player picks them up from the rooms 
+	*/
 	public void postItems() {
 		
 		if (gameBoard.getHero().getHasMap()) {
@@ -694,6 +700,9 @@ Image cabbageItem = new Image("images/cabbageItem.png");
 	}
 	
 	
+	/**
+	Method to post coloured rectangle health bar representing the state of the player health 
+	*/
 	public void postHealth() {
 			if  (gameBoard.getHero().getHealth() >40 ) {
 				healthGrid[3][0].setFill(Color.GREEN);
@@ -739,6 +748,10 @@ Image cabbageItem = new Image("images/cabbageItem.png");
 		return;
 	}
 	
+	
+	/**
+	Method clear the Item Grid boxes on game start, game over, and next level maze
+	*/
 	public void wipeItemGrid() {	
 		for (int k = 0; k<5;k++) {
 		itemGrid[k][0].setFill(Color.GREY);
@@ -746,6 +759,10 @@ Image cabbageItem = new Image("images/cabbageItem.png");
 	return;
 	}
 	
+	
+	/**
+	Method clear the Health Grid bar on game start and game over 
+	*/
 	public void wipeHealthGrid() {	
 		for (int k = 0; k<4;k++) {
 		healthGrid[k][0].setFill(Color.GREY);
