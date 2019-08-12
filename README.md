@@ -31,10 +31,11 @@ This is a GUI frontend to display and control the maze and player commands from 
 To run these files, create a folder in eclipse, and copy all the .java files into the src folder.
 Add the jar file jfxrt.jar to the build path as a library. Then run the class MazeGameGUI.java as a java application.<BR>
 
-Create a folder in eclipse and copy all of the files from /project/maze5/*.java into the eclipse source folder.
-also copy the directory /project/images/ into a package images in eclipse. <BR> 
+Create a folder in eclipse and copy all of the files from /project/maze5/*.java  along with /project/maze5/GUI/MazeGameGUI.java 
+into the eclipse source folder. Also copy the directory /project/maze5/images/ into a package images in eclipse. <BR> 
 
 Then link jfxrt.jar into the library path.  Finally Run MazeGameGUI.java. as a java application in eclipse. <BR>
+
 
 # HaineRiddle
 HAINE KIM DEMO 1 <BR>
