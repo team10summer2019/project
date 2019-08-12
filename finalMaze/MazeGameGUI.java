@@ -1492,7 +1492,7 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 		dot.setFill(null); // take the dot off the map during fight sequence
 		postCurrentRoom();
 		}
-		
+		 
 		//puzzle instances
 		// please move these into the maze creation function setBoard() in the appropriate 
 		// if statement based on level 1,2,3 etc not here

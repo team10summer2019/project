@@ -20,7 +20,7 @@ public class TestHaineRiddle {
 		CreateRiddle returnRiddle = theRiddle.chooseRiddle();
 		
 		return returnRiddle;
-		
+		 
 	} 
 	
 	public CreateRiddle riddleTwo(){
