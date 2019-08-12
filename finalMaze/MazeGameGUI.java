@@ -972,6 +972,7 @@ mapStack.getChildren().addAll(canvasLeft, dot);
  		
  		/////////////////// MAZE IS HAND DESIGNED ////////////////////////////
  		// setRoomWalls(int x,int y, boolean left, boolean right, boolean up, boolean down){
+ 		//setRoomItems(int x, int y ,boolean key, boolean door ,boolean map, boolean monster, boolean food, boolean riddle, boolean hint, boolean comboLock, boolean goat, boolean wolf, boolean cabbage ){ 
  		//ROW 0
  		m.setRoomWalls(0,0,true,true,true,false); // setup the first room 
  		m.setRoomPlayer(0,0,true);  // place the player in the first room
