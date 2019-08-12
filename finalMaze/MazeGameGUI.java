@@ -311,7 +311,7 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 		Text author = new Text();
 		String text = "THE MAZE a game by:\n" + 
 				      "Ron Rodriguez, Haine Kim, Steven On , Fiona Yong, and Kate Hsu \n" + 
-				      "Copyright (c) 2019.  Licensed under the GNU Public License GPL version 3.0./\n";
+				      "Copyright (c) 2019.  Licensed under the GNU Public License GPL version 3.0.\n";
 		author.setText(text);
 		author.setFill(Color.WHITE);
 		playButton.setMinHeight(50);
