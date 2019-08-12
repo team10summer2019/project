@@ -732,10 +732,10 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 			itemGrid[2][0].setFill(new ImagePattern(goatItem));
 		}
 		if (gameBoard.getHero().getHasWolf()) {
-			itemGrid[3][0].setFill(new ImagePattern(wolfItem));
+			itemGrid[2][0].setFill(new ImagePattern(wolfItem));
 		}
 		if (gameBoard.getHero().getHasCabbage()) {
-			itemGrid[4][0].setFill(new ImagePattern(cabbageItem));
+			itemGrid[2][0].setFill(new ImagePattern(cabbageItem));
 		}
 	return;
 	}
@@ -1426,6 +1426,8 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 			moveCounter++;
 			}else if (tempRoom.getHasGoat()){
 			gameBoard.takeGoat();
+			gameBoard.putWolf();
+			gameBoard.putCabbage();
 			System.out.println("You took the Goat!");
 			messageLabel.setText("You took the Goat!");
 			bigText.setText("You took the Goat!");
@@ -1433,6 +1435,8 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 			moveCounter++;
 			}else if (tempRoom.getHasWolf()){
 			gameBoard.takeWolf();
+			gameBoard.putGoat();
+			gameBoard.putCabbage();
 			System.out.println("You took the Wolf!");
 			messageLabel.setText("You took the Wolf!");
 			bigText.setText("You took the Wolf!");
@@ -1440,6 +1444,8 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 			moveCounter++;
 			}else if (tempRoom.getHasCabbage()){
 			gameBoard.takeCabbage();
+			gameBoard.putWolf();
+			gameBoard.putGoat();
 			System.out.println("You took the Cabbage!");
 			messageLabel.setText("You took the Cabbage!");
 			bigText.setText("You took the Cabbage!");
