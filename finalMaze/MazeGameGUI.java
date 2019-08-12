@@ -45,7 +45,7 @@ public class MazeGameGUI extends Application {
 	public static void main(String[] args) {
 		launch(args);
 	} 
-	
+	 
 //////////////////////////INSTANCE VARIABLES ///////////////////////////////////
 
 	private int level = 2 ;   // set the level to increase through 4 levels

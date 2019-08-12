@@ -37,7 +37,7 @@ public class TestHaineRiddle {
 	
 		return returnRiddle;
 		
-	}
+	} 
 	
 	public CreateRiddle riddleThree(){
 		///MAKE A LOT OF RIDDLES
