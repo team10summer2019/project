@@ -48,7 +48,7 @@ public class MazeGameGUI extends Application {
 	
 //////////////////////////INSTANCE VARIABLES ///////////////////////////////////
 
-	private int level = 1 ;   // set the level to increase through 4 levels
+	private int level = 2 ;   // set the level to increase through 4 levels
 	private int mazeSize=4;	 // Initialize with 4x4 maze for level 1  
 	//private int currentLevel=level; 
 	
@@ -404,6 +404,9 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 				messageLabel.setText(storeInput);
 			} else if (event.getCharacter().charAt(0) == 'p') {
 				storeInput="play";
+				messageLabel.setText(storeInput);
+			} else if (event.getCharacter().charAt(0) == 'x') {
+				storeInput="drop";
 				messageLabel.setText(storeInput);
 			}
 		
@@ -790,6 +793,13 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 		for (int k = 0; k<5;k++) {
 		itemGrid[k][0].setFill(Color.GREY);
 		}
+	return;
+	}
+	
+	public void wipeGoatWolfCabbage() {	
+		
+		itemGrid[2][0].setFill(Color.GREY);
+		
 	return;
 	}
 	
@@ -1461,6 +1471,28 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 		tempRoom = gameBoard.getCurrentRoom();
 		tempRoom.populateRoomGrid(); // load the information and characters currently set for the room into the roomGrid
 
+		}
+		
+		// if user input was "drop", will drop either the goat, cabbage, or wolf that the player has in level 2
+		if ( storeInput.equalsIgnoreCase("drop") ) {
+			gameBoard.dropObject();	
+			if (tempHero.getHasCabbage()) {
+				System.out.println("You dropped the cabbage!");
+				messageLabel.setText("You dropped the cabbage!");
+				bigText.setText("You dropped the cabbage!");
+			}else if (tempHero.getHasWolf()) {
+				System.out.println("You dropped the wolf!");
+				messageLabel.setText("You dropped the wolf!");
+				bigText.setText("You dropped the wolf!");
+			}else if (tempHero.getHasGoat()) {
+				System.out.println("You dropped the goat!");
+				messageLabel.setText("You dropped the goat!");
+				bigText.setText("You dropped the goat!");
+			}
+			gameBoard.resetLevelTwoItems();
+			wipeGoatWolfCabbage();
+			postCurrentRoom();
+						
 		}
 		
 		// if user input is "Fight"	
