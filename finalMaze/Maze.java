@@ -952,7 +952,7 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 		Point currentPosition = hero.getPosition();
 		currentRoom = getRoom( currentPosition );	
 			// if the hero has a cabbage
-			if (hero.getHasCabbage()){
+			if (hero.getHasCabbage()){ 
 			// put down the cabbage
 			hero.setHasCabbage(false);
 			// reset the room to have cabbage

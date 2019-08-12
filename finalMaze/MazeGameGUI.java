@@ -1440,7 +1440,7 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 			System.out.println("You took the Wolf!");
 			messageLabel.setText("You took the Wolf!");
 			bigText.setText("You took the Wolf!");
-			postItems();
+			postItems(); 
 			moveCounter++;
 			}else if (tempRoom.getHasCabbage()){
 			gameBoard.takeCabbage();
