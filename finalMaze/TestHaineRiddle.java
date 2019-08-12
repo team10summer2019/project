@@ -39,4 +39,22 @@ public class TestHaineRiddle {
 		
 	}
 	
+	public CreateRiddle riddleThree(){
+		///MAKE A LOT OF RIDDLES
+		CreateRiddle theRiddle = new CreateRiddle();
+		CreateRiddle riddle8 = new CreateRiddle("FLEAS" ,"When they are caught, they are thrown away. When they escape, you itch all day. What are they?\n");
+		CreateRiddle riddle9 = new CreateRiddle("G", "What always ends everything?\n");
+		CreateRiddle riddle10 = new CreateRiddle("KEYBOARD","I have keys, but no locks. I have a space, but no room.\nYou can enter but you can't go outside. What am I?\n");
+		CreateRiddle riddle11 = new CreateRiddle("TOWEL","What gets wet when drying?");
+		theRiddle.addRiddles(riddle8);
+		theRiddle.addRiddles(riddle9);
+		theRiddle.addRiddles(riddle10);
+		theRiddle.addRiddles(riddle11);
+		
+		CreateRiddle returnRiddle = theRiddle.chooseRiddle();
+	
+		return returnRiddle;
+		
+	}
+	
 }
