@@ -317,8 +317,8 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 		playButton.setMinHeight(50);
 		playButton.setMinWidth(100);
 		playButton.setOnAction(e -> primaryStage.setScene(scene));
-		playButton.setLayoutX(375);
-		playButton.setLayoutY(500);
+		playButton.setLayoutX(380);
+		playButton.setLayoutY(310);
 		author.setLayoutX(10);
 		author.setLayoutY(555);
 		
