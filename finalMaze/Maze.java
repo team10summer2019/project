@@ -578,6 +578,17 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 	}
 	
 	/**
+	Mutator to reset the Player object hero item Booleans for Map and Key, at the start of a new level.	
+	*/
+	public void resetLevelTwoItems() {
+	
+	hero.setHasGoat(false);
+	hero.setHasWolf(false);
+	hero.setHasCabbage(false);
+	
+	}
+	
+	/**
 	Mutator to set the Door object door location given input Point p as a coordinate.
 	Used to set the Door to a new starting location (maybe use to start in a random location in the maze each time).  
 	@param x An integer x-coordinate location to set the Door object location to.	
@@ -906,6 +917,98 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 	currentRoom = getRoom( currentPosition );
 	return;
 	}
+	
+	/**
+	Mutator to take another object and place the Goat that the player has back into the room.
+	*/
+	public void putGoat(){
+		Point currentPosition = hero.getPosition();
+		currentRoom = getRoom( currentPosition );	
+			// if the player has a goat
+			if (hero.getHasGoat()){
+			// take away the goat
+			hero.setHasGoat(false);
+			// change the goat with another item in the room
+			setCurrentRoom(currentPosition); // point current room to the room in roomList 
+			currentRoom.setHasGoat(true); // put the goat into the room
+			}
+		// restore the pointer away from the roomList;
+		currentRoom = getRoom( currentPosition );
+		return;
+		}
+	
+	/**
+	Mutator to take another object and place the Wolf that the player has back into the room.
+	*/
+	public void putWolf(){
+		Point currentPosition = hero.getPosition();
+		currentRoom = getRoom( currentPosition );	
+			// if the player has a wolf
+			if (hero.getHasWolf()){
+			// put down the wolf
+			hero.setHasWolf(false);
+			// reset the room to have a wolf
+			setCurrentRoom(currentPosition); // point current room to the room in roomList 
+			currentRoom.setHasWolf(true); // remove the Wolf from the room	
+			}
+		// restore the pointer away from the roomList;
+		currentRoom = getRoom( currentPosition );
+		return;
+		}
+	
+	/**
+	Mutator to take another object and place the Cabbage that the player has back into the room.
+	*/
+	public void putCabbage(){
+		Point currentPosition = hero.getPosition();
+		currentRoom = getRoom( currentPosition );	
+			// if the hero has a cabbage
+			if (hero.getHasCabbage()){ 
+			// put down the cabbage
+			hero.setHasCabbage(false);
+			// reset the room to have cabbage
+			setCurrentRoom(currentPosition); // point current room to the room in roomList 
+			currentRoom.setHasCabbage(true); // place the cabbage into to room
+			}
+		// restore the pointer away from the roomList;
+		currentRoom = getRoom( currentPosition );
+		return;
+		}
+	
+	/**
+	Mutator to take drop either goat, wolf or cabbage that is in the player inventory.
+	*/
+	public void dropObject(){
+		Point currentPosition = hero.getPosition();
+		currentRoom = getRoom( currentPosition );	
+			// if the hero has a cabbage
+			if (hero.getHasCabbage()){ 
+			// put down the cabbage
+			hero.setHasCabbage(false);
+			// reset the room to have cabbage
+			setCurrentRoom(currentPosition); // point current room to the room in roomList 
+			currentRoom.setHasCabbage(true); // place the cabbage into to room
+			}
+			// if the player has a wolf
+			else if (hero.getHasWolf()){
+			// put down the wolf
+			hero.setHasWolf(false);
+			// reset the room to have a wolf
+			setCurrentRoom(currentPosition); // point current room to the room in roomList 
+			currentRoom.setHasWolf(true); // remove the Wolf from the room	
+			}
+			// if the player has a goat
+			else if (hero.getHasGoat()){
+			// take away the goat
+			hero.setHasGoat(false);
+			// change the goat with another item in the room
+			setCurrentRoom(currentPosition); // point current room to the room in roomList 
+			currentRoom.setHasGoat(true); // put the goat into the room
+			}
+		// restore the pointer away from the roomList;
+		currentRoom = getRoom( currentPosition );
+		return;
+		}
 	
 	/**
 	Mutator to place the Map from a room with the hero and remove the Map from the current room.	
