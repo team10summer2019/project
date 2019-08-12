@@ -318,8 +318,8 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 		playButton.setOnAction(e -> primaryStage.setScene(scene));
 		playButton.setLayoutX(375);
 		playButton.setLayoutY(500);
-		author.setLayoutX(230);
-		author.setLayoutY(460);
+		author.setLayoutX(10);
+		author.setLayoutY(555);
 		
 		startMenu.getChildren().add(playButton);
 		startMenu.getChildren().add(author);
