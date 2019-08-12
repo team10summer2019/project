@@ -2,7 +2,7 @@
 Team Project Files
 
 # maze5
-In the folder maze5 is a demo of a maze that has a key and a monster. The player must traverse from room (0,0) to the room 
+In the folder maze5 is a demo of a maze that has a key, a map, and a monster. The player must traverse from room (0,0) to the room 
 with the key, collect the key and traverse to the room with the Door, use the key and exit the maze to win.  There are three levels.
 Level 1 is the same as maze version 1, with a randomly moving monster that you can fight.   Level 2 is a 6x6 36 room maze with random item placement for map and key.
 Level 3 is a 8 x 8 64 room maze with all items randomly placed in the maze including the key,door, monster and map. 
@@ -13,7 +13,7 @@ $cd maze5 <BR>
 $javac *.java <BR>
 $java MazeGame <BR>
 
-In the game use the commands Enter to cycle through the rooms in the array list, <BR>
+In the game use the commands + Enter to move through the rooms in the maze, <BR>
 
 Commands:  help, map, quit, left, right, down, up, take, open, escape, fight, attack, run. <BR>
 
@@ -22,7 +22,7 @@ terminates the program. The player moves around the map using the commands "Up",
 motion occurs to the adjacent room provided that there is no obstruction or Wall.
 "Fight" starts the fighting dialog with the maze Wraith monster. In the fight dialog you can use the command attack, fight or run.  <BR>
 
-The program will terminate after 300 rounds of user input, if you win by exiting the final door in level 3 or if you die or quit. <BR>
+The program will terminate after 1000 rounds of user input, if you win by exiting the final door in level 3 or if you die or quit. <BR>
 
 The class diagram is located in /project/maze4/diagram/ both in pdf and dia formats. <BR>
 
