@@ -1567,7 +1567,7 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 			
 			hitPlay = false;
 		}
-		
+		 
 		if( hitPlay == true && currentPosition.isEqual(thirdRiddle) && storeInput.equalsIgnoreCase(theRiddle.getAnswer()) ) {
 			solved = true;
 			tempRoom=gameBoard.getRoom(thirdRiddle);

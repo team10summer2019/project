@@ -21,7 +21,7 @@ public class TestHaineRiddle {
 		
 		return returnRiddle;
 		
-	}
+	} 
 	
 	public CreateRiddle riddleTwo(){
 		///MAKE A LOT OF RIDDLES
