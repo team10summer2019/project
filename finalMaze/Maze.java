@@ -601,6 +601,24 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 	
 	}
 	
+	public boolean heroHasGoat() {
+		
+		return hero.getHasGoat();
+		
+		}
+	
+	public boolean heroHasWolf() {
+			
+			return hero.getHasWolf();
+			
+			}
+	
+	public boolean heroHasCabbage() {
+		
+		return hero.getHasCabbage();
+		
+		}
+	
 	/**
 	Mutator to set the Door object door location given input Point p as a coordinate.
 	Used to set the Door to a new starting location (maybe use to start in a random location in the maze each time).  
@@ -1041,10 +1059,11 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 	Mutator to take drop either goat, wolf or cabbage that is in the player inventory.
 	*/
 	public void dropObject(){
+		Point halfWay = new Point(1,4);
 		Point currentPosition = hero.getPosition();
 		currentRoom = getRoom( currentPosition );	
 			// if the hero has a cabbage
-			if (hero.getHasCabbage()){ 
+			if (hero.getHasCabbage() && !(currentRoom.getLocation().isEqual(halfWay))){ 
 			// put down the cabbage
 			hero.setHasCabbage(false);
 			// reset the room to have cabbage
@@ -1052,7 +1071,7 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 			currentRoom.setHasCabbage(true); // place the cabbage into to room
 			}
 			// if the player has a wolf
-			else if (hero.getHasWolf()){
+			else if (hero.getHasWolf() && !(currentRoom.getLocation().isEqual(halfWay))){
 			// put down the wolf
 			hero.setHasWolf(false);
 			// reset the room to have a wolf
@@ -1060,7 +1079,7 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 			currentRoom.setHasWolf(true); // remove the Wolf from the room	
 			}
 			// if the player has a goat
-			else if (hero.getHasGoat()){
+			else if (hero.getHasGoat() && !(currentRoom.getLocation().isEqual(halfWay))){
 			// take away the goat
 			hero.setHasGoat(false);
 			// change the goat with another item in the room
