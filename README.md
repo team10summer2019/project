@@ -65,14 +65,13 @@ $java TestStevenRiver <BR>
 
 # LockLeverPuzzle(plus Escape Room Implementations)
 
-===Overview: (in package maze2 and within the package LockLeverPuzzle)===
+===Overview:===
 
 Folder LockLeverPuzzle has multiple demos of the pieces that would fit together for a specialized puzzle by a class called LockLeverPuzzle. 
 This program runs a text-based escape room styled interaction with the user.
 
 The program is run on java through the Main class in LockLeverPuzzle.
 Most classes are prompted and work with GenericRoom class.
-GenericRoom class will be called directly through the class Maze in the Maze2 package itself.
 
 The classes interact with each other properly and independently for the most part. 
 
@@ -86,7 +85,6 @@ are permitted to be used as long as permission is granted and updates are verifi
 
 ===Bugs and Future Updates:===
 
-More work will be needed to adjust inventory to carry it through GenericRoom(parent class/superclass) and its subclasses(Room1Haine,Room2Haine,Room3,Room4) and any other rooms in the MazeGame.
 LockLeverPuzzle requires review and editing to have it interacting with the user/player.
 
 ===File Information=========
