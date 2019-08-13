@@ -1356,9 +1356,9 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 		Point currentLocation = gameBoard.getCurrentRoom().getLocation();
 			// check that player has the key, and is in the location that the door is in and that the door is open
 			if (gameBoard.getHero().getHasKey()  && currentLocation.isEqual(doorLocation) && gameBoard.getCurrentRoom().getHasDoor()  && !gameBoard.getDoor().getIsLocked() && !gameBoard.getMonster().isAlive() ) {
-				
+				sayThis = instructions.levelTwoInstructions();
 				level++; 
-				System.out.println("You have escaped, and are now on Level: " + level );
+				System.out.println("You have escaped, and are now on Level: " + level + sayThis);
 				messageLabel.setText("You have escaped, and are now on Level: " + level );	
 				bigText.setText("You have escaped, and are now on Level: " + level );
 				drawImage(gcL,logo);

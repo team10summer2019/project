@@ -113,4 +113,10 @@ public class Instructions {
 		return ("The wolf has ate the goat!\n") 
 			+ ("The puzzle will now reset");
 	}
+	
+	public String levelTwoInstructions() {
+		return ("\nA farmer has lost his goat, wolf, and cabbage in this maze!\n") 
+			+ ("Find all three and bring them to the star on the map. Your inventory can only carry one of them at a time.\n")
+			+ ("Press key 1 to take/drop the wolf, 2 to take/drop the cabbage, and 3 to take/drop the goat.");
+	}
 }
