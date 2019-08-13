@@ -1909,7 +1909,7 @@ mapStack.getChildren().addAll(canvasLeft, dot);
  	
 	// Prints out the map if the hero / Player has the map boolean
 	/**
-	Prints out a static map depicting the maze rooms depending on which level is selected. 
+	Prints out a static map depicting the maze rooms depending on which level is selected.  
 	*/
 	public void printMap(){
 		
