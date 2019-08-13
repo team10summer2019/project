@@ -136,10 +136,6 @@ Image cabbageItem = new Image("images/cabbageItem.png");
 	
 ///////////////////////////// MAIN METHOD ////////////////////////////////////
 	
-	/**
-	Main method can be used to launch terminal arguments
-	@param args Input arguments stored in an array of type String 
-	*/
 	public static void main(String[] args) {
 		launch(args);
 	}
@@ -294,7 +290,8 @@ Image cabbageItem = new Image("images/cabbageItem.png");
 		root.setBackground(bg); 
 	
 		Scene scene = new Scene(root, 960, 660);
-     	/////////////////// SPLASH SCREEN /////////////////////////////////
+		
+		/////////////////// SPLASH SCREEN /////////////////////////////////
 		//  Start screen for the maze
 		StackPane stackImages = new StackPane(); 
 		ImageView Logo = new ImageView(startLogo);
@@ -308,10 +305,10 @@ Image cabbageItem = new Image("images/cabbageItem.png");
 		playButton.setMinHeight(50);
 		playButton.setMinWidth(100);
 		playButton.setOnAction(e -> primaryStage.setScene(scene));
-		playButton.setLayoutX(375);
-		playButton.setLayoutY(500);
-		author.setLayoutX(230);
-		author.setLayoutY(460);
+		playButton.setLayoutX(380);
+		playButton.setLayoutY(310);
+		author.setLayoutX(10);
+		author.setLayoutY(555);
 		
 		startMenu.getChildren().add(playButton);
 		startMenu.getChildren().add(author);
@@ -683,9 +680,7 @@ Image cabbageItem = new Image("images/cabbageItem.png");
 	}
 
 
-	/**
-	Method to post items into an item grid when the player picks them up from the rooms 
-	*/
+	
 	public void postItems() {
 		
 		if (gameBoard.getHero().getHasMap()) {
@@ -700,9 +695,6 @@ Image cabbageItem = new Image("images/cabbageItem.png");
 	}
 	
 	
-	/**
-	Method to post coloured rectangle health bar representing the state of the player health 
-	*/
 	public void postHealth() {
 			if  (gameBoard.getHero().getHealth() >40 ) {
 				healthGrid[3][0].setFill(Color.GREEN);
@@ -748,10 +740,6 @@ Image cabbageItem = new Image("images/cabbageItem.png");
 		return;
 	}
 	
-	
-	/**
-	Method clear the Item Grid boxes on game start, game over, and next level maze
-	*/
 	public void wipeItemGrid() {	
 		for (int k = 0; k<5;k++) {
 		itemGrid[k][0].setFill(Color.GREY);
@@ -759,10 +747,6 @@ Image cabbageItem = new Image("images/cabbageItem.png");
 	return;
 	}
 	
-	
-	/**
-	Method clear the Health Grid bar on game start and game over 
-	*/
 	public void wipeHealthGrid() {	
 		for (int k = 0; k<4;k++) {
 		healthGrid[k][0].setFill(Color.GREY);
@@ -1282,7 +1266,7 @@ Image cabbageItem = new Image("images/cabbageItem.png");
 		gameBoard.moveDown();
 		tempRoom = gameBoard.getCurrentRoom();
 		tempRoom.populateRoomGrid(); // load the information and characters currently set for the room into the roomGrid
-
+		player = new Image("images/player.jpg");
 		moveCounter++;
 		}	
 			
@@ -1292,7 +1276,7 @@ Image cabbageItem = new Image("images/cabbageItem.png");
 		gameBoard.moveUp();
 		tempRoom = gameBoard.getCurrentRoom();
 		tempRoom.populateRoomGrid(); // load the information and characters currently set for the room into the roomGrid
-
+		player = new Image("images/player.jpg");
 		moveCounter++;
 		}	
 		
@@ -1302,7 +1286,7 @@ Image cabbageItem = new Image("images/cabbageItem.png");
 		gameBoard.moveRight();
 		tempRoom = gameBoard.getCurrentRoom();
 		tempRoom.populateRoomGrid(); // load the information and characters currently set for the room into the roomGrid
-
+		player = new Image("images/playerRight.jpg");
 		moveCounter++;
 		}	
 		
@@ -1312,7 +1296,7 @@ Image cabbageItem = new Image("images/cabbageItem.png");
 		gameBoard.moveLeft();
 		tempRoom = gameBoard.getCurrentRoom();
 		tempRoom.populateRoomGrid(); // load the information and characters currently set for the room into the roomGrid
-
+		player = new Image("images/playerLeft.jpg");
 		moveCounter++;
 		}
 		
