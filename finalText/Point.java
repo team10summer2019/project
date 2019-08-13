@@ -15,7 +15,7 @@ package finalText;
 
 import java.util.Random;
 
-public class Point {
+public class Point { 
 
 /////////////////  MEMBER VARIABLES  ///////////////////////////////////////
 

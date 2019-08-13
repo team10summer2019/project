@@ -15,12 +15,12 @@
 //          Methods- moveLeft(), moveRight(), moveUp(), moveDown(),
 //	           searchRoom(), attack(), openDoor() , die() , isAlive()
 
-package finalText;
+package finalText; 
 
 import java.util.Random;
 
 public class Monster {
-
+ 
 ////////////////////// MEMBER VARIABLES /////////////////////////////////////
 
 private Point position;

@@ -16,11 +16,11 @@ package finalText;
 import java.util.Scanner;
 import java.util.Random;
 
-public class MazeGame {
+public class MazeGame { 
 
 ////////////////////////// INSTANCE VARIABLES ///////////////////////////////////
 
-	static int level = 2 ;   // set the level to increase through 4 levels
+	static int level = 1 ;   // set the level to increase through 4 levels
 
 ////////////////////////  METHODS //////////////////////////////////////////////
 

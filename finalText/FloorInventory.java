@@ -5,7 +5,7 @@ package finalText;
  *
  */
 import java.util.ArrayList;
-
+ 
 public class FloorInventory {
 	//objects that exist on the floor that can be picked up; works with dynamic objects
 	///CREATE:ROOM: HAS LIST OF OBJECTS-> IF TAKEN AWAY ROOM SHOULD NOT HAVE IT

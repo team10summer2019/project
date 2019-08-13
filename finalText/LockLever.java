@@ -4,7 +4,7 @@ package finalText;
 /**
  * @author Fiona
  *
- */ 
+ */  
 public class LockLever {
 	/*
 	 * CLASS

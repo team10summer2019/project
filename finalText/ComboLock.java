@@ -4,7 +4,7 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class ComboLock {
-
+ 
 	private ArrayList<String> correctCombo = new ArrayList<String>();
 	private ArrayList<String> userInputs = new ArrayList<String>();
 	

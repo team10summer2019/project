@@ -3,7 +3,7 @@ package finalText;
 /**
  * @author Fiona
  *
- */
+ */ 
 public class StaticObjects extends Inventory {
 	/*
 	 * CLASS

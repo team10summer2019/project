@@ -2,7 +2,7 @@ package finalText;
 
 public class TestHaineRiddle { 
 	 
-	public boolean riddleOne(){
+	public boolean riddleOne(){ 
 		///MAKE A LOT OF RIDDLES 
 		CreateRiddle runner = new CreateRiddle();
 		CreateRiddle riddle1 = new CreateRiddle("HUMAN" ,"What is the creature that walks on four legs in the morning,\ntwo legs at noon, and three in the evening?\n");

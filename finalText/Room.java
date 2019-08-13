@@ -18,7 +18,7 @@
 
 package finalText;
 
-public class Room {
+public class Room { 
 
 /////////////////////////// MEMBER VARIABLES ///////////////////////////////////////////
 
