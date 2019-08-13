@@ -49,7 +49,7 @@ public class MazeGameGUI extends Application {
 	 
 //////////////////////////INSTANCE VARIABLES ///////////////////////////////////
 
-	private int level = 1 ;   // set the level to increase through 4 levels
+	private int level = 2 ;   // set the level to increase through 4 levels
 	private int mazeSize=4;	 // Initialize with 4x4 maze for level 1  
 	//private int currentLevel=level; 
 	
@@ -1758,7 +1758,7 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 				if (tempRoom.getHasCabbage() && tempRoom.getHasGoat() && tempRoom.getHasWolf() && currentPosition.isEqual(puzzle)) {
 					gameBoard.setRoomWalls(puzzle, true, true, false, true);
 					gameBoard.setRoomWalls(farmerLocation, true, true, true, false);
-				}
+				}		
 			}
 		}
 		
@@ -1806,34 +1806,38 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 				gameBoard.setRoomWalls(farmerLocation, false, true, true, false);
 			}
 		}
-		
+		// check if you made a valid condition
 		public void checkGoat() {
 			Point currentPosition = tempHero.getPosition();	
 			Room puzRoom = gameBoard.getPuzzleRoom();
 			Room farRoom = gameBoard.getFarmerRoom();
 			if(currentPosition.isEqual(puzzle) && puzRoom.getHasCabbage() && puzRoom.getHasGoat() && !puzRoom.getHasWolf()){
+				gameBoard.moveUp();
 				gameBoard.resetAll();
 				gameBoard.resetPuzzle();
 				gameBoard.resetLevelTwoItems();
 				wipeGoatWolfCabbage();
 			}else if (currentPosition.isEqual(farmerLocation) && farRoom.getHasCabbage() && farRoom.getHasGoat() && !farRoom.getHasWolf()) {
+				gameBoard.moveUp();
 				gameBoard.resetAll();
 				gameBoard.resetPuzzle();
 				gameBoard.resetLevelTwoItems();
 				wipeGoatWolfCabbage();
 			}
 		}
-		
+		// check if you made a valid condition
 		public void checkWolf() {
 			Point currentPosition = tempHero.getPosition();	
 			Room puzRoom = gameBoard.getPuzzleRoom();
 			Room farRoom = gameBoard.getFarmerRoom();
 			if(currentPosition.isEqual(puzzle) && puzRoom.getHasWolf() && puzRoom.getHasGoat() && !puzRoom.getHasCabbage()){
+				gameBoard.moveUp();
 				gameBoard.resetAll(); 
 				gameBoard.resetPuzzle();
 				gameBoard.resetLevelTwoItems();
 				wipeGoatWolfCabbage();
 			}else if (currentPosition.isEqual(farmerLocation) && farRoom.getHasWolf() && farRoom.getHasGoat() && !farRoom.getHasCabbage()) {
+				gameBoard.moveUp();
 				gameBoard.resetAll();
 				gameBoard.resetPuzzle();
 				gameBoard.resetLevelTwoItems();

@@ -1005,13 +1005,13 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 	*/
 	public void resetAll(){
 		Point currentPosition = hero.getPosition();
-		moveUp();
-		moveUp();
-		moveUp();
+	//	moveUp();
 		setCurrentRoom(currentPosition); // point current room to the room in roomList 
-		currentRoom.setHasGoat(false); // remove the Goat from the room	
+		currentRoom.setHasGoat(false); // remove the Goat from the room
+	//	moveUp();
 		setCurrentRoom(currentPosition);
 		currentRoom.setHasWolf(false);
+	//	moveUp();
 		setCurrentRoom(currentPosition);
 		currentRoom.setHasCabbage(false);
 		moveDown();
