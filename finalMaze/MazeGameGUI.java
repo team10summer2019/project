@@ -812,8 +812,9 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 	}
 	
 	public void wipeGoatWolfCabbage() {	
-		
-		itemGrid[2][0].setFill(Color.GREY);
+		if(gameBoard.heroHasGoat() == false && gameBoard.heroHasWolf() == false && gameBoard.heroHasCabbage() == false) {
+			itemGrid[2][0].setFill(Color.GREY);
+		}
 		
 	return;
 	}
@@ -1692,7 +1693,6 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 			}
 			if (tempHero.getHasWolf()) {
 				gameBoard.dropObject();	
-				gameBoard.resetLevelTwoItems();
 				wipeGoatWolfCabbage();
 				postCurrentRoom();
 				checkPuzzle();
@@ -1720,7 +1720,6 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 			}
 			if (tempHero.getHasCabbage()) {
 				gameBoard.dropObject();	
-				gameBoard.resetLevelTwoItems();
 				wipeGoatWolfCabbage();
 				postCurrentRoom();
 				checkPuzzle();
@@ -1748,7 +1747,6 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 			}	
 			if (tempHero.getHasGoat()) {
 				gameBoard.dropObject();	
-				gameBoard.resetLevelTwoItems();
 				wipeGoatWolfCabbage();
 				postCurrentRoom();
 				checkPuzzle();
