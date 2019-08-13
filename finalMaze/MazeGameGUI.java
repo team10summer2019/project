@@ -1781,7 +1781,7 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 		 gameOn=false; // game terminating flag to halt input
 		}
 	
-		
+		 
 	return;
 	}
 	
