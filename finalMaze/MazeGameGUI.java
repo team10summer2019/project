@@ -49,7 +49,7 @@ public class MazeGameGUI extends Application {
 	 
 //////////////////////////INSTANCE VARIABLES ///////////////////////////////////
 
-	private int level = 2 ;   // set the level to increase through 4 levels
+	private int level = 1 ;   // set the level to increase through 4 levels
 	private int mazeSize=4;	 // Initialize with 4x4 maze for level 1  
 	//private int currentLevel=level; 
 	
@@ -1356,9 +1356,9 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 		Point currentLocation = gameBoard.getCurrentRoom().getLocation();
 			// check that player has the key, and is in the location that the door is in and that the door is open
 			if (gameBoard.getHero().getHasKey()  && currentLocation.isEqual(doorLocation) && gameBoard.getCurrentRoom().getHasDoor()  && !gameBoard.getDoor().getIsLocked() && !gameBoard.getMonster().isAlive() ) {
-				
+				sayThis = instructions.levelTwoInstructions();
 				level++; 
-				System.out.println("You have escaped, and are now on Level: " + level );
+				System.out.println("You have escaped, and are now on Level: " + level + sayThis);
 				messageLabel.setText("You have escaped, and are now on Level: " + level );	
 				bigText.setText("You have escaped, and are now on Level: " + level );
 				drawImage(gcL,logo);
@@ -1696,12 +1696,16 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 				wipeGoatWolfCabbage();
 				postCurrentRoom();
 				checkPuzzle();
+				if (gameBoard.heroHasWolf() == false) {
 				System.out.println("You dropped the wolf!");
 				messageLabel.setText("You dropped the wolf!");
 				bigText.setText("You dropped the wolf!");
+				}
 				if (tempRoom.getHasCabbage() && tempRoom.getHasGoat() && tempRoom.getHasWolf() && currentPosition.isEqual(puzzle)) {
 					gameBoard.setRoomWalls(puzzle, true, true, false, true);
 					gameBoard.setRoomWalls(farmerLocation, true, true, true, false);
+					sayThis = instructions.puzzleInstructions();
+					bigText.setText(sayThis);
 				}
 			}
 		}
@@ -1723,12 +1727,16 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 				wipeGoatWolfCabbage();
 				postCurrentRoom();
 				checkPuzzle();
-				System.out.println("You dropped the cabbage!");
-				messageLabel.setText("You dropped the cabbage!");
-				bigText.setText("You dropped the cabbage!");
+				if (gameBoard.heroHasCabbage() == false) {
+					System.out.println("You dropped the cabbage!");
+					messageLabel.setText("You dropped the cabbage!");
+					bigText.setText("You dropped the cabbage!");
+				}
 				if (tempRoom.getHasCabbage() && tempRoom.getHasGoat() && tempRoom.getHasWolf() && currentPosition.isEqual(puzzle)) {
 					gameBoard.setRoomWalls(puzzle, true, true, false, true);
 					gameBoard.setRoomWalls(farmerLocation, true, true, true, false);
+					sayThis = instructions.puzzleInstructions();
+					bigText.setText(sayThis);
 				}
 			}
 		}
@@ -1750,12 +1758,16 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 				wipeGoatWolfCabbage();
 				postCurrentRoom();
 				checkPuzzle();
+				if (gameBoard.heroHasGoat() == false) {
 				System.out.println("You dropped the goat!");
 				messageLabel.setText("You dropped the goat!");
 				bigText.setText("You dropped the goat!");
+				}
 				if (tempRoom.getHasCabbage() && tempRoom.getHasGoat() && tempRoom.getHasWolf() && currentPosition.isEqual(puzzle)) {
 					gameBoard.setRoomWalls(puzzle, true, true, false, true);
 					gameBoard.setRoomWalls(farmerLocation, true, true, true, false);
+					sayThis = instructions.puzzleInstructions();
+					bigText.setText(sayThis);
 				}		
 			}
 		}
@@ -1815,12 +1827,16 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 				gameBoard.resetPuzzle();
 				gameBoard.resetLevelTwoItems();
 				wipeGoatWolfCabbage();
+				sayThis = instructions.goat();
+				bigText.setText(sayThis);
 			}else if (currentPosition.isEqual(farmerLocation) && farRoom.getHasCabbage() && farRoom.getHasGoat() && !farRoom.getHasWolf()) {
 				gameBoard.moveUp();
 				gameBoard.resetAll();
 				gameBoard.resetPuzzle();
 				gameBoard.resetLevelTwoItems();
 				wipeGoatWolfCabbage();
+				sayThis = instructions.goat();
+				bigText.setText(sayThis);
 			}
 		}
 		// check if you made a valid condition
@@ -1834,12 +1850,16 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 				gameBoard.resetPuzzle();
 				gameBoard.resetLevelTwoItems();
 				wipeGoatWolfCabbage();
+				sayThis = instructions.wolf();
+				bigText.setText(sayThis);
 			}else if (currentPosition.isEqual(farmerLocation) && farRoom.getHasWolf() && farRoom.getHasGoat() && !farRoom.getHasCabbage()) {
 				gameBoard.moveUp();
 				gameBoard.resetAll();
 				gameBoard.resetPuzzle();
 				gameBoard.resetLevelTwoItems();
 				wipeGoatWolfCabbage();
+				sayThis = instructions.wolf();
+				bigText.setText(sayThis);
 			}
 		}
 	
@@ -1874,7 +1894,7 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 	System.out.println("Look: Search the room for clues");
 	System.out.println("Escape: Escape the Maze if the Door is Open");
 	System.out.println("Control Keys: a: left, s: down,d: right,w: up");
-	System.out.println("Control Keys: r: return, m: map, t: take , q: quit, h: help o: open, e: escape, f:fight");
+	System.out.println("Control Keys: r: return, m: map, t: take , q: quit, h: help o: open, e: escape, f:fight, l:look, p:play 1:take/drop wolf, 2:take/drop cabbage, 3:take/drop goat");
 	System.out.println("__________________________________________________");
 	System.out.println("");
 	System.out.println("Type \"Return\" and press Enter to return to the Maze");
