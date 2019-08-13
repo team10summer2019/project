@@ -49,7 +49,7 @@ public class MazeGameGUI extends Application {
 	 
 //////////////////////////INSTANCE VARIABLES ///////////////////////////////////
 
-	private int level = 3 ;   // set the level to increase through 4 levels
+	private int level = 1 ;   // set the level to increase through 4 levels
 	private int mazeSize=4;	 // Initialize with 4x4 maze for level 1  
 	//private int currentLevel=level; 
 	
@@ -1896,7 +1896,7 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 	System.out.println("Look: Search the room for clues");
 	System.out.println("Escape: Escape the Maze if the Door is Open");
 	System.out.println("Control Keys: a: left, s: down,d: right,w: up");
-	System.out.println("Control Keys: r: return, m: map, t: take , q: quit, h: help o: open, e: escape, f:fight, l:look, p:play 1:take/drop wolf, 2:take/drop cabbage, 3:take/drop goat");
+	System.out.println("Control Keys: r: return, m: map, t: take , q: quit, h: help o: open, e: escape, f:fight, l:look, p:play, 1:take/drop wolf, 2:take/drop cabbage, 3:take/drop goat");
 	System.out.println("__________________________________________________");
 	System.out.println("");
 	System.out.println("Type \"Return\" and press Enter to return to the Maze");
