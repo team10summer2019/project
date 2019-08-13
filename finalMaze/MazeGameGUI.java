@@ -974,10 +974,10 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 		m.setRoomItems(randPoint,tempRoom.getHasKey(),tempRoom.getHasDoor(),tempRoom.getHasMap(),tempRoom.getHasMonster(),true);
 		
 		////////////////////MAP POSITIONING ////////////////////////////////
-		dotX0=-130;  // set to initial room x position on map 1
-		dotY0=-100;  // set to initial room y position on map 1 
-		dot_x=80;   // set to match the map spacing in x between rooms
-		dot_y=75;   // set to match the map spacing in y between rooms
+		dotX0=-140;  // set to initial room x position on map 1
+		dotY0=-140;  // set to initial room y position on map 1 
+		dot_x=95;   // set to match the map spacing in x between rooms
+		dot_y=95;   // set to match the map spacing in y between rooms
 		dot.setTranslateX(dotX0);  // initial X position for the circle
 		dot.setTranslateY(dotY0);  // initial Y position for the circle 		
 
@@ -1090,10 +1090,10 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 		m.setRoomItems(randPoint,tempRoom.getHasKey(),tempRoom.getHasDoor(),tempRoom.getHasMap(),tempRoom.getHasMonster(),true);
 		
 		/////////////// MAP POSITIONING //////////////////////////////
-		dotX0=-150;
-		dotY0=-125;
-		dot_x=60;
-		dot_y=55;
+		dotX0=-160;
+		dotY0=-160;
+		dot_x=65;
+		dot_y=65;
 		dot.setTranslateX(dotX0);  // initial X position for the circle
 		dot.setTranslateY(dotY0);  // initial Y position for the circle 
 	
@@ -1933,7 +1933,7 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 		System.out.println("");
 		System.out.println("Type \"Return\" and press Enter to return to the Maze");
 		
-		image = new Image("images/map1.png"); // load the map
+		image = new Image("images/mapOne.jpg"); // load the map
 		
 		}
 		
@@ -1963,7 +1963,7 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 		System.out.println("");
 		System.out.println("Type \"Return\" and press Enter to return to the Maze");
 		
-		image = new Image("images/map2.png");
+		image = new Image("images/mazeTwo.jpg");
 		}
 	
 		if (level ==3) {
