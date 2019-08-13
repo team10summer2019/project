@@ -626,6 +626,22 @@ private int roomRows=6;  // height of a room
 	return;
 	}
 
+	/**
+	Mutator to set one character in a roomGrid. input is validated against the size of a roomGrid
+	Use this method to reposition items in a room.   
+	@param col  a column value in the room grid, must be < RoomCols.
+	@param row  a row value in the room grid, must be < RoomRows.
+	@param ch  a char character to change the value at (c,r) to in the roomGrid.
+	*/
+	public void setRoomGrid(int col, int row, char ch){
+		// validate input
+		if ( col >=0 && col < roomCols && row >=0 && row < roomRows ) {
+		// set the room grid item at (col,row) to char ch
+		roomGrid[col][row]=ch;
+		}
+	return;
+	} 	
+	
 	/*
 
 	public void setRoomWidth(int width){
