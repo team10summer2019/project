@@ -95,4 +95,22 @@ public class Instructions {
 				+("You stick the lever into the hole in the wall, and it fits perfectly.\n")
 				+("The wall vanishes once you pull the lever. You see a door far in the distance...");
 	}
+	
+	public String puzzleInstructions() {
+		return ("You the player, have a wolf, a goat, and a cabbage on one side of the maze. A farmer is on the other side waitng for you to deliver his things.\nYou need to get all three across to the other side of the room.")
+		+("You are trapped in this puzzle until you solved it. ")
+		+("You can only fit one of them in your inventory at a time.\nIf the wolf is left alone with the goat, the wolf will eat the goat.") 
+		+("If the goat is left alone with the cabbage, it will devour the cabbage.\nIf the cabbage is left alone with the wolf, nothing happens.") 
+		+("You can also move across the maze by yourself.\n");
+	}
+	
+	public String goat() {
+		return ("The goat has ate the cabbage!\n") 
+			+ ("The puzzle will now reset");
+	}
+	
+	public String wolf() {
+		return ("The wolf has ate the goat!\n") 
+			+ ("The puzzle will now reset");
+	}
 }
