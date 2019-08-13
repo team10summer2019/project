@@ -826,17 +826,20 @@ private int roomRows=6;  // height of a room
 		roomGrid[roomCols/2][roomRows/2]='L';
 		}else if (hasHint){
 		roomGrid[roomCols/2][roomRows/2]='H';
-		}else if (hasGoat){
-		roomGrid[roomCols/2][roomRows/2]='G';
-		}else if (hasWolf){
-		roomGrid[roomCols/2][roomRows/2]='Z';
-		}else if (hasCabbage){
-		roomGrid[roomCols/2][roomRows/2]='C';
 		}else if (hasFood){
 		roomGrid[roomCols/2][roomRows/2]='F';
 		}else {
 		roomGrid[roomCols/2][roomRows/2]=' ';
 		} 
+		
+		// puzzle item placement
+		if (hasGoat){
+		roomGrid[roomCols/2][(roomRows/2)-1]='G';
+		} if (hasWolf){
+		roomGrid[(roomCols/2)-2][(roomRows/2)-1]='Z';
+		} if (hasCabbage){
+		roomGrid[(roomCols/2)-1][(roomRows/2)-1]='C';
+		}
 		
 		//// Door placement depends on doorPosition integer 
 		if (hasDoor) {

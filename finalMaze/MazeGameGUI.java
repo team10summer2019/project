@@ -48,7 +48,7 @@ public class MazeGameGUI extends Application {
 	 
 //////////////////////////INSTANCE VARIABLES ///////////////////////////////////
 
-	private int level = 1 ;   // set the level to increase through 4 levels
+	private int level = 2 ;   // set the level to increase through 4 levels
 	private int mazeSize=4;	 // Initialize with 4x4 maze for level 1  
 	//private int currentLevel=level; 
 	
@@ -117,6 +117,9 @@ public class MazeGameGUI extends Application {
 	//look/hint instances
 	Point firstHint;
 	Point secondHint; 
+	// puzzle instances
+	Point puzzle;
+	Point farmerLocation;
 	
 ///////////////////////////// TEXTURE IMAGES ///////////////////////////////////////
 	Image startLogo = new Image("images/startlogo.jpg");
@@ -406,8 +409,14 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 			} else if (event.getCharacter().charAt(0) == 'p') {
 				storeInput="play";
 				messageLabel.setText(storeInput);
-			} else if (event.getCharacter().charAt(0) == 'x') {
-				storeInput="drop";
+			}  else if (event.getCharacter().charAt(0) == '1') {
+				storeInput="1";
+				messageLabel.setText(storeInput);
+			} else if (event.getCharacter().charAt(0) == '2') {
+				storeInput="2";
+				messageLabel.setText(storeInput);
+			} else if (event.getCharacter().charAt(0) == '3') {
+				storeInput="3";
 				messageLabel.setText(storeInput);
 			}
 		
@@ -675,18 +684,21 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 					buttonGrid[i][j].setOpacity(0.5);
 					//rectGrid[i][j].setFill(Color.BLUEVIOLET);
 					rectGrid[i][j].setFill(new ImagePattern(comboLock));
-				}else if (ch == 'G' ){
+				}else if (ch == 'G') {
 					buttonGrid[i][j].setOpacity(0.5);
 					//rectGrid[i][j].setFill(Color.BLUEVIOLET);
 					rectGrid[i][j].setFill(new ImagePattern(goat));
+					//rectGrid[i][j].setFill(new ImagePattern(floor));
 				}else if (ch == 'Z' ){
 					buttonGrid[i][j].setOpacity(0.5);
 					//rectGrid[i][j].setFill(Color.BLUEVIOLET);
 					rectGrid[i][j].setFill(new ImagePattern(wolf));
+					//rectGrid[i][j].setFill(new ImagePattern(floor));
 				}else if (ch == 'C' ){
 					buttonGrid[i][j].setOpacity(0.5);
 					//rectGrid[i][j].setFill(Color.BLUEVIOLET);
 					rectGrid[i][j].setFill(new ImagePattern(cabbage));
+					//rectGrid[i][j].setFill(new ImagePattern(floor));
 				}else if (ch == 'F' ){
 					buttonGrid[i][j].setOpacity(1);
 					//rectGrid[i][j].setFill(Color.ORANGE);
@@ -697,7 +709,7 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 					rectGrid[i][j].setFill(new ImagePattern(player));
 				}
 			}
-		}	
+		}
 	}
 
 	// Wipe graphics display
@@ -943,7 +955,6 @@ mapStack.getChildren().addAll(canvasLeft, dot);
  		m.setRoomItems(2,3,false,false,false,false,false,true,false,false,false,false,false); //place the riddle in the room below the key
  		// room (3,3)
  		m.setRoomWalls(3,3,false,true,false,true);
- 		m.setRoomItems(3,3,false,false,false,false,true,false,false,false,false,false,false); // place food
  		
  		// get a random location within the map 
 		randPoint.setRandom(m.getMazeSize());
@@ -977,6 +988,9 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 		firstHint = new Point(0,1);
 		secondHint = new Point(2,1);
 		
+		/////////////////////// PUZZLE LOCATION //////////////////////////////
+		puzzle = new Point(1,5);
+		farmerLocation = new Point(1,3);
  		} // level 1 end if brace
  	
  	
@@ -1027,7 +1041,7 @@ mapStack.getChildren().addAll(canvasLeft, dot);
  		m.setRoomWalls(5,4,false,true,false,false);	
  		// ROW 5
  		m.setRoomWalls(0,5,true,true,false,true);
- 		m.setRoomWalls(1,5,true,false,false,true);
+ 		m.setRoomWalls(1,5,true,false,true,true);
  		m.setRoomWalls(2,5,false,false,false,true);
  		m.setRoomWalls(3,5,false,false,true,true);	
  		m.setRoomWalls(4,5,false,true,false,true);
@@ -1080,12 +1094,17 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 		////////////////////// RIDDLE Locations /////////////////////////////
 		firstRiddle = new Point(0,2);   // modify these for level 2 
 		secondRiddle = new Point(2,3);
+		thirdRiddle = new Point(4,0);		  // level 2 location
 		comboLocation = new Point(3,0);
 		
 		/////////////////////// HINT LOCATIONS //////////////////////////////
 		//look/hint instances
 		firstHint = new Point(0,1);// modify these for level 2
 		secondHint = new Point(2,1);
+		
+		/////////////////////// PUZZLE LOCATION //////////////////////////////
+		puzzle = new Point(1,5);
+		farmerLocation = new Point(1,3);
 		
  		} // level 2 end if brace
  		////////////////////////     LEVEL 3   ///////////////////////////////////////
@@ -1272,7 +1291,9 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 		if (p.isEqual(comboLocation) && level ==1) {	
 		gameBoard.setRoomWalls(comboLocation,false,true,true,false);
 		}
-		
+		if (p.isEqual(puzzle) && level ==2) {
+		gameBoard.setRoomWalls(puzzle, true, true, false, true);
+		}
 	return;
 	}
 	
@@ -1441,33 +1462,6 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 			bigText.setText("You took the Food!");
 			postHealth();
 			moveCounter++;
-			}else if (tempRoom.getHasGoat()){
-			gameBoard.takeGoat();
-			gameBoard.putWolf();
-			gameBoard.putCabbage();
-			System.out.println("You took the Goat!");
-			messageLabel.setText("You took the Goat!");
-			bigText.setText("You took the Goat!");
-			postItems();
-			moveCounter++;
-			}else if (tempRoom.getHasWolf()){
-			gameBoard.takeWolf();
-			gameBoard.putGoat();
-			gameBoard.putCabbage();
-			System.out.println("You took the Wolf!");
-			messageLabel.setText("You took the Wolf!");
-			bigText.setText("You took the Wolf!");
-			postItems(); 
-			moveCounter++;
-			}else if (tempRoom.getHasCabbage()){
-			gameBoard.takeCabbage();
-			gameBoard.putWolf();
-			gameBoard.putGoat();
-			System.out.println("You took the Cabbage!");
-			messageLabel.setText("You took the Cabbage!");
-			bigText.setText("You took the Cabbage!");
-			postItems();
-			moveCounter++;
 			}else{
 			System.out.println("There is nothing in the room to take...");
 			messageLabel.setText("There is nothing in the room to take...");
@@ -1479,27 +1473,6 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 
 		}
 		
-		// if user input was "drop", will drop either the goat, cabbage, or wolf that the player has in level 2
-		if ( storeInput.equalsIgnoreCase("drop") ) {
-			gameBoard.dropObject();	
-			if (tempHero.getHasCabbage()) {
-				System.out.println("You dropped the cabbage!");
-				messageLabel.setText("You dropped the cabbage!");
-				bigText.setText("You dropped the cabbage!");
-			}else if (tempHero.getHasWolf()) {
-				System.out.println("You dropped the wolf!");
-				messageLabel.setText("You dropped the wolf!");
-				bigText.setText("You dropped the wolf!");
-			}else if (tempHero.getHasGoat()) {
-				System.out.println("You dropped the goat!");
-				messageLabel.setText("You dropped the goat!");
-				bigText.setText("You dropped the goat!");
-			}
-			gameBoard.resetLevelTwoItems();
-			wipeGoatWolfCabbage();
-			postCurrentRoom();
-						
-		}
 		
 		// if user input is "Fight"	
 		if ( storeInput.equalsIgnoreCase("Fight")){
@@ -1696,6 +1669,84 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 			sayThis = instructions.yellowBoxInstructions();
 			bigText.setText(sayThis);
 			hitLook = false;
+		}
+		
+		if (storeInput.equalsIgnoreCase("1")) {
+			if (tempRoom.getHasWolf()){
+				gameBoard.takeWolf();
+				gameBoard.putGoat();
+				gameBoard.putCabbage();
+				System.out.println("You took the Wolf!");
+				messageLabel.setText("You took the Wolf!");
+				bigText.setText("You took the Wolf!");
+				postItems(); 
+				moveCounter++;
+			}
+			if (tempHero.getHasWolf()) {
+				gameBoard.dropObject();	
+				gameBoard.resetLevelTwoItems();
+				wipeGoatWolfCabbage();
+				postCurrentRoom();
+				System.out.println("You dropped the wolf!");
+				messageLabel.setText("You dropped the wolf!");
+				bigText.setText("You dropped the wolf!");
+				if (tempRoom.getHasCabbage() && tempRoom.getHasGoat() && tempRoom.getHasWolf()) {
+					gameBoard.setRoomWalls(puzzle, true, true, false, true);
+					gameBoard.setRoomWalls(farmerLocation, true, true, true, false);
+				}
+			}
+		}
+		
+		if (storeInput.equalsIgnoreCase("2")) {
+			if (tempRoom.getHasCabbage()) {
+				gameBoard.takeCabbage();
+				gameBoard.putWolf();
+				gameBoard.putGoat();
+				System.out.println("You took the Cabbage!");
+				messageLabel.setText("You took the Cabbage!");
+				bigText.setText("You took the Cabbage!");
+				postItems();
+				moveCounter++;
+			}
+			if (tempHero.getHasCabbage()) {
+				gameBoard.dropObject();	
+				gameBoard.resetLevelTwoItems();
+				wipeGoatWolfCabbage();
+				postCurrentRoom();
+				System.out.println("You dropped the cabbage!");
+				messageLabel.setText("You dropped the cabbage!");
+				bigText.setText("You dropped the cabbage!");
+				if (tempRoom.getHasCabbage() && tempRoom.getHasGoat() && tempRoom.getHasWolf()) {
+					gameBoard.setRoomWalls(puzzle, true, true, false, true);
+					gameBoard.setRoomWalls(farmerLocation, true, true, true, false);
+				}
+			}
+		}
+		
+		if (storeInput.equalsIgnoreCase("3")) {
+			if (tempRoom.getHasGoat()){
+				gameBoard.takeGoat();
+				gameBoard.putWolf();
+				gameBoard.putCabbage();
+				System.out.println("You took the Goat!");
+				messageLabel.setText("You took the Goat!");
+				bigText.setText("You took the Goat!");
+				postItems();
+				moveCounter++;
+			}	
+			if (tempHero.getHasGoat()) {
+				gameBoard.dropObject();	
+				gameBoard.resetLevelTwoItems();
+				wipeGoatWolfCabbage();
+				postCurrentRoom();
+				System.out.println("You dropped the goat!");
+				messageLabel.setText("You dropped the goat!");
+				bigText.setText("You dropped the goat!");
+				if (tempRoom.getHasCabbage() && tempRoom.getHasGoat() && tempRoom.getHasWolf()) {
+					gameBoard.setRoomWalls(puzzle, true, true, false, true);
+					gameBoard.setRoomWalls(farmerLocation, true, true, true, false);
+				}
+			}
 		}
 		
 		/// closing message to user if Win
