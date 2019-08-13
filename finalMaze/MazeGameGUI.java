@@ -1695,7 +1695,7 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 	System.out.println("Type \"Return\" and press Enter to return to the Maze");
 	
 	// set the help info into the text area box 
-	bigText.setText("Welcome to the Maze\nHelp: prints useage\nQuit:Exits the game\nReturn:returns to the map\nControl Keys: a: left, s: down,d: right,w: up\nr: return, m: map, t: take , q: quit, \nh: help o: open, e: escape, f:fight, p: play riddle, l: look, z: send text from textbox");
+	bigText.setText("Welcome to the Maze\nHelp: prints useage\nQuit:Exits the game\nReturn:returns to the map\nControl Keys: a: left, s: down,d: right,w: up\nr: return, m: map, t: take , q: quit, \nh: help o: open, e: escape, f:fight, p: play riddle, l: look.\n1: take/drop wolf, 2: take/drop cabbage, 3: take/drop goat.\nz: send text from textbox.\n");
 
 	return;
 	}
