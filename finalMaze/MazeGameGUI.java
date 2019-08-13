@@ -49,7 +49,7 @@ public class MazeGameGUI extends Application {
 	 
 //////////////////////////INSTANCE VARIABLES ///////////////////////////////////
 
-	private int level = 1 ;   // set the level to increase through 4 levels
+	private int level = 3 ;   // set the level to increase through 4 levels
 	private int mazeSize=4;	 // Initialize with 4x4 maze for level 1  
 	//private int currentLevel=level; 
 	
@@ -122,6 +122,7 @@ public class MazeGameGUI extends Application {
 	Point puzzle;
 	Point farmerLocation;
 	Point halfWay;
+	Point start;
 	
 ///////////////////////////// TEXTURE IMAGES ///////////////////////////////////////
 	Image startLogo = new Image("images/startlogo.jpg");
@@ -1070,7 +1071,8 @@ mapStack.getChildren().addAll(canvasLeft, dot);
  		randPoint.setRandom(mazeSize);	// get a new random point
  		tempRoom = m.getRoom(randPoint);  // get a copy of the room at randLocation
  		// set MAP location preserving prior booleans 
- 		m.setRoomItems(randPoint,tempRoom.getHasKey(),tempRoom.getHasDoor(),true,tempRoom.getHasMonster(),tempRoom.getHasFood()); // Place the map 
+ 		start = new Point(0,0);
+ 		m.setRoomItems(start,tempRoom.getHasKey(),tempRoom.getHasDoor(),true,tempRoom.getHasMonster(),tempRoom.getHasFood()); // Place the map 
 
  		/////////////////// NON RANDOM ITEMS ////////////////////////////
  		// place door in specific location
@@ -1358,9 +1360,9 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 			if (gameBoard.getHero().getHasKey()  && currentLocation.isEqual(doorLocation) && gameBoard.getCurrentRoom().getHasDoor()  && !gameBoard.getDoor().getIsLocked() && !gameBoard.getMonster().isAlive() ) {
 				sayThis = instructions.levelTwoInstructions();
 				level++; 
-				System.out.println("You have escaped, and are now on Level: " + level + sayThis);
+				System.out.println("You have escaped, and are now on Level: " + level);
 				messageLabel.setText("You have escaped, and are now on Level: " + level );	
-				bigText.setText("You have escaped, and are now on Level: " + level );
+				bigText.setText("You have escaped, and are now on Level: " + level + sayThis);
 				drawImage(gcL,logo);
 				resetGameBoard();  // get a new level
 				if (level == 4){
@@ -1900,7 +1902,7 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 	System.out.println("Type \"Return\" and press Enter to return to the Maze");
 	
 	// set the help info into the text area box 
-	bigText.setText("Welcome to the Maze\nHelp: prints useage\nQuit:Exits the game\nReturn:returns to the map\nControl Keys: a: left, s: down,d: right,w: up\nr: return, m: map, t: take , q: quit, \nh: help o: open, e: escape, f:fight, p: play riddle, l: look, z: send text from textbox");
+	bigText.setText("Welcome to the Maze\nHelp: prints useage\nQuit:Exits the game\nReturn:returns to the map\nControl Keys: a: left, s: down,d: right,w: up\nr: return, m: map, t: take , q: quit, \nh: help o: open, e: escape, f:fight, p: play riddle, l: look, 1:take/drop wolf, 2:take/drop cabbage, 3:take/drop goat, z: send text from textbox");
 
 	return;
 	}
