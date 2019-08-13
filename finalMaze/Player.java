@@ -3,6 +3,7 @@ package finalMaze;
 
 
 
+
 // Player:  Attributes - (x,y) Point location, Health, hasKey, attackStrength
 //          Methods- moveLeft(), moveRight(), moveUp(), moveDown(),
 //	           searchRoom(), attack(), openDoor() , die() , isAlive()

@@ -2,6 +2,7 @@ package finalMaze;
 
 
 
+
 /**
 Class Door creates a Door that has a Point location and a boolean isLocked
 @author (Ron) Zorondras Rodriguez

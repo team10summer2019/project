@@ -1,16 +1,5 @@
 package finalMaze;
-//////////////////////////////////////////////
-//
-// File: MazeGame.java
-// Description: MazeGame class with main() function
-//
-// Author: (Ron) Zorondras Rodriguez
-// Course:  CPSC 233 Summer 2019
-// Creation Date: July 21, 2019
-// Version: 0.06
-// Revision Date: August 05, 2019
-//
-///////////////////////////////////////////////
+
 
 import java.util.Scanner;
 import java.util.Random;

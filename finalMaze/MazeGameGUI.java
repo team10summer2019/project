@@ -3,6 +3,7 @@ package finalMaze;
 
 
 
+
 import java.util.Random;
 import java.util.Scanner;
 //import java.util.concurrent.TimeUnit; // for delay before exit
@@ -1690,7 +1691,7 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 				System.out.println("You dropped the wolf!");
 				messageLabel.setText("You dropped the wolf!");
 				bigText.setText("You dropped the wolf!");
-				if (tempRoom.getHasCabbage() && tempRoom.getHasGoat() && tempRoom.getHasWolf()) {
+				if (tempRoom.getHasCabbage() && tempRoom.getHasGoat() && tempRoom.getHasWolf() && currentPosition.isEqual(puzzle)) {
 					gameBoard.setRoomWalls(puzzle, true, true, false, true);
 					gameBoard.setRoomWalls(farmerLocation, true, true, true, false);
 				}
@@ -1716,7 +1717,7 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 				System.out.println("You dropped the cabbage!");
 				messageLabel.setText("You dropped the cabbage!");
 				bigText.setText("You dropped the cabbage!");
-				if (tempRoom.getHasCabbage() && tempRoom.getHasGoat() && tempRoom.getHasWolf()) {
+				if (tempRoom.getHasCabbage() && tempRoom.getHasGoat() && tempRoom.getHasWolf() && currentPosition.isEqual(puzzle)) {
 					gameBoard.setRoomWalls(puzzle, true, true, false, true);
 					gameBoard.setRoomWalls(farmerLocation, true, true, true, false);
 				}
@@ -1742,7 +1743,7 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 				System.out.println("You dropped the goat!");
 				messageLabel.setText("You dropped the goat!");
 				bigText.setText("You dropped the goat!");
-				if (tempRoom.getHasCabbage() && tempRoom.getHasGoat() && tempRoom.getHasWolf()) {
+				if (tempRoom.getHasCabbage() && tempRoom.getHasGoat() && tempRoom.getHasWolf() && currentPosition.isEqual(puzzle)) {
 					gameBoard.setRoomWalls(puzzle, true, true, false, true);
 					gameBoard.setRoomWalls(farmerLocation, true, true, true, false);
 				}
@@ -1781,7 +1782,7 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 		 gameOn=false; // game terminating flag to halt input
 		}
 	
-		 
+		
 	return;
 	}
 	

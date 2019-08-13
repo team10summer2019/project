@@ -559,8 +559,8 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 		currentRoom = getRoom( currentPosition );
 		if (currentRoom.getHasGoat() && !hero.getHasGoat()){
 			hero.setHasGoat(true);
-			currentRoom.setHasGoat(false);
 			setCurrentRoom(currentPosition);
+			currentRoom.setHasGoat(false);
 			System.out.println("You took the goat!\n");
 		}
 		currentRoom = getRoom( currentPosition );
@@ -571,8 +571,8 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 		currentRoom = getRoom( currentPosition );
 		if (currentRoom.getHasCabbage() && !hero.getHasCabbage()){
 			hero.setHasCabbage(true);
-			currentRoom.setHasCabbage(false);
 			setCurrentRoom(currentPosition);
+			currentRoom.setHasCabbage(false);
 			System.out.println("You took the cabbage!\n");
 		}
 		currentRoom = getRoom( currentPosition );
@@ -583,8 +583,8 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 		currentRoom = getRoom( currentPosition );
 		if (currentRoom.getHasWolf() && !hero.getHasWolf()){
 			hero.setHasWolf(true);
-			currentRoom.setHasWolf(false);
 			setCurrentRoom(currentPosition);
+			currentRoom.setHasWolf(false);
 			System.out.println("You took the wolf!\n");
 		}
 		currentRoom = getRoom( currentPosition );

@@ -2,6 +2,7 @@ package finalMaze;
 
 
 
+
 public class Instructions {
 
 	public String hintInstructions() {
