@@ -1402,7 +1402,7 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 		gameBoard.moveDown();
 		tempRoom = gameBoard.getCurrentRoom();
 		tempRoom.populateRoomGrid(); // load the information and characters currently set for the room into the roomGrid
-
+		player = new Image("images/player.jpg");
 		moveCounter++;
 		}	
 			
@@ -1412,7 +1412,7 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 		gameBoard.moveUp();
 		tempRoom = gameBoard.getCurrentRoom();
 		tempRoom.populateRoomGrid(); // load the information and characters currently set for the room into the roomGrid
-
+		player = new Image("images/player.jpg");
 		moveCounter++;
 		}	
 		
@@ -1422,7 +1422,7 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 		gameBoard.moveRight();
 		tempRoom = gameBoard.getCurrentRoom();
 		tempRoom.populateRoomGrid(); // load the information and characters currently set for the room into the roomGrid
-
+		player = new Image("images/playerRight.jpg");
 		moveCounter++;
 		}	
 		
@@ -1432,7 +1432,7 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 		gameBoard.moveLeft();
 		tempRoom = gameBoard.getCurrentRoom();
 		tempRoom.populateRoomGrid(); // load the information and characters currently set for the room into the roomGrid
-
+		player = new Image("images/playerLeft.jpg");
 		moveCounter++;
 		}
 		
