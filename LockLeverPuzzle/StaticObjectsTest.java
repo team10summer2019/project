@@ -1,4 +1,5 @@
-package LockLeverPuzzle;
+
+
 /**
  * @author Fiona
  * @version June 28, 2019
@@ -7,22 +8,22 @@ public class StaticObjectsTest {
 
 	public static void main(String[] args) {
 		StaticObjects subjectiveObject = new StaticObjects();
-		
-		//Encounter with a bear
+
+		// Encounter with a bear
 		subjectiveObject.aBear();
-		
-		//Encounter with a bracelet
+
+		// Encounter with a bracelet
 		subjectiveObject.aBracelet();
-		
-		//Encounter with a card
+
+		// Encounter with a card
 		subjectiveObject.aCard();
-		
-		//Encounter with three bird
+
+		// Encounter with three bird
 		subjectiveObject.aBirdG();
 		subjectiveObject.aBirdR();
 		subjectiveObject.aBirdY();
-		
-		//Note
+
+		// Note
 		subjectiveObject.aNote();
 	}
 
