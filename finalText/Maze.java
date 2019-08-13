@@ -558,10 +558,16 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 		Point currentPosition = hero.getPosition();
 		currentRoom = getRoom( currentPosition );
 		if (currentRoom.getHasGoat() && !hero.getHasGoat()){
-			hero.setHasGoat(true);
 			setCurrentRoom(currentPosition);
+			hero.setHasGoat(true);
 			currentRoom.setHasGoat(false);
 			System.out.println("You took the goat!\n");
+		}
+		else if (hero.getHasGoat() && !currentRoom.getHasGoat()){
+			setCurrentRoom(currentPosition);
+			hero.setHasGoat(false);
+			currentRoom.setHasGoat(true);
+			System.out.println("You put down the goat.\n");
 		}
 		currentRoom = getRoom( currentPosition );
 	}
@@ -570,10 +576,16 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 		Point currentPosition = hero.getPosition();
 		currentRoom = getRoom( currentPosition );
 		if (currentRoom.getHasCabbage() && !hero.getHasCabbage()){
-			hero.setHasCabbage(true);
 			setCurrentRoom(currentPosition);
+			hero.setHasCabbage(true);
 			currentRoom.setHasCabbage(false);
 			System.out.println("You took the cabbage!\n");
+		}
+		else if (hero.getHasCabbage() && !currentRoom.getHasCabbage()){
+			setCurrentRoom(currentPosition);
+			hero.setHasCabbage(false);
+			currentRoom.setHasCabbage(true);
+			System.out.println("You put down the cabbage.\n");
 		}
 		currentRoom = getRoom( currentPosition );
 	}
@@ -582,10 +594,16 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 		Point currentPosition = hero.getPosition();
 		currentRoom = getRoom( currentPosition );
 		if (currentRoom.getHasWolf() && !hero.getHasWolf()){
-			hero.setHasWolf(true);
 			setCurrentRoom(currentPosition);
+			hero.setHasWolf(true);
 			currentRoom.setHasWolf(false);
 			System.out.println("You took the wolf!\n");
+		}
+		else if (hero.getHasWolf() && !currentRoom.getHasWolf()){
+			setCurrentRoom(currentPosition);
+			hero.setHasWolf(false);
+			currentRoom.setHasWolf(true);
+			System.out.println("You put down the cabbage.\n");
 		}
 		currentRoom = getRoom( currentPosition );
 	}
