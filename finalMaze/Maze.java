@@ -168,6 +168,18 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 	return temp;
 	}
 	
+	public Room getPuzzleRoom(){
+		currentRoom = getRoom(1,5);
+		Room temp = getRoom(1,5);  // copy construct and return the copy 
+		return temp;
+		}
+		
+		public Room getFarmerRoom(){
+			currentRoom = getRoom(1,3);
+			Room temp = getRoom(1,3);  // copy construct and return the copy 
+			return temp;
+			}
+		
 	/**
 	Accessor to get the integer size of the maze. returns mazeSize. 
 	@return the integer value of mazeSize the size of the maze.  
@@ -983,6 +995,43 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 			setCurrentRoom(currentPosition); // point current room to the room in roomList 
 			currentRoom.setHasCabbage(true); // place the cabbage into to room
 			}
+		// restore the pointer away from the roomList;
+		currentRoom = getRoom( currentPosition );
+		return;
+		}
+	
+	/**
+	Mutator to reset all.
+	*/
+	public void resetAll(){
+		Point currentPosition = hero.getPosition();
+		moveUp();
+		moveUp();
+		moveUp();
+		setCurrentRoom(currentPosition); // point current room to the room in roomList 
+		currentRoom.setHasGoat(false); // remove the Goat from the room	
+		setCurrentRoom(currentPosition);
+		currentRoom.setHasWolf(false);
+		setCurrentRoom(currentPosition);
+		currentRoom.setHasCabbage(false);
+		moveDown();
+		moveDown();
+		moveDown();	
+		// restore the pointer away from the roomList;
+		currentRoom = getRoom( currentPosition );
+		return;
+		}
+	
+	/** 
+	Mutator to reset the Wolf, cabbage, goat.
+	*/
+	public void resetPuzzle(){
+		Point currentPosition = hero.getPosition();
+		currentRoom = getRoom( currentPosition );	
+		setCurrentRoom(currentPosition); // point current room to the room in roomList 
+		currentRoom.setHasWolf(true); // put the Wolf into the room
+		currentRoom.setHasGoat(true); // put the goat into the room
+		currentRoom.setHasCabbage(true); // put the Cabbage into the room
 		// restore the pointer away from the roomList;
 		currentRoom = getRoom( currentPosition );
 		return;
