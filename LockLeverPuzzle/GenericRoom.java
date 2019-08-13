@@ -1,3 +1,4 @@
+package LockLeverPuzzle;
 import java.util.Scanner;
 
 /**

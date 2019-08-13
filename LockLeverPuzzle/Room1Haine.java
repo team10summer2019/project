@@ -1,4 +1,6 @@
+package LockLeverPuzzle;
 import java.util.Scanner;
+
 /**
  * @author Fiona Yong
  * @author Haine Kim

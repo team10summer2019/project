@@ -1,6 +1,7 @@
+package LockLeverPuzzle;
 
 /**
- * @author Fiona
+ * @author Fiona Yong
  * @version July 21, 2019
  * 
  * CLASS

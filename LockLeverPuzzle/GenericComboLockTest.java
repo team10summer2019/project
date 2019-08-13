@@ -1,7 +1,7 @@
 package LockLeverPuzzle;
 /**
- * @author Fiona
- *
+ * @author Fiona Yong
+ * @version July 28, 2019
  */
 public class GenericComboLockTest {
 
