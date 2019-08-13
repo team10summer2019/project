@@ -612,7 +612,19 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 		}
 	}
 
-
+	/**
+	Mutator to set one character in a roomGrid in the current room. input is validated against the size of a roomGrid
+	Use this method to reposition items in a room.   
+	@param col  a column value in the room grid, must be < RoomCols.
+	@param row  a row value in the room grid, must be < RoomRows.
+	@param ch  a char character to change the value at (c,r) to in the roomGrid.
+	*/
+	public void setCurrentRoomGrid(int col , int row, char ch) {
+		currentRoom.setRoomGrid(col,row,ch);	
+		return;
+	}
+	
+	
 /////////////////////    Player Motion Operations  ////////////////////////////////////////////
 
 	/**
