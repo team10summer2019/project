@@ -1,8 +1,12 @@
 import java.util.Scanner;
 /**
- * @author Fiona 
-
- * Version Updated: August 5, 2019
+ * @author Fiona Yong
+ * @version August 13, 2019
+ *
+ * CLASS
+ * ROOM4
+ * Runs Room specific configurations
+ *
  */
 
 public class Room4 extends GenericRoom {
@@ -16,19 +20,27 @@ public class Room4 extends GenericRoom {
 	
 	private Player p1 = new Player();//transfer player input into player
 	private StaticObjects stat_item = new StaticObjects();
-	private DynamicObjects dyn_item = new DynamicObjects();
-	private Inventory playerInventory; //*
-	private FloorInventory roomInventory; //*
+	private DynamicObjects dyn_item; 
+	private Inventory playerInventory; 
+	private FloorInventory roomInventory; 
+	LockLever lockLeverCheck;
+	
 //////////CONSTRUCTORS////////////
-	public Room4(GenericRoom gr) { //*
+	/**
+	 * @param gr passes instance of GenericRoom's prompted instance of Classes
+	 */
+	public Room4(GenericRoom gr) { 
 		super();
 		this.playerInventory = new Inventory(gr.playerInventory);
 		this.roomInventory = new FloorInventory(gr.roomInventory);
+		this.dyn_item = new DynamicObjects(gr.lockLeverCheck);
+		this.lockLeverCheck = new LockLever(gr);
 	}	
 //////////EXIT VIEW////////////
-/*
-* Leaves room
-*/
+	/**
+	 * Leaves current room if permitted
+	 * @param userInput checks if input was 'exit' to leave
+	 */
 	private void exitView(String userInput) {
 		if (userInput.equalsIgnoreCase("exit")) { //don't need to prompt for each item(aka. make a new method to call it) because it'll be combined later on
 			System.out.println("Exiting..");
@@ -36,10 +48,10 @@ public class Room4 extends GenericRoom {
 			//keyboard.close(); //for isolated game from MazeGame only (DEVELOPERS USE)
 		}
 	}
-//////////ROOM 1////////////
-/*
- * Lets you play through room
- */
+//////////ROOM 4////////////
+	/**
+	 * Lets user play through room when called
+	 */
 	public void room4() {
 		while (inRoom4 == true) {
 			System.out.println("//////////Room 4://///////////\nThis room has a bear with a red box beside it. There is a shelf with three birds sitting on it: a red bird, yellow bird, and green bird.");
@@ -67,7 +79,10 @@ public class Room4 extends GenericRoom {
 			exitView(userInput);
 		}
 	}
-//////////SET INROOM1////////////
+//////////SET INROOM4////////////
+	/**
+	 * @param inRoom_Bool Status of being in Room; true if in Room, false if not in Room
+	 */
 	public void setInRoom4(boolean inRoom_Bool) {
 		Room4.inRoom4 = inRoom_Bool;
 	}
@@ -76,20 +91,31 @@ public class Room4 extends GenericRoom {
 /*
  * Unique methods that are used in the class
  */
+	/**
+	 * Views player inventory
+	 */
 	public void viewInventory() {
 		playerInventory.viewInventory();
 	}
+
 	//////////Add Unique Object to Inventory////////////
-	//change status of dynamic object(ANY!)
-	//Adds unique item to Inventory and removes unique item from FloorInventory
+	/**
+	 * Changes the status of any DynamicObjects item.
+	 * Adds the unique item to Inventory and removes unique item from FloorInventory by its string 'identity name'
+	 * @param item 'Item identity name'
+	 */
 	public void uniqueObject_toInventory(String item) { 
 		System.out.println("You added '" + item + "' to your inventory.");
-		dyn_item.changeStatus_dynObj(item);
+		this.lockLeverCheck = dyn_item.changeStatus_dynObj(item); 
 		playerInventory.addUniqueItemToInventory(item); //adds item to Inventory
 		roomInventory.remove_flrInv(item); //removes item from FloorInventory
 		//roomInventory.viewFloorInventory();
 	}
+	
 	//////////BEAR////////////
+	/**
+	 * Provide information and interactions with object in room
+	 */
 	private void viewBear() {
 		System.out.println("<><>BEAR<><>");
 		boolean awaitInput = true;
@@ -117,6 +143,9 @@ public class Room4 extends GenericRoom {
 		}	
 	}
 	//////////REDBOX////////////
+	/**
+	 * Provide information and interactions with object in room
+	 */
 	private void viewRedBox() { 
 		System.out.println("<><>REDBOX<><>");
 		boolean awaitInput = true;
@@ -134,6 +163,9 @@ public class Room4 extends GenericRoom {
 		}
 	}
 	//////////SHELF////////////
+	/**
+	 * Provide information and interactions with object in room
+	 */
 	private void viewShelf() {
 		boolean awaitInput = true;
 		

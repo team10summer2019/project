@@ -1,11 +1,20 @@
 import java.util.Scanner;
 /**
- * @author Fiona
- * @author Haine
+ * @author Fiona Yong
+ * @author Haine Kim
+ * @version August 13, 2019
  *
- * Version Updated: August 5, 2019
+ * CLASS
+ * ROOM1HAINE
+ * Runs Room specific configurations
+ *
  */
 
+/*
+ * CLASS
+ * ROOM1HAINE
+ * Runs Room specific configurations
+ */
 public class Room1Haine extends GenericRoom {
 	private static boolean inRoom1H = true;
 	//removed gameMethods
@@ -14,23 +23,28 @@ public class Room1Haine extends GenericRoom {
 	
 	private Player p1 = new Player();//transfer player input into player
 	private StaticObjects stat_item = new StaticObjects();
-	private DynamicObjects dyn_item = new DynamicObjects();
-	public Inventory playerInventory; //*
-	public FloorInventory roomInventory; //*
-	public LockLever lockLeverCheck; //*
+	private DynamicObjects dyn_item;
+	public Inventory playerInventory; 
+	public FloorInventory roomInventory; 
+	public LockLever lockLeverCheck; 
 	//private boolean gotBearLever1 = false;
 	//private boolean gotBearLever2 = false;
 //////////CONSTRUCTORS////////////
-	public Room1Haine(GenericRoom gr) { //*
+	/**
+	 * @param gr passes instance of GenericRoom's prompted instance of Classes
+	 */
+	public Room1Haine(GenericRoom gr) { 
 		super();
 		this.playerInventory = new Inventory(gr.playerInventory);
 		this.roomInventory = new FloorInventory(gr.roomInventory);
+		this.dyn_item = new DynamicObjects(gr.lockLeverCheck);
 		this.lockLeverCheck = new LockLever(gr);
 	}
 //////////EXIT VIEW////////////
-/*
-* Leaves room
-*/
+	/**
+	 * Leaves current room if permitted
+	 * @param userInput checks if input was 'exit' to leave
+	 */
 	private void exitView(String userInput) {
 		if (userInput.equalsIgnoreCase("exit")) { //don't need to prompt for each item(aka. make a new method to call it) because it'll be combined later on
 			System.out.println("\nYou decide to stop looking around the room.\n");
@@ -38,9 +52,9 @@ public class Room1Haine extends GenericRoom {
 		}
 	}
 //////////ROOM 1 HAINE////////////
-/*
-* Lets you play through room
-*/
+/**
+ * Lets user play through room when called
+ */
 public void room1H() {
 	while (inRoom1H == true) {
 		System.out.println("//////////Room 1H://///////////");
@@ -81,16 +95,25 @@ public void room1H() {
 	//return gotBearLever1;
 }
 //////////SET INROOM1H////////////
+	/**
+	 * @param inRoom_Bool Status of being in Room; true if in Room, false if not in Room
+	 */
 	public void setInRoom1H(boolean inRoom_Bool) {
 		Room1Haine.inRoom1H = inRoom_Bool;
 	}
 ////////////////////////ITEM METHODS////////////////////////////////
+	/**
+	 * Views player inventory
+	 */
 	public void viewInventory() {
 		playerInventory.viewInventory();
 		}
 	//////////Add Unique Object to Inventory////////////
-	//change status of dynamic object(ANY!)
-	//Adds unique item to Inventory and removes unique item from FloorInventory
+	/**
+	 * Changes the status of any DynamicObjects item.
+	 * Adds the unique item to Inventory and removes unique item from FloorInventory by its string 'identity name'
+	 * @param item 'Item identity name'
+	 */
 	public void uniqueObject_toInventory(String item) { 
 		System.out.println("You added '" + item + "' to your inventory.");
 		dyn_item.changeStatus_dynObj(item);
@@ -99,6 +122,9 @@ public void room1H() {
 		//roomInventory.viewFloorInventory();
 	}
 //////////BEAR////////////
+	/**
+	 * Provide information and interactions with object in room
+	 */
 	public void viewBear() {
 		System.out.println("\n<><>BEAR<><>");
 		boolean awaitInput = true;
@@ -127,6 +153,9 @@ public void room1H() {
 		}	
 	}
 //////////SHELF////////////
+	/**
+	 * Provide information and interactions with object in room
+	 */
 	public void viewShelfH() {
 		boolean awaitInput = true;
 		
@@ -150,11 +179,19 @@ public void room1H() {
 		}
 	}
 //////////PUDDLE////////////		//Haine
+	/**
+	 * Provide information and interactions with object in room
+	 * @author Haine Kim
+	 */
 	public void viewPuddle() {
 		System.out.println("\n<><>PUDDLE<><>");
 		stat_item.aPuddle();
 	}
 ////////BLACKBOARD//////////		//Haine
+	/**
+	 * Provide information and interactions with object in room
+	 * @author Haine Kim
+	 */
 	public void viewBlackboard() { 
 		System.out.println("\n<><>BLACKBOARD<><>");
 		boolean awaitInput = true;

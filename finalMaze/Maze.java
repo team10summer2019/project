@@ -1,6 +1,5 @@
 package finalMaze;
 
-
 import java.util.Random;
 import java.util.ArrayList;
 
@@ -168,18 +167,6 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 	return temp;
 	}
 	
-	public Room getPuzzleRoom(){
-		currentRoom = getRoom(1,5);
-		Room temp = getRoom(1,5);  // copy construct and return the copy 
-		return temp;
-		}
-		
-		public Room getFarmerRoom(){
-			currentRoom = getRoom(1,3);
-			Room temp = getRoom(1,3);  // copy construct and return the copy 
-			return temp;
-			}
-		
 	/**
 	Accessor to get the integer size of the maze. returns mazeSize. 
 	@return the integer value of mazeSize the size of the maze.  
@@ -591,35 +578,6 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 	}
 	
 	/**
-	Mutator to reset the Player object hero item Booleans for Map and Key, at the start of a new level.	
-	*/
-	public void resetLevelTwoItems() {
-	
-	hero.setHasGoat(false);
-	hero.setHasWolf(false);
-	hero.setHasCabbage(false);
-	
-	}
-	
-	public boolean heroHasGoat() {
-		
-		return hero.getHasGoat();
-		
-		}
-	
-	public boolean heroHasWolf() {
-			
-			return hero.getHasWolf();
-			
-			}
-	
-	public boolean heroHasCabbage() {
-		
-		return hero.getHasCabbage();
-		
-		}
-	
-	/**
 	Mutator to set the Door object door location given input Point p as a coordinate.
 	Used to set the Door to a new starting location (maybe use to start in a random location in the maze each time).  
 	@param x An integer x-coordinate location to set the Door object location to.	
@@ -642,19 +600,7 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 		}
 	}
 
-	/**
-	Mutator to set one character in a roomGrid in the current room. input is validated against the size of a roomGrid
-	Use this method to reposition items in a room.   
-	@param col  a column value in the room grid, must be < RoomCols.
-	@param row  a row value in the room grid, must be < RoomRows.
-	@param ch  a char character to change the value at (c,r) to in the roomGrid.
-	*/
-	public void setCurrentRoomGrid(int col , int row, char ch) {
-		currentRoom.setRoomGrid(col,row,ch);	
-		return;
-	}
-	
-	
+
 /////////////////////    Player Motion Operations  ////////////////////////////////////////////
 
 	/**
@@ -960,136 +906,6 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 	currentRoom = getRoom( currentPosition );
 	return;
 	}
-	
-	/**
-	Mutator to take another object and place the Goat that the player has back into the room.
-	*/
-	public void putGoat(){
-		Point currentPosition = hero.getPosition();
-		currentRoom = getRoom( currentPosition );	
-			// if the player has a goat
-			if (hero.getHasGoat()){
-			// take away the goat
-			hero.setHasGoat(false);
-			// change the goat with another item in the room
-			setCurrentRoom(currentPosition); // point current room to the room in roomList 
-			currentRoom.setHasGoat(true); // put the goat into the room
-			}
-		// restore the pointer away from the roomList;
-		currentRoom = getRoom( currentPosition );
-		return;
-		}
-	
-	/**
-	Mutator to take another object and place the Wolf that the player has back into the room.
-	*/
-	public void putWolf(){
-		Point currentPosition = hero.getPosition();
-		currentRoom = getRoom( currentPosition );	
-			// if the player has a wolf
-			if (hero.getHasWolf()){
-			// put down the wolf
-			hero.setHasWolf(false);
-			// reset the room to have a wolf
-			setCurrentRoom(currentPosition); // point current room to the room in roomList 
-			currentRoom.setHasWolf(true); // remove the Wolf from the room	
-			}
-		// restore the pointer away from the roomList;
-		currentRoom = getRoom( currentPosition );
-		return;
-		}
-	
-	/**
-	Mutator to take another object and place the Cabbage that the player has back into the room.
-	*/
-	public void putCabbage(){
-		Point currentPosition = hero.getPosition();
-		currentRoom = getRoom( currentPosition );	
-			// if the hero has a cabbage
-			if (hero.getHasCabbage()){ 
-			// put down the cabbage
-			hero.setHasCabbage(false);
-			// reset the room to have cabbage
-			setCurrentRoom(currentPosition); // point current room to the room in roomList 
-			currentRoom.setHasCabbage(true); // place the cabbage into to room
-			}
-		// restore the pointer away from the roomList;
-		currentRoom = getRoom( currentPosition );
-		return;
-		}
-	
-	/**
-	Mutator to reset all.
-	*/
-	public void resetAll(){
-		Point currentPosition = hero.getPosition();
-	//	moveUp();
-		setCurrentRoom(currentPosition); // point current room to the room in roomList 
-		currentRoom.setHasGoat(false); // remove the Goat from the room
-	//	moveUp();
-		setCurrentRoom(currentPosition);
-		currentRoom.setHasWolf(false);
-	//	moveUp();
-		setCurrentRoom(currentPosition);
-		currentRoom.setHasCabbage(false);
-		moveDown();
-		moveDown();
-		moveDown();	
-		// restore the pointer away from the roomList;
-		currentRoom = getRoom( currentPosition );
-		return;
-		}
-	
-	/** 
-	Mutator to reset the Wolf, cabbage, goat.
-	*/
-	public void resetPuzzle(){
-		Point currentPosition = hero.getPosition();
-		currentRoom = getRoom( currentPosition );	
-		setCurrentRoom(currentPosition); // point current room to the room in roomList 
-		currentRoom.setHasWolf(true); // put the Wolf into the room
-		currentRoom.setHasGoat(true); // put the goat into the room
-		currentRoom.setHasCabbage(true); // put the Cabbage into the room
-		// restore the pointer away from the roomList;
-		currentRoom = getRoom( currentPosition );
-		return;
-		}
-	
-	/**
-	Mutator to take drop either goat, wolf or cabbage that is in the player inventory.
-	*/
-	public void dropObject(){
-		Point halfWay = new Point(1,4);
-		Point currentPosition = hero.getPosition();
-		currentRoom = getRoom( currentPosition );	
-			// if the hero has a cabbage
-			if (hero.getHasCabbage() && !(currentRoom.getLocation().isEqual(halfWay))){ 
-			// put down the cabbage
-			hero.setHasCabbage(false);
-			// reset the room to have cabbage
-			setCurrentRoom(currentPosition); // point current room to the room in roomList 
-			currentRoom.setHasCabbage(true); // place the cabbage into to room
-			}
-			// if the player has a wolf
-			else if (hero.getHasWolf() && !(currentRoom.getLocation().isEqual(halfWay))){
-			// put down the wolf
-			hero.setHasWolf(false);
-			// reset the room to have a wolf
-			setCurrentRoom(currentPosition); // point current room to the room in roomList 
-			currentRoom.setHasWolf(true); // remove the Wolf from the room	
-			}
-			// if the player has a goat
-			else if (hero.getHasGoat() && !(currentRoom.getLocation().isEqual(halfWay))){
-			// take away the goat
-			hero.setHasGoat(false);
-			// change the goat with another item in the room
-			setCurrentRoom(currentPosition); // point current room to the room in roomList 
-			currentRoom.setHasGoat(true); // put the goat into the room
-			}
-		// restore the pointer away from the roomList;
-		currentRoom = getRoom( currentPosition );
-		return;
-		}
 	
 	/**
 	Mutator to place the Map from a room with the hero and remove the Map from the current room.	

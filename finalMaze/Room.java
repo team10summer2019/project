@@ -3,7 +3,6 @@ package finalMaze;
 
 
 
-
 //////////////////////////////////////////////
 //
 // File: Room.java
@@ -626,22 +625,6 @@ private int roomRows=6;  // height of a room
 	return;
 	}
 
-	/**
-	Mutator to set one character in a roomGrid. input is validated against the size of a roomGrid
-	Use this method to reposition items in a room.   
-	@param col  a column value in the room grid, must be < RoomCols.
-	@param row  a row value in the room grid, must be < RoomRows.
-	@param ch  a char character to change the value at (c,r) to in the roomGrid.
-	*/
-	public void setRoomGrid(int col, int row, char ch){
-		// validate input
-		if ( col >=0 && col < roomCols && row >=0 && row < roomRows ) {
-		// set the room grid item at (col,row) to char ch
-		roomGrid[col][row]=ch;
-		}
-	return;
-	} 	
-	
 	/*
 
 	public void setRoomWidth(int width){
@@ -843,20 +826,17 @@ private int roomRows=6;  // height of a room
 		roomGrid[roomCols/2][roomRows/2]='L';
 		}else if (hasHint){
 		roomGrid[roomCols/2][roomRows/2]='H';
+		}else if (hasGoat){
+		roomGrid[roomCols/2][roomRows/2]='G';
+		}else if (hasWolf){
+		roomGrid[roomCols/2][roomRows/2]='Z';
+		}else if (hasCabbage){
+		roomGrid[roomCols/2][roomRows/2]='C';
 		}else if (hasFood){
 		roomGrid[roomCols/2][roomRows/2]='F';
 		}else {
 		roomGrid[roomCols/2][roomRows/2]=' ';
 		} 
-		
-		// puzzle item placement
-		if (hasGoat){
-		roomGrid[roomCols/2][(roomRows/2)-1]='G';
-		} if (hasWolf){
-		roomGrid[(roomCols/2)-2][(roomRows/2)-1]='Z';
-		} if (hasCabbage){
-		roomGrid[(roomCols/2)-1][(roomRows/2)-1]='C';
-		}
 		
 		//// Door placement depends on doorPosition integer 
 		if (hasDoor) {

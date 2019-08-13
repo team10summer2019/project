@@ -1,7 +1,7 @@
 
 /**
  * @author Fiona
- *
+ * @version August 9, 2019
  */
 public class Main {
 	
@@ -9,7 +9,7 @@ public class Main {
 		GenericRoom gr = new GenericRoom();
 		gr.configuration(4);
 		gr.configuration(3);
-		gr.configuration(1);
+		//gr.configuration(1);
 		/*gameRooms.configuration(4);
 		gameRooms.configuration(3);
 		gameRooms.configuration(2);

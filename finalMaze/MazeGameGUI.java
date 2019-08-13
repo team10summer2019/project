@@ -3,7 +3,6 @@ package finalMaze;
 
 
 
-
 import java.util.Random;
 import java.util.Scanner;
 //import java.util.concurrent.TimeUnit; // for delay before exit
@@ -13,7 +12,6 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Text;
 //import javafx.scene.Group;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
@@ -30,7 +28,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 
 /**
 Class MazeGameGUI is the Main GUI class that runs the Maze Game in GUI mode. Creates a Maze object gameBoard which is used to run the game.
@@ -46,7 +43,7 @@ public class MazeGameGUI extends Application {
 	public static void main(String[] args) {
 		launch(args);
 	} 
-	 
+	
 //////////////////////////INSTANCE VARIABLES ///////////////////////////////////
 
 	private int level = 1 ;   // set the level to increase through 4 levels
@@ -112,17 +109,11 @@ public class MazeGameGUI extends Application {
 	CreateRiddle theRiddle;  // riddle pointer/reference
 	Point firstRiddle;
 	Point secondRiddle;
-	Point thirdRiddle;
 	Point comboLocation;
 	
 	//look/hint instances
 	Point firstHint;
 	Point secondHint; 
-	// puzzle instances
-	Point puzzle;
-	Point farmerLocation;
-	Point halfWay;
-	Point start;
 	
 ///////////////////////////// TEXTURE IMAGES ///////////////////////////////////////
 	Image startLogo = new Image("images/startlogo.jpg");
@@ -314,22 +305,12 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 		StackPane stackImages = new StackPane(); 
 		ImageView Logo = new ImageView(startLogo);
 		Button playButton = new Button("Play!");
-		Text author = new Text();
-		String text = "THE MAZE a game by:\n" + 
-				      "Ron Rodriguez, Haine Kim, Steven On , Fiona Yong, and Kate Hsu \n" + 
-				      "Copyright (c) 2019.  Licensed under the GNU Public License GPL version 3.0.\n";
-		author.setText(text);
-		author.setFill(Color.WHITE);
 		playButton.setMinHeight(50);
 		playButton.setMinWidth(100);
 		playButton.setOnAction(e -> primaryStage.setScene(scene));
-		playButton.setLayoutX(380);
-		playButton.setLayoutY(310);
-		author.setLayoutX(10);
-		author.setLayoutY(555);
-		
+		playButton.setLayoutX(375);
+		playButton.setLayoutY(500);
 		startMenu.getChildren().add(playButton);
-		startMenu.getChildren().add(author);
 		stackImages.getChildren().addAll(Logo, startMenu);
 		Scene startScreen = new Scene(stackImages, 815, 600);
 ////////////////////////////////////////////////////////////////////////////		
@@ -411,15 +392,6 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 				messageLabel.setText(storeInput);
 			} else if (event.getCharacter().charAt(0) == 'p') {
 				storeInput="play";
-				messageLabel.setText(storeInput);
-			}  else if (event.getCharacter().charAt(0) == '1') {
-				storeInput="1";
-				messageLabel.setText(storeInput);
-			} else if (event.getCharacter().charAt(0) == '2') {
-				storeInput="2";
-				messageLabel.setText(storeInput);
-			} else if (event.getCharacter().charAt(0) == '3') {
-				storeInput="3";
 				messageLabel.setText(storeInput);
 			}
 		
@@ -687,21 +659,18 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 					buttonGrid[i][j].setOpacity(0.5);
 					//rectGrid[i][j].setFill(Color.BLUEVIOLET);
 					rectGrid[i][j].setFill(new ImagePattern(comboLock));
-				}else if (ch == 'G') {
+				}else if (ch == 'G' ){
 					buttonGrid[i][j].setOpacity(0.5);
 					//rectGrid[i][j].setFill(Color.BLUEVIOLET);
 					rectGrid[i][j].setFill(new ImagePattern(goat));
-					//rectGrid[i][j].setFill(new ImagePattern(floor));
 				}else if (ch == 'Z' ){
 					buttonGrid[i][j].setOpacity(0.5);
 					//rectGrid[i][j].setFill(Color.BLUEVIOLET);
 					rectGrid[i][j].setFill(new ImagePattern(wolf));
-					//rectGrid[i][j].setFill(new ImagePattern(floor));
 				}else if (ch == 'C' ){
 					buttonGrid[i][j].setOpacity(0.5);
 					//rectGrid[i][j].setFill(Color.BLUEVIOLET);
 					rectGrid[i][j].setFill(new ImagePattern(cabbage));
-					//rectGrid[i][j].setFill(new ImagePattern(floor));
 				}else if (ch == 'F' ){
 					buttonGrid[i][j].setOpacity(1);
 					//rectGrid[i][j].setFill(Color.ORANGE);
@@ -712,7 +681,7 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 					rectGrid[i][j].setFill(new ImagePattern(player));
 				}
 			}
-		}
+		}	
 	}
 
 	// Wipe graphics display
@@ -751,10 +720,10 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 			itemGrid[2][0].setFill(new ImagePattern(goatItem));
 		}
 		if (gameBoard.getHero().getHasWolf()) {
-			itemGrid[2][0].setFill(new ImagePattern(wolfItem));
+			itemGrid[3][0].setFill(new ImagePattern(wolfItem));
 		}
 		if (gameBoard.getHero().getHasCabbage()) {
-			itemGrid[2][0].setFill(new ImagePattern(cabbageItem));
+			itemGrid[4][0].setFill(new ImagePattern(cabbageItem));
 		}
 	return;
 	}
@@ -809,14 +778,6 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 		for (int k = 0; k<5;k++) {
 		itemGrid[k][0].setFill(Color.GREY);
 		}
-	return;
-	}
-	
-	public void wipeGoatWolfCabbage() {	
-		if(gameBoard.heroHasGoat() == false && gameBoard.heroHasWolf() == false && gameBoard.heroHasCabbage() == false) {
-			itemGrid[2][0].setFill(Color.GREY);
-		}
-		
 	return;
 	}
 	
@@ -959,6 +920,7 @@ mapStack.getChildren().addAll(canvasLeft, dot);
  		m.setRoomItems(2,3,false,false,false,false,false,true,false,false,false,false,false); //place the riddle in the room below the key
  		// room (3,3)
  		m.setRoomWalls(3,3,false,true,false,true);
+ 		m.setRoomItems(3,3,false,false,false,false,true,false,false,false,false,false,false); // place food
  		
  		// get a random location within the map 
 		randPoint.setRandom(m.getMazeSize());
@@ -974,17 +936,16 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 		m.setRoomItems(randPoint,tempRoom.getHasKey(),tempRoom.getHasDoor(),tempRoom.getHasMap(),tempRoom.getHasMonster(),true);
 		
 		////////////////////MAP POSITIONING ////////////////////////////////
-		dotX0=-140;  // set to initial room x position on map 1
-		dotY0=-140;  // set to initial room y position on map 1 
-		dot_x=95;   // set to match the map spacing in x between rooms
-		dot_y=95;   // set to match the map spacing in y between rooms
+		dotX0=-130;  // set to initial room x position on map 1
+		dotY0=-100;  // set to initial room y position on map 1 
+		dot_x=80;   // set to match the map spacing in x between rooms
+		dot_y=75;   // set to match the map spacing in y between rooms
 		dot.setTranslateX(dotX0);  // initial X position for the circle
 		dot.setTranslateY(dotY0);  // initial Y position for the circle 		
 
 		////////////////////// RIDDLE Locations /////////////////////////////
 		firstRiddle = new Point(0,2);         // level 1 locations
 		secondRiddle = new Point(2,3);
-		thirdRiddle = new Point(4,0);		  // level 2 location
 		comboLocation = new Point(3,0);
 		
 		/////////////////////// HINT LOCATIONS //////////////////////////////
@@ -992,10 +953,6 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 		firstHint = new Point(0,1);
 		secondHint = new Point(2,1);
 		
-		/////////////////////// PUZZLE LOCATION //////////////////////////////
-		puzzle = new Point(1,5);
-		farmerLocation = new Point(1,3);
-		halfWay = new Point(1,4);
  		} // level 1 end if brace
  	
  	
@@ -1003,7 +960,6 @@ mapStack.getChildren().addAll(canvasLeft, dot);
  		
  		/////////////////// MAZE IS HAND DESIGNED ////////////////////////////
  		// setRoomWalls(int x,int y, boolean left, boolean right, boolean up, boolean down){
- 		//setRoomItems(int x, int y ,boolean key, boolean door ,boolean map, boolean monster, boolean food, boolean riddle, boolean hint, boolean comboLock, boolean goat, boolean wolf, boolean cabbage ){ 
  		//ROW 0
  		m.setRoomWalls(0,0,true,true,true,false); // setup the first room 
  		m.setRoomPlayer(0,0,true);  // place the player in the first room
@@ -1011,8 +967,7 @@ mapStack.getChildren().addAll(canvasLeft, dot);
  		m.setRoomWalls(2,0,false,true,true,true);
  		m.setRoomItems(2,0,false,false,false,false,false,false,false,false,true,false,false); // place goat
  		m.setRoomWalls(3,0,true,false,true,false);
- 		m.setRoomWalls(4,0,false,true,true,true);
- 		m.setRoomItems(4,0,false,false,false,false,false,true,false,false,false,false,false); // riddle
+ 		m.setRoomWalls(4,0,false,false,true,true);
  		m.setRoomWalls(5,0,false,true,true,true);
  		// ROW 1
  		m.setRoomWalls(0,1,true,true,false,false);
@@ -1046,7 +1001,7 @@ mapStack.getChildren().addAll(canvasLeft, dot);
  		m.setRoomWalls(5,4,false,true,false,false);	
  		// ROW 5
  		m.setRoomWalls(0,5,true,true,false,true);
- 		m.setRoomWalls(1,5,true,false,true,true);
+ 		m.setRoomWalls(1,5,true,false,false,true);
  		m.setRoomWalls(2,5,false,false,false,true);
  		m.setRoomWalls(3,5,false,false,true,true);	
  		m.setRoomWalls(4,5,false,true,false,true);
@@ -1071,8 +1026,7 @@ mapStack.getChildren().addAll(canvasLeft, dot);
  		randPoint.setRandom(mazeSize);	// get a new random point
  		tempRoom = m.getRoom(randPoint);  // get a copy of the room at randLocation
  		// set MAP location preserving prior booleans 
- 		start = new Point(0,0);
- 		m.setRoomItems(start,tempRoom.getHasKey(),tempRoom.getHasDoor(),true,tempRoom.getHasMonster(),tempRoom.getHasFood()); // Place the map 
+ 		m.setRoomItems(randPoint,tempRoom.getHasKey(),tempRoom.getHasDoor(),true,tempRoom.getHasMonster(),tempRoom.getHasFood()); // Place the map 
 
  		/////////////////// NON RANDOM ITEMS ////////////////////////////
  		// place door in specific location
@@ -1090,27 +1044,22 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 		m.setRoomItems(randPoint,tempRoom.getHasKey(),tempRoom.getHasDoor(),tempRoom.getHasMap(),tempRoom.getHasMonster(),true);
 		
 		/////////////// MAP POSITIONING //////////////////////////////
-		dotX0=-160;
-		dotY0=-160;
-		dot_x=65;
-		dot_y=65;
+		dotX0=-150;
+		dotY0=-125;
+		dot_x=60;
+		dot_y=55;
 		dot.setTranslateX(dotX0);  // initial X position for the circle
 		dot.setTranslateY(dotY0);  // initial Y position for the circle 
 	
 		////////////////////// RIDDLE Locations /////////////////////////////
 		firstRiddle = new Point(0,2);   // modify these for level 2 
 		secondRiddle = new Point(2,3);
-		thirdRiddle = new Point(4,0);		  // level 2 location
 		comboLocation = new Point(3,0);
 		
 		/////////////////////// HINT LOCATIONS //////////////////////////////
 		//look/hint instances
 		firstHint = new Point(0,1);// modify these for level 2
 		secondHint = new Point(2,1);
-		
-		/////////////////////// PUZZLE LOCATION //////////////////////////////
-		puzzle = new Point(1,5);
-		farmerLocation = new Point(1,3);
 		
  		} // level 2 end if brace
  		////////////////////////     LEVEL 3   ///////////////////////////////////////
@@ -1253,7 +1202,7 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 		//look/hint instances
 		firstHint = new Point(0,1); // modify these for level 3
 		secondHint = new Point(2,1);
-		halfWay = new Point(1,4);
+ 		
  		} // level 3 end if brace
  		
  		return;
@@ -1291,15 +1240,10 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 		if (p.isEqual(secondRiddle) && level ==1) {	
 		gameBoard.setRoomWalls(secondRiddle,true,false,false,true);
 		}
-		if (p.isEqual(thirdRiddle) && level==2) {
-		gameBoard.setRoomWalls(thirdRiddle,false,false,true,true);
-		}
 		if (p.isEqual(comboLocation) && level ==1) {	
 		gameBoard.setRoomWalls(comboLocation,false,true,true,false);
 		}
-		if (p.isEqual(puzzle) && level ==2) {
-		gameBoard.setRoomWalls(puzzle, true, true, false, true);
-		}
+		
 	return;
 	}
 	
@@ -1358,11 +1302,11 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 		Point currentLocation = gameBoard.getCurrentRoom().getLocation();
 			// check that player has the key, and is in the location that the door is in and that the door is open
 			if (gameBoard.getHero().getHasKey()  && currentLocation.isEqual(doorLocation) && gameBoard.getCurrentRoom().getHasDoor()  && !gameBoard.getDoor().getIsLocked() && !gameBoard.getMonster().isAlive() ) {
-				sayThis = instructions.levelTwoInstructions();
+				
 				level++; 
-				System.out.println("You have escaped, and are now on Level: " + level);
+				System.out.println("You have escaped, and are now on Level: " + level );
 				messageLabel.setText("You have escaped, and are now on Level: " + level );	
-				bigText.setText("You have escaped, and are now on Level: " + level + sayThis);
+				bigText.setText("You have escaped, and are now on Level: " + level );
 				drawImage(gcL,logo);
 				resetGameBoard();  // get a new level
 				if (level == 4){
@@ -1407,10 +1351,8 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 		gameBoard.moveDown();
 		tempRoom = gameBoard.getCurrentRoom();
 		tempRoom.populateRoomGrid(); // load the information and characters currently set for the room into the roomGrid
-		player = new Image("images/player.jpg");
+
 		moveCounter++;
-		checkGoat();
-		checkWolf();
 		}	
 			
 		// if user input is "Up"	
@@ -1419,10 +1361,8 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 		gameBoard.moveUp();
 		tempRoom = gameBoard.getCurrentRoom();
 		tempRoom.populateRoomGrid(); // load the information and characters currently set for the room into the roomGrid
-		player = new Image("images/player.jpg");
+
 		moveCounter++;
-		checkGoat();
-		checkWolf();
 		}	
 		
 		// if user input is "Right"	
@@ -1431,7 +1371,7 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 		gameBoard.moveRight();
 		tempRoom = gameBoard.getCurrentRoom();
 		tempRoom.populateRoomGrid(); // load the information and characters currently set for the room into the roomGrid
-		player = new Image("images/playerRight.jpg");
+
 		moveCounter++;
 		}	
 		
@@ -1441,7 +1381,7 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 		gameBoard.moveLeft();
 		tempRoom = gameBoard.getCurrentRoom();
 		tempRoom.populateRoomGrid(); // load the information and characters currently set for the room into the roomGrid
-		player = new Image("images/playerLeft.jpg");
+
 		moveCounter++;
 		}
 		
@@ -1472,6 +1412,27 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 			bigText.setText("You took the Food!");
 			postHealth();
 			moveCounter++;
+			}else if (tempRoom.getHasGoat()){
+			gameBoard.takeGoat();
+			System.out.println("You took the Goat!");
+			messageLabel.setText("You took the Goat!");
+			bigText.setText("You took the Goat!");
+			postItems();
+			moveCounter++;
+			}else if (tempRoom.getHasWolf()){
+			gameBoard.takeWolf();
+			System.out.println("You took the Wolf!");
+			messageLabel.setText("You took the Wolf!");
+			bigText.setText("You took the Wolf!");
+			postItems();
+			moveCounter++;
+			}else if (tempRoom.getHasCabbage()){
+			gameBoard.takeCabbage();
+			System.out.println("You took the Cabbage!");
+			messageLabel.setText("You took the Cabbage!");
+			bigText.setText("You took the Cabbage!");
+			postItems();
+			moveCounter++;
 			}else{
 			System.out.println("There is nothing in the room to take...");
 			messageLabel.setText("There is nothing in the room to take...");
@@ -1482,7 +1443,6 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 		tempRoom.populateRoomGrid(); // load the information and characters currently set for the room into the roomGrid
 
 		}
-		
 		
 		// if user input is "Fight"	
 		if ( storeInput.equalsIgnoreCase("Fight")){
@@ -1507,7 +1467,7 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 		dot.setFill(null); // take the dot off the map during fight sequence
 		postCurrentRoom();
 		}
-		 
+		
 		//puzzle instances
 		// please move these into the maze creation function setBoard() in the appropriate 
 		// if statement based on level 1,2,3 etc not here
@@ -1538,15 +1498,6 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 					theRiddle.sayRiddle(theRiddle);
 				
 					} 
-				else if (tempRoom.getHasRiddle() && currentPosition.isEqual(thirdRiddle)) {
-					// give the player a riddle
-					theRiddle = rid.riddleThree();
-					bigText.setText(theRiddle.getRiddle()+theRiddle.instructions());
-
-					theRiddle.addAnswer(theRiddle);
-					theRiddle.sayRiddle(theRiddle);
-				
-					} 
 				else if (tempRoom.getHasComboLock() && currentPosition.isEqual(comboLocation)) {
 					sayThis = instructions.comboInstructions();
 					bigText.setText(sayThis);
@@ -1561,13 +1512,14 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 			
 		if ( hitPlay == true && currentPosition.isEqual(firstRiddle) && storeInput.equalsIgnoreCase(theRiddle.getAnswer()) ) {
 			solved = true;			//If the riddle has been solved
-			/// This line wipes out other items that might be in the room as well like random placed maps or keys
-		 	//gameBoard.setRoomItems(0,2,false,false,false,false,false,false,false,false,false,false,false); // has riddle
-			tempRoom=gameBoard.getRoom(firstRiddle);
-			gameBoard.setRoomItems(firstRiddle.getXCoordinate(),firstRiddle.getYCoordinate(),tempRoom.getHasKey(),tempRoom.getHasDoor(),tempRoom.getHasMap(),tempRoom.getHasMonster(),tempRoom.getHasFood(),false,tempRoom.getHasHint(),tempRoom.getHasComboLock(),tempRoom.getHasGoat(),tempRoom.getHasWolf(),tempRoom.getHasCabbage()); // has riddle
-			bigText.setText("The right wall disappeared to reveal a path..\n");	
-			openWalls(firstRiddle);
-			hitPlay = false;
+			
+				/// This line wipes out other items that might be in the room as well like random placed maps or keys
+			 	//gameBoard.setRoomItems(0,2,false,false,false,false,false,false,false,false,false,false,false); // has riddle
+				tempRoom=gameBoard.getRoom(firstRiddle);
+				gameBoard.setRoomItems(firstRiddle.getXCoordinate(),firstRiddle.getYCoordinate(),tempRoom.getHasKey(),tempRoom.getHasDoor(),tempRoom.getHasMap(),tempRoom.getHasMonster(),tempRoom.getHasFood(),false,tempRoom.getHasHint(),tempRoom.getHasComboLock(),tempRoom.getHasGoat(),tempRoom.getHasWolf(),tempRoom.getHasCabbage()); // has riddle
+				bigText.setText("The right wall disappeared to reveal a path..\n");	
+				openWalls(firstRiddle);
+				hitPlay = false;
 		}
 		
 		if( hitPlay == true && currentPosition.isEqual(secondRiddle) && storeInput.equalsIgnoreCase(theRiddle.getAnswer()) ) {
@@ -1581,18 +1533,7 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 			openWalls(secondRiddle);
 			
 			hitPlay = false;
-		}
-		 
-		if( hitPlay == true && currentPosition.isEqual(thirdRiddle) && storeInput.equalsIgnoreCase(theRiddle.getAnswer()) ) {
-			solved = true;
-			tempRoom=gameBoard.getRoom(thirdRiddle);
-			gameBoard.setRoomItems(thirdRiddle.getXCoordinate(),thirdRiddle.getYCoordinate(),tempRoom.getHasKey(),tempRoom.getHasDoor(),tempRoom.getHasMap(),tempRoom.getHasMonster(),tempRoom.getHasFood(),false,tempRoom.getHasHint(),tempRoom.getHasComboLock(),tempRoom.getHasGoat(),tempRoom.getHasWolf(),tempRoom.getHasCabbage()); // has riddle
-			//setRoomItems(int x , int y,  boolean key, boolean door ,boolean map, boolean monster, boolean food, boolean riddle, boolean hint, boolean comboLock, boolean goat, boolean wolf, boolean cabbage )		
-			bigText.setText("A wall disappeared..?\n");
-			openWalls(thirdRiddle);
-			
-			hitPlay = false;
-		}
+			}
 		
 		if (playCombo == true && currentPosition.isEqual(comboLocation) && storeInput.contentEquals("728")) {
 			if (tempHero.getHasLeverOne() == true && tempHero.getHasLeverTwo() == true) {
@@ -1681,99 +1622,6 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 			hitLook = false;
 		}
 		
-		if (storeInput.equalsIgnoreCase("1")) {
-			if (tempRoom.getHasWolf()){
-				gameBoard.takeWolf();
-				gameBoard.putGoat();
-				gameBoard.putCabbage();
-				System.out.println("You took the Wolf!");
-				messageLabel.setText("You took the Wolf!");
-				bigText.setText("You took the Wolf!");
-				postItems(); 
-				moveCounter++;
-				checkPuzzle();
-			}
-			if (tempHero.getHasWolf()) {
-				gameBoard.dropObject();	
-				wipeGoatWolfCabbage();
-				postCurrentRoom();
-				checkPuzzle();
-				if (gameBoard.heroHasWolf() == false) {
-				System.out.println("You dropped the wolf!");
-				messageLabel.setText("You dropped the wolf!");
-				bigText.setText("You dropped the wolf!");
-				}
-				if (tempRoom.getHasCabbage() && tempRoom.getHasGoat() && tempRoom.getHasWolf() && currentPosition.isEqual(puzzle)) {
-					gameBoard.setRoomWalls(puzzle, true, true, false, true);
-					gameBoard.setRoomWalls(farmerLocation, true, true, true, false);
-					sayThis = instructions.puzzleInstructions();
-					bigText.setText(sayThis);
-				}
-			}
-		}
-		
-		if (storeInput.equalsIgnoreCase("2")) {
-			if (tempRoom.getHasCabbage()) {
-				gameBoard.takeCabbage();
-				gameBoard.putWolf();
-				gameBoard.putGoat();
-				System.out.println("You took the Cabbage!");
-				messageLabel.setText("You took the Cabbage!");
-				bigText.setText("You took the Cabbage!");
-				postItems();
-				moveCounter++;
-				checkPuzzle();
-			}
-			if (tempHero.getHasCabbage()) {
-				gameBoard.dropObject();	
-				wipeGoatWolfCabbage();
-				postCurrentRoom();
-				checkPuzzle();
-				if (gameBoard.heroHasCabbage() == false) {
-					System.out.println("You dropped the cabbage!");
-					messageLabel.setText("You dropped the cabbage!");
-					bigText.setText("You dropped the cabbage!");
-				}
-				if (tempRoom.getHasCabbage() && tempRoom.getHasGoat() && tempRoom.getHasWolf() && currentPosition.isEqual(puzzle)) {
-					gameBoard.setRoomWalls(puzzle, true, true, false, true);
-					gameBoard.setRoomWalls(farmerLocation, true, true, true, false);
-					sayThis = instructions.puzzleInstructions();
-					bigText.setText(sayThis);
-				}
-			}
-		}
-		
-		if (storeInput.equalsIgnoreCase("3")) {
-			if (tempRoom.getHasGoat()){
-				gameBoard.takeGoat();
-				gameBoard.putWolf();
-				gameBoard.putCabbage();
-				System.out.println("You took the Goat!");
-				messageLabel.setText("You took the Goat!");
-				bigText.setText("You took the Goat!");
-				postItems();
-				moveCounter++;
-				checkPuzzle();
-			}	
-			if (tempHero.getHasGoat()) {
-				gameBoard.dropObject();	
-				wipeGoatWolfCabbage();
-				postCurrentRoom();
-				checkPuzzle();
-				if (gameBoard.heroHasGoat() == false) {
-				System.out.println("You dropped the goat!");
-				messageLabel.setText("You dropped the goat!");
-				bigText.setText("You dropped the goat!");
-				}
-				if (tempRoom.getHasCabbage() && tempRoom.getHasGoat() && tempRoom.getHasWolf() && currentPosition.isEqual(puzzle)) {
-					gameBoard.setRoomWalls(puzzle, true, true, false, true);
-					gameBoard.setRoomWalls(farmerLocation, true, true, true, false);
-					sayThis = instructions.puzzleInstructions();
-					bigText.setText(sayThis);
-				}		
-			}
-		}
-		
 		/// closing message to user if Win
 		if ( level ==4 && victory ){
 		 System.out.println("Congratulations! You are free from THE MAZE!");
@@ -1810,61 +1658,6 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 	return;
 	}
 	
-	// check the win condition in puzzle in level 2
-		public void checkPuzzle() {
-			Point currentPosition = tempHero.getPosition();	
-			if(tempRoom.getHasCabbage() && tempRoom.getHasGoat() && tempRoom.getHasWolf() && currentPosition.isEqual(farmerLocation)){
-				gameBoard.setRoomWalls(puzzle, true, false, false, true);
-				gameBoard.setRoomWalls(farmerLocation, false, true, true, false);
-			}
-		}
-		// check if you made a valid condition
-		public void checkGoat() {
-			Point currentPosition = tempHero.getPosition();	
-			Room puzRoom = gameBoard.getPuzzleRoom();
-			Room farRoom = gameBoard.getFarmerRoom();
-			if(currentPosition.isEqual(puzzle) && puzRoom.getHasCabbage() && puzRoom.getHasGoat() && !puzRoom.getHasWolf()){
-				gameBoard.moveUp();
-				gameBoard.resetAll();
-				gameBoard.resetPuzzle();
-				gameBoard.resetLevelTwoItems();
-				wipeGoatWolfCabbage();
-				sayThis = instructions.goat();
-				bigText.setText(sayThis);
-			}else if (currentPosition.isEqual(farmerLocation) && farRoom.getHasCabbage() && farRoom.getHasGoat() && !farRoom.getHasWolf()) {
-				gameBoard.moveUp();
-				gameBoard.resetAll();
-				gameBoard.resetPuzzle();
-				gameBoard.resetLevelTwoItems();
-				wipeGoatWolfCabbage();
-				sayThis = instructions.goat();
-				bigText.setText(sayThis);
-			}
-		}
-		// check if you made a valid condition
-		public void checkWolf() {
-			Point currentPosition = tempHero.getPosition();	
-			Room puzRoom = gameBoard.getPuzzleRoom();
-			Room farRoom = gameBoard.getFarmerRoom();
-			if(currentPosition.isEqual(puzzle) && puzRoom.getHasWolf() && puzRoom.getHasGoat() && !puzRoom.getHasCabbage()){
-				gameBoard.moveUp();
-				gameBoard.resetAll(); 
-				gameBoard.resetPuzzle();
-				gameBoard.resetLevelTwoItems();
-				wipeGoatWolfCabbage();
-				sayThis = instructions.wolf();
-				bigText.setText(sayThis);
-			}else if (currentPosition.isEqual(farmerLocation) && farRoom.getHasWolf() && farRoom.getHasGoat() && !farRoom.getHasCabbage()) {
-				gameBoard.moveUp();
-				gameBoard.resetAll();
-				gameBoard.resetPuzzle();
-				gameBoard.resetLevelTwoItems();
-				wipeGoatWolfCabbage();
-				sayThis = instructions.wolf();
-				bigText.setText(sayThis);
-			}
-		}
-	
 	
 	
  /////////////////////////////   THESE METHODS OUTPUT TO THE CONSOLE REPLACE THEM  /////////////////////////////	
@@ -1896,20 +1689,20 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 	System.out.println("Look: Search the room for clues");
 	System.out.println("Escape: Escape the Maze if the Door is Open");
 	System.out.println("Control Keys: a: left, s: down,d: right,w: up");
-	System.out.println("Control Keys: r: return, m: map, t: take , q: quit, h: help o: open, e: escape, f:fight, l:look, p:play, 1:take/drop wolf, 2:take/drop cabbage, 3:take/drop goat");
+	System.out.println("Control Keys: r: return, m: map, t: take , q: quit, h: help o: open, e: escape, f:fight");
 	System.out.println("__________________________________________________");
 	System.out.println("");
 	System.out.println("Type \"Return\" and press Enter to return to the Maze");
 	
 	// set the help info into the text area box 
-	bigText.setText("Welcome to the Maze\nHelp: prints useage\nQuit:Exits the game\nReturn:returns to the map\nControl Keys: a: left, s: down,d: right,w: up\nr: return, m: map, t: take , q: quit, \nh: help o: open, e: escape, f:fight, p: play riddle, l: look, 1:take/drop wolf, 2:take/drop cabbage, 3:take/drop goat, z: send text from textbox");
+	bigText.setText("Welcome to the Maze\nHelp: prints useage\nQuit:Exits the game\nReturn:returns to the map\nControl Keys: a: left, s: down,d: right,w: up\nr: return, m: map, t: take , q: quit, \nh: help o: open, e: escape, f:fight, p: play riddle, l: look, z: send text from textbox");
 
 	return;
 	}
  	
 	// Prints out the map if the hero / Player has the map boolean
 	/**
-	Prints out a static map depicting the maze rooms depending on which level is selected.  
+	Prints out a static map depicting the maze rooms depending on which level is selected. 
 	*/
 	public void printMap(){
 		
@@ -1933,7 +1726,7 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 		System.out.println("");
 		System.out.println("Type \"Return\" and press Enter to return to the Maze");
 		
-		image = new Image("images/mapOne.jpg"); // load the map
+		image = new Image("images/map1.png"); // load the map
 		
 		}
 		
@@ -1963,7 +1756,7 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 		System.out.println("");
 		System.out.println("Type \"Return\" and press Enter to return to the Maze");
 		
-		image = new Image("images/mazeTwo.jpg");
+		image = new Image("images/map2.png");
 		}
 	
 		if (level ==3) {

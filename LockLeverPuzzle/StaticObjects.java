@@ -1,7 +1,13 @@
 
 /**
- * @author Fiona
- *
+ * @author Fiona Yong
+ * @version August 5, 2019
+ * 
+ *  CLASS
+ * STATIC OBJECTS
+ * These are objects that only provide a description.
+ * They may be neutral objects or objects that provide clues.
+ * (Some of these objects are things that are taken from the room and placed into the inventory. NOT IMPLEMENTED)
  */
 public class StaticObjects extends Inventory {
 	/*
@@ -20,7 +26,6 @@ public class StaticObjects extends Inventory {
 	/////ROOM1/////
 	public void aBear() {
 		System.out.println("This is a bear.");
-		
 	}
 	
 	public void aBracelet() {
@@ -104,21 +109,34 @@ public class StaticObjects extends Inventory {
 	}
 	
 	/////ROOM2HAINE/////
+	/**
+	 * @author Haine Kim
+	 */
 	public void aCardH() { //Added by Haine
 		System.out.println("\nIt has Happy Birthday written on it.\n");
 	}
-	public void orangeBox() { //Addedd by Haine
+	/**
+	 * @author Haine Kim
+	 */
+	public void orangeBox() { //Added by Haine
 		System.out.println("It is an orange box. Someone painted a white 1 on the lid.\nOpen? 'y'/'n'");
 	}
-	
+	/**
+	 * @author Haine Kim
+	 */
 	public void purpleBox() { //Added by Haine
 		System.out.println("A very bright, purple box.\nOpen? 'y'/'n'");
 	}
-	
+	/**
+	 * @author Haine Kim
+	 */
 	public void toyBox() { //Added by Haine
 		System.out.println("Someone wrote a sloppy 3 on the lid with sharpie.\nOpen? 'y'/'n'\"");
 	}
-	
+	/**
+	 * @author Fiona Yong
+	 * @author Haine Kim
+	 */
 	public void aShelfH() { //Modified and added by Haine
 		System.out.println("You are viewing the shelf.");
 		System.out.println("There are three framed photos, neatly lined up next to each other.");
@@ -128,7 +146,10 @@ public class StaticObjects extends Inventory {
 		System.out.println("To stop viewing the shelf, type 'Stop'.");
 		System.out.println("..and then press ENTER.");
 	}
-	
+	/**
+	 * @author Fiona Yong
+	 * @author Haine Kim
+	 */
 	public void aNoteH() { //Modified and added by Haine
 		System.out.println("You find a folded sticky note inside. You unfold the note. The note reads:");
 		System.out.println("__________________");

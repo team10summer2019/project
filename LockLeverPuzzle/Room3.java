@@ -1,8 +1,12 @@
 import java.util.Scanner;
 /**
- * @author Fiona 
-
- * Version Updated: August 5, 2019
+ * @author Fiona Yong
+ * @version August 13, 2019
+ *
+ * CLASS
+ * ROOM3
+ * Runs Room specific configurations
+ *
  */
 
 public class Room3 extends GenericRoom {
@@ -17,20 +21,26 @@ public class Room3 extends GenericRoom {
 	
 	private Player p1 = new Player();//transfer player input into player
 	private StaticObjects stat_item = new StaticObjects();
-	private DynamicObjects dyn_item = new DynamicObjects();
-	private Inventory playerInventory;//*
-	private FloorInventory roomInventory;//*
+	private DynamicObjects dyn_item;
+	private Inventory playerInventory;
+	private FloorInventory roomInventory;
 
 //////////CONSTRUCTORS////////////
-	public Room3(GenericRoom gr) { //*
+	/**
+	 * @param gr passes instance of GenericRoom's prompted instance of Classes
+	 */
+	public Room3(GenericRoom gr) { 
 		super();
 		this.playerInventory = new Inventory(gr.playerInventory);
 		this.roomInventory = new FloorInventory(gr.roomInventory);
+		this.dyn_item = new DynamicObjects(gr.lockLeverCheck);
+		this.lockLeverCheck = new LockLever(gr);
 	}	
 //////////EXIT VIEW////////////
-/*
-* Leaves room
-*/
+	/**
+	 * Leaves current room if permitted
+	 * @param userInput checks if input was 'exit' to leave
+	 */
 	private void exitView(String userInput) {
 		if (userInput.equalsIgnoreCase("exit")) { //don't need to prompt for each item(aka. make a new method to call it) because it'll be combined later on
 			System.out.println("Exiting..");
@@ -39,10 +49,10 @@ public class Room3 extends GenericRoom {
 		}
 	}
 	
-//////////ROOM 2////////////
-/*
-* Lets you play through room
-*/
+//////////ROOM 3////////////
+	/**
+	 * Lets user play through room when called
+	 */
 	public void room3() {
 		while (inRoom3 == true) {
 			System.out.println("//////////Room 3://///////////\nThis room has a cabinet.");
@@ -65,17 +75,29 @@ public class Room3 extends GenericRoom {
 		}
 	}
 //////////SET INROOM3////////////
-public void setInRoom3(boolean inRoom_Bool) {
-	Room3.inRoom3 = inRoom_Bool;
-}
+	/**
+	 * @param inRoom_Bool Status of being in Room; true if in Room, false if not in Room
+	 */
+	public void setInRoom3(boolean inRoom_Bool) {
+		Room3.inRoom3 = inRoom_Bool;
+	}
 
 ////////////////////////ITEM METHODS////////////////////////////////
+/*
+ * Unique methods that are used in the class
+ */
+	/**
+	 * Views player inventory
+	 */
 	public void viewInventory() {
 		playerInventory.viewInventory();
 	}
 	//////////Add Unique Object to Inventory////////////
-	//change status of dynamic object(ANY!)
-	//Adds unique item to Inventory and removes unique item from FloorInventory
+	/**
+	 * Changes the status of any DynamicObjects item.
+	 * Adds the unique item to Inventory and removes unique item from FloorInventory by its string 'identity name'
+	 * @param item 'Item identity name'
+	 */
 	public void uniqueObject_toInventory(String item) { 
 		System.out.println("You added '" + item + "' to your inventory.");
 		dyn_item.changeStatus_dynObj(item);
@@ -84,7 +106,8 @@ public void setInRoom3(boolean inRoom_Bool) {
 		//roomInventory.viewFloorInventory();
 	}
 	//////////CABINET/////////
-	/*
+	/**
+	 * Provide information and interactions with object in room
 	 * If user has key, cabinet can be opened and viewed, otherwise it doesn't do anything
 	 * The cabinet initially contains box and leverPiece2 
 	 */
@@ -187,6 +210,7 @@ public void setInRoom3(boolean inRoom_Bool) {
 	}
 	//////////VIEW UNDER CABINET/////////
 	/*
+	 * Provide information and interactions with object in room
 	 * opens views yellow box, inside a bracelet and key
 	 */
 	public void viewUnderCabinet() {

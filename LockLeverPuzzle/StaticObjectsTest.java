@@ -1,7 +1,7 @@
 
 /**
  * @author Fiona
- *
+ * @version June 28, 2019
  */
 public class StaticObjectsTest {
 

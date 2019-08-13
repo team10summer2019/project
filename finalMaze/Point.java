@@ -2,7 +2,6 @@ package finalMaze;
 
 
 
-
 import java.util.Random;
 
 /**

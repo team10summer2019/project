@@ -1,8 +1,7 @@
 
 /**
- * @author Fiona
- *
- * Version updated: August 8, 2019
+ * @author Fiona Yong
+ * @version August 8, 2019
  */
 import static org.junit.Assert.*;
 
