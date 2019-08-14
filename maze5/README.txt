@@ -11,6 +11,8 @@
 //
 //////////////////////////////////
 
+Preamble:
+
 To get these files use the following command line commands in linux or windows with git
 
 $ mkdir project
@@ -33,8 +35,4 @@ MazeGame is a 3 level dungeon maze with a monster, a key, and map, and a door.  
 
 To play MazeGameGUI, you must import the file project "/maze5/GUI/MazeGameGUI.java" along with all of the files in the folder "project/maze5/" into eclipse and copy the folder "project/images" and all it's files into a package in the src directory. You will also need to copy the jar file jfxrt.jar and link it as a library, using "build path" -> "configure build path" -> "Libraries" ->"add jar file". To run the file right click on the file MazeGameGUI.java, and select "Run As" -> Java Application.   The commands in the GUI version are the same as the text based version however several key controls for motion and operations have been added.  Traverse with a,s,d,w , q to quit, t for take, f to fight, o to open the door, and e to escape.
 
-To examine the Class Diagram, go into the folder "/project/maze5/diagram/" and open the file MazeGame5_all.pdf.  
-The dia file with the UML class descriptions is also provided in this folder. 
-
 For bug reports and further assistance contact Ron Rodriguez using the email zarodrig@ucalgary.ca 
-

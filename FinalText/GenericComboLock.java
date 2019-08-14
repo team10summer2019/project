@@ -1,8 +1,10 @@
+package FinalText;
+
 
 /**
  * @author Fiona
  *
- */
+ */ 
 public class GenericComboLock {
 	/* PROJECT MEMBER NOTES:
 	 * This lock has a set max of three digit number combinations.
