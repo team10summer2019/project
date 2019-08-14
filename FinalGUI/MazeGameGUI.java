@@ -1427,7 +1427,7 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 		gameBoard.moveUp();
 		tempRoom = gameBoard.getCurrentRoom();
 		tempRoom.populateRoomGrid(); // load the information and characters currently set for the room into the roomGrid
-		player = new Image("images/player.jpg");
+		player = new Image("images/playerUp.jpg");
 		moveCounter++;
 		checkGoat();
 		checkWolf();
@@ -2012,7 +2012,7 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 		System.out.println("");
 		System.out.println("Type \"Return\" and press Enter to return to the Maze");
 		
-		image = new Image("images/map3.png");
+		image = new Image("images/mapThree.png");
 		}
 	
 	return;
