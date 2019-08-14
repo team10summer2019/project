@@ -9,7 +9,7 @@ package JUnitTests;
 
 //import maze2.Inventory; //imports Inventory for testing
 
-import LockLeverPuzzle.*;
+
 import static org.junit.Assert.*;
 
 import org.junit.Test;

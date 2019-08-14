@@ -1,6 +1,6 @@
 package JUnitTests;
 import static org.junit.Assert.*;
-import finalMaze.Point;
+import FinalGUI.Point;
 
 import org.junit.Test;
 
