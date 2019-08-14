@@ -1,6 +1,6 @@
 package JUnitTests;
 import static org.junit.Assert.*;
-import finalMaze.Point;
+import FinalGUI.Point;
 
 import org.junit.Test;
 
@@ -14,7 +14,7 @@ public class PointTest {
 		assertEquals("Created Point(0,0) - testing y value", 0, p.getYCoordinate());
 	}
 	
-	@Test
+	@Test 
 	public void test_Constructor_NegativeX() {
 		Point p = new Point(-1,10);
 		assertEquals("Created Point(-1,10) - testing x value", 0, p.getXCoordinate());
