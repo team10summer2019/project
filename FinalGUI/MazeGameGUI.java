@@ -1245,10 +1245,10 @@ mapStack.getChildren().addAll(canvasLeft, dot);
  		m.setRoomItems(randPoint,tempRoom.getHasKey(),tempRoom.getHasDoor(),tempRoom.getHasMap(),tempRoom.getHasMonster(),true);	
  					
  		/////////////// MAP POSITIONING //////////////////////////////
- 		dotX0=-160;
- 		dotY0=-150;
- 		dot_x=46;
- 		dot_y=45;
+ 		dotX0=-165;
+ 		dotY0=-170;
+ 		dot_x=48;
+ 		dot_y=48;
  		dot.setTranslateX(dotX0);  // initial X position for the circle
  		dot.setTranslateY(dotY0);  // initial Y position for the circle 
 	
