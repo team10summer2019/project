@@ -14,6 +14,7 @@ Last Updated: AUG 13,2019
 Folder LockLeverPuzzle has multiple demos of the pieces that would be intended to fit together for a specialized puzzle by a class called LockLeverPuzzle. 
 This program runs a text-based escape room styled interaction with the user.
 
+This version is different from the classes in the Maze Game.
 The program is run on java through the main class.
 Most classes are prompted and work with the start class.
 
