@@ -1366,11 +1366,23 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 		Point currentLocation = gameBoard.getCurrentRoom().getLocation();
 			// check that player has the key, and is in the location that the door is in and that the door is open
 			if (gameBoard.getHero().getHasKey()  && currentLocation.isEqual(doorLocation) && gameBoard.getCurrentRoom().getHasDoor()  && !gameBoard.getDoor().getIsLocked() && !gameBoard.getMonster().isAlive() ) {
+				
+				level++; // increment the level 
+				
+				sayThis=""; // initialize the string to empty string (but not null)
+	
+				// stuff to add at the beginning of each level
+				if (level ==2) {
 				sayThis = instructions.levelTwoInstructions();
-				level++; 
+				} else if (level == 3) {
+				sayThis = instructions.levelThreeInstructions();
+				}
+				
 				System.out.println("You have escaped, and are now on Level: " + level);
 				messageLabel.setText("You have escaped, and are now on Level: " + level );	
-				bigText.setText("You have escaped, and are now on Level: " + level + sayThis);
+				bigText.setText("You have escaped, and are now on Level: " + level +sayThis);
+				
+				
 				drawImage(gcL,logo);
 				resetGameBoard();  // get a new level
 				if (level == 4){
@@ -1823,6 +1835,7 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 	// check the win condition in puzzle in level 2
 		public void checkPuzzle() {
 			Point currentPosition = tempHero.getPosition();	
+			tempRoom=gameBoard.getRoom(currentPosition);
 			if(tempRoom.getHasCabbage() && tempRoom.getHasGoat() && tempRoom.getHasWolf() && currentPosition.isEqual(farmerLocation)){
 				gameBoard.setRoomWalls(puzzle, true, false, false, true);
 				gameBoard.setRoomWalls(farmerLocation, false, true, true, false);
@@ -1882,7 +1895,7 @@ mapStack.getChildren().addAll(canvasLeft, dot);
 	
 	
  /////////////////////////////   THESE METHODS OUTPUT TO THE CONSOLE REPLACE THEM  /////////////////////////////	
- //////////////////////////////// METHODS THE REQUIRE REPLACEMENT/TRANSLATION //////////////////////////////////	
+ //////////////////////////////// METHODS THAT REQUIRE REPLACEMENT/TRANSLATION //////////////////////////////////	
  	/// replace with a textBox substitute method 
 	
 	

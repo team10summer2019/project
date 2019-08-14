@@ -133,6 +133,14 @@ public class Instructions {
 			+ ("Press key 1 to take/drop the wolf, 2 to take/drop the cabbage, and 3 to take/drop the goat.");
 	}
 	
+	public String levelThreeInstructions() {
+		return ("\nYou are on the Final Level\n") 
+				+ ("All of the items have been randomly placed in this maze\n")
+				+ ("Find the Key and Fight the Monster, and Find the Door to Escape\n")
+				+ ("Finding the Map first would also prove most helpful...\n");
+	}
+	
+	
 	public String solved() {
 		return ("The farmer thanks you for helping him and has taken away his goat, wolf, and cabbage.\n") 
 			+ ("You solved the puzzle!");

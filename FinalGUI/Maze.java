@@ -913,7 +913,7 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 	Point currentPosition = hero.getPosition();
 	currentRoom = getRoom( currentPosition );	
 		// if the room has a Goat but the player doesn't
-		if (!hero.getHasGoat()){
+		if (currentRoom.getHasGoat() && !hero.getHasGoat()){
 		// give the player a Goat
 		hero.setHasGoat(true);
 		// reset the room to not have a Goat 
@@ -932,7 +932,7 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 	Point currentPosition = hero.getPosition();
 	currentRoom = getRoom( currentPosition );	
 		// if the room has a Wolf but the player doesn't
-		if (!hero.getHasWolf()){
+		if (currentRoom.getHasWolf() && !hero.getHasWolf()){
 		// give the player a Wolf
 		hero.setHasWolf(true);
 		// reset the room to not have a Wolf 
@@ -951,7 +951,7 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 	Point currentPosition = hero.getPosition();
 	currentRoom = getRoom( currentPosition );	
 		// if the room has a Cabbage but the player doesn't
-		if (!hero.getHasCabbage()){
+		if (currentRoom.getHasCabbage() &&!hero.getHasCabbage()){
 		// give the player a Cabbage
 		hero.setHasCabbage(true);
 		// reset the room to not have a Cabbage 
@@ -1028,12 +1028,13 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 	//	moveUp();
 		setCurrentRoom(currentPosition); // point current room to the room in roomList 
 		currentRoom.setHasGoat(false); // remove the Goat from the room
+		currentRoom.setHasWolf(false); // remove the Wolf from the room
+		currentRoom.setHasCabbage(false);  // remove the Cabbage from the room
 	//	moveUp();
-		setCurrentRoom(currentPosition);
-		currentRoom.setHasWolf(false);
+	//	setCurrentRoom(currentPosition);
 	//	moveUp();
-		setCurrentRoom(currentPosition);
-		currentRoom.setHasCabbage(false);
+	//	setCurrentRoom(currentPosition);
+	    // move three rooms down
 		moveDown();
 		moveDown();
 		moveDown();	
@@ -1064,9 +1065,9 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 		Point currentPosition = hero.getPosition();
 		setCurrentRoom(currentPosition); // point current room to the room in roomList 
 		currentRoom.setHasGoat(false); // remove the Goat from the room
-		setCurrentRoom(currentPosition);
+		//setCurrentRoom(currentPosition);
 		currentRoom.setHasWolf(false);
-		setCurrentRoom(currentPosition);
+		//setCurrentRoom(currentPosition);
 		currentRoom.setHasCabbage(false);
 		// restore the pointer away from the roomList;
 		currentRoom = getRoom( currentPosition );
@@ -1077,7 +1078,7 @@ private int mazeSize = 4;   // set this value to increase the number of rooms in
 	Mutator to take drop either goat, wolf or cabbage that is in the player inventory.
 	*/
 	public void dropObject(){
-		Point halfWay = new Point(1,4);
+		Point halfWay = new Point(1,4);  // Coordinate of Room with the River game.
 		Point currentPosition = hero.getPosition();
 		currentRoom = getRoom( currentPosition );	
 			// if the hero has a cabbage
