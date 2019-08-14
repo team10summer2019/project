@@ -19,7 +19,7 @@ import java.util.ArrayList;
 public class InventoryTest_JUnit {
 	
 		//Constructor
-		//copy constructor
+		//copy constructor 
 		@Test
 		public void test_Inventory_toCopy() {
 			//setup

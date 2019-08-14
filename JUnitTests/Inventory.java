@@ -22,7 +22,7 @@ public class Inventory {
 	public Inventory() {
 		this.inventory = new ArrayList<String>();
 	}
-
+ 
 	/**
 	 * Copy constructor.
 	 * 
