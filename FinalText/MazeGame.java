@@ -583,7 +583,6 @@ public class MazeGame {
 		// randomize monster start location but don't overwrite previous conditions except moster variable 
 		m.setRoomItems(randPoint,tempRoom.getHasKey(),tempRoom.getHasDoor(),tempRoom.getHasMap(),true,tempRoom.getHasRiddle());  // Working
 		
-		
 		// get a new random location within the maze
 		randPoint.setRandom(mazeSize);	// get a new random point
 		tempRoom = m.getRoom(randPoint);  // get a copy of the room at randLocation
@@ -717,6 +716,10 @@ public class MazeGame {
 	System.out.println("Run: Run away from the maze Wraith in the fighting dialogue");
 	System.out.println("Open: Opens the Door if you Have a Key");
 	System.out.println("Escape: Escape the Maze if the Door is Open");
+	System.out.println("Look: In a room with a hint, type look to examine the room for hints and items.");
+	System.out.println("Play: In a room with a Riddle, type play to answer the riddle.");
+	System.out.println("Unlock: In a room with a combo lock, type unlock to enter a combination code.");
+	System.out.println("1: Take or drop the Cabbage, 2: Take or drop the wolf, 3: Take or drop the goat.");
 	System.out.println("__________________________________________________");
 	System.out.println("");
 	System.out.println("Type \"Return\" and press Enter to return to the Maze");
@@ -724,7 +727,6 @@ public class MazeGame {
 	}
 		
 
-	
 	public static String getUserInput(){
 	String input;
 	Scanner keyboard = new Scanner(System.in);
