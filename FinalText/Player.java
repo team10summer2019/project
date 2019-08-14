@@ -267,7 +267,7 @@ private int attackStrength;
 	}
 
 	public boolean isAlive(){
-		if (health >= 0){
+		if (health > 0){
 		return true;
 		} 
 	return false;
