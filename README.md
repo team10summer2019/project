@@ -28,7 +28,8 @@ Then link jfxrt.jar into the library path.  Finally Run MazeGameGUI.java. as a j
 #FinalText
 Final text is a version of the text based game corresponding to the game in FinalGUI.<BR>
 
-ADD MORE INFO HERE ON HOW TO RUN THE FILES <BR>
+To run these files create a new project in eclipse, and make a new package named "FinalText".  Copy all of the files from the folder /project/FinalText into this package. <BR>
+Finally to run the game the main class is MazeGame.java.  Right click on this file and select Run As -> Java Application. This should start a console application version of the game.<BR> 
 
 #JUnitTests
 
