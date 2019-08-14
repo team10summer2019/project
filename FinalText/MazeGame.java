@@ -83,7 +83,7 @@ public class MazeGame {
 	
 	// Main loop to run the Maze Game 
 		
-		while ( moveCounter < 300 && !storeInput.equalsIgnoreCase("quit")  && gameBoard.getHero().isAlive()  ){
+		while ( moveCounter < 1000 && !storeInput.equalsIgnoreCase("quit")  && gameBoard.getHero().isAlive()  ){
 		
 			// if user input was "MAP" display map unit until user types return
 			if ( storeInput.equalsIgnoreCase("map") ) {
