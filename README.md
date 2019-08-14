@@ -9,7 +9,6 @@ $git clone https://github.com/team10summer2019/project.git -b final-branch  <BR>
 
 This will create a directory named "project" which contains the java classes, images and class diagrams created during the production of the game "The Maze".  <BR>
 
-
 #FinalGUI 
 FinalGUI is the final production from team 10, and is a GUI application that must be run in eclipse.   The files for this game are found in "project/FinalGUI".
 The main class that starts the game is "MazeGameGUI.java" and is found in the folder "project/FinalGUI". <BR>
@@ -26,11 +25,21 @@ into the eclipse source folder. Also copy the directory /project/images/ into a 
 
 Then link jfxrt.jar into the library path.  Finally Run MazeGameGUI.java. as a java application in eclipse. <BR>
 
-
 #FinalText
 Final text is a version of the text based game corresponding to the game in FinalGUI.<BR>
 
 ADD MORE INFO HERE ON HOW TO RUN THE FILES <BR>
+
+#JUnitTests
+
+In the Folder /project/JUnitTests/ , are FloorInventoryTest_JUnit.java  InventoryTest_JUnit.java  LockLeverTest_JUnit.java and PointTest.java. Add these files to a folder
+in the eclipse project created for FinalGUI and FinalText, nameing this folder JUnitTests.   Link JUnit to the library, by right clicking on the eclipse project folder and clicking the following:<BR>
+
+Build Path -> Configure Build Path -> Add Library  -> Junit -> JUnit5 -> Finish -> Apply and Close.<BR>
+
+To run the tests right click on them and select Run As -> Junit Test. <BR> 
+
+The test should run with no errors.  <BR>
 
 # maze5
 This folder contains the preliminary game engine classes used by our team to create the final product FinalGUI. <BR>
