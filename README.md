@@ -16,12 +16,12 @@ The main class that starts the game is "MazeGameGUI.java" and is found in the fo
 This game consists of a player trapped in a three level Maze, with the goal of escaping the maze the player must traverse through different rooms by solving puzzles. 
 The puzzles consist of Riddles, and games.  The player must find a map, a key, open a door and escape to the next level.  To do so other objects must be picked up and puzzles solved.<BR>
 
-To run this game open Eclipse, and create a new project. Copy all the *.java files into the src folder. 
+To run this game open Eclipse, and create a new project. Create a package in the src folder called "FinalGUI", Copy all the *.java files into the "src/FinalGUI" package. 
 The main class which will be run as a java application is the file MazeGameGUI.java.  You will require javafx to run this class.  
-Add the jar file jfxrt.jar to the build path as a library. Then run the class MazeGameGUI.java as a java application.<BR>
+Add the jar file jfxrt.jar to the build path as a library.<BR>
 
 Create a folder in eclipse and copy all of the files from /project/FinalMaze/*.java  along with /project/FinalMaze/MazeGameGUI.java 
-into the eclipse source folder. Also copy the directory /project/images/ into a package named "images" in the eclipse project. <BR> 
+into the eclipse source folder. Also copy the directory /project/images/ into a package named "images" in the src folder in the eclipse project. <BR> 
 
 Then link jfxrt.jar into the library path.  Finally Run MazeGameGUI.java. as a java application in eclipse. <BR>
 
@@ -34,7 +34,7 @@ Finally to run the game the main class is MazeGame.java.  Right click on this fi
 #JUnitTests
 
 In the Folder /project/JUnitTests/ , are FloorInventoryTest_JUnit.java  InventoryTest_JUnit.java  LockLeverTest_JUnit.java and PointTest.java. Add these files to a folder
-in the eclipse project created for FinalGUI and FinalText, nameing this folder JUnitTests.   Link JUnit to the library, by right clicking on the eclipse project folder and clicking the following:<BR>
+in the eclipse project created for FinalGUI and FinalText, naming this folder JUnitTests.   Link JUnit to the library, by right clicking on the eclipse project folder and clicking the following:<BR>
 
 Build Path -> Configure Build Path -> Add Library  -> Junit -> JUnit5 -> Finish -> Apply and Close.<BR>
 
@@ -73,10 +73,10 @@ The class diagram is located in /project/maze5/diagram/ both in pdf and dia form
 This is a GUI frontend to display and control the maze and player commands from MazeGame.java implemented in javafx.  
 To run these files, create a folder in eclipse, and copy all the .java files into the src folder. 
 Retrive the GUI class from /project/maze5/GUI/MazeGameGUI.java. Add this file into the eclipse folder.  This is the main class that plays the GUI game. 
-Add the jar file jfxrt.jar to the build path as a library. Then run the class MazeGameGUI.java as a java application.<BR>
+Add the jar file jfxrt.jar to the build path as a library.<BR>
 
 Create a folder in eclipse and copy all of the files from /project/maze5/*.java  along with /project/maze5/GUI/MazeGameGUI.java 
-into the eclipse source folder. Also copy the directory /project/maze5/images/ into a package images in eclipse. <BR> 
+into the eclipse source folder. Also copy the directory /project/maze5/images/ into a package images in the src directory in eclipse. <BR> 
 
 Then link jfxrt.jar into the library path.  Finally Run MazeGameGUI.java. as a java application in eclipse. <BR>
 
