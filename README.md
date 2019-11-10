@@ -2,9 +2,9 @@
 Team Project Files
 
 # maze5
-In the folder maze5 is a demo of a maze that has a key, a map, and a monster. The player must traverse from room (0,0) to the room 
-with the key, collect the key and traverse to the room with the Door, use the key and exit the maze to win.  There are three levels.
-Level 1 is the same as maze version 1, with a randomly moving monster that you can fight.   Level 2 is a 6x6 36 room maze with random item placement for map and key.
+In the folder maze5, there is a demo of a maze that has a key, a map, and a monster. 
+The player must traverse from room (0,0) to the room with the key. Collect the key then traverse to the room with the Door. Use the key to unlock the door and exit the maze to win. 
+There are three levels. Level 1 is the same as maze version 1, with a randomly moving monster that you can fight.   Level 2 is a 6x6 36 room maze with random item placement for map and key.
 Level 3 is a 8 x 8 64 room maze with all items randomly placed in the maze including the key,door, monster and map. 
 
 Currently to test the maze classes run the following commands <BR>
